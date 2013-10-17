@@ -7,21 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Clinica_Frba
+
+namespace Clinica_Frba.NewFolder3
 {
-    public partial class Form1 : Form
+    public partial class CompraBonoForm : Form
     {
-        public Form1()
+        private Clinica_Frba.Compra_de_Bono.CompraBonoModel modelo= new Clinica_Frba.Compra_de_Bono.CompraBonoModel();
+        public CompraBonoForm()
         {
-          InitializeComponent();
-
+            InitializeComponent();
         }
-
-        private void Form1_Click(object sender, EventArgs e){}
 
         private void button1_Click(object sender, EventArgs e)
         {
-            (new Clinica_Frba.NewFolder3.CompraBonoForm()).Show();
+            modelo.holaMundo();
         }
     }
 }
