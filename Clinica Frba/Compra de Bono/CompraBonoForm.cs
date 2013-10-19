@@ -22,5 +22,10 @@ namespace Clinica_Frba.NewFolder3
         {
             modelo.holaMundo();
         }
+
+        private void CompraBonoForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
