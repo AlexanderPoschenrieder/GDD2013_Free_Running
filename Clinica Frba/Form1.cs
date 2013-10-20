@@ -13,15 +13,11 @@ namespace Clinica_Frba
     {
         public Form1()
         {
-          InitializeComponent();
+            InitializeComponent();
+            this.Hide(); //lo oculto
+            Clinica_Frba.NewFolder10.Form1 login = new Clinica_Frba.NewFolder10.Form1();//creo instancia del form login
+            login.ShowDialog();//toma el control el form login
 
-        }
-
-        private void Form1_Click(object sender, EventArgs e){}
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            (new Clinica_Frba.NewFolder3.CompraBonoForm()).Show();
         }
     }
 }

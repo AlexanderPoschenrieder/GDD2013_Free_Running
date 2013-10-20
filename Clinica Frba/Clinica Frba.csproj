@@ -48,31 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abm de Afiliado\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm de Afiliado\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm de Afiliado\Form2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm de Afiliado\Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm de Afiliado\Form3.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm de Afiliado\Form3.Designer.cs">
-      <DependentUpon>Form3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm de Afiliado\Form4.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm de Afiliado\Form4.Designer.cs">
-      <DependentUpon>Form4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Compra de Bono\CompraBonoModel.cs" />
+    <Compile Include="Conexion.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,10 +61,41 @@
     <Compile Include="Login\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login\menuAdministrativo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\menuAdministrativo.Designer.cs">
+      <DependentUpon>menuAdministrativo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\menuMedico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\menuMedico.Designer.cs">
+      <DependentUpon>menuMedico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\menuPaciente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\menuPaciente.Designer.cs">
+      <DependentUpon>menuPaciente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\selecRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\selecRol.Designer.cs">
+      <DependentUpon>selecRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Usuario.cs" />
     <Compile Include="Registro de Usuario\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Registro de Usuario\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm de Afiliado\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm de Afiliado\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm de Profesional\Form1.cs">
@@ -121,11 +128,11 @@
     <Compile Include="Registrar Agenda\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra de Bono\CompraBonoForm.cs">
+    <Compile Include="Compra de Bono\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compra de Bono\CompraBonoForm.Designer.cs">
-      <DependentUpon>CompraBonoForm.cs</DependentUpon>
+    <Compile Include="Compra de Bono\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Pedir Turno\Form1.cs">
       <SubType>Form</SubType>
@@ -165,17 +172,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Abm de Afiliado\Form1.resx">
+    <EmbeddedResource Include="Login\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm de Afiliado\Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <EmbeddedResource Include="Login\menuAdministrativo.resx">
+      <DependentUpon>menuAdministrativo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Compra de Bono\CompraBonoForm.resx">
-      <DependentUpon>CompraBonoForm.cs</DependentUpon>
+    <EmbeddedResource Include="Login\menuMedico.resx">
+      <DependentUpon>menuMedico.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Login\menuPaciente.resx">
+      <DependentUpon>menuPaciente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\selecRol.resx">
+      <DependentUpon>selecRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -196,6 +206,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Validar.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

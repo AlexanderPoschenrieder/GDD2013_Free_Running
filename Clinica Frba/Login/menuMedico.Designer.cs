@@ -1,6 +1,6 @@
-﻿namespace Clinica_Frba
+﻿namespace Clinica_Frba.Login
 {
-    partial class Form1
+    partial class menuMedico
     {
         /// <summary>
         /// Required designer variable.
@@ -28,12 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // menuMedico
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(292, 273);
+            this.Name = "menuMedico";
+            this.Text = "menuMedico";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.menuMedico_FormClosing);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
     }
 }
-
