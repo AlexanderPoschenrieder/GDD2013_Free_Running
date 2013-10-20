@@ -12,11 +12,10 @@ namespace Clinica_Frba.Compra_de_Bono
         {
             //falta implementar
         }
-        public void asignarFecha() 
+        public void asignarFecha()
         {
             //falta implementar
         }
-
         public void holaMundo()
         {
             MessageBox.Show("Hola mundo");

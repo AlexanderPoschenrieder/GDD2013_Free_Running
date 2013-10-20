@@ -12,7 +12,7 @@ namespace Clinica_Frba.NewFolder3
 {
     public partial class CompraBonoForm : Form
     {
-        private Clinica_Frba.Compra_de_Bono.CompraBonoModel modelo= new Clinica_Frba.Compra_de_Bono.CompraBonoModel();
+        private Clinica_Frba.Compra_de_Bono.CompraBonoModel modelo = new Clinica_Frba.Compra_de_Bono.CompraBonoModel();
         public CompraBonoForm()
         {
             InitializeComponent();
@@ -22,10 +22,7 @@ namespace Clinica_Frba.NewFolder3
         {
             modelo.holaMundo();
         }
-
-        private void CompraBonoForm_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
+
+
