@@ -20,5 +20,10 @@ namespace Clinica_Frba.Login
         {
             Application.Exit();
         }
+
+        private void menuAdministrativo_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

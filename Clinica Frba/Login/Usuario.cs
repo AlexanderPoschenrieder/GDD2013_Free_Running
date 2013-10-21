@@ -39,13 +39,14 @@ namespace Clinica_Frba.Login
             if (drUsuario.Read() == true)
             {
                     //ACA EXISTE EL USUARIO
+                
 
                     if (Convert.ToInt32(drUsuario[2]) == 1)//PREGUNTO SI ESTA HABILITADO
-                    {   
-                       
-                        if ((Convert.ToString(drUsuario[1])) == this.pPass)//PREGUNTO SI Coincide el Pass
-                        {
-                            MessageBox.Show("Bienvenido");
+                    {
+                        
+                        if (Convert.ToString(drUsuario[1]) == Validar.getHashSha256(this.pPass))//PREGUNTO SI Coincide el Pass
+                        {                       
+                            MessageBox.Show("Bienvenido: "+this.pUser);
                             return true;
                         }
                         else

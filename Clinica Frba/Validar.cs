@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Security.Cryptography;
 
 namespace Clinica_Frba
 {
@@ -23,7 +24,6 @@ namespace Clinica_Frba
                 pE.Handled = true;
             }
         }
-
 
         public static void SoloLetras(KeyPressEventArgs pE)
         {
@@ -51,5 +51,27 @@ namespace Clinica_Frba
                 return true;
             else return false;
         }
+
+
+        public static string getHashSha256(string text)
+        {
+            SHA256CryptoServiceProvider shaM = new SHA256CryptoServiceProvider();
+            byte[] inputBytes = Encoding.UTF8.GetBytes(text);
+            byte[] hashedBytes = shaM.ComputeHash(inputBytes);
+            StringBuilder pass_hasheado = new StringBuilder();
+            for (int i = 0; i < hashedBytes.Length; i++)
+            pass_hasheado.Append(hashedBytes[i].ToString("x2").ToLower());
+            return pass_hasheado.ToString();
+        }
+
+
+
+
+
+
+
+
+
     }
 }
+
