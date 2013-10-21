@@ -98,7 +98,6 @@ namespace Clinica_Frba.Login
             }
         }
 
-
         public ArrayList roles()//CREAR un VECTOR DE ROLES para un USUARIO
         {
             ArrayList misRoles = new ArrayList();
@@ -127,6 +126,27 @@ namespace Clinica_Frba.Login
                 Clinica_Frba.Login.selecRol menuRol = new selecRol(this);
                 menuRol.ShowDialog();
             }
+        }
+
+        public void agregarIntentoFallido() 
+        {
+            using (SqlConnection miConexion = Conexion.Conectar())
+            {
+                //IntentoFallido(@usuario)
+                SqlCommand cmdIntentoFallido = new SqlCommand("NombreStoreProcedure", miConexion);
+                cmdIntentoFallido.CommandType = CommandType.StoredProcedure;
+
+                //remplazo parametro
+                cmdIntentoFallido.Parameters.AddWithValue("@param", Convert.ToInt32(this.pUser));
+
+                SqlDataReader dr = cmdIntentoFallido.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    //aqui cargas la lista
+                }
+            }
+        
         }
 
     }
