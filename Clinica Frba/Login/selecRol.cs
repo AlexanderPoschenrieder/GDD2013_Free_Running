@@ -36,18 +36,18 @@ namespace Clinica_Frba.Login
             }
         }
 
-        private void btAceptar_Click(object sender, EventArgs e)
+        private void selecRol_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Validar.noVacio(cbRoles.Text)) 
+            Application.Exit();
+        }
+
+        private void btAceptar_Click_1(object sender, EventArgs e)
+        {
+            if (Validar.noVacio(cbRoles.Text))
             {
                 this.Hide();
                 miUser.AbrirMenuUnico(cbRoles.Text);
             }
-        }
-
-        private void selecRol_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Application.Exit();
         }
     }
 }
