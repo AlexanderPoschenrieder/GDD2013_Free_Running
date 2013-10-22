@@ -552,8 +552,8 @@ where not((( g1.Turno_Fecha is null) and ( g1.Compra_Bono_Fecha is null)))
 		
 		go
 
-		--Creo Funcion suNroAfiliado00333: dado un DNI me devuelve su Nro de Afiliado
-		create function suNroAfiliado00333(@DNI numeric(18,0))
+		--Creo Funcion suNroAfiliado: dado un DNI me devuelve su Nro de Afiliado
+		create function Free_Running.suNroAfiliado(@DNI numeric(18,0))
 		returns numeric(18,0)
 		as
 		begin
@@ -722,7 +722,7 @@ Values
 
 
 go
-create function calcula_fecha_vencimiento00333(@fecha smalldatetime)
+create function Free_Running.calcula_fecha_vencimiento(@fecha smalldatetime)
 returns smalldatetime
 as 
 begin
@@ -752,7 +752,7 @@ select  M.Bono_Consulta_Numero,M.Compra_Bono_Fecha,
 			M.Paciente_Dni = M2.Paciente_Dni and 
 			M.Bono_Consulta_Numero >= M2.Bono_Consulta_Numero )),
 	 
-	 dbo.suNroAfiliado00333(M.Paciente_Dni),
+	Free_Running.suNroAfiliado(M.Paciente_Dni),
 	 
 	 (select P.Nro_Afiliado 
 	 from gd_esquema.Maestra M3 
@@ -781,7 +781,7 @@ where (M.Compra_Bono_Fecha is not null and M.Bono_Consulta_Numero is not null)
 --un paciente auq haya llegado, se puede ir
 
 INSERT INTO Free_Running.Llegada_Atencion_Medica(Fecha_Hs_Llegada,Nro_Afiliado,Turno_Numero,Bono_Consulta)
-select M.Turno_Fecha,dbo.suNroAfiliado00333(M.Paciente_Dni),M.Turno_Numero,M.Bono_Consulta_Numero
+select M.Turno_Fecha,Free_Running.suNroAfiliado(M.Paciente_Dni),M.Turno_Numero,M.Bono_Consulta_Numero
 from gd_esquema.Maestra M
 where Consulta_Sintomas is not null
 
@@ -801,8 +801,8 @@ select LAM.Id,LAM.Fecha_Hs_Llegada,'Confirmado'
 from Free_Running.Llegada_Atencion_Medica LAM
 
 go
-		--Creo Funcion suNroAtencion00333 que dado un turno me retorna su Nro Atencion Medica
-		create function suNroAtencion00333(@turno numeric(18,0))
+		--Creo Funcion suNroAtencion que dado un turno me retorna su Nro Atencion Medica
+		create function Free_Running.suNroAtencion(@turno numeric(18,0))
 		returns numeric(18,0)
 		as 
 		begin
@@ -827,7 +827,7 @@ go
 --Consulta
 --Representa el Diagnostico para una determinada Atencion Medica
 INSERT INTO Free_Running.Consulta(Id_Atencion_Medica,Sintomas,Enfermedades)
-select dbo.suNroAtencion00333(M.Turno_Numero),M.Consulta_Sintomas,M.Consulta_Enfermedades
+select Free_Running.suNroAtencion(M.Turno_Numero),M.Consulta_Sintomas,M.Consulta_Enfermedades
 from gd_esquema.Maestra M
 where M.Consulta_Sintomas is not null
 
@@ -844,7 +844,7 @@ CREATE INDEX ÍNDICE_AdM3 ON Free_Running.Consulta(Id_Atencion_Medica)
 
 INSERT INTO Free_Running.Bono_Farmacia(Id,Fecha_Compra,Fecha_Vencimiento,Afiliado_Compra,Afiliado_Utiliza,Precio,Consulta_Id,Plan_Correspondiente)
 select M.Bono_Farmacia_Numero,M.Compra_Bono_Fecha,M.Bono_Farmacia_Fecha_Vencimiento,
-		(dbo.suNroAfiliado00333(M.Paciente_Dni)) COMPRA,
+		(Free_Running.suNroAfiliado(M.Paciente_Dni)) COMPRA,
 		
 		(select P.Nro_Afiliado 
 		from gd_esquema.Maestra M3 
@@ -930,4 +930,46 @@ INSERT INTO Free_Running.Usuario_por_Rol(Rol_Id,Username) values('Admnistrador G
 INSERT INTO Free_Running.Usuario_por_Rol(Rol_Id,Username) values('Administrativo','admin2')
 INSERT INTO Free_Running.Usuario_por_Rol(Rol_Id,Username) values('Afiliado','admin2')
 INSERT INTO Free_Running.Usuario_por_Rol(Rol_Id,Username) values('Profesional','admin2')
+GO
 
+--PROCEDIMIENTOS
+
+
+CREATE FUNCTION Free_Running.CantIntentosActual(@Username varchar(255))
+RETURNS int
+AS
+BEGIN
+DECLARE @Return int
+SET @Return = (select COUNT(InF.Id) from Free_Running.Intentos_Fallidos InF where InF.Username=@Username group by InF.Username)
+RETURN @Return
+END
+GO
+
+CREATE PROCEDURE Free_Running.agregarIntentoFallido 
+    --@Fecha datetime, 
+    @User varchar(255) 
+AS 
+BEGIN
+	INSERT INTO Free_Running.Intentos_Fallidos(Username,Fecha) values(@User,GETDATE())
+	if((select COUNT(InF.Id) from Free_Running.Intentos_Fallidos InF where InF.Username=@User group by InF.Username)= 3)
+	BEGIN
+		UPDATE Free_Running.Usuario
+		SET  Habilitado = 0
+		WHERE Username = @User;
+	END
+END
+GO
+
+CREATE PROCEDURE Free_Running.borrarIntentoFallido 
+    @Username varchar(255) 
+AS 
+BEGIN
+
+		DELETE Free_Running.Intentos_Fallidos
+		WHERE Username = @Username;
+
+END
+GO
+
+select *
+from Free_Running.Intentos_Fallidos

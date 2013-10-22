@@ -41,18 +41,22 @@ namespace Clinica_Frba.Login
                     //ACA EXISTE EL USUARIO
                 
 
-                    if (Convert.ToInt32(drUsuario[2]) == 1)//PREGUNTO SI ESTA HABILITADO
+                    if (Convert.ToInt32(drUsuario[2]) == 1)//PREGUNTO SI ESTA HABILITADO(1) ...NO HABILITADO(0)
                     {
                         
                         if (Convert.ToString(drUsuario[1]) == Validar.getHashSha256(this.pPass))//PREGUNTO SI Coincide el Pass
-                        {                       
+                        {
+                            this.borrarIntentoFallido();//borro todos los intentos fallidos que tenia hasta el momento
                             MessageBox.Show("Bienvenido: "+this.pUser);
                             return true;
                         }
                         else
                         {
-                            MessageBox.Show("Contraseña Incorrecta"); return false;
-                            //llamada al procedimiento agregaintentofallido
+                            //INTENTO FALLIDO
+                            MessageBox.Show("Contraseña Incorrecta");
+                            this.agregarIntentoFallido();//agrego un intento fallido, si la cantidad es 3 => Habilitado = 0 (desde sql)
+                            return false;
+                            
                         }
                     }
                     else
@@ -128,25 +132,41 @@ namespace Clinica_Frba.Login
             }
         }
 
-        public void agregarIntentoFallido() 
+        public void agregarIntentoFallido() //FALTA FECHAA
         {
             using (SqlConnection miConexion = Conexion.Conectar())
             {
-                //IntentoFallido(@usuario)
-                SqlCommand cmdIntentoFallido = new SqlCommand("NombreStoreProcedure", miConexion);
-                cmdIntentoFallido.CommandType = CommandType.StoredProcedure;
 
-                //remplazo parametro
-                cmdIntentoFallido.Parameters.AddWithValue("@param", Convert.ToInt32(this.pUser));
+                SqlCommand cmd = new SqlCommand();
+                // Configuramos el comando
+                //
+                cmd.Connection = miConexion;
+                cmd.CommandText = "Free_Running.agregarIntentoFallido";
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlParameter parUser = cmd.Parameters.Add ("@User", SqlDbType.VarChar,255 );
+                parUser.Value = this.pUser;
+                cmd.ExecuteNonQuery();
 
-                SqlDataReader dr = cmdIntentoFallido.ExecuteReader();
-
-                if (dr.Read())
-                {
-                    //aqui cargas la lista
-                }
             }
         
+        }
+
+        public void borrarIntentoFallido()
+        {
+            using (SqlConnection miConexion = Conexion.Conectar())
+            {
+                SqlCommand cmd = new SqlCommand();
+                // Configuramos el comando
+                //
+                cmd.Connection = miConexion;
+                cmd.CommandText = "Free_Running.borrarIntentoFallido";
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlParameter parUser = cmd.Parameters.Add("@Username", SqlDbType.VarChar, 255);
+                parUser.Value = this.pUser;
+                cmd.ExecuteNonQuery();
+
+            }
+
         }
 
     }
