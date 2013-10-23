@@ -12,6 +12,11 @@ namespace Clinica_Frba.Compra_de_Bono
         {
             //falta implementar
         }
+
+        public void comprarBonoFarmacia() { 
+        
+        }
+        public void comprarBonoConsulta() { }
         public void asignarFecha()
         {
             //falta implementar
