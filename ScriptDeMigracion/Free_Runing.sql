@@ -930,6 +930,10 @@ INSERT INTO Free_Running.Usuario_por_Rol(Rol_Id,Username) values('Admnistrador G
 INSERT INTO Free_Running.Usuario_por_Rol(Rol_Id,Username) values('Administrativo','admin2')
 INSERT INTO Free_Running.Usuario_por_Rol(Rol_Id,Username) values('Afiliado','admin2')
 INSERT INTO Free_Running.Usuario_por_Rol(Rol_Id,Username) values('Profesional','admin2')
+
+INSERT INTO Free_Running.Usuario(Username,Usuario_Password,Habilitado) values('admin3','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1)
+INSERT INTO Free_Running.Usuario_por_Rol(Rol_Id,Username) values('Afiliado','admin3')
+INSERT INTO Free_Running.Usuario_por_Rol(Rol_Id,Username) values('Profesional','admin3')
 GO
 
 --PROCEDIMIENTOS
@@ -951,7 +955,7 @@ CREATE PROCEDURE Free_Running.agregarIntentoFallido
 AS 
 BEGIN
 	INSERT INTO Free_Running.Intentos_Fallidos(Username,Fecha) values(@User,GETDATE())
-	if((select COUNT(InF.Id) from Free_Running.Intentos_Fallidos InF where InF.Username=@User group by InF.Username)= 3)
+	if(Free_Running.CantIntentosActual(@User)= 3)
 	BEGIN
 		UPDATE Free_Running.Usuario
 		SET  Habilitado = 0
@@ -971,5 +975,4 @@ BEGIN
 END
 GO
 
-select *
-from Free_Running.Intentos_Fallidos
+

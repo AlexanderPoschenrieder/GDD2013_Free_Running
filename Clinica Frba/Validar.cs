@@ -52,7 +52,6 @@ namespace Clinica_Frba
             else return false;
         }
 
-
         public static string getHashSha256(string text)
         {
             SHA256CryptoServiceProvider shaM = new SHA256CryptoServiceProvider();
@@ -62,7 +61,10 @@ namespace Clinica_Frba
             for (int i = 0; i < hashedBytes.Length; i++)
             pass_hasheado.Append(hashedBytes[i].ToString("x2").ToLower());
             return pass_hasheado.ToString();
+
+            
         }
+
 
 
 

@@ -52,11 +52,11 @@
             // 
             // btAceptar
             // 
-            this.btAceptar.Location = new System.Drawing.Point(152, 115);
+            this.btAceptar.Location = new System.Drawing.Point(152, 101);
             this.btAceptar.Name = "btAceptar";
             this.btAceptar.Size = new System.Drawing.Size(75, 23);
             this.btAceptar.TabIndex = 2;
-            this.btAceptar.Text = "Aceptar";
+            this.btAceptar.Text = "Login";
             this.btAceptar.UseVisualStyleBackColor = true;
             this.btAceptar.Click += new System.EventHandler(this.btAceptar_Click);
             // 
@@ -82,14 +82,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(257, 173);
+            this.ClientSize = new System.Drawing.Size(257, 138);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btAceptar);
             this.Controls.Add(this.tbPass);
             this.Controls.Add(this.tbUser);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Login";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
