@@ -93,6 +93,12 @@
       <DependentUpon>selecRol.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\Usuario.cs" />
+    <Compile Include="Registrar Agenda\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registrar Agenda\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Registro de Usuario\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,12 +133,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Abm de Rol\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Registrar Agenda\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Registrar Agenda\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Pedir Turno\Form1.cs">
