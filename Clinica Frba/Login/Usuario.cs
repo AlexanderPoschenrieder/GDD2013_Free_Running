@@ -75,7 +75,6 @@ namespace Clinica_Frba.Login
         {
             if (unRol == "Afiliado")
             { //paciente 
-                //getAiliado(Up.)
                 Clinica_Frba.Login.menuPaciente menuPaciente = new menuPaciente();
                 menuPaciente.ShowDialog();
             }

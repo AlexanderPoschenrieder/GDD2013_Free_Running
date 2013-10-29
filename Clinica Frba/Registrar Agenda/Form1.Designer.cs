@@ -63,7 +63,7 @@
             this.gbDiaSemana.Controls.Add(this.cbLunes);
             this.gbDiaSemana.Location = new System.Drawing.Point(35, 27);
             this.gbDiaSemana.Name = "gbDiaSemana";
-            this.gbDiaSemana.Size = new System.Drawing.Size(142, 258);
+            this.gbDiaSemana.Size = new System.Drawing.Size(142, 256);
             this.gbDiaSemana.TabIndex = 0;
             this.gbDiaSemana.TabStop = false;
             this.gbDiaSemana.Text = "Seleccionar Dias";
@@ -202,9 +202,9 @@
             this.gbFecha.Controls.Add(this.label3);
             this.gbFecha.Controls.Add(this.dtpFechaFin);
             this.gbFecha.Controls.Add(this.dtpFechaInicio);
-            this.gbFecha.Location = new System.Drawing.Point(199, 162);
+            this.gbFecha.Location = new System.Drawing.Point(199, 163);
             this.gbFecha.Name = "gbFecha";
-            this.gbFecha.Size = new System.Drawing.Size(340, 123);
+            this.gbFecha.Size = new System.Drawing.Size(340, 120);
             this.gbFecha.TabIndex = 2;
             this.gbFecha.TabStop = false;
             this.gbFecha.Text = "Rango Fecha";
@@ -250,7 +250,7 @@
             // 
             // btLimpiar
             // 
-            this.btLimpiar.Location = new System.Drawing.Point(54, 307);
+            this.btLimpiar.Location = new System.Drawing.Point(54, 302);
             this.btLimpiar.Name = "btLimpiar";
             this.btLimpiar.Size = new System.Drawing.Size(75, 23);
             this.btLimpiar.TabIndex = 3;
@@ -259,19 +259,18 @@
             // 
             // btGuardar
             // 
-            this.btGuardar.Location = new System.Drawing.Point(441, 307);
+            this.btGuardar.Location = new System.Drawing.Point(448, 302);
             this.btGuardar.Name = "btGuardar";
             this.btGuardar.Size = new System.Drawing.Size(75, 23);
             this.btGuardar.TabIndex = 4;
             this.btGuardar.Text = "Guardar";
             this.btGuardar.UseVisualStyleBackColor = true;
-            this.btGuardar.Click += new System.EventHandler(this.btGuardar_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(575, 364);
+            this.ClientSize = new System.Drawing.Size(575, 352);
             this.Controls.Add(this.btGuardar);
             this.Controls.Add(this.btLimpiar);
             this.Controls.Add(this.gbFecha);
@@ -299,6 +298,8 @@
         private System.Windows.Forms.CheckBox cbMartes;
         private System.Windows.Forms.CheckBox cbLunes;
         private System.Windows.Forms.GroupBox gbHorario;
+        private System.Windows.Forms.DateTimePicker dtpHoraInicio;
+        private System.Windows.Forms.DateTimePicker dtpHoraFin;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox gbFecha;
@@ -308,7 +309,5 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btLimpiar;
         private System.Windows.Forms.Button btGuardar;
-        public System.Windows.Forms.DateTimePicker dtpHoraInicio;
-        public System.Windows.Forms.DateTimePicker dtpHoraFin;
     }
 }
