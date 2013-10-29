@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abm de Afiliado\Paciente.cs" />
     <Compile Include="Compra de Bono\CompraBonoForm.cs">
       <SubType>Form</SubType>
     </Compile>
