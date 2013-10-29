@@ -9,17 +9,16 @@ namespace Clinica_Frba.Abm_de_Afiliado
 {
     class Paciente
     {
-        public static int Insertar_afiliado(string Nombre, string Apellido, string Tipo_documento, int Documento, string Direccion,
-            int Telefono, string Mail, DateTime Fecha_nac, char Sexo, string Estado_civil, int Cant_familiares,
-            int Plan_medico, int Nro_afiliado, string Estado, string Username)
+        public static void Insertar_afiliado(string Nombre, string Apellido, string Tipo_documento, long Documento, string Direccion,
+            long Telefono, string Mail, DateTime Fecha_nac, string Sexo, string Estado_civil, int Cant_familiares,
+            long Plan_medico, string Estado, string Username)
 
             //Inserta un nuevo afiliado a la base de datos
         {
             SqlConnection miconexion = Conexion.Conectar();//Conecto a la base de datos
             string sel;
-            sel = "INSERT INTO Free_Running.Paciente(string Nombre,string Apellido,string Tipo_documento,int Documento,string Direccion,int Telefono,string Mail,DateTime fecha_nac,char Sexo,string Estado_civil,int Cant_familiares,int Plan_medico,int Nro_afiliado,string Estado,string Username)" +
-                "VALUES " + "(@Nombre, @Apellido, @Tipo_documento, @Documento, @Direccion,@Telefono,@Mail,@Fecha_nac,@Sexo,@Cant_familiares,@Estado_civil,@Plan_medico,@nro_afiliado,@estado,@username)" +
-                "SELECT @@Identity";
+            sel = "INSERT INTO Free_Running.Paciente(Nombre,Apellido,Tipo_documento,Documento,Direccion,Telefono,Mail,fecha_nac,Sexo,Estado_civil,Cant_familiares,Plan_medico,Estado)" +//Username
+                  "VALUES(@Nombre, @Apellido, @Tipo_documento, @Documento, @Direccion,@Telefono,@Mail,@Fecha_nac,@Sexo,@Estado_civil,@Cant_familiares,@Plan_medico,@estado)"; //@username
             using (miconexion)
             {
                 SqlCommand cmd = new SqlCommand(sel, miconexion);
@@ -35,12 +34,12 @@ namespace Clinica_Frba.Abm_de_Afiliado
                 cmd.Parameters.AddWithValue("@Cant_familiares", Cant_familiares);
                 cmd.Parameters.AddWithValue("@Estado_civil", Estado_civil);
                 cmd.Parameters.AddWithValue("@Plan_medico", Plan_medico);
-                cmd.Parameters.AddWithValue("@Nro_afiliado", Nro_afiliado);
                 cmd.Parameters.AddWithValue("@Estado", Estado);
-                cmd.Parameters.AddWithValue("@Username", Username);
-                int t = Convert.ToInt32(cmd.ExecuteScalar());
+                //cmd.Parameters.AddWithValue("@Username", Username);
+                cmd.ExecuteNonQuery();
+                //int t = Convert.ToInt32(cmd.ExecuteScalar());
                 miconexion.Close();
-                return t;
+                //return t;
             }
 
         }
