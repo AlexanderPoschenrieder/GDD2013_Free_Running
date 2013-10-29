@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Clinica_Frba.NewFolder7
+namespace Clinica_Frba.NewFolder4
 {
-    public partial class Form1 : Form
+    public partial class PedirTurnoForm : Form
     {
-        public Form1()
+        public PedirTurnoForm()
         {
             InitializeComponent();
         }

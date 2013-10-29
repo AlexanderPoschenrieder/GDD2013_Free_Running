@@ -1,6 +1,6 @@
 ﻿namespace Clinica_Frba.NewFolder7
 {
-    partial class Form1
+    partial class CancelarAtencionForm
     {
         /// <summary>
         /// Required designer variable.
