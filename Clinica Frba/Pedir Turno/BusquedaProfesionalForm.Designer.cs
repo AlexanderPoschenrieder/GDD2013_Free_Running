@@ -35,6 +35,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.gridResultados = new System.Windows.Forms.DataGridView();
             this.NombreProfesional = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SeleccionarButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridResultados)).BeginInit();
             this.SuspendLayout();
             // 
@@ -97,11 +98,22 @@
             this.NombreProfesional.HeaderText = "Nombre";
             this.NombreProfesional.Name = "NombreProfesional";
             // 
+            // SeleccionarButton
+            // 
+            this.SeleccionarButton.Location = new System.Drawing.Point(14, 260);
+            this.SeleccionarButton.Name = "SeleccionarButton";
+            this.SeleccionarButton.Size = new System.Drawing.Size(75, 23);
+            this.SeleccionarButton.TabIndex = 6;
+            this.SeleccionarButton.Text = "Seleccionar";
+            this.SeleccionarButton.UseVisualStyleBackColor = true;
+            this.SeleccionarButton.Click += new System.EventHandler(this.SeleccionarButton_Click);
+            // 
             // BusquedaProfesionalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 266);
+            this.ClientSize = new System.Drawing.Size(292, 289);
+            this.Controls.Add(this.SeleccionarButton);
             this.Controls.Add(this.gridResultados);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
@@ -125,5 +137,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView gridResultados;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombreProfesional;
+        private System.Windows.Forms.Button SeleccionarButton;
     }
 }

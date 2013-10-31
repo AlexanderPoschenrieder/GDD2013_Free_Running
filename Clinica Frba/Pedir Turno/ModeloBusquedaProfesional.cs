@@ -36,9 +36,12 @@ namespace Clinica_Frba.Pedir_Turno
         }
 
         public void buscar(){
+            
             String whereString;
             miConexion = Conexion.Conectar();
-         
+            ArrayList resultadoAux= new ArrayList();
+            resultadoBusqueda.Clear();
+
             if (especialidadSeleccionada.Length == 0)
             {
                 whereString = "";
@@ -55,9 +58,11 @@ namespace Clinica_Frba.Pedir_Turno
 
             dr_resultados.Close();
             miConexion.Close();
-
+            //Filtra por el nombre, HAY QUE REVISAR EL TEMA DE LAS MINUSCULAS/MAYUSCULAS
+            foreach (String it in resultadoBusqueda){
+                if (it.Contains(nombre)) { resultadoAux.Add(it); } 
+            }
+            resultadoBusqueda = resultadoAux;
         }
-
-
     }
 }

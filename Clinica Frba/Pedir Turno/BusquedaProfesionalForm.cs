@@ -11,12 +11,14 @@ namespace Clinica_Frba.Pedir_Turno
 {
     public partial class BusquedaProfesionalForm : Form
     {
-        private ModeloBusquedaProfesional miModelo;
+        private ModeloBusquedaProfesional miModelo;       
         public BusquedaProfesionalForm()
         {
             miModelo = new ModeloBusquedaProfesional();
             InitializeComponent();
             generarComboEspecialidades();
+            gridResultados.MultiSelect = false;
+            gridResultados.ReadOnly=true;
         }
 
         private void generarComboEspecialidades() {//BINDEA EL COMBO CON LAS ESPECIALIDADES
@@ -28,12 +30,13 @@ namespace Clinica_Frba.Pedir_Turno
         }
         private void armarGrilla() {
             ArrayList profesionales = miModelo.resultadoBusqueda;
+            gridResultados.Rows.Clear();
             for (int i = 0; i < profesionales.Count; i++)
             {
                 gridResultados.Rows.Add(profesionales[i]);
-            }    
+            }
+            gridResultados.Update();
         }
-
 
         private void NombreProfTB_TextChanged(object sender, EventArgs e)
         {
@@ -43,11 +46,19 @@ namespace Clinica_Frba.Pedir_Turno
         private void botonBuscar(object sender, EventArgs e)
         {
             miModelo.especialidadSeleccionada = comboEspecialidad.Text;
-            //MessageBox.Show(string.Format("especialidad:'{0}'",miModelo.especialidadSeleccionada));
             miModelo.buscar();
             armarGrilla();
             
         }
 
+        private void SeleccionarButton_Click(object sender, EventArgs e)
+        {
+            if (gridResultados.SelectedCells.Count == 0)
+            {
+                MessageBox.Show("Seleccione un profesional");
+            }
+            else MessageBox.Show(gridResultados.SelectedCells[0]
+                    .EditedFormattedValue.ToString());
+        }
     }
 }
