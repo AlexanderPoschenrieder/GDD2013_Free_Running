@@ -15,8 +15,7 @@ namespace Clinica_Frba.Pedir_Turno
         private SqlConnection miConexion;
         private SqlCommand miConsulta;
         private String consultaBuscarBase = //CONSULTA PARA CONSEGUIR LOS PROFESIONALES
-            "select distinct SUBSTRING(Nombre,0,2)+lower(substring(Nombre,2,255))+' '" + 
-            "Apellido as Profesional from"+
+            "select distinct SUBSTRING(Nombre,0,2)+lower(substring(Nombre,2,255))+' '+Apellido as Profesional from"+
             "(Free_Running.Medico m left join Free_Running.Especialidad_Por_Med em on m.Id =em.Id)"+
             "join Free_Running.Especialidad e on em.Especialidad_Codigo= e.Codigo";
 
@@ -45,7 +44,7 @@ namespace Clinica_Frba.Pedir_Turno
                 whereString = "";
             }
             else {
-                whereString = string.Format("where Descripcion = '{0}'", especialidadSeleccionada);
+                whereString = string.Format(" where Descripcion = '{0}'", especialidadSeleccionada);
             }
             SqlCommand consultaBuscar = new SqlCommand(consultaBuscarBase+ whereString,miConexion);
             SqlDataReader dr_resultados = consultaBuscar.ExecuteReader();
