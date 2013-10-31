@@ -1,6 +1,6 @@
 ﻿namespace Clinica_Frba.NewFolder4
 {
-    partial class Form1
+    partial class PedirTurnoForm
     {
         /// <summary>
         /// Required designer variable.
