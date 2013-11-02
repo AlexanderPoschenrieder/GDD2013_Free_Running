@@ -57,8 +57,10 @@ namespace Clinica_Frba.Pedir_Turno
             {
                 MessageBox.Show("Seleccione un profesional");
             }
-            else MessageBox.Show(gridResultados.SelectedCells[0]
-                    .EditedFormattedValue.ToString());
+            else { String nombreMed= gridResultados.SelectedCells[0]
+                    .EditedFormattedValue.ToString() ;
+            MessageBox.Show(nombreMed + miModelo.idDelMedico(nombreMed));
+            }
         }
     }
 }
