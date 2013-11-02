@@ -161,12 +161,20 @@
     <Compile Include="Registro de LLegada\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro Resultado Atencion\ResultadoAtencionForm.cs">
+    <Compile Include="Registro Resultado Atencion\AtencionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro Resultado Atencion\ResultadoAtencionForm.Designer.cs">
-      <DependentUpon>ResultadoAtencionForm.cs</DependentUpon>
+    <Compile Include="Registro Resultado Atencion\AtencionForm.Designer.cs">
+      <DependentUpon>AtencionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Registro Resultado Atencion\ResulAtForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registro Resultado Atencion\ResulAtForm.Designer.cs">
+      <DependentUpon>ResulAtForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Registro Resultado Atencion\ModeloAtencion.cs" />
+    <Compile Include="Registro Resultado Atencion\ModeloRegistroResultadoAtencion.cs" />
     <Compile Include="Cancelar Atencion\CancelarAtencionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,6 +222,9 @@
     <EmbeddedResource Include="Pedir Turno\BusquedaProfesionalForm.resx">
       <DependentUpon>BusquedaProfesionalForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pedir Turno\PedirTurnoForm.resx">
+      <DependentUpon>PedirTurnoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -221,6 +232,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Registrar Agenda\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro Resultado Atencion\AtencionForm.resx">
+      <DependentUpon>AtencionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro Resultado Atencion\ResulAtForm.resx">
+      <DependentUpon>ResulAtForm.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
