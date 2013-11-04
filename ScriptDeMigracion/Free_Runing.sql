@@ -12,7 +12,7 @@ GO
 
 --///////////////////////////////////////////CREACION TABLAS///////////////////////////////////////////--
 
-
+go
 
 --TABLA PACIENTES: Tabla de todos los Pacientes de la Clinica - esten o no activos 
 
@@ -151,7 +151,7 @@ GO
 
 --TABLA BONO CONSULTA: Contiene TODOS los Bonos Consulta Comprados Cancelados o No, Utilizados o No
 CREATE TABLE Free_Running.Bono_Consulta (  --Fecha Imprecion Va (en la tabla maestra esta?
-Id numeric(18, 0) NOT NULL ,
+Id numeric(18, 0) NOT NULL identity(1,1),
 Fecha_Compra	datetime NOT NULL, 
 Numero	numeric(18, 0) NOT NULL, -- propio de cada paciente indica la cant de consultas de un paciente
 Afiliado_Compra numeric(18, 0) NOT NULL,
@@ -174,7 +174,7 @@ GO
 --TABLA BONO FARMACIA: Contiene TODOS los Bonos Farmacia Comprados, Vencidos o No, Utilizados o No
 CREATE TABLE Free_Running.Bono_Farmacia (
 Fecha_Compra	datetime NOT NULL,
-Id	numeric(18, 0) NOT NULL,
+Id	numeric(18, 0) NOT NULL identity(1,1),
 Fecha_Vencimiento	datetime NOT NULL,
 Fecha_Preinscripcion_Medicamento	varchar(255) NULL,
 Plan_Correspondiente numeric(18, 0) NOT NULL,
@@ -741,6 +741,7 @@ go
 
 --Bono Consulta
 --TODOS LOS BONO COLSUTA COMPRADOS utilizados o NO
+SET IDENTITY_INSERT Free_Running.Bono_Consulta ON
 INSERT INTO Free_Running.Bono_Consulta(Id,Fecha_Compra,Numero,Afiliado_Compra,Afiliado_Utiliza,Precio,Plan_Correspondiente)
 
 select  M.Bono_Consulta_Numero,M.Compra_Bono_Fecha,
@@ -769,7 +770,7 @@ select  M.Bono_Consulta_Numero,M.Compra_Bono_Fecha,
 
 from gd_esquema.Maestra M
 where (M.Compra_Bono_Fecha is not null and M.Bono_Consulta_Numero is not null)
-
+SET IDENTITY_INSERT Free_Running.Bono_Consulta OFF
 
 
 
@@ -841,6 +842,7 @@ where M.Consulta_Sintomas is not null
 --BONO FARMACIA
 CREATE INDEX ÍNDICE_AdM3 ON Free_Running.Consulta(Id_Atencion_Medica)
 
+SET IDENTITY_INSERT Free_Running.Bono_Farmacia ON
 
 INSERT INTO Free_Running.Bono_Farmacia(Id,Fecha_Compra,Fecha_Vencimiento,Afiliado_Compra,Afiliado_Utiliza,Precio,Consulta_Id,Plan_Correspondiente)
 select M.Bono_Farmacia_Numero,M.Compra_Bono_Fecha,M.Bono_Farmacia_Fecha_Vencimiento,
@@ -871,7 +873,7 @@ where M.Bono_Farmacia_Numero is not null and M.Compra_Bono_Fecha is not null
 
 
 
-
+SET IDENTITY_INSERT Free_Running.Bono_Farmacia ON
 
 
 
@@ -923,17 +925,12 @@ having datename(dw,DATEADD(D, 0, DATEDIFF(D, 0, Turno_Fecha))) <> 'Domingo'
 
 
 INSERT INTO Free_Running.Usuario(Username,Usuario_Password,Habilitado) values('admin','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1)
-INSERT INTO Free_Running.Usuario_por_Rol(Rol_Id,Username) values('Admnistrador Gerencial','admin')
+
 
 INSERT INTO Free_Running.Usuario(Username,Usuario_Password,Habilitado) values('admin2','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1)
-INSERT INTO Free_Running.Usuario_por_Rol(Rol_Id,Username) values('Admnistrador Gerencial','admin2')
-INSERT INTO Free_Running.Usuario_por_Rol(Rol_Id,Username) values('Administrativo','admin2')
-INSERT INTO Free_Running.Usuario_por_Rol(Rol_Id,Username) values('Afiliado','admin2')
-INSERT INTO Free_Running.Usuario_por_Rol(Rol_Id,Username) values('Profesional','admin2')
+
 
 INSERT INTO Free_Running.Usuario(Username,Usuario_Password,Habilitado) values('admin3','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1)
-INSERT INTO Free_Running.Usuario_por_Rol(Rol_Id,Username) values('Afiliado','admin3')
-INSERT INTO Free_Running.Usuario_por_Rol(Rol_Id,Username) values('Profesional','admin3')
 GO
 
 --PROCEDIMIENTOS
@@ -975,6 +972,19 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE Free_Running.existeAgenda 
+    @FechaInicio date,
+    @Medico numeric(18, 0)
+AS 
+BEGIN
+
+		Select top 1 * 
+		from Free_Running.Agenda A 
+		where((A.Medico = @Medico) and ( @FechaInicio between A.Fecha_Inicio and A.Fecha_Fin))
+
+END
+GO
+
 /*FUNCION PARA LA COMPRA DE BONOS */
 CREATE function [Free_Running].[calcula_plan_y_precio](@idCliente int)
 returns TABLE
@@ -988,3 +998,6 @@ select select p.Plan_Medico as PlanMedico,pm.Precio_Bono_Consulta as PrecioBonoC
 );
 
 
+
+SELECT *
+FROM Free_Running.Bono_Consulta
