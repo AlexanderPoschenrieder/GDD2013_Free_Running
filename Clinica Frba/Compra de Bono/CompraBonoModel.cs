@@ -17,19 +17,21 @@ namespace Clinica_Frba.Compra_de_Bono
         String stringInsert;
         public int montoTotal { get; set; }
 
-        public void comprarBonoFarmacia(int idPaciente)
+        public String comprarBonoFarmacia(int idPaciente)
         {
             BonoFarmacia bonoAux = new BonoFarmacia(idPaciente);
             carrito.Add(bonoAux);
             carritoFarmacia.Add(bonoAux);
             montoTotal += bonoAux.precio;
+            return bonoAux.nombreBono();
         }
-        public void comprarBonoConsulta(int idPaciente)
+        public String comprarBonoConsulta(int idPaciente)
         {
             BonoConsulta bonoAux = new BonoConsulta(idPaciente);
             carrito.Add(bonoAux);
             carritoConsulta.Add(bonoAux);
             montoTotal += bonoAux.precio;
+            return bonoAux.nombreBono();
         }
 
         private String armarStringInsert()

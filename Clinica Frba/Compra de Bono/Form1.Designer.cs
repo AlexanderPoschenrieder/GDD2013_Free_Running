@@ -31,13 +31,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.gridCarrito = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button3 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.labelMonto = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridCarrito)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -69,18 +69,18 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Seleccione el tipo de bono que quiere añadir al carrito";
             // 
-            // dataGridView1
+            // gridCarrito
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.gridCarrito.AllowUserToAddRows = false;
+            this.gridCarrito.AllowUserToDeleteRows = false;
+            this.gridCarrito.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridCarrito.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 86);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
-            this.dataGridView1.TabIndex = 3;
+            this.gridCarrito.Location = new System.Drawing.Point(12, 86);
+            this.gridCarrito.Name = "gridCarrito";
+            this.gridCarrito.ReadOnly = true;
+            this.gridCarrito.Size = new System.Drawing.Size(143, 150);
+            this.gridCarrito.TabIndex = 3;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -137,10 +137,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.gridCarrito);
             this.Name = "CompraBonoForm";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridCarrito)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -151,7 +151,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView gridCarrito;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label2;

@@ -24,13 +24,15 @@ namespace Clinica_Frba.Compra_de_Bono
 
         private void botonConsulta_Click(object sender, EventArgs e)
         {
-            modelo.comprarBonoConsulta(idPaciente);
+            String nombreBono= modelo.comprarBonoConsulta(idPaciente);
             labelMonto.Text = modelo.montoTotal.ToString();
+            gridCarrito.Rows.Add(nombreBono);
         }
         private void botonFarmacia_Click(object sender, EventArgs e)
         {
-            modelo.comprarBonoFarmacia(idPaciente);
+            String nombreBono = modelo.comprarBonoFarmacia(idPaciente);
             labelMonto.Text = modelo.montoTotal.ToString();
+            gridCarrito.Rows.Add(nombreBono);
         }
 
         private void buttonFinalizar_Click(object sender, EventArgs e)
