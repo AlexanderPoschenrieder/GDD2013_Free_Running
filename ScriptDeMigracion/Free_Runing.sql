@@ -153,7 +153,7 @@ GO
 CREATE TABLE Free_Running.Bono_Consulta (  --Fecha Imprecion Va (en la tabla maestra esta?
 Id numeric(18, 0) NOT NULL identity(1,1),
 Fecha_Compra	datetime NOT NULL, 
-Numero	numeric(18, 0) NOT NULL, -- propio de cada paciente indica la cant de consultas de un paciente
+Numero	numeric(18, 0) NULL, -- propio de cada paciente indica la cant de consultas de un paciente
 Afiliado_Compra numeric(18, 0) NOT NULL,
 Afiliado_Utiliza numeric(18, 0) NULL,
 Precio numeric(18, 0) NULL,

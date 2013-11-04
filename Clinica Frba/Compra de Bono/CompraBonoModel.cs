@@ -52,23 +52,22 @@ namespace Clinica_Frba.Compra_de_Bono
                     }
                     i++;
                 }
-
+            }
                 //Verifica que la lista no este vacia, si lo esta no hace insert
-                if (carritoConsulta.Count != 0)
+            if (carritoConsulta.Count != 0)
+            {
+                stringInsert = stringInsert + ";" + "insert into Free_Running.Bono_Consulta(Fecha_Compra,Afiliado_Compra,Precio,Plan_Correspondiente) values";
+                i = 0;
+                //Agrega por cada Bono los valores al value()----------------------  
+                foreach (BonoConsulta bonoC in carritoConsulta)
                 {
-                    stringInsert = stringInsert + ";" + "insert into Free_Running.Bono_Consulta(Fecha_Compra,Afiliado_Compra,Precio,Plan_Correspondiente) values";
-                    i = 0;
-                    //Agrega por cada Bono los valores al value()----------------------  
-                    foreach (BonoConsulta bonoC in carritoConsulta)
+                    if (i == 0)
+                    { stringInsert = stringInsert + bonoC.stringInsert(); }
+                    else
                     {
-                        if (i == 0)
-                        { stringInsert = stringInsert + bonoC.stringInsert(); }
-                        else
-                        {
-                            stringInsert = stringInsert + "," + bonoC.stringInsert();
-                        }
-                        i++;
+                        stringInsert = stringInsert + "," + bonoC.stringInsert();
                     }
+                    i++;
                 }
             }
             return stringInsert;
