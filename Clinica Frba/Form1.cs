@@ -22,8 +22,8 @@ namespace Clinica_Frba
             //Clinica_Frba.Registrar_Agenda.Form1 agenda = new Clinica_Frba.Registrar_Agenda.Form1();
             //agenda.ShowDialog();
 
-            Clinica_Frba.Abm_de_Afiliado.Agregar agregarPaciente = new Clinica_Frba.Abm_de_Afiliado.Agregar();
-            agregarPaciente.ShowDialog();
+            Clinica_Frba.Compra_de_Bono.CompraBonoForm ventana= new Clinica_Frba.Compra_de_Bono.CompraBonoForm(100);
+            ventana.ShowDialog();
         }
     }
 }

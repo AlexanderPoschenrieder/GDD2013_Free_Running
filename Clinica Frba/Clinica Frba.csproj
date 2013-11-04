@@ -55,13 +55,16 @@
       <DependentUpon>Agregar.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm de Afiliado\Paciente.cs" />
-    <Compile Include="Compra de Bono\CompraBonoForm.cs">
+    <Compile Include="Compra de Bono\Bono.cs" />
+    <Compile Include="Compra de Bono\BonoConsulta.cs" />
+    <Compile Include="Compra de Bono\BonoFarmacia.cs" />
+    <Compile Include="Compra de Bono\CompraBonoModel.cs" />
+    <Compile Include="Compra de Bono\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compra de Bono\CompraBonoForm.Designer.cs">
-      <DependentUpon>CompraBonoForm.cs</DependentUpon>
+    <Compile Include="Compra de Bono\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra de Bono\CompraBonoModel.cs" />
     <Compile Include="Conexion.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -201,8 +204,8 @@
     <EmbeddedResource Include="Abm de Afiliado\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Compra de Bono\CompraBonoForm.resx">
-      <DependentUpon>CompraBonoForm.cs</DependentUpon>
+    <EmbeddedResource Include="Compra de Bono\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

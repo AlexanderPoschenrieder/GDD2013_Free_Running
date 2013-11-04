@@ -975,4 +975,16 @@ BEGIN
 END
 GO
 
+/*FUNCION PARA LA COMPRA DE BONOS */
+CREATE function [Free_Running].[calcula_plan_y_precio](@idCliente int)
+returns TABLE
+as 
+return
+(
+select select p.Plan_Medico as PlanMedico,pm.Precio_Bono_Consulta as PrecioBonoConsulta,pm.Precio_Bono_Farmacia as PrecioBonoFarmacia
+	 from Free_Running.Paciente p left join Free_Running.Plan_Medico pm on
+		p.Plan_Medico=pm.Codigo
+	 where p.Nro_Afiliado= @idCliente
+);
+
 
