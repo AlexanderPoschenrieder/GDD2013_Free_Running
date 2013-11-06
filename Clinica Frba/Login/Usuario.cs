@@ -10,12 +10,10 @@ using System.Data;
 using System.Drawing;
 using System.Configuration;
 
-
 namespace Clinica_Frba.Login
 {
     public class Usuario
     {
-
         public String pUser { get; set; }
         public String pPass { get; set; }
 
@@ -24,11 +22,10 @@ namespace Clinica_Frba.Login
         {
             this.pPass = c;
             this.pUser = u;
-
         }
 
-        public bool Login()//(string pUser, string pPass) static
-        {   
+        public bool Login()
+        {
             //CREO UNA CONEXION Y X LA CONSULTA BUSCO EL USUARIO
             SqlConnection miConexion = Conexion.Conectar();
             SqlCommand consultaUsuario = new SqlCommand(string.Format(
@@ -38,98 +35,42 @@ namespace Clinica_Frba.Login
             //PREGUNTO SI PUEDO LEER ...si puedo => EXISTE EL USUARIO
             if (drUsuario.Read() == true)
             {
-                    //ACA EXISTE EL USUARIO
-                
+                //ACA EXISTE EL USUARIO
 
-                    if (Convert.ToInt32(drUsuario[2]) == 1)//PREGUNTO SI ESTA HABILITADO(1) ...NO HABILITADO(0)
+
+                if (Convert.ToInt32(drUsuario[2]) == 1)//PREGUNTO SI ESTA HABILITADO(1) ...NO HABILITADO(0)
+                {
+
+                    if (Convert.ToString(drUsuario[1]) == Validar.getHashSha256(this.pPass))//PREGUNTO SI Coincide el Pass
                     {
-                        
-                        if (Convert.ToString(drUsuario[1]) == Validar.getHashSha256(this.pPass))//PREGUNTO SI Coincide el Pass
+                        this.borrarIntentoFallido();//borro todos los intentos fallidos que tenia hasta el momento
+                        MessageBox.Show("Bienvenido: " + this.pUser);
+
+                        if (this.roles().Count > 0)
                         {
-                            this.borrarIntentoFallido();//borro todos los intentos fallidos que tenia hasta el momento
-                            MessageBox.Show("Bienvenido: "+this.pUser);
                             return true;
                         }
-                        else
-                        {
-                            //INTENTO FALLIDO
-                            MessageBox.Show("Contraseña Incorrecta");
-                            this.agregarIntentoFallido();//agrego un intento fallido, si la cantidad es 3 => Habilitado = 0 (desde sql)
-                            return false;
-                            
-                        }
+                        else { MessageBox.Show("No posee Ningun Rol"); return false; }
                     }
                     else
                     {
-                            MessageBox.Show("Usuario NO Habilitado"); return false;
+                        //INTENTO FALLIDO
+                        MessageBox.Show("Contraseña Incorrecta");
+                        this.agregarIntentoFallido();//agrego un intento fallido, si la cantidad es 3 => Habilitado = 0 (desde sql)
+                        return false;
+
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Usuario NO Habilitado"); return false;
+                }
             }
             else
             {
                 MessageBox.Show("Usuario No Existe"); return false;
             }
             //miConexion.Close();
-        }
-
-        public void AbrirMenuUnico(String unRol)
-        {
-            if (unRol == "Afiliado")
-            { //paciente 
-                Clinica_Frba.Login.menuPaciente menuPaciente = new menuPaciente();
-                menuPaciente.ShowDialog();
-            }
-
-            if (unRol == "Administrativo")
-            { //Administrativo 
-                Clinica_Frba.Login.menuAdministrativo menuAdmin = new menuAdministrativo();
-                menuAdmin.ShowDialog();
-            }
-            else
-            {
-                if (unRol == "Profesional")
-                { //Profecional 
-                    Clinica_Frba.Login.menuMedico menuMedico = new menuMedico();
-                    menuMedico.ShowDialog();
-                }
-                else
-                {
-                    if (unRol == "Admnistrador Gerencial")
-                    { //Admnistrador Gerencial NOSE SI VA
-                        Clinica_Frba.Login.menuAdministrativo menuAdmin = new menuAdministrativo();
-                        menuAdmin.ShowDialog();
-                    }
-                }
-            }
-        }
-
-        public ArrayList roles()//CREAR un VECTOR DE ROLES para un USUARIO
-        {
-            ArrayList misRoles = new ArrayList();
-            SqlConnection miConexion = Conexion.Conectar();
-            SqlCommand consultaRoles = new SqlCommand("select * from Free_Running.Usuario_por_Rol where Username='" + this.pUser + "'", miConexion);
-            SqlDataReader dr_roles = consultaRoles.ExecuteReader();
-
-            while (dr_roles.Read())
-            {
-                misRoles.Add((dr_roles[1]));
-            }
-
-            miConexion.Close();
-            return misRoles;
-        }
-
-        public void AbrirMenu()//Abre el MENU dependiendo la cantidad de roles que tenga
-        {
-            ArrayList misROles = this.roles();//CREO ARRAY de ROLES
-            if (misROles.Count == 1)//SI SOLO TIENE UN ROL
-            {
-                this.AbrirMenuUnico((misROles[0].ToString()));//ABRO EL MENU del ROL
-            }
-            else
-            {   //ABRO el MENU PARA SELECCIONAR UN ROL
-                Clinica_Frba.Login.selecRol menuRol = new selecRol(this);
-                menuRol.ShowDialog();
-            }
         }
 
         public void agregarIntentoFallido() //FALTA FECHAA
@@ -143,12 +84,12 @@ namespace Clinica_Frba.Login
                 cmd.Connection = miConexion;
                 cmd.CommandText = "Free_Running.agregarIntentoFallido";
                 cmd.CommandType = CommandType.StoredProcedure;
-                SqlParameter parUser = cmd.Parameters.Add ("@User", SqlDbType.VarChar,255 );
+                SqlParameter parUser = cmd.Parameters.Add("@User", SqlDbType.VarChar, 255);
                 parUser.Value = this.pUser;
                 cmd.ExecuteNonQuery();
 
             }
-        
+
         }
 
         public void borrarIntentoFallido()
@@ -169,5 +110,98 @@ namespace Clinica_Frba.Login
 
         }
 
+        public void AbrirMenuUnico(String unRol)
+        {
+            if (unRol == "Afiliado")
+            {
+                Clinica_Frba.Login.menuPaciente menuPaciente = new menuPaciente(this.generarPaciente());
+                menuPaciente.ShowDialog();
+            }
+
+            if (unRol == "Administrativo")
+            { 
+                Clinica_Frba.Login.menuAdministrativo menuAdmin = new menuAdministrativo();
+                menuAdmin.ShowDialog();
+            }
+            else
+            {
+                if (unRol == "Profesional")
+                {
+                    Clinica_Frba.Login.menuMedico menuMedico = new menuMedico(this.generarMedico());
+                    menuMedico.ShowDialog();
+                }
+                else
+                {
+                    if (unRol == "Admnistrador Gerencial")
+                    {
+                        Clinica_Frba.Login.menuAdministrativo menuAdmin = new menuAdministrativo();
+                        menuAdmin.ShowDialog();
+                    }
+                }
+            }
+        }
+
+        public ArrayList roles()//CREAR un VECTOR DE ROLES ""VALIDOS"" para un USUARIO
+        {
+            ArrayList misRoles = new ArrayList();
+            SqlConnection miConexion = Conexion.Conectar();
+            SqlCommand consultaRoles = new SqlCommand("select * from Free_Running.Usuario_por_Rol where Username='" + this.pUser + "'", miConexion);
+            SqlDataReader dr_roles = consultaRoles.ExecuteReader();
+            SqlConnection miConexion2 = Conexion.Conectar();
+            while (dr_roles.Read())
+            {
+                SqlCommand existeRoles = new SqlCommand("select * from Free_Running.Rol where Id='" + Convert.ToString(dr_roles[1]) + "'", miConexion2);
+                SqlDataReader dr_rolesActivos = existeRoles.ExecuteReader();
+                dr_rolesActivos.Read();
+                if ((Convert.ToInt32(dr_rolesActivos[1])) == 1) { misRoles.Add((dr_roles[1])); }
+
+            }
+
+            miConexion.Close();
+            miConexion2.Close();
+            return misRoles;
+        }
+
+        public void AbrirMenu()//Abre el MENU dependiendo la cantidad de roles que tenga
+        {
+            ArrayList misROles = this.roles();//CREO ARRAY de ROLES
+            if (misROles.Count == 1)//SI SOLO TIENE UN ROL
+            {
+                this.AbrirMenuUnico((misROles[0].ToString()));//ABRO EL MENU del ROL
+            }
+            else
+            {                   //ABRO el MENU PARA SELECCIONAR UN ROL
+                    Clinica_Frba.Login.selecRol menuRol = new selecRol(this);
+                    menuRol.ShowDialog();  
+            }
+        }
+
+        public Paciente generarPaciente()
+        {
+
+            SqlConnection miConexion = Conexion.Conectar();
+            SqlCommand consultaPaciente = new SqlCommand("select * from Free_Running.Paciente where Username='" + this.pUser + "'", miConexion);
+            SqlDataReader dr_paciente = consultaPaciente.ExecuteReader();
+            dr_paciente.Read();
+            Paciente miPaciente = new Paciente(Convert.ToUInt32(dr_paciente[0]), Convert.ToString(dr_paciente[1]), Convert.ToString(dr_paciente[2]), Convert.ToUInt32(dr_paciente[3]), Convert.ToString(dr_paciente[4]), Convert.ToUInt32(dr_paciente[5]), Convert.ToString(dr_paciente[6]), Convert.ToDateTime(dr_paciente[7]), Convert.ToString(dr_paciente[8]), Convert.ToString(dr_paciente[9]), Convert.ToString(dr_paciente[10]), Convert.ToInt32(dr_paciente[11]), Convert.ToUInt32(dr_paciente[12]), Convert.ToString(dr_paciente[13]), Convert.ToString(dr_paciente[14]));
+            return miPaciente;
+
+        }
+
+        public Medico generarMedico()
+        {
+
+            SqlConnection miConexion = Conexion.Conectar();
+            SqlCommand consultaMedico = new SqlCommand("select * from Free_Running.Medico where Username='" + this.pUser + "'", miConexion);
+            SqlDataReader dr_Medico = consultaMedico.ExecuteReader();
+            dr_Medico.Read();
+            Medico miMedico = new Medico(Convert.ToUInt32(dr_Medico[0]), Convert.ToString(dr_Medico[1]), Convert.ToString(dr_Medico[2]), Convert.ToString(dr_Medico[3]), Convert.ToString(dr_Medico[4]), Convert.ToUInt32(dr_Medico[5]), Convert.ToString(dr_Medico[6]), Convert.ToUInt32(dr_Medico[7]), Convert.ToString(dr_Medico[8]), Convert.ToDateTime(dr_Medico[9]), Convert.ToUInt32(dr_Medico[10]), Convert.ToString(dr_Medico[11]));
+            return miMedico;
+
+        }
     }
+
 }
+
+
+

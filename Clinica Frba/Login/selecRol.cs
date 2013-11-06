@@ -15,7 +15,7 @@ namespace Clinica_Frba.Login
     {
         public selecRol()
         {
-            InitializeComponent();   
+            InitializeComponent();
         }
 
         public Usuario miUser;
@@ -28,7 +28,7 @@ namespace Clinica_Frba.Login
         }
 
         public void generarMenu(Usuario unUser)
-        {               
+        {
             ArrayList misRoles = unUser.roles();
             for (int i = 0; i < misRoles.Count; i++)
             {
@@ -36,12 +36,7 @@ namespace Clinica_Frba.Login
             }
         }
 
-        private void selecRol_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void btAceptar_Click_1(object sender, EventArgs e)
+        private void btAceptar_Click(object sender, EventArgs e)
         {
             if (Validar.noVacio(cbRoles.Text))
             {
@@ -49,5 +44,11 @@ namespace Clinica_Frba.Login
                 miUser.AbrirMenuUnico(cbRoles.Text);
             }
         }
+
+
+
+
+
+
     }
 }

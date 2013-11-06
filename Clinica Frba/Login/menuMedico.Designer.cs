@@ -28,69 +28,69 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btReceta = new System.Windows.Forms.Button();
+            this.btCancelarT = new System.Windows.Forms.Button();
+            this.btRegRes = new System.Windows.Forms.Button();
+            this.btAgenda = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // btReceta
             // 
-            this.button1.Location = new System.Drawing.Point(27, 23);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(154, 33);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "AGENDA";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btReceta.Location = new System.Drawing.Point(61, 191);
+            this.btReceta.Name = "btReceta";
+            this.btReceta.Size = new System.Drawing.Size(171, 35);
+            this.btReceta.TabIndex = 7;
+            this.btReceta.Text = "RECETA MEDICA";
+            this.btReceta.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btCancelarT
             // 
-            this.button2.Location = new System.Drawing.Point(27, 84);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(154, 33);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "REGISTRAR RESULTADO";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btCancelarT.Location = new System.Drawing.Point(61, 140);
+            this.btCancelarT.Name = "btCancelarT";
+            this.btCancelarT.Size = new System.Drawing.Size(171, 35);
+            this.btCancelarT.TabIndex = 6;
+            this.btCancelarT.Text = "CANCELACION TURNO";
+            this.btCancelarT.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btRegRes
             // 
-            this.button3.Location = new System.Drawing.Point(27, 145);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(154, 33);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "CANCELAR TURNO";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btRegRes.Location = new System.Drawing.Point(61, 89);
+            this.btRegRes.Name = "btRegRes";
+            this.btRegRes.Size = new System.Drawing.Size(171, 35);
+            this.btRegRes.TabIndex = 5;
+            this.btRegRes.Text = "REGISTRO RESULTADO";
+            this.btRegRes.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btAgenda
             // 
-            this.button4.Location = new System.Drawing.Point(27, 206);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(154, 33);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "RECETA MEDICA";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btAgenda.Location = new System.Drawing.Point(61, 38);
+            this.btAgenda.Name = "btAgenda";
+            this.btAgenda.Size = new System.Drawing.Size(171, 35);
+            this.btAgenda.TabIndex = 4;
+            this.btAgenda.Text = "CARGAR AGENDA";
+            this.btAgenda.UseVisualStyleBackColor = true;
+            this.btAgenda.Click += new System.EventHandler(this.btAgenda_Click_1);
             // 
             // menuMedico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(220, 275);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(292, 273);
+            this.Controls.Add(this.btReceta);
+            this.Controls.Add(this.btCancelarT);
+            this.Controls.Add(this.btRegRes);
+            this.Controls.Add(this.btAgenda);
             this.Name = "menuMedico";
             this.Text = "menuMedico";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.menuMedico_FormClosing);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btReceta;
+        private System.Windows.Forms.Button btCancelarT;
+        private System.Windows.Forms.Button btRegRes;
+        private System.Windows.Forms.Button btAgenda;
     }
 }

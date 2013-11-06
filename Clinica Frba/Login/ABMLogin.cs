@@ -7,22 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Clinica_Frba.NewFolder10
+namespace Clinica_Frba.Login
 {
-    public partial class Form1 : Form
+    public partial class ABMLogin : Form
     {
-        public Form1()
+        public ABMLogin()
         {
             InitializeComponent();
         }
 
-        public void realizarLogin() 
-        
+        public void realizarLogin()
         {
-            Clinica_Frba.Login.Usuario unUser = new Clinica_Frba.Login.Usuario(tbUser.Text, tbPass.Text);
+            Clinica_Frba.Login.Usuario unUser = new Usuario(tbUser.Text, tbPass.Text);
             if ((Validar.noVacio(unUser.pPass)) & (Validar.noVacio(unUser.pUser)))
             {
-                if(unUser.Login())
+                if (unUser.Login())
                 {
                     this.Hide();
                     unUser.AbrirMenu();
@@ -30,16 +29,12 @@ namespace Clinica_Frba.NewFolder10
             }
             else { MessageBox.Show("Complete el Usuario y la Contraseña"); }
         }
-        
 
-        private void btAceptar_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-         realizarLogin();
+            realizarLogin();
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Application.Exit();
-        }
+
     }
 }

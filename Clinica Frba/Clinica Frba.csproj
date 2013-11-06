@@ -55,6 +55,30 @@
       <DependentUpon>Agregar.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm de Afiliado\Paciente.cs" />
+    <Compile Include="Abm de Rol\ABM_ROL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm de Rol\ABM_ROL.Designer.cs">
+      <DependentUpon>ABM_ROL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm de Rol\AltaRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm de Rol\AltaRol.Designer.cs">
+      <DependentUpon>AltaRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm de Rol\BajaRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm de Rol\BajaRol.Designer.cs">
+      <DependentUpon>BajaRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm de Rol\ModificarRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm de Rol\ModificarRol.Designer.cs">
+      <DependentUpon>ModificarRol.cs</DependentUpon>
+    </Compile>
     <Compile Include="Compra de Bono\Bono.cs" />
     <Compile Include="Compra de Bono\BonoConsulta.cs" />
     <Compile Include="Compra de Bono\BonoFarmacia.cs" />
@@ -72,12 +96,43 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\Form1.cs">
+    <Compile Include="Listados Estadisticos\AfiliadoBFvenc.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Listados Estadisticos\AfiliadoBFvenc.Designer.cs">
+      <DependentUpon>AfiliadoBFvenc.cs</DependentUpon>
     </Compile>
+    <Compile Include="Listados Estadisticos\AfiliadosMasBnoPropios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados Estadisticos\AfiliadosMasBnoPropios.Designer.cs">
+      <DependentUpon>AfiliadosMasBnoPropios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados Estadisticos\EspMasBFvencidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados Estadisticos\EspMasBFvencidos.Designer.cs">
+      <DependentUpon>EspMasBFvencidos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados Estadisticos\EspMasCanceladas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados Estadisticos\EspMasCanceladas.Designer.cs">
+      <DependentUpon>EspMasCanceladas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados Estadisticos\Estadisticas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados Estadisticos\Estadisticas.Designer.cs">
+      <DependentUpon>Estadisticas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\ABMLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\ABMLogin.Designer.cs">
+      <DependentUpon>ABMLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Medico.cs" />
     <Compile Include="Login\menuAdministrativo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +151,7 @@
     <Compile Include="Login\menuPaciente.Designer.cs">
       <DependentUpon>menuPaciente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login\Paciente.cs" />
     <Compile Include="Login\selecRol.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,12 +166,13 @@
       <DependentUpon>BusquedaProfesionalForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Pedir Turno\ModeloBusquedaProfesional.cs" />
-    <Compile Include="Registrar Agenda\Form1.cs">
+    <Compile Include="Registrar Agenda\ABM_Agenda.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registrar Agenda\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Registrar Agenda\ABM_Agenda.Designer.cs">
+      <DependentUpon>ABM_Agenda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Registrar Agenda\AgendaDia.cs" />
     <Compile Include="Registro de Usuario\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,12 +201,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Abm de Planes\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm de Rol\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm de Rol\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Pedir Turno\PedirTurnoForm.cs">
@@ -190,12 +241,6 @@
     <Compile Include="Generar Receta\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listados Estadisticos\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Listados Estadisticos\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Abm de Afiliado\Agregar.resx">
@@ -204,11 +249,35 @@
     <EmbeddedResource Include="Abm de Afiliado\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm de Rol\ABM_ROL.resx">
+      <DependentUpon>ABM_ROL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm de Rol\AltaRol.resx">
+      <DependentUpon>AltaRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm de Rol\BajaRol.resx">
+      <DependentUpon>BajaRol.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Compra de Bono\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Listados Estadisticos\AfiliadoBFvenc.resx">
+      <DependentUpon>AfiliadoBFvenc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados Estadisticos\AfiliadosMasBnoPropios.resx">
+      <DependentUpon>AfiliadosMasBnoPropios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados Estadisticos\EspMasBFvencidos.resx">
+      <DependentUpon>EspMasBFvencidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados Estadisticos\EspMasCanceladas.resx">
+      <DependentUpon>EspMasCanceladas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados Estadisticos\Estadisticas.resx">
+      <DependentUpon>Estadisticas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\ABMLogin.resx">
+      <DependentUpon>ABMLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\menuAdministrativo.resx">
       <DependentUpon>menuAdministrativo.cs</DependentUpon>
@@ -233,8 +302,8 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Registrar Agenda\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Registrar Agenda\ABM_Agenda.resx">
+      <DependentUpon>ABM_Agenda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Registro Resultado Atencion\AtencionForm.resx">
       <DependentUpon>AtencionForm.cs</DependentUpon>

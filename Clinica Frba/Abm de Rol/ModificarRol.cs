@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Clinica_Frba.NewFolder9
+namespace Clinica_Frba.Abm_de_Rol
 {
-    public partial class Form1 : Form
+    public partial class ModificarRol : Form
     {
-        public Form1()
+        public ModificarRol()
         {
             InitializeComponent();
         }

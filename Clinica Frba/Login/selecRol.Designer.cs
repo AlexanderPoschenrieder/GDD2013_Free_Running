@@ -29,49 +29,48 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.cbRoles = new System.Windows.Forms.ComboBox();
             this.btAceptar = new System.Windows.Forms.Button();
+            this.cbRoles = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 30);
+            this.label1.Location = new System.Drawing.Point(30, 98);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Seleccionar Rol";
+            this.label1.Size = new System.Drawing.Size(76, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Selecionar Rol";
+            // 
+            // btAceptar
+            // 
+            this.btAceptar.Location = new System.Drawing.Point(31, 154);
+            this.btAceptar.Name = "btAceptar";
+            this.btAceptar.Size = new System.Drawing.Size(75, 23);
+            this.btAceptar.TabIndex = 4;
+            this.btAceptar.Text = "Aceptar";
+            this.btAceptar.UseVisualStyleBackColor = true;
+            this.btAceptar.Click += new System.EventHandler(this.btAceptar_Click);
             // 
             // cbRoles
             // 
             this.cbRoles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbRoles.FormattingEnabled = true;
-            this.cbRoles.Location = new System.Drawing.Point(108, 27);
+            this.cbRoles.Location = new System.Drawing.Point(125, 95);
             this.cbRoles.Name = "cbRoles";
-            this.cbRoles.Size = new System.Drawing.Size(172, 21);
-            this.cbRoles.TabIndex = 4;
-            // 
-            // btAceptar
-            // 
-            this.btAceptar.Location = new System.Drawing.Point(12, 71);
-            this.btAceptar.Name = "btAceptar";
-            this.btAceptar.Size = new System.Drawing.Size(75, 23);
-            this.btAceptar.TabIndex = 5;
-            this.btAceptar.Text = "Aceptar";
-            this.btAceptar.UseVisualStyleBackColor = true;
-            this.btAceptar.Click += new System.EventHandler(this.btAceptar_Click_1);
+            this.cbRoles.Size = new System.Drawing.Size(138, 21);
+            this.cbRoles.TabIndex = 3;
             // 
             // selecRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 127);
+            this.ClientSize = new System.Drawing.Size(292, 273);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btAceptar);
             this.Controls.Add(this.cbRoles);
-            this.Controls.Add(this.label1);
             this.Name = "selecRol";
             this.Text = "selecRol";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.selecRol_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -80,8 +79,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cbRoles;
         private System.Windows.Forms.Button btAceptar;
-
+        private System.Windows.Forms.ComboBox cbRoles;
     }
 }
