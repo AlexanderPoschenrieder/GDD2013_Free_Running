@@ -497,7 +497,10 @@ GO
  
  ALTER TABLE Free_Running.Agenda_Dia ADD CONSTRAINT FK_Agenda FOREIGN KEY (Agenda) 
  REFERENCES Free_Running.Agenda(Id) 
- GO
+ ON update cascade
+ ON delete cascade
+ go
+
 
 
 
@@ -591,8 +594,8 @@ where g2.Especialidad_Codigo is not null
 
 
 --Migrar Medicos
-INSERT INTO Free_Running.Medico(Nombre,Apellido,Tipo_Documento,Documento,Direccion,Telefono,Mail,Fecha_Nac)
-SELECT distinct g2.Medico_Nombre,Medico_Apellido,'DNI',Medico_Dni,Medico_Direccion,Medico_Telefono,Medico_Mail,Medico_Fecha_Nac
+INSERT INTO Free_Running.Medico(Nombre,Apellido,Tipo_Documento,Documento,Direccion,Telefono,Mail,Fecha_Nac,Matricula)
+SELECT distinct g2.Medico_Nombre,Medico_Apellido,'DNI',Medico_Dni,Medico_Direccion,Medico_Telefono,Medico_Mail,Medico_Fecha_Nac,00
 FROM gd_esquema.Maestra g2
 where g2.Medico_Dni is not null
 
@@ -973,17 +976,90 @@ END
 GO
 
 CREATE PROCEDURE Free_Running.existeAgenda 
-    @FechaInicio date,
     @Medico numeric(18, 0)
 AS 
 BEGIN
 
 		Select top 1 * 
 		from Free_Running.Agenda A 
-		where((A.Medico = @Medico) and ( @FechaInicio between A.Fecha_Inicio and A.Fecha_Fin))
+		where(A.Medico = @Medico)
 
 END
 GO
+
+
+
+
+CREATE PROCEDURE Free_Running.EspeMasCanceladas 
+    @Inicio DateTime,
+    @Fin DateTime  
+AS 
+BEGIN
+	select top 5 T.Especialidad_Codigo Especialidad, COUNT(*) Cantidad
+	from Free_Running.Turno_Cancelado TC join Free_Running.Turno T on (TC.Turno_Numero = T.Numero)
+	where ((T.Fecha >= @Inicio) and (T.Fecha <= @Fin))
+	Group by T.Especialidad_Codigo
+	order by 2 DESC
+END
+go
+
+
+CREATE PROCEDURE Free_Running.AfiliadoBFvenc 
+    @Inicio DateTime,
+    @Fin DateTime  
+AS 
+BEGIN
+	select top 5 P.Nro_Afiliado Afiliado, COUNT(*) Cantidad
+	from Free_Running.Bono_Farmacia BF join Free_Running.Bono_Farmacia_Vencido V on (V.Bono_Farmacia_Id = BF.Id)
+		 join Free_Running.Paciente P on (BF.Afiliado_Compra = P.Nro_Afiliado)
+	where ((BF.Fecha_Compra >= @Inicio) and (BF.Fecha_Compra <= @Fin))
+	Group by P.Nro_Afiliado
+	order by 2 DESC
+END
+
+
+
+
+CREATE PROCEDURE Free_Running.EspMasCanc
+    @Inicio DateTime,
+    @Fin DateTime  
+AS 
+BEGIN
+select top 5 T.Especialidad_Codigo,Count(BF.Id)
+From Free_Running.Bono_Farmacia BF join Free_Running.Consulta C on (C.Id = BF.Consulta_Id)
+	 join Free_Running.Atencion_Medica AM on (Am.Id = C.Id_Atencion_Medica)
+	 join Free_Running.Llegada_Atencion_Medica LAM on (LAM.Id = AM.Llegada_Id)
+	 join Free_Running.Turno T on (LAM.Turno_Numero=T.Numero)
+where ((BF.Fecha_Compra >= @Inicio) and (BF.Fecha_Compra <= @Fin))
+group by T.Especialidad_Codigo
+Order by 2 DESC
+end
+
+
+go
+CREATE PROCEDURE Free_Running.AfiliadoUsoDist
+    @Inicio DateTime,
+    @Fin DateTime  
+AS 
+BEGIN
+select top 10 A.Afiliado_Compra, cant
+from(
+select Bc.Afiliado_Compra,Count(Bc.Afiliado_Utiliza) cant
+from Free_Running.Bono_Consulta Bc
+where Bc.Afiliado_Compra<>Bc.Afiliado_Utiliza and ((Bc.Fecha_Compra >= @Inicio) and (Bc.Fecha_Compra <= @Fin))
+group by Bc.Afiliado_Compra
+UNION
+select B.Afiliado_Compra,Count(B.Afiliado_Utiliza) cant
+from Free_Running.Bono_Farmacia B
+where B.Afiliado_Compra<>B.Afiliado_Utiliza and ((B.Fecha_Compra >= @Inicio) and (B.Fecha_Compra <= @Fin))
+group by B.Afiliado_Compra
+)
+ A
+end
+
+
+
+
 
 /*FUNCION PARA LA COMPRA DE BONOS */
 CREATE function [Free_Running].[calcula_plan_y_precio](@idCliente int)
