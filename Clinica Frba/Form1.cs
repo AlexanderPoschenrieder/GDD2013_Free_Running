@@ -23,8 +23,8 @@ namespace Clinica_Frba
             //Clinica_Frba.Compra_de_Bono.CompraBonoForm ventana= new Clinica_Frba.Compra_de_Bono.CompraBonoForm(100);
             //ventana.ShowDialog();
 
-            //Clinica_Frba.Login.ABMLogin login = new Clinica_Frba.Login.ABMLogin();//creo instancia del form login
-            Clinica_Frba.Abm_de_Rol.ModificarRol login = new Clinica_Frba.Abm_de_Rol.ModificarRol();
+            Clinica_Frba.Login.ABMLogin login = new Clinica_Frba.Login.ABMLogin();//creo instancia del form login
+            //Clinica_Frba.Abm_de_Rol.ModificarRol login = new Clinica_Frba.Abm_de_Rol.ModificarRol();
             login.ShowDialog();
         }
     }
