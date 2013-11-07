@@ -1,4 +1,3 @@
-
 --///////////////////////////////////////////SELECCION BdD///////////////////////////////////////////--
 
 use GD2C2013
@@ -162,6 +161,19 @@ CONSTRAINT PK_Bono_Consulta PRIMARY KEY CLUSTERED (Id ASC)
 )
 GO
 
+--Trigger para calcular la fecha actual
+CREATE TRIGGER insteadInsertTriggerConsulta
+   ON  Free_Running.Bono_Consulta
+   instead of INSERT
+AS 
+BEGIN
+	insert into Free_Running.Bono_Consulta
+	(Fecha_Compra,Plan_Correspondiente,Afiliado_Compra,Precio)
+	select GETDATE(),i.Plan_Correspondiente,i.Afiliado_Compra,i.Precio
+	from inserted i
+END
+GO
+
 --TABLA BONO CONSULTA CANSELADO: Representa un Bono Consulta que se Utilizo al momento de Llegar a la Clinica pero que No se pudo realizar la Consulta
 CREATE TABLE Free_Running.Bono_Consulta_Cancelado (
 Id	numeric(18, 0) NOT NULL identity(1,1),
@@ -184,6 +196,19 @@ Precio numeric(18, 0) NOT NULL,
 Consulta_Id numeric(18, 0) NULL,
 CONSTRAINT PK_Bono_Farmacia PRIMARY KEY CLUSTERED (Id ASC)
 )
+GO
+
+--Guarda la fecha de vencimiento al momento de hacer el insert
+CREATE TRIGGER insteadInsertTriggerFarmacias
+   ON  Free_Running.Bono_Farmacia
+   Instead of INSERT
+AS 
+BEGIN
+	insert into Free_Running.Bono_Farmacia
+	(Fecha_Compra,Fecha_Vencimiento,Plan_Correspondiente,Afiliado_Compra,Precio)
+	select GETDATE(),Free_Running.calcula_fecha_vencimiento(GETDATE()),i.Plan_Correspondiente,i.Afiliado_Compra,i.Precio
+	from inserted i
+END
 GO
 
 --TABLA BONO FARMACIA VENCIDO: Representa los Bonos Farmacia NO utilizados antes de los 60 Dias
@@ -538,7 +563,7 @@ SELECT distinct Plan_Med_Codigo,Plan_Med_Descripcion,Plan_Med_Precio_Bono_Consul
 FROM gd_esquema.Maestra
 
 		--Creo Indices
-		CREATE INDEX ÍNDICE_DOCUMENTO ON Free_Running.Plan_Medico(Codigo)
+		CREATE INDEX ï¿½NDICE_DOCUMENTO ON Free_Running.Plan_Medico(Codigo)
 
 
 
@@ -557,8 +582,8 @@ where not((( g1.Turno_Fecha is null) and ( g1.Compra_Bono_Fecha is null)))
 
 
 		--Creo Indices
-		CREATE INDEX ÍNDICE_DOCUMENTO ON Free_Running.Paciente (Documento);
-		CREATE INDEX ÍNDICE_NroAfiliado ON Free_Running.Paciente (Nro_Afiliado);
+		CREATE INDEX ï¿½NDICE_DOCUMENTO ON Free_Running.Paciente (Documento);
+		CREATE INDEX ï¿½NDICE_NroAfiliado ON Free_Running.Paciente (Nro_Afiliado);
 		
 		go
 
@@ -828,9 +853,9 @@ go
 		go
 
 		--Creo Indices
-		CREATE INDEX ÍNDICE_LAM ON Free_Running.Llegada_Atencion_Medica(Turno_Numero)
-		CREATE INDEX ÍNDICE_LAM2 ON Free_Running.Llegada_Atencion_Medica(Id)
-		CREATE INDEX ÍNDICE_AM ON Free_Running.Atencion_Medica(Llegada_Id)
+		CREATE INDEX ï¿½NDICE_LAM ON Free_Running.Llegada_Atencion_Medica(Turno_Numero)
+		CREATE INDEX ï¿½NDICE_LAM2 ON Free_Running.Llegada_Atencion_Medica(Id)
+		CREATE INDEX ï¿½NDICE_AM ON Free_Running.Atencion_Medica(Llegada_Id)
 
 
 
@@ -850,7 +875,7 @@ where M.Consulta_Sintomas is not null
 
 
 --BONO FARMACIA
-CREATE INDEX ÍNDICE_AdM3 ON Free_Running.Consulta(Id_Atencion_Medica)
+CREATE INDEX ï¿½NDICE_AdM3 ON Free_Running.Consulta(Id_Atencion_Medica)
 
 SET IDENTITY_INSERT Free_Running.Bono_Farmacia ON
 
