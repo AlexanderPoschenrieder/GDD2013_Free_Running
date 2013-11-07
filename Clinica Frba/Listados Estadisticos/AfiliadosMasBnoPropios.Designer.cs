@@ -37,7 +37,7 @@
             this.dvgTop.AllowUserToAddRows = false;
             this.dvgTop.AllowUserToDeleteRows = false;
             this.dvgTop.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgTop.Location = new System.Drawing.Point(12, 28);
+            this.dvgTop.Location = new System.Drawing.Point(12, 12);
             this.dvgTop.Name = "dvgTop";
             this.dvgTop.ReadOnly = true;
             this.dvgTop.Size = new System.Drawing.Size(268, 217);

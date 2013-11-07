@@ -36,7 +36,7 @@
             // 
             // btReceta
             // 
-            this.btReceta.Location = new System.Drawing.Point(61, 191);
+            this.btReceta.Location = new System.Drawing.Point(12, 165);
             this.btReceta.Name = "btReceta";
             this.btReceta.Size = new System.Drawing.Size(171, 35);
             this.btReceta.TabIndex = 7;
@@ -45,7 +45,7 @@
             // 
             // btCancelarT
             // 
-            this.btCancelarT.Location = new System.Drawing.Point(61, 140);
+            this.btCancelarT.Location = new System.Drawing.Point(12, 114);
             this.btCancelarT.Name = "btCancelarT";
             this.btCancelarT.Size = new System.Drawing.Size(171, 35);
             this.btCancelarT.TabIndex = 6;
@@ -54,7 +54,7 @@
             // 
             // btRegRes
             // 
-            this.btRegRes.Location = new System.Drawing.Point(61, 89);
+            this.btRegRes.Location = new System.Drawing.Point(12, 63);
             this.btRegRes.Name = "btRegRes";
             this.btRegRes.Size = new System.Drawing.Size(171, 35);
             this.btRegRes.TabIndex = 5;
@@ -63,7 +63,7 @@
             // 
             // btAgenda
             // 
-            this.btAgenda.Location = new System.Drawing.Point(61, 38);
+            this.btAgenda.Location = new System.Drawing.Point(12, 12);
             this.btAgenda.Name = "btAgenda";
             this.btAgenda.Size = new System.Drawing.Size(171, 35);
             this.btAgenda.TabIndex = 4;
@@ -75,7 +75,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 273);
+            this.ClientSize = new System.Drawing.Size(199, 218);
             this.Controls.Add(this.btReceta);
             this.Controls.Add(this.btCancelarT);
             this.Controls.Add(this.btRegRes);

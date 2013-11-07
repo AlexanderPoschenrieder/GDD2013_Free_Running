@@ -39,7 +39,7 @@
             // 
             // btEstadist
             // 
-            this.btEstadist.Location = new System.Drawing.Point(49, 312);
+            this.btEstadist.Location = new System.Drawing.Point(12, 292);
             this.btEstadist.Name = "btEstadist";
             this.btEstadist.Size = new System.Drawing.Size(194, 32);
             this.btEstadist.TabIndex = 13;
@@ -48,7 +48,7 @@
             // 
             // btLlegada
             // 
-            this.btLlegada.Location = new System.Drawing.Point(49, 265);
+            this.btLlegada.Location = new System.Drawing.Point(12, 245);
             this.btLlegada.Name = "btLlegada";
             this.btLlegada.Size = new System.Drawing.Size(194, 32);
             this.btLlegada.TabIndex = 12;
@@ -57,7 +57,7 @@
             // 
             // btPedido
             // 
-            this.btPedido.Location = new System.Drawing.Point(49, 218);
+            this.btPedido.Location = new System.Drawing.Point(12, 198);
             this.btPedido.Name = "btPedido";
             this.btPedido.Size = new System.Drawing.Size(194, 32);
             this.btPedido.TabIndex = 11;
@@ -66,7 +66,7 @@
             // 
             // btCompra
             // 
-            this.btCompra.Location = new System.Drawing.Point(49, 171);
+            this.btCompra.Location = new System.Drawing.Point(12, 151);
             this.btCompra.Name = "btCompra";
             this.btCompra.Size = new System.Drawing.Size(194, 32);
             this.btCompra.TabIndex = 10;
@@ -75,7 +75,7 @@
             // 
             // btProf
             // 
-            this.btProf.Location = new System.Drawing.Point(49, 124);
+            this.btProf.Location = new System.Drawing.Point(12, 104);
             this.btProf.Name = "btProf";
             this.btProf.Size = new System.Drawing.Size(194, 32);
             this.btProf.TabIndex = 9;
@@ -84,7 +84,7 @@
             // 
             // btAfiliado
             // 
-            this.btAfiliado.Location = new System.Drawing.Point(49, 77);
+            this.btAfiliado.Location = new System.Drawing.Point(12, 57);
             this.btAfiliado.Name = "btAfiliado";
             this.btAfiliado.Size = new System.Drawing.Size(194, 32);
             this.btAfiliado.TabIndex = 8;
@@ -93,7 +93,7 @@
             // 
             // btRol
             // 
-            this.btRol.Location = new System.Drawing.Point(49, 30);
+            this.btRol.Location = new System.Drawing.Point(12, 10);
             this.btRol.Name = "btRol";
             this.btRol.Size = new System.Drawing.Size(194, 32);
             this.btRol.TabIndex = 7;
@@ -105,7 +105,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 388);
+            this.ClientSize = new System.Drawing.Size(220, 341);
             this.Controls.Add(this.btEstadist);
             this.Controls.Add(this.btLlegada);
             this.Controls.Add(this.btPedido);

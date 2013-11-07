@@ -16,8 +16,6 @@ namespace Clinica_Frba.Login
     {
         public menuAdministrativo()
         {
-            InitializeComponent();
-
             ArrayList misFuncionalidades = new ArrayList();
             InitializeComponent();
             SqlConnection miConexion = Conexion.Conectar();
@@ -32,7 +30,7 @@ namespace Clinica_Frba.Login
             if (misFuncionalidades.Contains("PROFECIONAL")) { } else { btProf.Visible = false; }
             if (misFuncionalidades.Contains("COMPRA_BONO")) { } else { btCompra.Visible = false; }
             if (misFuncionalidades.Contains("PEDIDO_TURNO")) { } else { btPedido.Visible = false; }
-            if (misFuncionalidades.Contains("LLEGADA_ATENCION_MEDICA")) { } else { btLlegada.Visible = false; }
+            if (misFuncionalidades.Contains("LLEGADA_ATENCION_MEDICA")) { } else { this.btLlegada.Visible = false; }
             if (misFuncionalidades.Contains("LISTADO_ESTADISTICO")) { } else { btEstadist.Visible = false; }
         }
 

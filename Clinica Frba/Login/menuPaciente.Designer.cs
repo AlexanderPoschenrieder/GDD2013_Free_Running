@@ -34,7 +34,7 @@
             // 
             // btCancelar
             // 
-            this.btCancelar.Location = new System.Drawing.Point(75, 143);
+            this.btCancelar.Location = new System.Drawing.Point(12, 69);
             this.btCancelar.Name = "btCancelar";
             this.btCancelar.Size = new System.Drawing.Size(137, 41);
             this.btCancelar.TabIndex = 3;
@@ -43,7 +43,7 @@
             // 
             // btComprar
             // 
-            this.btComprar.Location = new System.Drawing.Point(75, 69);
+            this.btComprar.Location = new System.Drawing.Point(12, 12);
             this.btComprar.Name = "btComprar";
             this.btComprar.Size = new System.Drawing.Size(137, 41);
             this.btComprar.TabIndex = 2;
@@ -54,7 +54,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 273);
+            this.ClientSize = new System.Drawing.Size(160, 127);
             this.Controls.Add(this.btCancelar);
             this.Controls.Add(this.btComprar);
             this.Name = "menuPaciente";

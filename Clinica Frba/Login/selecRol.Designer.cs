@@ -36,7 +36,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(30, 98);
+            this.label1.Location = new System.Drawing.Point(50, 43);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 5;
@@ -44,7 +44,7 @@
             // 
             // btAceptar
             // 
-            this.btAceptar.Location = new System.Drawing.Point(31, 154);
+            this.btAceptar.Location = new System.Drawing.Point(53, 88);
             this.btAceptar.Name = "btAceptar";
             this.btAceptar.Size = new System.Drawing.Size(75, 23);
             this.btAceptar.TabIndex = 4;
@@ -56,7 +56,7 @@
             // 
             this.cbRoles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbRoles.FormattingEnabled = true;
-            this.cbRoles.Location = new System.Drawing.Point(125, 95);
+            this.cbRoles.Location = new System.Drawing.Point(132, 40);
             this.cbRoles.Name = "cbRoles";
             this.cbRoles.Size = new System.Drawing.Size(138, 21);
             this.cbRoles.TabIndex = 3;
@@ -65,12 +65,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 273);
+            this.ClientSize = new System.Drawing.Size(321, 151);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btAceptar);
             this.Controls.Add(this.cbRoles);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "selecRol";
-            this.Text = "selecRol";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Selecionar Rol";
             this.ResumeLayout(false);
             this.PerformLayout();
 

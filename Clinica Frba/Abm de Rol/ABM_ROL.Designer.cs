@@ -35,7 +35,7 @@
             // 
             // btModificar
             // 
-            this.btModificar.Location = new System.Drawing.Point(73, 176);
+            this.btModificar.Location = new System.Drawing.Point(12, 135);
             this.btModificar.Name = "btModificar";
             this.btModificar.Size = new System.Drawing.Size(146, 39);
             this.btModificar.TabIndex = 5;
@@ -45,7 +45,7 @@
             // 
             // btBaja
             // 
-            this.btBaja.Location = new System.Drawing.Point(73, 115);
+            this.btBaja.Location = new System.Drawing.Point(12, 74);
             this.btBaja.Name = "btBaja";
             this.btBaja.Size = new System.Drawing.Size(146, 39);
             this.btBaja.TabIndex = 4;
@@ -55,7 +55,7 @@
             // 
             // btAlta
             // 
-            this.btAlta.Location = new System.Drawing.Point(73, 57);
+            this.btAlta.Location = new System.Drawing.Point(12, 16);
             this.btAlta.Name = "btAlta";
             this.btAlta.Size = new System.Drawing.Size(146, 39);
             this.btAlta.TabIndex = 3;
@@ -67,7 +67,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 273);
+            this.ClientSize = new System.Drawing.Size(182, 205);
             this.Controls.Add(this.btModificar);
             this.Controls.Add(this.btBaja);
             this.Controls.Add(this.btAlta);

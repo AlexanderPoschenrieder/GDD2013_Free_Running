@@ -41,7 +41,7 @@
             this.cblFuncionalidades.FormattingEnabled = true;
             this.cblFuncionalidades.Location = new System.Drawing.Point(108, 67);
             this.cblFuncionalidades.Name = "cblFuncionalidades";
-            this.cblFuncionalidades.Size = new System.Drawing.Size(259, 169);
+            this.cblFuncionalidades.Size = new System.Drawing.Size(246, 169);
             this.cblFuncionalidades.TabIndex = 12;
             // 
             // btLimpiar

@@ -37,7 +37,7 @@
             this.dgvTop.AllowUserToAddRows = false;
             this.dgvTop.AllowUserToDeleteRows = false;
             this.dgvTop.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTop.Location = new System.Drawing.Point(12, 12);
+            this.dgvTop.Location = new System.Drawing.Point(8, 12);
             this.dgvTop.Name = "dgvTop";
             this.dgvTop.ReadOnly = true;
             this.dgvTop.Size = new System.Drawing.Size(276, 185);
@@ -47,7 +47,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 273);
+            this.ClientSize = new System.Drawing.Size(292, 270);
             this.Controls.Add(this.dgvTop);
             this.Name = "AfiliadoBFvenc";
             this.Text = "AfiliadoBFvenc";
