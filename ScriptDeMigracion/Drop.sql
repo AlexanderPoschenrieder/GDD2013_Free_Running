@@ -35,6 +35,8 @@ DROP FUNCTION Free_Running.calcula_fecha_vencimiento
 DROP FUNCTION Free_Running.suNroAfiliado
 DROP FUNCTION Free_Running.suNroAtencion
 DROP PROCEDURE Free_Running.existeAgenda 
-DROP  PROCEDURE Free_Running.EspeMasCanceladas 
-
+DROP PROCEDURE Free_Running.EspeMasCanceladas 
+DROP PROCEDURE Free_Running.AfiliadoBFvenc 
+DROP PROCEDURE Free_Running.AfiliadoUsoDist
+DROP PROCEDURE Free_Running.EspMasCanc
 DROP schema Free_Running

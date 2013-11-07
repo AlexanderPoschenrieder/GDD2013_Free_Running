@@ -466,9 +466,11 @@ GO
  
  ALTER TABLE Free_Running.Funcionalidad_por_Rol ADD CONSTRAINT FK_Func_por_Rol_Rol_Id  FOREIGN KEY (Rol_Id) 
  REFERENCES Free_Running.Rol(Id) 
+ ON update cascade
+ ON delete cascade
  GO 
  ALTER TABLE Free_Running.Funcionalidad_por_Rol ADD CONSTRAINT FK_Func_por_Rol_Funcionalidad_Id  FOREIGN KEY (Funcionalidad_Id) 
- REFERENCES Free_Running.Funcionalidad(Id) 
+ REFERENCES Free_Running.Funcionalidad(Id)
  GO
  
  
@@ -479,6 +481,8 @@ GO
  GO
  ALTER TABLE Free_Running.Usuario_por_Rol ADD CONSTRAINT FK_Rol_Id  FOREIGN KEY (Rol_Id) 
  REFERENCES Free_Running.Rol(Id) 
+ ON update cascade
+ ON delete cascade
  GO
  
  
@@ -693,7 +697,7 @@ INSERT INTO Free_Running.Funcionalidad(Id)
 Values
 ('ROL'),
 ('AFILIADO'),
-('PROFECIONAL'),
+('PROFESIONAL'),
 ('AGENDA'),
 ('COMPRA_BONO'),
 ('PEDIDO_TURNO'),
@@ -713,11 +717,11 @@ Values
 INSERT INTO Free_Running.Funcionalidad_por_Rol(Rol_Id,Funcionalidad_Id)
 Values
 ('Afiliado','COMPRA_BONO'),('Afiliado','CANCELACION_TURNO'),
-('Administrativo','ROL'),('Administrativo','AFILIADO'),('Administrativo','PROFECIONAL'),('Administrativo','COMPRA_BONO'),
+('Administrativo','ROL'),('Administrativo','AFILIADO'),('Administrativo','PROFESIONAL'),('Administrativo','COMPRA_BONO'),
 ('Administrativo','PEDIDO_TURNO'),('Administrativo','LLEGADA_ATENCION_MEDICA'),('Administrativo','LISTADO_ESTADISTICO'),
 ('Profesional','AGENDA'),('Profesional','REGISTRO_RESULTADO'),('Profesional','CANCELACION_TURNO'),('Profesional','RECETA_MEDICA'),
 ('Admnistrador Gerencial','ROL'),('Admnistrador Gerencial','AFILIADO'),
-('Admnistrador Gerencial','PROFECIONAL'),('Admnistrador Gerencial','AGENDA'),
+('Admnistrador Gerencial','PROFESIONAL'),('Admnistrador Gerencial','AGENDA'),
 ('Admnistrador Gerencial','COMPRA_BONO'),('Admnistrador Gerencial','PEDIDO_TURNO'),
 ('Admnistrador Gerencial','LLEGADA_ATENCION_MEDICA'),('Admnistrador Gerencial','REGISTRO_RESULTADO'),
 ('Admnistrador Gerencial','CANCELACION_TURNO'),('Admnistrador Gerencial','RECETA_MEDICA'),('Admnistrador Gerencial','LISTADO_ESTADISTICO')
@@ -928,17 +932,15 @@ having datename(dw,DATEADD(D, 0, DATEDIFF(D, 0, Turno_Fecha))) <> 'Domingo'
 
 
 INSERT INTO Free_Running.Usuario(Username,Usuario_Password,Habilitado) values('admin','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1)
+INSERT INTO Free_Running.Usuario_por_Rol(Username,Rol_Id) values('admin','Administrativo')
 
 
-INSERT INTO Free_Running.Usuario(Username,Usuario_Password,Habilitado) values('admin2','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1)
 
 
-INSERT INTO Free_Running.Usuario(Username,Usuario_Password,Habilitado) values('admin3','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1)
-GO
 
 --PROCEDIMIENTOS
 
-
+go
 CREATE FUNCTION Free_Running.CantIntentosActual(@Username varchar(255))
 RETURNS int
 AS
@@ -1016,7 +1018,7 @@ BEGIN
 	Group by P.Nro_Afiliado
 	order by 2 DESC
 END
-
+go
 
 
 
@@ -1060,7 +1062,7 @@ end
 
 
 
-
+go
 /*FUNCION PARA LA COMPRA DE BONOS */
 CREATE function [Free_Running].[calcula_plan_y_precio](@idCliente int)
 returns TABLE
@@ -1074,6 +1076,17 @@ select select p.Plan_Medico as PlanMedico,pm.Precio_Bono_Consulta as PrecioBonoC
 );
 
 
+go
 
-SELECT *
-FROM Free_Running.Bono_Consulta
+SELECT FxR.Funcionalidad_Id Funcionalidad 
+FROM Free_Running.Funcionalidad_por_Rol FxR
+WHERE FxR.Rol_Id = 'Profesional' 
+
+
+SELECT Id Funcionalidad 
+FROM Free_Running.Funcionalidad F 
+Where (not exists (select * 
+					from Free_Running.Funcionalidad_por_Rol FxR 
+					Where FxR.Rol_Id = 'Profesional'  and F.Id = FxR.Funcionalidad_Id))
+					
+					
