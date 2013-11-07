@@ -322,12 +322,14 @@ GO
  
  ALTER TABLE Free_Running.Paciente ADD CONSTRAINT FK_Usuario_Paciente  FOREIGN KEY (Username) 
  REFERENCES Free_Running.Usuario(Username) 
+  ON update cascade
  GO
  
 
  
  ALTER TABLE Free_Running.Medico ADD CONSTRAINT FK_Usuario_Medico  FOREIGN KEY (Username) 
  REFERENCES Free_Running.Usuario(Username) 
+  ON update cascade
  GO
  
  
@@ -492,6 +494,7 @@ GO
  
  ALTER TABLE Free_Running.Intentos_Fallidos ADD CONSTRAINT FK_Intentos_Fallidos_Username  FOREIGN KEY (Username) 
  REFERENCES Free_Running.Usuario(Username) 
+  ON update cascade
  GO
 
  
