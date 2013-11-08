@@ -1,4 +1,4 @@
---///////////////////////////////////////////SELECCION BdD///////////////////////////////////////////--
+﻿--///////////////////////////////////////////SELECCION BdD///////////////////////////////////////////--
 
 use GD2C2013
 go
@@ -563,7 +563,7 @@ SELECT distinct Plan_Med_Codigo,Plan_Med_Descripcion,Plan_Med_Precio_Bono_Consul
 FROM gd_esquema.Maestra
 
 		--Creo Indices
-		CREATE INDEX �NDICE_DOCUMENTO ON Free_Running.Plan_Medico(Codigo)
+		CREATE INDEX iNDICE_DOCUMENTO ON Free_Running.Plan_Medico(Codigo)
 
 
 
@@ -582,8 +582,8 @@ where not((( g1.Turno_Fecha is null) and ( g1.Compra_Bono_Fecha is null)))
 
 
 		--Creo Indices
-		CREATE INDEX �NDICE_DOCUMENTO ON Free_Running.Paciente (Documento);
-		CREATE INDEX �NDICE_NroAfiliado ON Free_Running.Paciente (Nro_Afiliado);
+		CREATE INDEX iNDICE_DOCUMENTO ON Free_Running.Paciente (Documento);
+		CREATE INDEX iNDICE_NroAfiliado ON Free_Running.Paciente (Nro_Afiliado);
 		
 		go
 
@@ -853,9 +853,9 @@ go
 		go
 
 		--Creo Indices
-		CREATE INDEX �NDICE_LAM ON Free_Running.Llegada_Atencion_Medica(Turno_Numero)
-		CREATE INDEX �NDICE_LAM2 ON Free_Running.Llegada_Atencion_Medica(Id)
-		CREATE INDEX �NDICE_AM ON Free_Running.Atencion_Medica(Llegada_Id)
+		CREATE INDEX iNDICE_LAM ON Free_Running.Llegada_Atencion_Medica(Turno_Numero)
+		CREATE INDEX iNDICE_LAM2 ON Free_Running.Llegada_Atencion_Medica(Id)
+		CREATE INDEX iNDICE_AM ON Free_Running.Atencion_Medica(Llegada_Id)
 
 
 
@@ -1106,15 +1106,5 @@ select select p.Plan_Medico as PlanMedico,pm.Precio_Bono_Consulta as PrecioBonoC
 
 go
 
-SELECT FxR.Funcionalidad_Id Funcionalidad 
-FROM Free_Running.Funcionalidad_por_Rol FxR
-WHERE FxR.Rol_Id = 'Profesional' 
-
-
-SELECT Id Funcionalidad 
-FROM Free_Running.Funcionalidad F 
-Where (not exists (select * 
-					from Free_Running.Funcionalidad_por_Rol FxR 
-					Where FxR.Rol_Id = 'Profesional'  and F.Id = FxR.Funcionalidad_Id))
 					
 					
