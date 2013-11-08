@@ -161,19 +161,6 @@ CONSTRAINT PK_Bono_Consulta PRIMARY KEY CLUSTERED (Id ASC)
 )
 GO
 
---Trigger para calcular la fecha actual
-CREATE TRIGGER insteadInsertTriggerConsulta
-   ON  Free_Running.Bono_Consulta
-   instead of INSERT
-AS 
-BEGIN
-	insert into Free_Running.Bono_Consulta
-	(Fecha_Compra,Plan_Correspondiente,Afiliado_Compra,Precio)
-	select GETDATE(),i.Plan_Correspondiente,i.Afiliado_Compra,i.Precio
-	from inserted i
-END
-GO
-
 --TABLA BONO CONSULTA CANSELADO: Representa un Bono Consulta que se Utilizo al momento de Llegar a la Clinica pero que No se pudo realizar la Consulta
 CREATE TABLE Free_Running.Bono_Consulta_Cancelado (
 Id	numeric(18, 0) NOT NULL identity(1,1),
@@ -198,18 +185,7 @@ CONSTRAINT PK_Bono_Farmacia PRIMARY KEY CLUSTERED (Id ASC)
 )
 GO
 
---Guarda la fecha de vencimiento al momento de hacer el insert
-CREATE TRIGGER insteadInsertTriggerFarmacias
-   ON  Free_Running.Bono_Farmacia
-   Instead of INSERT
-AS 
-BEGIN
-	insert into Free_Running.Bono_Farmacia
-	(Fecha_Compra,Fecha_Vencimiento,Plan_Correspondiente,Afiliado_Compra,Precio)
-	select GETDATE(),Free_Running.calcula_fecha_vencimiento(GETDATE()),i.Plan_Correspondiente,i.Afiliado_Compra,i.Precio
-	from inserted i
-END
-GO
+
 
 --TABLA BONO FARMACIA VENCIDO: Representa los Bonos Farmacia NO utilizados antes de los 60 Dias
 CREATE TABLE Free_Running.Bono_Farmacia_Vencido (
@@ -777,6 +753,7 @@ go
 --Bono Consulta
 --TODOS LOS BONO COLSUTA COMPRADOS utilizados o NO
 SET IDENTITY_INSERT Free_Running.Bono_Consulta ON
+go
 INSERT INTO Free_Running.Bono_Consulta(Id,Fecha_Compra,Numero,Afiliado_Compra,Afiliado_Utiliza,Precio,Plan_Correspondiente)
 
 select  M.Bono_Consulta_Numero,M.Compra_Bono_Fecha,
@@ -806,7 +783,7 @@ select  M.Bono_Consulta_Numero,M.Compra_Bono_Fecha,
 from gd_esquema.Maestra M
 where (M.Compra_Bono_Fecha is not null and M.Bono_Consulta_Numero is not null)
 SET IDENTITY_INSERT Free_Running.Bono_Consulta OFF
-
+go
 
 
 
@@ -875,10 +852,10 @@ where M.Consulta_Sintomas is not null
 
 
 --BONO FARMACIA
-CREATE INDEX �NDICE_AdM3 ON Free_Running.Consulta(Id_Atencion_Medica)
+CREATE INDEX iNDICE_AdM3 ON Free_Running.Consulta(Id_Atencion_Medica)
 
 SET IDENTITY_INSERT Free_Running.Bono_Farmacia ON
-
+go
 INSERT INTO Free_Running.Bono_Farmacia(Id,Fecha_Compra,Fecha_Vencimiento,Afiliado_Compra,Afiliado_Utiliza,Precio,Consulta_Id,Plan_Correspondiente)
 select M.Bono_Farmacia_Numero,M.Compra_Bono_Fecha,M.Bono_Farmacia_Fecha_Vencimiento,
 		(Free_Running.suNroAfiliado(M.Paciente_Dni)) COMPRA,
@@ -908,8 +885,8 @@ where M.Bono_Farmacia_Numero is not null and M.Compra_Bono_Fecha is not null
 
 
 
-SET IDENTITY_INSERT Free_Running.Bono_Farmacia ON
-
+SET IDENTITY_INSERT Free_Running.Bono_Farmacia OFF
+go
 
 
 
@@ -1106,5 +1083,29 @@ select select p.Plan_Medico as PlanMedico,pm.Precio_Bono_Consulta as PrecioBonoC
 
 go
 
+
+--Trigger para calcular la fecha actual
+CREATE TRIGGER insteadInsertTriggerConsulta
+   ON  Free_Running.Bono_Consulta
+   instead of INSERT
+AS 
+BEGIN
+	insert into Free_Running.Bono_Consulta(Fecha_Compra,Plan_Correspondiente,Afiliado_Compra,Precio)
+	select GETDATE(),i.Plan_Correspondiente,i.Afiliado_Compra,i.Precio
+	from inserted i
+END
+GO
 					
 					
+					--Guarda la fecha de vencimiento al momento de hacer el insert
+CREATE TRIGGER insteadInsertTriggerFarmacias
+   ON  Free_Running.Bono_Farmacia
+   Instead of INSERT
+AS 
+BEGIN
+	insert into Free_Running.Bono_Farmacia
+	(Fecha_Compra,Fecha_Vencimiento,Plan_Correspondiente,Afiliado_Compra,Precio)
+	select GETDATE(),Free_Running.calcula_fecha_vencimiento(GETDATE()),i.Plan_Correspondiente,i.Afiliado_Compra,i.Precio
+	from inserted i
+END
+GO
