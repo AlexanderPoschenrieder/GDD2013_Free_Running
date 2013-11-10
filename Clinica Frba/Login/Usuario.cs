@@ -199,6 +199,54 @@ namespace Clinica_Frba.Login
             return miMedico;
 
         }
+
+
+        static public void Eliminar_usuario(string campo_a_modificar, long Parametro, string Tabla)//ver como lo haria polimorficamente
+            //Elimina un usuario de la base de datos.
+        {
+            SqlConnection miconexion = Conexion.Conectar();
+
+            string queryl = "DELETE FROM " + Tabla + " WHERE " + campo_a_modificar + " = " + Parametro;
+
+            using (miconexion)
+            {
+                SqlCommand cmd = new SqlCommand(queryl, miconexion);
+
+
+                cmd.ExecuteNonQuery();
+
+                miconexion.Close();
+            }
+        }
+
+
+        static public void filtrar_tabla(string campo_a_modificar, string tabla, long Parametro, DataGridView dataGridView)
+           //lleno la tabla para modificar los datos
+        {
+            DataSet ds = new DataSet();
+            SqlDataAdapter adapt;
+
+            try
+            {
+                SqlConnection miconexion = Conexion.Conectar();
+
+                string queryl = "SELECT * FROM Free_Running." + tabla + " WHERE " + campo_a_modificar + " =" + Parametro;
+
+                adapt = new SqlDataAdapter(queryl, miconexion);//vinculo la conexion con la consulta
+
+                adapt.Fill(ds, tabla);//Lleno el dataset
+                dataGridView.DataSource = ds.Tables[0];//asigno
+                //dataGridView1.DataMember = "Paciente_Details";
+                //miconexion.Close();
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error en la busqueda de datos", "Update", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+            }
+
+        }
     }
 
 }

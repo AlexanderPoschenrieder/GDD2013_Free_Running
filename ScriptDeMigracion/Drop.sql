@@ -1,6 +1,6 @@
 ------ELIMINAR TODO
 
-
+DROP TABLE Free_Running.Familia
 DROP TABLE Free_Running.Agenda_Dia
 DROP TABLE Free_Running.Agenda
 DROP TABLE Free_Running.Bono_Consulta_Cancelado

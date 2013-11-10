@@ -41,6 +41,13 @@ namespace Clinica_Frba.Login
             abmRol.ShowDialog();
         }
 
+        private void btAfiliado_Click(object sender, EventArgs e)
+        {
+            Clinica_Frba.Abm_de_Afiliado.Menu_Afiliado mAfiliado = new Clinica_Frba.Abm_de_Afiliado.Menu_Afiliado();
+            mAfiliado.ShowDialog();
+            this.Hide();
+        }
+
 
 
 

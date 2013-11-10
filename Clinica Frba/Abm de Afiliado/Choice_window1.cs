@@ -9,17 +9,16 @@ using System.Windows.Forms;
 
 namespace Clinica_Frba.Abm_de_Afiliado
 {
-    public partial class Agregar : Form
+    public partial class Choice_window1 : Form
     {
-        public Agregar()
+        public Choice_window1()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            Paciente.Insertar_afiliado("Roberto", "Aasdasn", "DNI", 3883833, "av siempre viva", 4450023, "pepe@pepe", DateTime.Today, "Femenino", "Soltero", 4, 555559, "Activo", "pepe003");
+            this.Close();
         }
-
     }
 }

@@ -48,13 +48,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abm de Afiliado\Agregar.cs">
+    <Compile Include="Abm de Afiliado\Agregar_Afiliado.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm de Afiliado\Agregar.Designer.cs">
-      <DependentUpon>Agregar.cs</DependentUpon>
+    <Compile Include="Abm de Afiliado\Agregar_Afiliado.Designer.cs">
+      <DependentUpon>Agregar_Afiliado.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm de Afiliado\Paciente.cs" />
+    <Compile Include="Abm de Afiliado\Choice_window.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm de Afiliado\Choice_window.Designer.cs">
+      <DependentUpon>Choice_window.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm de Afiliado\Choice_window1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm de Afiliado\Choice_window1.Designer.cs">
+      <DependentUpon>Choice_window1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm de Afiliado\Eliminar_Afiliado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm de Afiliado\Eliminar_Afiliado.Designer.cs">
+      <DependentUpon>Eliminar_Afiliado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm de Afiliado\Modificar_Afiliado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm de Afiliado\Modificar_Afiliado.Designer.cs">
+      <DependentUpon>Modificar_Afiliado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm de Rol\ABM_ROL.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,11 +208,11 @@
     <Compile Include="Registro de Usuario\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm de Afiliado\Form1.cs">
+    <Compile Include="Abm de Afiliado\Menu_Afiliado.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm de Afiliado\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm de Afiliado\Menu_Afiliado.Designer.cs">
+      <DependentUpon>Menu_Afiliado.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm de Profesional\Form1.cs">
       <SubType>Form</SubType>
@@ -249,11 +272,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Abm de Afiliado\Agregar.resx">
-      <DependentUpon>Agregar.cs</DependentUpon>
+    <EmbeddedResource Include="Abm de Afiliado\Agregar_Afiliado.resx">
+      <DependentUpon>Agregar_Afiliado.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm de Afiliado\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Abm de Afiliado\Choice_window.resx">
+      <DependentUpon>Choice_window.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm de Afiliado\Choice_window1.resx">
+      <DependentUpon>Choice_window1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm de Afiliado\Menu_Afiliado.resx">
+      <DependentUpon>Menu_Afiliado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm de Rol\ABM_ROL.resx">
       <DependentUpon>ABM_ROL.cs</DependentUpon>

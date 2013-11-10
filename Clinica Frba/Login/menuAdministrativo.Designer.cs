@@ -90,6 +90,7 @@
             this.btAfiliado.TabIndex = 8;
             this.btAfiliado.Text = "AFILIADO";
             this.btAfiliado.UseVisualStyleBackColor = true;
+            this.btAfiliado.Click += new System.EventHandler(this.btAfiliado_Click);
             // 
             // btRol
             // 

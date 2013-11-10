@@ -15,8 +15,17 @@ go
 
 --TABLA PACIENTES: Tabla de todos los Pacientes de la Clinica - esten o no activos 
 
-CREATE TABLE Free_Running.Paciente (
-Nro_Afiliado numeric(18, 0) NOT NULL identity(100,100),
+create table Free_Running.Familia(
+Id_familia numeric(18,0) identity(1,1),
+CONSTRAINT PK_familia PRIMARY KEY CLUSTERED (Id_familia ASC)
+)
+Go
+
+
+CREATE TABLE Free_Running.Paciente(
+ID numeric(18, 0) NOT NULL identity(1,1),
+Nro_Afiliado numeric(18,0) NOT NULL,
+Familia numeric(18,0) NOT NULL,
 Nombre	varchar(255) NOT NULL,
 Apellido	varchar(255) NOT NULL,
 Documento	numeric(18, 0) NOT NULL,
@@ -34,6 +43,7 @@ Username  varchar(255) NULL,
 CONSTRAINT PK_Paciente PRIMARY KEY CLUSTERED (Nro_Afiliado ASC)
 )
 GO
+
 
 
 --TABLA PLAN MEDICO: Tabla de todos los Planes que Ofrece la Clinica 
@@ -326,6 +336,10 @@ GO
   ON update cascade
  GO
  
+ ALTER TABLE Free_Running.Paciente ADD CONSTRAINT FK_Familia FOREIGN KEY (Familia) 
+ REFERENCES Free_Running.Familia(Id_familia) 
+ GO
+
 
  
  ALTER TABLE Free_Running.Medico ADD CONSTRAINT FK_Usuario_Medico  FOREIGN KEY (Username) 
@@ -543,17 +557,41 @@ FROM gd_esquema.Maestra
 
 
 
+--Migrar TABLA FAMILIA
 
+
+
+SET IDENTITY_INSERT Free_Running.Familia on
+
+declare @i int
+declare @length int
+SET @length =(select count(distinct (M.Paciente_Dni)) from gd_esquema.Maestra M)
+SET @i = 0
+
+while (@length > @i)
+begin
+SET @i = @i + 1
+INSERT INTO Free_Running.Familia(Id_familia) values( (@i ))
+
+
+end
+
+go
+
+SET IDENTITY_INSERT Free_Running.Familia off
 
 --Migrar Pacientes
-INSERT INTO Free_Running.Paciente(Nombre,Apellido,Documento,Direccion,Telefono,Mail,Fecha_Nac,Sexo,Tipo_Documento,Estado_Civil,Cant_Familiares,Plan_Medico,Estado)
-SELECT distinct g1.Paciente_Nombre,g1.Paciente_Apellido,g1.Paciente_Dni,g1.Paciente_Direccion,g1.Paciente_Telefono,g1.Paciente_Mail,g1.Paciente_Fecha_Nac,'F','DNI','Soltero',
-	   0,
-	   g1.Plan_Med_Codigo,'Activo'
+INSERT INTO Free_Running.Paciente(Nombre,Apellido,Documento,Direccion,Telefono,Mail,Fecha_Nac,Sexo,Tipo_Documento,Estado_Civil,Cant_Familiares,Plan_Medico,Estado,Nro_Afiliado,Familia)
+
+SELECT distinct
+g1.Paciente_Nombre,g1.Paciente_Apellido,g1.Paciente_Dni,g1.Paciente_Direccion,g1.Paciente_Telefono,g1.Paciente_Mail,g1.Paciente_Fecha_Nac,'F','DNI','Soltero',0,g1.Plan_Med_Codigo,'Activo',
+(( ROW_NUMBER() OVER(ORDER BY g1.Paciente_Dni DESC))*100),
+(( ROW_NUMBER() OVER(ORDER BY g1.Paciente_Dni DESC))) 
+
 FROM gd_esquema.Maestra g1
 where not((( g1.Turno_Fecha is null) and ( g1.Compra_Bono_Fecha is null)))
-
-
+group by g1.Paciente_Nombre,g1.Paciente_Apellido,g1.Paciente_Dni,g1.Paciente_Direccion,g1.Paciente_Telefono,g1.Paciente_Mail,g1.Paciente_Fecha_Nac,g1.Plan_Med_Codigo
+go
 
 
 
@@ -855,7 +893,6 @@ where M.Consulta_Sintomas is not null
 CREATE INDEX iNDICE_AdM3 ON Free_Running.Consulta(Id_Atencion_Medica)
 
 SET IDENTITY_INSERT Free_Running.Bono_Farmacia ON
-go
 INSERT INTO Free_Running.Bono_Farmacia(Id,Fecha_Compra,Fecha_Vencimiento,Afiliado_Compra,Afiliado_Utiliza,Precio,Consulta_Id,Plan_Correspondiente)
 select M.Bono_Farmacia_Numero,M.Compra_Bono_Fecha,M.Bono_Farmacia_Fecha_Vencimiento,
 		(Free_Running.suNroAfiliado(M.Paciente_Dni)) COMPRA,
@@ -882,11 +919,8 @@ select M.Bono_Farmacia_Numero,M.Compra_Bono_Fecha,M.Bono_Farmacia_Fecha_Vencimie
 		
 from gd_esquema.Maestra M
 where M.Bono_Farmacia_Numero is not null and M.Compra_Bono_Fecha is not null
-
-
-
 SET IDENTITY_INSERT Free_Running.Bono_Farmacia OFF
-go
+
 
 
 
@@ -1068,20 +1102,7 @@ end
 
 
 go
-/*FUNCION PARA LA COMPRA DE BONOS */
-CREATE function [Free_Running].[calcula_plan_y_precio](@idCliente int)
-returns TABLE
-as 
-return
-(
-select select p.Plan_Medico as PlanMedico,pm.Precio_Bono_Consulta as PrecioBonoConsulta,pm.Precio_Bono_Farmacia as PrecioBonoFarmacia
-	 from Free_Running.Paciente p left join Free_Running.Plan_Medico pm on
-		p.Plan_Medico=pm.Codigo
-	 where p.Nro_Afiliado= @idCliente
-);
 
-
-go
 
 
 --Trigger para calcular la fecha actual
@@ -1109,3 +1130,24 @@ BEGIN
 	from inserted i
 END
 GO
+
+
+/*FUNCION PARA LA COMPRA DE BONOS */
+CREATE function [Free_Running].[calcula_plan_y_precio](@idCliente int)
+returns TABLE
+as 
+return
+(
+select select p.Plan_Medico as PlanMedico,pm.Precio_Bono_Consulta as PrecioBonoConsulta,pm.Precio_Bono_Farmacia as PrecioBonoFarmacia
+	 from Free_Running.Paciente p left join Free_Running.Plan_Medico pm on
+		p.Plan_Medico=pm.Codigo
+	 where p.Nro_Afiliado= @idCliente
+);
+
+
+go
+
+
+
+select *
+from Free_Running.Paciente
