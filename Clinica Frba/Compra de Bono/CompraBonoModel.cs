@@ -10,8 +10,8 @@ namespace Clinica_Frba.Compra_de_Bono
     class CompraBonoModel
     {
         List<Bono> carrito = new List<Bono>();
-        List<BonoConsulta> carritoConsulta = new List<BonoConsulta>();
-        List<BonoFarmacia> carritoFarmacia = new List<BonoFarmacia>();
+        List<Bono> carritoConsulta = new List<Bono>();
+        List<Bono> carritoFarmacia = new List<Bono>();
         SqlConnection miConexion;
         SqlCommand commandInsert;
         String stringInsert;
@@ -19,19 +19,19 @@ namespace Clinica_Frba.Compra_de_Bono
 
         public String comprarBonoFarmacia(int idPaciente)
         {
-            BonoFarmacia bonoAux = new BonoFarmacia(idPaciente);
+            Bono bonoAux = new Bono(idPaciente,"Bono Farmacia",2);
             carrito.Add(bonoAux);
             carritoFarmacia.Add(bonoAux);
             montoTotal += bonoAux.precio;
-            return bonoAux.nombreBono();
+            return "Bono Farmacia";
         }
         public String comprarBonoConsulta(int idPaciente)
         {
-            BonoConsulta bonoAux = new BonoConsulta(idPaciente);
+            Bono bonoAux = new Bono(idPaciente,"Bono Consulta",1);
             carrito.Add(bonoAux);
             carritoConsulta.Add(bonoAux);
             montoTotal += bonoAux.precio;
-            return bonoAux.nombreBono();
+            return "Bono Consulta";
         }
 
         private String armarStringInsert()
@@ -41,10 +41,10 @@ namespace Clinica_Frba.Compra_de_Bono
             //
             if (carritoFarmacia.Count != 0)
             {
-                stringInsert = "insert into Free_Running.Bono_Farmacia(Fecha_Compra,Afiliado_Compra,Precio,Plan_Correspondiente,Fecha_Vencimiento) values";
+                stringInsert = "insert into Free_Running.Bono_Farmacia(Afiliado_Compra,Precio,Plan_Correspondiente) values";
 
                 //Agrega por cada Bono los valores al value()----------------------  
-                foreach (BonoFarmacia bonoF in carritoFarmacia)
+                foreach (Bono bonoF in carritoFarmacia)
                 {
                     if (i == 0)
                     { stringInsert = stringInsert + bonoF.stringInsert(); }
@@ -58,10 +58,10 @@ namespace Clinica_Frba.Compra_de_Bono
                 //Verifica que la lista no este vacia, si lo esta no hace insert
             if (carritoConsulta.Count != 0)
             {
-                stringInsert = stringInsert + ";" + "insert into Free_Running.Bono_Consulta(Fecha_Compra,Afiliado_Compra,Precio,Plan_Correspondiente) values";
+                stringInsert = stringInsert + ";" + "insert into Free_Running.Bono_Consulta(Afiliado_Compra,Precio,Plan_Correspondiente) values";
                 i = 0;
                 //Agrega por cada Bono los valores al value()----------------------  
-                foreach (BonoConsulta bonoC in carritoConsulta)
+                foreach (Bono bonoC in carritoConsulta)
                 {
                     if (i == 0)
                     { stringInsert = stringInsert + bonoC.stringInsert(); }

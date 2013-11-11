@@ -34,8 +34,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.gridResultados = new System.Windows.Forms.DataGridView();
-            this.NombreProfesional = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SeleccionarButton = new System.Windows.Forms.Button();
+            this.NombreProfesional = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idMedico = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.botonLimpiar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridResultados)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,16 +90,13 @@
             // 
             this.gridResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridResultados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.NombreProfesional});
+            this.NombreProfesional,
+            this.Apellido,
+            this.idMedico});
             this.gridResultados.Location = new System.Drawing.Point(13, 136);
             this.gridResultados.Name = "gridResultados";
             this.gridResultados.Size = new System.Drawing.Size(267, 118);
             this.gridResultados.TabIndex = 5;
-            // 
-            // NombreProfesional
-            // 
-            this.NombreProfesional.HeaderText = "Nombre";
-            this.NombreProfesional.Name = "NombreProfesional";
             // 
             // SeleccionarButton
             // 
@@ -108,11 +108,37 @@
             this.SeleccionarButton.UseVisualStyleBackColor = true;
             this.SeleccionarButton.Click += new System.EventHandler(this.SeleccionarButton_Click);
             // 
+            // NombreProfesional
+            // 
+            this.NombreProfesional.HeaderText = "Nombre";
+            this.NombreProfesional.Name = "NombreProfesional";
+            // 
+            // Apellido
+            // 
+            this.Apellido.HeaderText = "Apellido";
+            this.Apellido.Name = "Apellido";
+            // 
+            // idMedico
+            // 
+            this.idMedico.HeaderText = "idMedico";
+            this.idMedico.Name = "idMedico";
+            // 
+            // botonLimpiar
+            // 
+            this.botonLimpiar.Location = new System.Drawing.Point(205, 106);
+            this.botonLimpiar.Name = "botonLimpiar";
+            this.botonLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.botonLimpiar.TabIndex = 7;
+            this.botonLimpiar.Text = "Limpiar";
+            this.botonLimpiar.UseVisualStyleBackColor = true;
+            this.botonLimpiar.Click += new System.EventHandler(this.botonLimpiar_Click);
+            // 
             // BusquedaProfesionalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 289);
+            this.Controls.Add(this.botonLimpiar);
             this.Controls.Add(this.SeleccionarButton);
             this.Controls.Add(this.gridResultados);
             this.Controls.Add(this.button1);
@@ -136,7 +162,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView gridResultados;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NombreProfesional;
         private System.Windows.Forms.Button SeleccionarButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NombreProfesional;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idMedico;
+        private System.Windows.Forms.Button botonLimpiar;
     }
 }

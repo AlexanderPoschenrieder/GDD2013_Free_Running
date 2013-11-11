@@ -108,9 +108,27 @@
     <Compile Include="Abm de Rol\ModificarRolFunciones.Designer.cs">
       <DependentUpon>ModificarRolFunciones.cs</DependentUpon>
     </Compile>
+    <Compile Include="Cancelar Atencion\CancelarAtencionMedico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cancelar Atencion\CancelarAtencionMedico.Designer.cs">
+      <DependentUpon>CancelarAtencionMedico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cancelar Atencion\CancelarAtencionPaciente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cancelar Atencion\CancelarAtencionPaciente.Designer.cs">
+      <DependentUpon>CancelarAtencionPaciente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cancelar Atencion\ModeloCancelarAtencion.cs" />
+    <Compile Include="Cancelar Atencion\ModeloMotivoCancelacion.cs" />
+    <Compile Include="Cancelar Atencion\MotivoCancelacionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cancelar Atencion\MotivoCancelacionForm.Designer.cs">
+      <DependentUpon>MotivoCancelacionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Compra de Bono\Bono.cs" />
-    <Compile Include="Compra de Bono\BonoConsulta.cs" />
-    <Compile Include="Compra de Bono\BonoFarmacia.cs" />
     <Compile Include="Compra de Bono\CompraBonoModel.cs" />
     <Compile Include="Compra de Bono\Form1.cs">
       <SubType>Form</SubType>
@@ -258,12 +276,6 @@
     </Compile>
     <Compile Include="Registro Resultado Atencion\ModeloAtencion.cs" />
     <Compile Include="Registro Resultado Atencion\ModeloRegistroResultadoAtencion.cs" />
-    <Compile Include="Cancelar Atencion\CancelarAtencionForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Cancelar Atencion\CancelarAtencionForm.Designer.cs">
-      <DependentUpon>CancelarAtencionForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Generar Receta\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -298,6 +310,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm de Rol\ModificarRolFunciones.resx">
       <DependentUpon>ModificarRolFunciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cancelar Atencion\CancelarAtencionPaciente.resx">
+      <DependentUpon>CancelarAtencionPaciente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cancelar Atencion\MotivoCancelacionForm.resx">
+      <DependentUpon>MotivoCancelacionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra de Bono\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

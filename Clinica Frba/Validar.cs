@@ -65,15 +65,15 @@ namespace Clinica_Frba
             
         }
 
+        public static int anteriorDosDias(DateTime fecha)
+        {
+            TimeSpan dosDias = TimeSpan.FromDays(2);
+            DateTime dia = DateTime.Today.Subtract(dosDias);
+            int numero = dia.CompareTo(fecha);
+            return numero;
+        }
 
-
-
-
-
-
-
-
-
+        
     }
 }
 

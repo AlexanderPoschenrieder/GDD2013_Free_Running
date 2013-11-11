@@ -6,22 +6,22 @@ using System.Data.SqlClient;
 
 namespace Clinica_Frba.Compra_de_Bono
 {
-    abstract class Bono
+    class Bono
     {
         public int clienteCompra;
-        public DateTime fecha_Compra;
         SqlConnection miConexion;
         SqlCommand consultaPlan;
         SqlDataReader dr_datos;
         public int precio;
         public int plan_correspondiente;
+        public int indice;
 
-
-        public Bono(int id_Cliente)
+        public Bono(int id_Cliente,String nombreBono,int index)
         {
             clienteCompra = id_Cliente;
-            fecha_Compra = DateTime.Now;
+            indice = index;
             obtenerDatos();
+
         }
 
         private void obtenerDatos(){
@@ -32,12 +32,17 @@ namespace Clinica_Frba.Compra_de_Bono
             //Realizo una consulta
             dr_datos = consultaPlan.ExecuteReader();
             dr_datos.Read();
-            precio = (int)dr_datos.GetValue(indice());
+            precio = (int)dr_datos.GetValue(indice);
             plan_correspondiente = (int)dr_datos.GetInt32(0);
         }
+   
+        public String stringInsert()
+        { //Devuelve el string a concatenar cuando haya que hacer el insert
+            return string.Format("({0},{1},{2})",
+                    clienteCompra,
+                    precio,
+                    plan_correspondiente);
 
-        public abstract String stringInsert();
-        public abstract int indice(); //template method, implementado en las subclases
-        public abstract String nombreBono();
+        }
     }
 }

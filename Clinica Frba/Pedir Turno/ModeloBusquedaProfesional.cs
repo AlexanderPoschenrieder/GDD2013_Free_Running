@@ -9,14 +9,13 @@ namespace Clinica_Frba.Pedir_Turno
     class ModeloBusquedaProfesional
     {
         public String nombre { get; set; }
-        public ArrayList resultadoBusqueda{ get; set; }
-        public ArrayList resultadosId { get; set; }
-        public ArrayList especialidades{ get; set; }
+        public SqlDataReader dr_Medicos { get; set;}
+        public SqlDataReader dr_Especialidades { get; set; }
         public String especialidadSeleccionada { get; set; }
         private SqlConnection miConexion;
         private SqlCommand miConsulta;
         private String consultaBuscarBase = //CONSULTA PARA CONSEGUIR LOS PROFESIONALES
-            "select distinct SUBSTRING(Nombre,0,2)+lower(substring(Nombre,2,255))+' '+Apellido as Profesional,cast(m.Id as Int) from"+
+            "select distinct m.Nombre,m.Apellido,m.Id  from"+
             "(Free_Running.Medico m left join Free_Running.Especialidad_Por_Med em on m.Id =em.Id)"+
             "join Free_Running.Especialidad e on em.Especialidad_Codigo= e.Codigo";
 
@@ -24,32 +23,23 @@ namespace Clinica_Frba.Pedir_Turno
         {
             this.nombre = "";
             miConexion = Conexion.Conectar();
-            resultadoBusqueda= new ArrayList();
-            especialidades = new ArrayList();
             miConsulta = new SqlCommand("select Descripcion from Free_Running.Especialidad", miConexion);
-            SqlDataReader dr_Especialidades = miConsulta.ExecuteReader();
-
-            while (dr_Especialidades.Read()) {
-                especialidades.Add((dr_Especialidades[0]));
-            }
-            dr_Especialidades.Close();
-            miConexion.Close();
+            dr_Especialidades = miConsulta.ExecuteReader();
         }
 
         public void buscar()
         {
 
             String whereString;
-            ArrayList resultadoAux = new ArrayList();
-            resultadosId = new ArrayList();
+            String likeString= string.Format("and (m.Nombre like '%{0}%' or m.Apellido like '%{0}%')",nombre);
             miConexion = Conexion.Conectar();
-            resultadoBusqueda.Clear();
+            
             //
             //Armo la consulta con el WHERE
             //
             if (especialidadSeleccionada.Length == 0)
             {
-                whereString = "";//Muestra todos los profesionales
+                whereString = " where 1=1 ";//Muestra todos los profesionales
             }
             else
             {
@@ -58,31 +48,11 @@ namespace Clinica_Frba.Pedir_Turno
             //
             //Ejecuto la Consulta
             //
-            SqlCommand consultaBuscar = new SqlCommand(consultaBuscarBase + whereString, miConexion);
-            SqlDataReader dr_resultados = consultaBuscar.ExecuteReader();
-            while (dr_resultados.Read())
-            {
-                resultadoBusqueda.Add(dr_resultados[0]);
-                resultadosId.Add(dr_resultados.GetValue(1));
-            }
-
-            dr_resultados.Close();
-            miConexion.Close();
-            int i=0;
+            SqlCommand consultaBuscar = 
+                new SqlCommand(consultaBuscarBase + whereString+likeString, miConexion);
+            dr_Medicos = consultaBuscar.ExecuteReader();
             //Filtra por el nombre, HAY QUE REVISAR EL TEMA DE LAS MINUSCULAS/MAYUSCULAS
-            foreach (String it in resultadoBusqueda)
-            {
-                if (it.Contains(nombre)) { resultadoAux.Add(it);}
-                else { resultadosId.RemoveAt(i);}
-                i++;
-
-            }
-            resultadoBusqueda = resultadoAux;
-        }
-
-        public int idDelMedico(String nombreMedico)
-        {
-            return (int)resultadosId[resultadoBusqueda.IndexOf(nombreMedico)];
+            
         }
     }
 }

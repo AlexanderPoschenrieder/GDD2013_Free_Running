@@ -1097,30 +1097,43 @@ group by B.Afiliado_Compra
 )
  A
 end
-
-
-
-
 go
+
+select *
+from Free_Running.Paciente
+
+/*FUNCION PARA LA COMPRA DE BONOS */
+CREATE FUNCTION [Free_Running].[calcula_plan_y_precio](@idCliente int)
+returns TABLE
+as
+return
+(
+select p.Plan_Medico as PlanMedico,pm.Precio_Bono_Consulta as PrecioBonoConsulta,pm.Precio_Bono_Farmacia as PrecioBonoFarmacia
+	 from Free_Running.Paciente p left join Free_Running.Plan_Medico pm on
+		p.Plan_Medico=pm.Codigo
+	 where p.Nro_Afiliado= @idCliente
+)
+GO
 
 
 
 --Trigger para calcular la fecha actual
-CREATE TRIGGER insteadInsertTriggerConsulta
-   ON  Free_Running.Bono_Consulta
+CREATE TRIGGER [Free_Running].[insteadInsertTriggerConsulta]
+   ON  [Free_Running].[Bono_Consulta]
    instead of INSERT
 AS 
 BEGIN
-	insert into Free_Running.Bono_Consulta(Fecha_Compra,Plan_Correspondiente,Afiliado_Compra,Precio)
+	insert into Free_Running.Bono_Consulta
+	(Fecha_Compra,Plan_Correspondiente,Afiliado_Compra,Precio)
 	select GETDATE(),i.Plan_Correspondiente,i.Afiliado_Compra,i.Precio
 	from inserted i
 END
+
 GO
-					
-					
-					--Guarda la fecha de vencimiento al momento de hacer el insert
-CREATE TRIGGER insteadInsertTriggerFarmacias
-   ON  Free_Running.Bono_Farmacia
+
+--Guarda la fecha de vencimiento al momento de hacer el insert
+CREATE TRIGGER [Free_Running].[insteadInsertTriggerFarmacia]
+   ON  [Free_Running].[Bono_Farmacia]
    Instead of INSERT
 AS 
 BEGIN
@@ -1129,25 +1142,40 @@ BEGIN
 	select GETDATE(),Free_Running.calcula_fecha_vencimiento(GETDATE()),i.Plan_Correspondiente,i.Afiliado_Compra,i.Precio
 	from inserted i
 END
+
 GO
 
+--cancelar turno------------------------------------------------------
+CREATE PROCEDURE Free_Running.cancelarTurno(@idTurno int,@detalle varchar(255),@tipo varchar(255),@canceladoPor varchar(255))
+AS
+BEGIN
+	insert into Free_Running.Turno_Cancelado(Turno_Numero,Cancelado_Por,Motivo,Tipo)
+	values(@idTurno,@canceladoPor,@detalle,@tipo);
+END
+GO
 
-/*FUNCION PARA LA COMPRA DE BONOS */
-CREATE function [Free_Running].[calcula_plan_y_precio](@idCliente int)
-returns TABLE
-as 
-return
+--Vista que muestra los turnos no cancelados
+create view Free_Running.turnosPendientes
+as
 (
-select select p.Plan_Medico as PlanMedico,pm.Precio_Bono_Consulta as PrecioBonoConsulta,pm.Precio_Bono_Farmacia as PrecioBonoFarmacia
-	 from Free_Running.Paciente p left join Free_Running.Plan_Medico pm on
-		p.Plan_Medico=pm.Codigo
-	 where p.Nro_Afiliado= @idCliente
-);
+select * from
+	Free_Running.Turno t left join Free_Running.Turno_Cancelado tc 
+	on (t.Numero=tc.Turno_Numero)
+	where tc.id is null
+ )
+ GO
+ 
+ --Funcion para la vista de cancelarTurnos
+CREATE FUNCTION [Free_Running].[turnosDePaciente](@idPaciente int)
+RETURNS TABLE    
+AS
+RETURN 
+(
+	select t.Numero,t.Fecha,e.Descripcion
+	from Free_Running.turnosPendientes t right join Free_Running.Paciente p
+		on (t.Nro_Afiliado=p.Nro_Afiliado)
+		join Free_Running.Especialidad e on t.Especialidad_Codigo=e.Codigo
+	where p.Nro_Afiliado=@idPaciente
+)
 
-
-go
-
-
-
-select *
-from Free_Running.Paciente
+GO
