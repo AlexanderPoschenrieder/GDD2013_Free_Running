@@ -1102,6 +1102,7 @@ go
 select *
 from Free_Running.Paciente
 
+GO
 /*FUNCION PARA LA COMPRA DE BONOS */
 CREATE FUNCTION [Free_Running].[calcula_plan_y_precio](@idCliente int)
 returns TABLE
@@ -1176,6 +1177,7 @@ RETURN
 		on (t.Nro_Afiliado=p.Nro_Afiliado)
 		join Free_Running.Especialidad e on t.Especialidad_Codigo=e.Codigo
 	where p.Nro_Afiliado=@idPaciente
+	and t.fecha between GETDATE() and '01/01/2020'
 )
 
 GO
