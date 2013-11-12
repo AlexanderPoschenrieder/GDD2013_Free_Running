@@ -41,7 +41,8 @@ namespace Clinica_Frba.Compra_de_Bono
             //
             if (carritoFarmacia.Count != 0)
             {
-                stringInsert = "insert into Free_Running.Bono_Farmacia(Afiliado_Compra,Precio,Plan_Correspondiente) values";
+                stringInsert = "begin transaction "
+                    +"insert into Free_Running.Bono_Farmacia(Afiliado_Compra,Precio,Plan_Correspondiente) values";
 
                 //Agrega por cada Bono los valores al value()----------------------  
                 foreach (Bono bonoF in carritoFarmacia)
@@ -72,6 +73,7 @@ namespace Clinica_Frba.Compra_de_Bono
                     i++;
                 }
             }
+            stringInsert = stringInsert + " commit transaction";
             return stringInsert;
         }
 

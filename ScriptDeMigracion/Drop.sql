@@ -39,4 +39,10 @@ DROP PROCEDURE Free_Running.EspeMasCanceladas
 DROP PROCEDURE Free_Running.AfiliadoBFvenc 
 DROP PROCEDURE Free_Running.AfiliadoUsoDist
 DROP PROCEDURE Free_Running.EspMasCanc
+DROP VIEW Free_Running.turnosPendientes
+DROP PROCEDURE Free_Running.cancelarTurno
+DROP FUNCTION Free_Running.calcula_plan_y_precio
+DROP FUNCTION Free_Running.turnosDePaciente
+
+
 DROP schema Free_Running
