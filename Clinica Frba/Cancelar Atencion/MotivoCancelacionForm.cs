@@ -29,8 +29,8 @@ namespace Clinica_Frba.Cancelar_Atencion
         private void button1_Click(object sender, EventArgs e)
         {
             miConexion = Conexion.Conectar();
-            String stringInsert="insert into Free_Running.Turno_Cancelado(Turno_Numero,Cancelado_Por,Motivo,Tipo)"
-	            +string.Format("values({0},'{1}','{2}','{3}')",turnoACancelar,"Paciente",tbDetalle.Text,comboMotivos.Text);
+            String stringInsert="begin transaction insert into Free_Running.Turno_Cancelado(Turno_Numero,Cancelado_Por,Motivo,Tipo)"
+	            +string.Format("values({0},'{1}','{2}','{3}') commit transaction",turnoACancelar,"Paciente",tbDetalle.Text,comboMotivos.Text);
             commandInsert= new SqlCommand(stringInsert,miConexion);
             commandInsert.ExecuteNonQuery();
         }

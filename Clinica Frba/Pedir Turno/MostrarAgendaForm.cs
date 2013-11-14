@@ -9,11 +9,17 @@ using System.Windows.Forms;
 
 namespace Clinica_Frba.Pedir_Turno
 {
-    public partial class PedirTurnoForm : Form
+    public partial class MostrarAgendaForm : Form
     {
-        public PedirTurnoForm()
+        public MostrarAgendaForm()
         {
             InitializeComponent();
         }
+
+        private void calendarioDeAgenda_DateSelected(object sender, DateRangeEventArgs e)
+        {
+
+        }
+
     }
 }

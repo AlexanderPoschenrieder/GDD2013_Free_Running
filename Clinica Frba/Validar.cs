@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Data;
+using System.Data.Sql;
+using System.Data.SqlClient;
 using System.Security.Cryptography;
+
+
 
 namespace Clinica_Frba
 {
@@ -73,7 +78,39 @@ namespace Clinica_Frba
             return numero;
         }
 
-        
+        public static void textoNumeros(String texto) 
+        {
+            foreach (char letra in texto)
+            {
+                if (!char.IsDigit(letra))
+                {
+                    throw new Exception("El texto contiende caracteres invalidos");
+                }
+            }
+        }
+
+        public static void nroAfiliadoExiste(int nroAfiliado) 
+        {
+            SqlCommand miCommand = new SqlCommand("Free_Running.usuarioExisteActivo", Conexion.Conectar());
+            miCommand.CommandType=CommandType.StoredProcedure;
+            miCommand.Parameters.Add("@nroAfiliado",SqlDbType.Int);
+            miCommand.Parameters["@nroAfiliado"].Direction=ParameterDirection.Input;
+            miCommand.Parameters["@nroAfiliado"].Value= nroAfiliado;
+
+            miCommand.Parameters.Add("@salida",SqlDbType.Int);
+            miCommand.Parameters["@salida"].Direction= ParameterDirection.Output;
+
+            miCommand.ExecuteNonQuery();
+
+            switch(Convert.ToInt32(miCommand.Parameters["@salida"].Value))
+            {
+                case 0:
+                    throw new Exception("El afiliado no existe");
+                case -1:
+                    throw new Exception("El afiliado no está activo");
+            }            
+        }
+
     }
 }
 

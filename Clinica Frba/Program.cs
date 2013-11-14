@@ -16,7 +16,7 @@ namespace Clinica_Frba
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Login.ABMLogin());//Form1()
-            Application.Run(new Cancelar_Atencion.CancelarAtencionPaciente(100));
+            Application.Run(new Compra_de_Bono.CompraBonoAdmin());
         }
     }
 }

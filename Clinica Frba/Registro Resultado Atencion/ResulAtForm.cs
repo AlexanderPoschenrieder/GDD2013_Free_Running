@@ -21,9 +21,16 @@ namespace Clinica_Frba.Registro_Resultado_Atencion
 
         private void botonAceptar_Click(object sender, EventArgs e)
         {
-            miModelo.insertarDatos(tbSintomas.Text, tbEnfermedades.Text);
-            MessageBox.Show("Los datos han sido ingresados");
-            this.Close();
+            if (tbSintomas.Text.Length == 0)
+            {
+                MessageBox.Show("Seleccione un motivo");
+            }
+            else
+            {
+                miModelo.insertarDatos(tbSintomas.Text, tbEnfermedades.Text);
+                MessageBox.Show("Los datos han sido ingresados");
+                this.Close();
+            }
         }
     }
 }

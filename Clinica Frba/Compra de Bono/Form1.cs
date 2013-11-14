@@ -22,6 +22,9 @@ namespace Clinica_Frba.Compra_de_Bono
             labelMonto.Text = "0";
         }
 
+        public CompraBonoForm()
+        { }
+
         private void botonConsulta_Click(object sender, EventArgs e)
         {
             String nombreBono= modelo.comprarBonoConsulta(idPaciente);

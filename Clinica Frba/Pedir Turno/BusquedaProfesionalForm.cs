@@ -71,7 +71,7 @@ namespace Clinica_Frba.Pedir_Turno
             {
                 int index = (int)gridResultados.SelectedCells[0].RowIndex;
                 int idTurno = (int)gridResultados.Rows[index].Cells["idMedico"].Value;
-                PedirTurnoForm ventana = new PedirTurnoForm();
+                MostrarAgendaForm ventana = new MostrarAgendaForm();
                 ventana.ShowDialog();
             };
         }
