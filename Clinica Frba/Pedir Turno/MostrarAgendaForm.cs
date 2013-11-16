@@ -11,15 +11,57 @@ namespace Clinica_Frba.Pedir_Turno
 {
     public partial class MostrarAgendaForm : Form
     {
-        public MostrarAgendaForm()
+        ModeloAgenda miModelo;
+        DateTime diaSeleccionado;
+        public MostrarAgendaForm(UInt32 nroMedico,int nro_Paciente)
         {
             InitializeComponent();
+            //Deshabilito las partes que no tienen que estarlo en el comienzo
+            botonSeleccionar.Enabled = false;
+            horariosDisponibles.Enabled = false;
+            //---------------------------------------------------------------
+            
+            calendarioDeAgenda.MaxSelectionCount = 1;
+            miModelo = new ModeloAgenda(nroMedico,nro_Paciente);
+            calendarioDeAgenda.BoldedDates = miModelo.turnos.ToArray<DateTime>();
         }
 
         private void calendarioDeAgenda_DateSelected(object sender, DateRangeEventArgs e)
         {
-
+            diaSeleccionado= calendarioDeAgenda.SelectionRange.Start;
+            if (!miModelo.turnos.Any(turno =>turno.Date==diaSeleccionado.Date))//verifica que el turno este disponible
+            {
+                horariosDisponibles.Enabled = false;//deshabilito la seleccion de horarios
+                MessageBox.Show("Seleccione una fecha disponible");
+            }
+            else
+            {
+                horariosDisponibles.Enabled = true;//habilito la seleccion de horarios
+                horariosDisponibles.Rows.Clear();
+                miModelo.horariosDelDia(diaSeleccionado);
+                foreach (DateTime hora in miModelo.listaHorarios)
+                {
+                    horariosDisponibles.Rows.Add(new Object[]{
+                        hora.ToString("HH:mm:ss")
+                    });
+                }
+            }
         }
+
+        private void horariosDisponibles_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            botonSeleccionar.Enabled = true;
+        }
+
+        private void botonSeleccionar_Click(object sender, EventArgs e)
+        {
+            DateTime horarioSeleccionado = Convert.ToDateTime(horariosDisponibles.SelectedCells[0].Value);
+            DateTime fechaHora = new DateTime(diaSeleccionado.Year, diaSeleccionado.Month, diaSeleccionado.Day, horarioSeleccionado.Hour, horarioSeleccionado.Minute, horarioSeleccionado.Second);
+
+            miModelo.reservarTurno(fechaHora);
+            this.Close();
+        }
+
 
     }
 }

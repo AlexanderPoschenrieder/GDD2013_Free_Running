@@ -43,6 +43,9 @@ DROP VIEW Free_Running.turnosPendientes
 DROP PROCEDURE Free_Running.cancelarTurno
 DROP FUNCTION Free_Running.calcula_plan_y_precio
 DROP FUNCTION Free_Running.turnosDePaciente
+DROP PROCEDURE Free_Running.usuarioExisteActivo
+DROP FUNCTION Free_Running.diasAtencionMedico
+DROP FUNCTION Free_Running.turnoLibre
 
 
 DROP schema Free_Running

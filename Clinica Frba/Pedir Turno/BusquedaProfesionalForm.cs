@@ -12,9 +12,11 @@ namespace Clinica_Frba.Pedir_Turno
     public partial class BusquedaProfesionalForm : Form
     {
         private ModeloBusquedaProfesional miModelo;
-        public BusquedaProfesionalForm()
+        int nroPaciente;
+        public BusquedaProfesionalForm(int nro_Paciente)
         {
             miModelo = new ModeloBusquedaProfesional();
+            nroPaciente = nro_Paciente;
             InitializeComponent();
             generarComboEspecialidades();
             gridResultados.MultiSelect = false;
@@ -62,7 +64,6 @@ namespace Clinica_Frba.Pedir_Turno
 
         private void SeleccionarButton_Click(object sender, EventArgs e)
         {
-
             if (gridResultados.SelectedCells.Count == 0)
             {
                 MessageBox.Show("Seleccione un profesional");
@@ -70,9 +71,10 @@ namespace Clinica_Frba.Pedir_Turno
             else 
             {
                 int index = (int)gridResultados.SelectedCells[0].RowIndex;
-                int idTurno = (int)gridResultados.Rows[index].Cells["idMedico"].Value;
-                MostrarAgendaForm ventana = new MostrarAgendaForm();
+                UInt32 idMedico = Convert.ToUInt32(gridResultados.Rows[index].Cells["idMedico"].Value);
+                MostrarAgendaForm ventana = new MostrarAgendaForm(idMedico,nroPaciente);
                 ventana.ShowDialog();
+                this.Close();
             };
         }
 

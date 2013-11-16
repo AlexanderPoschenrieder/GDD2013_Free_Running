@@ -13,10 +13,11 @@ namespace Clinica_Frba
         [STAThread]
         static void Main()
         {
+            Clinica_Frba.Pedir_Turno.BusquedaProfesionalForm ventana;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Login.ABMLogin());//Form1()
-            Application.Run(new Compra_de_Bono.CompraBonoAdmin());
+            Application.Run(ventana = new Clinica_Frba.Pedir_Turno.BusquedaProfesionalForm(100));
         }
     }
 }

@@ -218,7 +218,14 @@
     <Compile Include="Pedir Turno\BusquedaProfesionalForm.Designer.cs">
       <DependentUpon>BusquedaProfesionalForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pedir Turno\Class1.cs" />
+    <Compile Include="Pedir Turno\ModeloRegistrarTurno.cs" />
+    <Compile Include="Pedir Turno\FinalizarPedidoTurno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pedir Turno\FinalizarPedidoTurno.Designer.cs">
+      <DependentUpon>FinalizarPedidoTurno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pedir Turno\ModeloAgenda.cs" />
     <Compile Include="Pedir Turno\MostrarAgendaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -362,6 +369,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pedir Turno\BusquedaProfesionalForm.resx">
       <DependentUpon>BusquedaProfesionalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pedir Turno\FinalizarPedidoTurno.resx">
+      <DependentUpon>FinalizarPedidoTurno.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pedir Turno\MostrarAgendaForm.resx">
       <DependentUpon>MostrarAgendaForm.cs</DependentUpon>

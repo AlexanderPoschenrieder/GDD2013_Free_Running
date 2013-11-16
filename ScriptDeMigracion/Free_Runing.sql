@@ -1,31 +1,16 @@
-﻿--///////////////////////////////////////////SELECCION BdD///////////////////////////////////////////--
-
-use GD2C2013
+﻿use GD2C2013
 go
-
---///////////////////////////////////////////CREACION ESQUEMA///////////////////////////////////////////--
-
 CREATE SCHEMA Free_Running AUTHORIZATION gd
 GO
 
 
 --///////////////////////////////////////////CREACION TABLAS///////////////////////////////////////////--
 
-go
 
 --TABLA PACIENTES: Tabla de todos los Pacientes de la Clinica - esten o no activos 
 
-create table Free_Running.Familia(
-Id_familia numeric(18,0) identity(1,1),
-CONSTRAINT PK_familia PRIMARY KEY CLUSTERED (Id_familia ASC)
-)
-Go
-
-
 CREATE TABLE Free_Running.Paciente(
-ID numeric(18, 0) NOT NULL identity(1,1),
 Nro_Afiliado numeric(18,0) NOT NULL,
-Familia numeric(18,0) NOT NULL,
 Nombre	varchar(255) NOT NULL,
 Apellido	varchar(255) NOT NULL,
 Documento	numeric(18, 0) NOT NULL,
@@ -43,7 +28,6 @@ Username  varchar(255) NULL,
 CONSTRAINT PK_Paciente PRIMARY KEY CLUSTERED (Nro_Afiliado ASC)
 )
 GO
-
 
 
 --TABLA PLAN MEDICO: Tabla de todos los Planes que Ofrece la Clinica 
@@ -71,7 +55,7 @@ GO
 
 --TABLA TURNO: En esta Tabla se Registran TODOS los turnos que se dan
 CREATE TABLE Free_Running.Turno (
-Numero	numeric(18, 0) NOT NULL,
+Numero	numeric(18, 0) NOT NULL IDENTITY(1,1),
 Fecha	datetime NOT NULL,
 Nro_Afiliado numeric(18, 0) NOT NULL,
 Especialidad_Codigo	numeric(18, 0) NOT NULL,
@@ -261,10 +245,6 @@ CONSTRAINT PK_Renglon_Receta PRIMARY KEY CLUSTERED (Id ASC)
 GO
 
 
-
-
-
-
 --TABLA FUNCIONALIDADES: Tabla que muestra las Funcionalidades que puede tener un Rol
 CREATE TABLE Free_Running.Funcionalidad(
 Id varchar(255) NOT NULL,
@@ -335,18 +315,12 @@ GO
  REFERENCES Free_Running.Usuario(Username) 
   ON update cascade
  GO
- 
- ALTER TABLE Free_Running.Paciente ADD CONSTRAINT FK_Familia FOREIGN KEY (Familia) 
- REFERENCES Free_Running.Familia(Id_familia) 
- GO
-
 
  
  ALTER TABLE Free_Running.Medico ADD CONSTRAINT FK_Usuario_Medico  FOREIGN KEY (Username) 
  REFERENCES Free_Running.Usuario(Username) 
   ON update cascade
  GO
- 
  
  
  
@@ -525,10 +499,6 @@ GO
 
 
 
-
-
-
-
  ALTER TABLE Free_Running.Turno_Cancelado ADD CONSTRAINT FK_Tipo FOREIGN KEY (Tipo) 
  REFERENCES Free_Running.Tipo_Cancelado(Tipo) 
  GO
@@ -557,36 +527,12 @@ FROM gd_esquema.Maestra
 
 
 
---Migrar TABLA FAMILIA
-
-
-
-SET IDENTITY_INSERT Free_Running.Familia on
-
-declare @i int
-declare @length int
-SET @length =(select count(distinct (M.Paciente_Dni)) from gd_esquema.Maestra M)
-SET @i = 0
-
-while (@length > @i)
-begin
-SET @i = @i + 1
-INSERT INTO Free_Running.Familia(Id_familia) values( (@i ))
-
-
-end
-
-go
-
-SET IDENTITY_INSERT Free_Running.Familia off
-
 --Migrar Pacientes
-INSERT INTO Free_Running.Paciente(Nombre,Apellido,Documento,Direccion,Telefono,Mail,Fecha_Nac,Sexo,Tipo_Documento,Estado_Civil,Cant_Familiares,Plan_Medico,Estado,Nro_Afiliado,Familia)
+INSERT INTO Free_Running.Paciente(Nombre,Apellido,Documento,Direccion,Telefono,Mail,Fecha_Nac,Sexo,Tipo_Documento,Estado_Civil,Cant_Familiares,Plan_Medico,Estado,Nro_Afiliado)
 
 SELECT distinct
 g1.Paciente_Nombre,g1.Paciente_Apellido,g1.Paciente_Dni,g1.Paciente_Direccion,g1.Paciente_Telefono,g1.Paciente_Mail,g1.Paciente_Fecha_Nac,'F','DNI','Soltero',0,g1.Plan_Med_Codigo,'Activo',
-(( ROW_NUMBER() OVER(ORDER BY g1.Paciente_Dni DESC))*100),
-(( ROW_NUMBER() OVER(ORDER BY g1.Paciente_Dni DESC))) 
+(( ROW_NUMBER() OVER(ORDER BY g1.Paciente_Dni DESC))*100)
 
 FROM gd_esquema.Maestra g1
 where not((( g1.Turno_Fecha is null) and ( g1.Compra_Bono_Fecha is null)))
@@ -597,7 +543,7 @@ go
 
 		--Creo Indices
 		CREATE INDEX iNDICE_DOCUMENTO ON Free_Running.Paciente (Documento);
-		CREATE INDEX iNDICE_NroAfiliado ON Free_Running.Paciente (Nro_Afiliado);
+		--CREATE INDEX iNDICE_NroAfiliado ON Free_Running.Paciente (Nro_Afiliado);
 		
 		go
 
@@ -659,10 +605,10 @@ From Free_Running.Medico m1
 
 
 
-
 --Migrar Turnos
 -- TODOS LOS TURNOS, Incluido Cancelados
 
+set identity_insert Free_Running.Turno on
 INSERT INTO Free_Running.Turno(Numero,Fecha,Especialidad_Codigo,Medico_Id,Nro_Afiliado)
 select distinct M.Turno_Numero,M.Turno_Fecha,M.Especialidad_Codigo,
 				(select med.Id 
@@ -675,7 +621,8 @@ select distinct M.Turno_Numero,M.Turno_Fecha,M.Especialidad_Codigo,
 from gd_esquema.Maestra M
 where M.Turno_Numero is not null
 
-
+set identity_insert Free_Running.Turno off
+go
 
 
 
@@ -871,7 +818,6 @@ go
 		CREATE INDEX iNDICE_LAM ON Free_Running.Llegada_Atencion_Medica(Turno_Numero)
 		CREATE INDEX iNDICE_LAM2 ON Free_Running.Llegada_Atencion_Medica(Id)
 		CREATE INDEX iNDICE_AM ON Free_Running.Atencion_Medica(Llegada_Id)
-
 
 
 
@@ -1078,6 +1024,7 @@ end
 
 
 go
+
 CREATE PROCEDURE Free_Running.AfiliadoUsoDist
     @Inicio DateTime,
     @Fin DateTime  
@@ -1099,10 +1046,7 @@ group by B.Afiliado_Compra
 end
 go
 
-select *
-from Free_Running.Paciente
 
-GO
 /*FUNCION PARA LA COMPRA DE BONOS */
 CREATE FUNCTION [Free_Running].[calcula_plan_y_precio](@idCliente int)
 returns TABLE
@@ -1115,8 +1059,6 @@ select p.Plan_Medico as PlanMedico,pm.Precio_Bono_Consulta as PrecioBonoConsulta
 	 where p.Nro_Afiliado= @idCliente
 )
 GO
-
-
 
 --Trigger para calcular la fecha actual
 CREATE TRIGGER [Free_Running].[insteadInsertTriggerConsulta]
@@ -1181,3 +1123,61 @@ RETURN
 )
 
 GO
+
+CREATE FUNCTION Free_Running.diasAtencionMedico(@idMedico int)
+
+RETURNS TABLE 
+AS
+RETURN 
+(
+	select a.Fecha_Inicio, a.Fecha_Fin,ad.Dia_Semana,ad.Hora_Inicio,ad.Hora_Fin
+	from Free_Running.Agenda a left join Free_Running.Agenda_Dia ad on (a.Id=ad.Agenda)
+		join Free_Running.Medico m on (a.Medico= m.Id)
+	where m.Id=@idMedico
+	
+	
+)
+GO
+
+CREATE PROCEDURE Free_Running.usuarioExisteActivo(@nroAfiliado int, @salida int output)
+AS
+BEGIN
+	if (ISNULL((select top 1 COUNT(*) from Free_Running.Paciente where Nro_Afiliado=@nroAfiliado group by Nro_Afiliado),0)<1)
+		begin
+		set @salida=0
+		end
+	else
+		begin
+		if ('Activo'=(select top 1 Estado from Free_Running.Paciente where Nro_Afiliado=@nroAfiliado))
+			begin
+			set @salida=-1
+			end
+		else
+			begin
+			set @salida=1
+			end
+		end
+END
+GO
+
+CREATE FUNCTION Free_Running.turnoLibre(@fechaHoraTurno DateTime,@idMedico int) 
+RETURNS TinyInt
+AS
+BEGIN
+	if ((select COUNT(*) from Free_Running.Turno t left join
+			Free_Running.Turno_Cancelado tc on t.Numero=tc.Turno_Numero 
+			where t. Fecha= @fechaHoraTurno
+			and tc.Id is null
+			and t.Medico_Id=@idMedico)<>0)
+		begin
+		return 0
+		end
+	return 1
+END
+GO
+
+
+
+
+
+
