@@ -13,6 +13,8 @@ namespace Clinica_Frba.Pedir_Turno
     {
         ModeloAgenda miModelo;
         DateTime diaSeleccionado;
+
+        //Constructor para la ABM  Cancelar Consulta Medico
         public MostrarAgendaForm(UInt32 nroMedico,int nro_Paciente)
         {
             InitializeComponent();
@@ -21,11 +23,29 @@ namespace Clinica_Frba.Pedir_Turno
             horariosDisponibles.Enabled = false;
             //---------------------------------------------------------------
             
-            calendarioDeAgenda.MaxSelectionCount = 1;
+            calendarioDeAgenda.MaxSelectionCount = 1;//limito la seleccion a un dia
             miModelo = new ModeloAgenda(nroMedico,nro_Paciente);
             calendarioDeAgenda.BoldedDates = miModelo.turnos.ToArray<DateTime>();
+            //Le cargo las acciones correspondientes-----------------------------------------
+            this.calendarioDeAgenda.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.calendarioDeAgenda_DateSelected);
+            this.botonSeleccionar.Click += new System.EventHandler(this.botonSeleccionar_Click);
         }
 
+//Constructor para la ABM cancelar Turno Medico
+        public MostrarAgendaForm(UInt32 nroMedico) {
+            InitializeComponent();
+            label1.Text = "Seleccione una fecha o un intervalo";
+            botonSeleccionar.Enabled = false;
+            miModelo = new ModeloAgenda(nroMedico);
+            calendarioDeAgenda.BoldedDates = miModelo.turnos.ToArray<DateTime>();
+            
+            //Le cargo las acciones correspondientes-----------------------------------------
+            this.botonSeleccionar.Click += new System.EventHandler(this.cancelarTurno_Click);
+            this.calendarioDeAgenda.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.calendarioDeAgenda_CancelarTurno);
+            
+        }
+
+//Accones para la ABM pedir Turno------------------------------------------------------
         private void calendarioDeAgenda_DateSelected(object sender, DateRangeEventArgs e)
         {
             diaSeleccionado= calendarioDeAgenda.SelectionRange.Start;
@@ -36,6 +56,7 @@ namespace Clinica_Frba.Pedir_Turno
             }
             else
             {
+                this.Width = 400;//expando la ventana para mostrar la seleccion de horarios
                 horariosDisponibles.Enabled = true;//habilito la seleccion de horarios
                 horariosDisponibles.Rows.Clear();
                 miModelo.horariosDelDia(diaSeleccionado);
@@ -53,7 +74,7 @@ namespace Clinica_Frba.Pedir_Turno
             botonSeleccionar.Enabled = true;
         }
 
-        private void botonSeleccionar_Click(object sender, EventArgs e)
+        public void botonSeleccionar_Click(object sender, EventArgs e)
         {
             DateTime horarioSeleccionado = Convert.ToDateTime(horariosDisponibles.SelectedCells[0].Value);
             DateTime fechaHora = new DateTime(diaSeleccionado.Year, diaSeleccionado.Month, diaSeleccionado.Day, horarioSeleccionado.Hour, horarioSeleccionado.Minute, horarioSeleccionado.Second);
@@ -61,6 +82,20 @@ namespace Clinica_Frba.Pedir_Turno
             miModelo.reservarTurno(fechaHora);
             this.Close();
         }
+
+//-------------------------------------------------------------------------------------
+//Acciones para la ABM CancelarTurno---------------------------------------------------
+        private void cancelarTurno_Click(object sender, EventArgs e)
+        {
+            miModelo.cancelarListaTurnos(calendarioDeAgenda.SelectionRange.Start,calendarioDeAgenda.SelectionRange.End);
+            this.Close();
+        }
+
+        private void calendarioDeAgenda_CancelarTurno(object sender, DateRangeEventArgs e)
+        {
+            botonSeleccionar.Enabled = true;
+        }
+
 
 
     }

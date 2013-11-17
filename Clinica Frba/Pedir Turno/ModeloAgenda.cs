@@ -18,6 +18,7 @@ namespace Clinica_Frba.Pedir_Turno
         public List<DateTime> turnos { get; set; }
         public List<DateTime> listaHorarios { get; set; }
 
+        //Constructor para la ABM pedir turno
         public ModeloAgenda(UInt32 nro_Medico,int nro_Paciente) {
             nroMedico = nro_Medico;
             nroPaciente = nro_Paciente;
@@ -27,6 +28,29 @@ namespace Clinica_Frba.Pedir_Turno
 
         }
 
+        //Constructor para la ABM Cancelar Turno Medico
+        public ModeloAgenda(UInt32 nro_Medico) {
+            nroMedico = nro_Medico;
+            turnos = new List<DateTime>();
+            turnosDelMedico();            
+        }
+        //
+        //Metodos para ABM Cancelar Atencion Medico
+        //
+
+        public void cancelarListaTurnos(DateTime primerFecha,DateTime segundaFecha ) {
+            List<String> diasACancelar = new List<string>();
+            
+            while (primerFecha <= segundaFecha) {
+                diasACancelar.Add(primerFecha.ToString("yyyy-dd-MM HH:mm:ss"));
+                primerFecha=primerFecha.AddDays(1);
+            }
+            (new Clinica_Frba.Cancelar_Atencion.MotivoCancelacionForm(diasACancelar,nroMedico)).ShowDialog();
+        }
+
+        //
+        //Metodos para ABM Pedir turno
+        //
         public void turnosDelMedico()
         {
             miConexion = Conexion.Conectar();

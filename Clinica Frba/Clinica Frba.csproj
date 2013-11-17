@@ -325,6 +325,9 @@
     <EmbeddedResource Include="Abm de Rol\ModificarRolFunciones.resx">
       <DependentUpon>ModificarRolFunciones.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Cancelar Atencion\CancelarAtencionMedico.resx">
+      <DependentUpon>CancelarAtencionMedico.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Cancelar Atencion\CancelarAtencionPaciente.resx">
       <DependentUpon>CancelarAtencionPaciente.cs</DependentUpon>
     </EmbeddedResource>

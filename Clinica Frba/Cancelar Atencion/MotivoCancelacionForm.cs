@@ -14,25 +14,66 @@ namespace Clinica_Frba.Cancelar_Atencion
     {
         ModeloMotivoCancelacion miModelo;
         long turnoACancelar;
+        UInt32 nroMedico;
+        public List<String> fechasACancelar = new List<String>();
         SqlConnection miConexion;
         SqlCommand commandInsert;
+        String stringInsert =
+                "insert into Free_Running.Turno_Cancelado(Turno_Numero,Cancelado_Por,Motivo,Tipo) values";
+
+
         public MotivoCancelacionForm(long idTurno)
         {
             InitializeComponent();
             turnoACancelar = idTurno;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             miModelo = new ModeloMotivoCancelacion();
             foreach (String motivo in miModelo.listaMotivos) {
                 comboMotivos.Items.Add(motivo);
             }
         }
+        //Constructor para la cancelacion del medico
+        public MotivoCancelacionForm(List<String> fechas,UInt32 nro_Medico)
+        {
+            InitializeComponent();
+            nroMedico = nro_Medico;
+            fechasACancelar = fechas;
+            this.button1.Click += new System.EventHandler(this.botonMedico);
+            miModelo = new ModeloMotivoCancelacion();
+            foreach (String motivo in miModelo.listaMotivos)
+            {
+                comboMotivos.Items.Add(motivo);
+
+            }
+        }
+
+        private void botonMedico(object sender, EventArgs e) {
+            miConexion=Conexion.Conectar();
+            
+            foreach (string fecha in fechasACancelar) {
+                stringInsert = string.Format("exec Free_Running.cancelarTurnosDelDia '{0}',{1},'{2}','{3}'",fecha,nroMedico,tbDetalle.Text,comboMotivos.Text);
+                commandInsert = new SqlCommand(stringInsert, miConexion);
+                commandInsert.ExecuteNonQuery();
+            }
+
+            MessageBox.Show("Sus turnos han sido cancelados");
+            this.Close();
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
             miConexion = Conexion.Conectar();
-            String stringInsert="begin transaction insert into Free_Running.Turno_Cancelado(Turno_Numero,Cancelado_Por,Motivo,Tipo)"
-	            +string.Format("values({0},'{1}','{2}','{3}') commit transaction",turnoACancelar,"Paciente",tbDetalle.Text,comboMotivos.Text);
+            stringInsert=stringInsert + armarStringTurno(turnoACancelar, "Paciente");
             commandInsert= new SqlCommand(stringInsert,miConexion);
             commandInsert.ExecuteNonQuery();
+        }
+
+        private string armarStringTurno(long idTurno,String PacMed) {
+            return string.Format("({0},'{1}','{2}','{3}')",
+                idTurno,
+                PacMed,
+                tbDetalle.Text,
+                comboMotivos.Text);
         }
     }
 }

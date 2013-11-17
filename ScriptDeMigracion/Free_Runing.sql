@@ -1176,6 +1176,25 @@ BEGIN
 END
 GO
 
+create PROCEDURE Free_Running.cancelarTurnosDelDia(@dia varchar(20),@idMedico int,@motivo varchar(255),@tipo varchar(255))
+as
+BEGIN
+	declare @diaACancelar DateTime;
+	set @diaACancelar= CAST(@dia as DateTime) 
+	begin transaction
+		insert into Free_Running.Turno_Cancelado(Cancelado_Por,Turno_Numero,Motivo,Tipo)
+		select 'Médico',t.Numero,@motivo,@tipo
+		from Free_Running.Turno t left join Free_Running.Turno_Cancelado tc
+		on t.Numero=tc.Turno_Numero
+		where datepart(Year,t.Fecha) =DATEPART(year,@diaACancelar)
+		and DATEPART(MONTH,t.Fecha) = DATEPART(month,@diaACancelar)
+		and DATEPART(day,t.Fecha) = DATEPART(day,@diaACancelar)
+		and tc.Id is null
+		and t.Medico_Id=@idMedico
+	commit transaction
+END
+GO
+
 
 
 

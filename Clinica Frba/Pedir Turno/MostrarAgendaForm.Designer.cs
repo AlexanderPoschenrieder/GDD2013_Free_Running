@@ -44,14 +44,12 @@
             this.botonSeleccionar.TabIndex = 5;
             this.botonSeleccionar.Text = "Seleccionar";
             this.botonSeleccionar.UseVisualStyleBackColor = true;
-            this.botonSeleccionar.Click += new System.EventHandler(this.botonSeleccionar_Click);
             // 
             // calendarioDeAgenda
             // 
             this.calendarioDeAgenda.Location = new System.Drawing.Point(5, 36);
             this.calendarioDeAgenda.Name = "calendarioDeAgenda";
             this.calendarioDeAgenda.TabIndex = 4;
-            this.calendarioDeAgenda.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.calendarioDeAgenda_DateSelected);
             // 
             // horariosDisponibles
             // 
@@ -82,7 +80,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(383, 241);
+            this.ClientSize = new System.Drawing.Size(192, 241);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.horariosDisponibles);
             this.Controls.Add(this.botonSeleccionar);
