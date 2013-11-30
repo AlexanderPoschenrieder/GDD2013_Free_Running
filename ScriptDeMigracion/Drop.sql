@@ -51,6 +51,7 @@ DROP FUNCTION Free_Running.calcula_plan_y_precio
 DROP FUNCTION Free_Running.turnosDePaciente
 DROP FUNCTION Free_Running.turnoLibre
 DROP FUNCTION Free_Running.calcularNroAfiliado
+DROP FUNCTION Free_Running.especialidadCod
 DROP PROCEDURE Free_Running.InsertarPrincipal
 DROP PROCEDURE Free_Running.usuarioExisteActivo
 DROP FUNCTION Free_Running.suIdAfiliado

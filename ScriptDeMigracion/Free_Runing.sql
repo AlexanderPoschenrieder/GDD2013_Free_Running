@@ -145,7 +145,7 @@ GO
 --TABLA BONO CONSULTA: Contiene TODOS los Bonos Consulta Comprados Cancelados o No, Utilizados o No
 CREATE TABLE Free_Running.Bono_Consulta (
 Id numeric(18, 0) NOT NULL identity(1,1),
-Numero	numeric(18, 0) NULL, -- propio de cada paciente indica la cant de consultas de un paciente
+Numero	numeric(18, 0) NULL,
 Afiliado_Utiliza numeric(18, 0) NULL,
 Precio numeric(18, 0) NULL,
 Plan_Correspondiente numeric(18, 0) NOT NULL,
@@ -758,7 +758,7 @@ go
 --TODOS LOS BONO COLSUTA COMPRADOS utilizados o NO
 SET IDENTITY_INSERT Free_Running.Bono_Consulta ON
 go
-INSERT INTO Free_Running.Bono_Consulta(Id,Afiliado_Utiliza,Precio,Plan_Correspondiente,Numero)
+INSERT INTO Free_Running.Bono_Consulta(Id,Afiliado_Utiliza,Precio,Plan_Correspondiente)--,Numero)
 
 select  M.Bono_Consulta_Numero,
 
@@ -773,14 +773,16 @@ select  M.Bono_Consulta_Numero,
 	from Free_Running.Plan_Medico P
 	where M.Plan_Med_Codigo = P.Codigo)) Precio,
 	
-	M.Plan_Med_Codigo Plan_Correspondiente,
+	M.Plan_Med_Codigo Plan_Correspondiente
+	
+	/*,
 	
 	(select  Count(distinct M2.Bono_Consulta_Numero)
 	 from gd_esquema.Maestra M2
 	 where (M.Compra_Bono_Fecha is not null and 
 			M.Bono_Consulta_Numero is not null and 
 			M.Paciente_Dni = M2.Paciente_Dni and 
-			M.Bono_Consulta_Numero >= M2.Bono_Consulta_Numero )) Numero
+			M.Bono_Consulta_Numero >= M2.Bono_Consulta_Numero )) Numero*/
 
 from gd_esquema.Maestra M
 where (M.Compra_Bono_Fecha is not null and M.Bono_Consulta_Numero is not null)
@@ -1237,4 +1239,3 @@ BEGIN
 	commit transaction
 END
 GO
-
