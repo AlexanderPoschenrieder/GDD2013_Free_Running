@@ -52,11 +52,9 @@ namespace Clinica_Frba.Registro_de_LLegada
 
                         SqlCommand insertLlegada = new SqlCommand(string.Format("INSERT INTO Free_Running.Llegada_Atencion_Medica(Fecha_Hs_Llegada,Nro_Afiliado,Turno_Numero,Bono_Consulta)values(GETDATE()," + Afiliado + "," + Turno + "," + BC + ")"), miconexion);
                         insertLlegada.ExecuteNonQuery();
-                        SqlCommand updateBC = new SqlCommand(string.Format("UPDATE Free_Running.Bono_Consulta set Afiliado_Utiliza = " + (long)Afiliado + " where Id = " + (long)BC), miconexion);
+                        SqlCommand updateBC = new SqlCommand(string.Format("UPDATE Free_Running.Bono_Consulta set Afiliado_Utiliza = " + (long)Afiliado + ", Numero = (select COUNT(*)+1 from Free_Running.Bono_Consulta BC where BC.Numero is not null and BC.Afiliado_Utiliza is not null and BC.Afiliado_Utiliza = " + Afiliado + ") where Id = " + (long)BC), miconexion);
                         updateBC.ExecuteNonQuery();
-                        
-                        //falta agregar el numero
-                        
+
                         MessageBox.Show("Llegada Registrada Correctamente");
                         miconexion.Close();
                     }

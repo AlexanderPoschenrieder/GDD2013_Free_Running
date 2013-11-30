@@ -20,7 +20,7 @@ namespace Clinica_Frba.Registro_de_LLegada
             miEsp = unEsp;
 
             //tabla que muestra todos los turnos no canselados mayores a la fecha de hoy
-            tabla = "select T.Numero,T.Fecha,T.Nro_Afiliado,T.Medico_Id from Free_Running.Turno T where not exists (select * from Free_Running.Turno_Cancelado TC where TC.Turno_Numero = T.Numero) and T.Medico_Id = " + miProf + " and T.Fecha > GETDATE() and T.Especialidad_Codigo = Free_Running.especialidadCod('" + miEsp + "')";
+            tabla = "select T.Numero,T.Fecha,T.Nro_Afiliado,T.Medico_Id from Free_Running.Turno T where not exists (select * from Free_Running.Turno_Cancelado TC where TC.Turno_Numero = T.Numero) and T.Medico_Id = " + miProf + " and T.Fecha > GETDATE() and T.Especialidad_Codigo = Free_Running.especialidadCod('" + miEsp + "') and  not exists (select * from Free_Running.Llegada_Atencion_Medica LAM where LAM.Turno_Numero = T.Numero)";
             InitializeComponent();
             iniciarDGV(dgvTurnos);
             mostrarTurno(dgvTurnos, tabla, "");
