@@ -7,6 +7,15 @@ GO
 --///////////////////////////////////////////CREACION TABLAS///////////////////////////////////////////--
 
 
+use GD2C2013
+go
+CREATE SCHEMA Free_Running AUTHORIZATION gd
+GO
+
+
+--///////////////////////////////////////////CREACION TABLAS///////////////////////////////////////////--
+
+
 --TABLA PACIENTES: Tabla de todos los Pacientes de la Clinica - esten o no activos 
 
 CREATE TABLE Free_Running.Paciente(
@@ -55,11 +64,11 @@ GO
 
 --TABLA TURNO: En esta Tabla se Registran TODOS los turnos que se dan
 CREATE TABLE Free_Running.Turno (
-Numero	numeric(18, 0) NOT NULL IDENTITY(1,1),
+Numero	numeric(18, 0) NOT NULL,
 Fecha	datetime NOT NULL,
 Nro_Afiliado numeric(18, 0) NOT NULL,
 Especialidad_Codigo	numeric(18, 0) NOT NULL,
-Medico_Id numeric(18, 0) NOT NULL,
+Medico_Id numeric(18, 0) NOT NULL
 CONSTRAINT PK_Turno PRIMARY KEY CLUSTERED (Numero ASC)
 )
 GO
@@ -124,30 +133,27 @@ GO
 CREATE TABLE Free_Running.Agenda (
 Id numeric(18, 0) NOT NULL identity(1,1),
 Medico numeric(18, 0) NOT NULL ,
-Fecha_Inicio date NOT NULL,
-Fecha_Fin date NOT NULL,
+FechaHora_Turno datetime NOT NULL,
 CONSTRAINT PK_Agenda PRIMARY KEY CLUSTERED (Id ASC)
 )
 GO
 
 
---TABLA AGENDA DIA: Relaciona una Agenda de un determinado Medico con los Dias que Atiene este
-CREATE TABLE Free_Running.Agenda_Dia(
-Agenda numeric(18, 0) NOT NULL,
+
+--TABLA COMPRA BONO CONSULTA: Muestra todas las compras que se hicieron de los Bonos Consulta
+CREATE TABLE Free_Running.Compra_Bono_Consulta (
 Id numeric(18, 0) NOT NULL identity(1,1),
-Dia_Semana varchar(255) NOT NULL,
-Hora_Inicio	time NOT NULL,
-Hora_Fin	time NOT NULL,
-CONSTRAINT PK_Agenda_Dia PRIMARY KEY CLUSTERED (Id ASC)
+Fecha_Compra	datetime NOT NULL, 
+Afiliado_Compra numeric(18, 0) NOT NULL,
+Bono_Consulta numeric(18,0) NOT NULL
+CONSTRAINT PK__Compra_Bono_Consulta PRIMARY KEY CLUSTERED (Id ASC)
 )
 GO
 
 --TABLA BONO CONSULTA: Contiene TODOS los Bonos Consulta Comprados Cancelados o No, Utilizados o No
-CREATE TABLE Free_Running.Bono_Consulta (  --Fecha Imprecion Va (en la tabla maestra esta?
+CREATE TABLE Free_Running.Bono_Consulta (
 Id numeric(18, 0) NOT NULL identity(1,1),
-Fecha_Compra	datetime NOT NULL, 
 Numero	numeric(18, 0) NULL, -- propio de cada paciente indica la cant de consultas de un paciente
-Afiliado_Compra numeric(18, 0) NOT NULL,
 Afiliado_Utiliza numeric(18, 0) NULL,
 Precio numeric(18, 0) NULL,
 Plan_Correspondiente numeric(18, 0) NOT NULL,
@@ -163,15 +169,22 @@ CONSTRAINT PK_Bono_Consulta_Cancelado PRIMARY KEY CLUSTERED (Id ASC)
 )
 GO
 
+--TABLA COMPRA BONO FARMACIA: Muestra todas las compras que se hicieron de los Bonos Farmacia
+CREATE TABLE Free_Running.Compra_Bono_Farmacia (
+Id numeric(18, 0) NOT NULL identity(1,1),
+Fecha_Compra	datetime NOT NULL, 
+Afiliado_Compra numeric(18, 0) NOT NULL,
+Bono_Farmacia numeric(18, 0) NOT NULL
+CONSTRAINT PK__Compra_Bono_Farmacia PRIMARY KEY CLUSTERED (Id ASC)
+)
+GO
 
 --TABLA BONO FARMACIA: Contiene TODOS los Bonos Farmacia Comprados, Vencidos o No, Utilizados o No
 CREATE TABLE Free_Running.Bono_Farmacia (
-Fecha_Compra	datetime NOT NULL,
 Id	numeric(18, 0) NOT NULL identity(1,1),
 Fecha_Vencimiento	datetime NOT NULL,
 Fecha_Preinscripcion_Medicamento	varchar(255) NULL,
 Plan_Correspondiente numeric(18, 0) NOT NULL,
-Afiliado_Compra numeric(18, 0) NOT NULL,
 Afiliado_Utiliza numeric(18, 0) NULL,
 Precio numeric(18, 0) NOT NULL,
 Consulta_Id numeric(18, 0) NULL,
@@ -232,17 +245,24 @@ CONSTRAINT PK_Tipo_Cancelado PRIMARY KEY CLUSTERED (Tipo ASC)
 GO
 
 
-
---TABLA RENGLON Medicamento:
-CREATE TABLE Free_Running.Medicamento (
-Id	numeric(18, 0) NOT NULL identity(1,1),
+--TABLA MEDICAMENTO x BONO FARMACIA:
+CREATE TABLE Free_Running.Medicamento_por_BonoFarmacia (
+Medicamento	varchar(255) NOT NULL,
 Bono_Farmacia numeric(18, 0) NOT NULL,
-Medicamento varchar(255) NOT NULL,
 Cantidad numeric(18, 0) NULL,
 Aclaracion_Cantidad varchar(255) NULL,
-CONSTRAINT PK_Renglon_Receta PRIMARY KEY CLUSTERED (Id ASC)
+CONSTRAINT PK_Medicamento_x_BF PRIMARY KEY CLUSTERED (Medicamento ASC,Bono_Farmacia ASC )
 )
 GO
+
+--TABLA Medicamento:
+CREATE TABLE Free_Running.Medicamento (
+Medicamento varchar(255) NOT NULL,
+CONSTRAINT PK_Medicamento PRIMARY KEY CLUSTERED (Medicamento ASC)
+)
+GO
+
+
 
 
 --TABLA FUNCIONALIDADES: Tabla que muestra las Funcionalidades que puede tener un Rol
@@ -302,7 +322,6 @@ GO
 
 
 
-
 --///////////////////////////////////////////CREACION FK///////////////////////////////////////////--
 
 
@@ -313,13 +332,13 @@ GO
  
  ALTER TABLE Free_Running.Paciente ADD CONSTRAINT FK_Usuario_Paciente  FOREIGN KEY (Username) 
  REFERENCES Free_Running.Usuario(Username) 
-  ON update cascade
+ ON update cascade
  GO
 
  
  ALTER TABLE Free_Running.Medico ADD CONSTRAINT FK_Usuario_Medico  FOREIGN KEY (Username) 
  REFERENCES Free_Running.Usuario(Username) 
-  ON update cascade
+ ON update cascade
  GO
  
  
@@ -337,15 +356,15 @@ GO
  REFERENCES Free_Running.Paciente(Nro_Afiliado) 
  GO
  
- 
- 
- 
- 
- ALTER TABLE Free_Running.Medicamento ADD CONSTRAINT FK_Medicamento_Bono FOREIGN KEY (Bono_Farmacia) 
+
+ ALTER TABLE Free_Running.Medicamento_por_BonoFarmacia ADD CONSTRAINT FK_MxF_BonoFarmacia FOREIGN KEY (Bono_Farmacia) 
  REFERENCES Free_Running.Bono_Farmacia(Id) 
  GO
  
- 
+ ALTER TABLE Free_Running.Medicamento_por_BonoFarmacia ADD CONSTRAINT FK_MxF_Medicamento FOREIGN KEY (Medicamento) 
+ REFERENCES Free_Running.Medicamento(Medicamento) 
+ GO
+
   
  
  
@@ -354,28 +373,42 @@ GO
  GO
  
  
- 
-
- ALTER TABLE Free_Running.Bono_Farmacia ADD CONSTRAINT FK_Bono_Farmacia FOREIGN KEY (Consulta_Id) 
+ALTER TABLE Free_Running.Bono_Farmacia ADD CONSTRAINT FK_Bono_Farmacia FOREIGN KEY (Consulta_Id) 
  REFERENCES Free_Running.Consulta(Id) 
  GO
- ALTER TABLE Free_Running.Bono_Farmacia ADD CONSTRAINT FK_Bono_Farmacia_Afiliado_Compra FOREIGN KEY (Afiliado_Compra) 
- REFERENCES Free_Running.Paciente(Nro_Afiliado) 
- GO
+
  ALTER TABLE Free_Running.Bono_Farmacia ADD CONSTRAINT FK_Bono_Farmacia_Afiliado_Utiliza FOREIGN KEY (Afiliado_Utiliza) 
  REFERENCES Free_Running.Paciente(Nro_Afiliado) 
  GO
  ALTER TABLE Free_Running.Bono_Farmacia ADD CONSTRAINT FK_Bono_Farmacia_Plan_Correspondiente FOREIGN KEY (Plan_Correspondiente) 
  REFERENCES Free_Running.Plan_Medico(Codigo) 
  GO
+
  
  
- 
- 
- 
- ALTER TABLE Free_Running.Bono_Consulta ADD CONSTRAINT FK_Bono_Consulta_Afiliado_Compra FOREIGN KEY (Afiliado_Compra) 
+ ALTER TABLE Free_Running.Compra_Bono_Farmacia ADD CONSTRAINT FK_Compra_BF_Afiliado_Compra FOREIGN KEY (Afiliado_Compra) 
  REFERENCES Free_Running.Paciente(Nro_Afiliado) 
  GO
+ ALTER TABLE Free_Running.Compra_Bono_Farmacia ADD CONSTRAINT FK_Compra_BF_BonoFarmacia FOREIGN KEY (Bono_Farmacia) 
+ REFERENCES Free_Running.Bono_Farmacia(Id) 
+ GO
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ ALTER TABLE Free_Running.Compra_Bono_Consulta ADD CONSTRAINT FK_Compra_BC_Afiliado_Compra FOREIGN KEY (Afiliado_Compra) 
+ REFERENCES Free_Running.Paciente(Nro_Afiliado) 
+ GO
+ ALTER TABLE Free_Running.Compra_Bono_Consulta ADD CONSTRAINT FK_Compra_BC_BonoConsulta FOREIGN KEY (Bono_Consulta) 
+ REFERENCES Free_Running.Bono_Consulta(Id) 
+ GO
+ 
+ 
+ 
  ALTER TABLE Free_Running.Bono_Consulta ADD CONSTRAINT FK_Bono_Consulta_Afiliado_Utiliza FOREIGN KEY (Afiliado_Utiliza) 
  REFERENCES Free_Running.Paciente(Nro_Afiliado) 
  GO
@@ -384,8 +417,11 @@ GO
  GO
  
  
- 
- 
+
+
+
+
+
  
  ALTER TABLE Free_Running.Bono_Consulta_Cancelado ADD CONSTRAINT FK_Bono_Consulta FOREIGN KEY (Bono_Consulta) 
  REFERENCES Free_Running.Bono_Consulta(Id) 
@@ -470,6 +506,7 @@ GO
  ALTER TABLE Free_Running.Usuario_por_Rol ADD CONSTRAINT FK_Usuario_Username  FOREIGN KEY (Username) 
  REFERENCES Free_Running.Usuario(Username) 
  GO
+ 
  ALTER TABLE Free_Running.Usuario_por_Rol ADD CONSTRAINT FK_Rol_Id  FOREIGN KEY (Rol_Id) 
  REFERENCES Free_Running.Rol(Id) 
  ON update cascade
@@ -483,20 +520,14 @@ GO
  
  ALTER TABLE Free_Running.Intentos_Fallidos ADD CONSTRAINT FK_Intentos_Fallidos_Username  FOREIGN KEY (Username) 
  REFERENCES Free_Running.Usuario(Username) 
-  ON update cascade
+ ON update cascade
  GO
 
  
  ALTER TABLE Free_Running.Agenda ADD CONSTRAINT FK_Agenda_Medico_Id FOREIGN KEY (Medico) 
  REFERENCES Free_Running.Medico(Id) 
- GO
- 
- ALTER TABLE Free_Running.Agenda_Dia ADD CONSTRAINT FK_Agenda FOREIGN KEY (Agenda) 
- REFERENCES Free_Running.Agenda(Id) 
  ON update cascade
- ON delete cascade
- go
-
+ GO
 
 
  ALTER TABLE Free_Running.Turno_Cancelado ADD CONSTRAINT FK_Tipo FOREIGN KEY (Tipo) 
@@ -510,9 +541,7 @@ GO
 
 
 
-
 --///////////////////////////////////////////MIGRACION///////////////////////////////////////////--
-
 
 
 
@@ -608,7 +637,6 @@ From Free_Running.Medico m1
 --Migrar Turnos
 -- TODOS LOS TURNOS, Incluido Cancelados
 
-set identity_insert Free_Running.Turno on
 INSERT INTO Free_Running.Turno(Numero,Fecha,Especialidad_Codigo,Medico_Id,Nro_Afiliado)
 select distinct M.Turno_Numero,M.Turno_Fecha,M.Especialidad_Codigo,
 				(select med.Id 
@@ -621,8 +649,7 @@ select distinct M.Turno_Numero,M.Turno_Fecha,M.Especialidad_Codigo,
 from gd_esquema.Maestra M
 where M.Turno_Numero is not null
 
-set identity_insert Free_Running.Turno off
-go
+
 
 
 
@@ -656,14 +683,14 @@ Group by M.Turno_Numero,M.Turno_Fecha
 Having (COUNT(M.Turno_Numero)=1 and (datename(dw,DATEADD(D, 0, DATEDIFF(D, 0, M.Turno_Fecha)))= 'Domingo')) 
 	
 
-
+/*
 INSERT INTO Free_Running.Turno_Cancelado(Turno_Numero,Tipo,Motivo)
 select M.Turno_numero, 'Sistema','Fecha del Turno Superior al permitido'
 from gd_esquema.Maestra M
 where Turno_Fecha is not null 
 Group by M.Turno_Numero,M.Turno_Fecha
 Having (COUNT(M.Turno_Numero)=1 and M.Turno_Fecha > GETDATE()+120 )
-
+*/
 
 
 --Rol
@@ -739,37 +766,40 @@ go
 --TODOS LOS BONO COLSUTA COMPRADOS utilizados o NO
 SET IDENTITY_INSERT Free_Running.Bono_Consulta ON
 go
-INSERT INTO Free_Running.Bono_Consulta(Id,Fecha_Compra,Numero,Afiliado_Compra,Afiliado_Utiliza,Precio,Plan_Correspondiente)
+INSERT INTO Free_Running.Bono_Consulta(Id,Afiliado_Utiliza,Precio,Plan_Correspondiente,Numero)
 
-select  M.Bono_Consulta_Numero,M.Compra_Bono_Fecha,
+select  M.Bono_Consulta_Numero,
+
+	 (select P.Nro_Afiliado 
+	 from gd_esquema.Maestra M3 
+	 join Free_Running.Paciente P on M3.Paciente_Dni=P.Documento 
+	 where  M.Bono_Consulta_Numero = M3.Bono_Consulta_Numero and 
+			M3.Turno_Numero is not null and 
+			M3.Bono_Consulta_Numero is not null) Afiliado_Utiliza,
+	 
+	((select top 1 P.Precio_Bono_Consulta
+	from Free_Running.Plan_Medico P
+	where M.Plan_Med_Codigo = P.Codigo)) Precio,
+	
+	M.Plan_Med_Codigo Plan_Correspondiente,
 	
 	(select  Count(distinct M2.Bono_Consulta_Numero)
 	 from gd_esquema.Maestra M2
 	 where (M.Compra_Bono_Fecha is not null and 
 			M.Bono_Consulta_Numero is not null and 
 			M.Paciente_Dni = M2.Paciente_Dni and 
-			M.Bono_Consulta_Numero >= M2.Bono_Consulta_Numero )),
-	 
-	Free_Running.suNroAfiliado(M.Paciente_Dni),
-	 
-	 (select P.Nro_Afiliado 
-	 from gd_esquema.Maestra M3 
-	 join Free_Running.Paciente P on M3.Paciente_Dni=P.Documento 
-	 where  M.Bono_Consulta_Numero = M3.Bono_Consulta_Numero and 
-			M3.Turno_Numero is not null and 
-			M3.Bono_Consulta_Numero is not null),
-	 
-	((select top 1 P.Precio_Bono_Consulta
-	from Free_Running.Plan_Medico P
-	where M.Plan_Med_Codigo = P.Codigo)),
-	
-	M.Plan_Med_Codigo
+			M.Bono_Consulta_Numero >= M2.Bono_Consulta_Numero )) Numero
 
 from gd_esquema.Maestra M
 where (M.Compra_Bono_Fecha is not null and M.Bono_Consulta_Numero is not null)
 SET IDENTITY_INSERT Free_Running.Bono_Consulta OFF
 go
 
+
+INSERT INTO Free_Running.Compra_Bono_Consulta(Fecha_Compra,Afiliado_Compra,Bono_Consulta)
+select M.Compra_Bono_Fecha,Free_Running.suNroAfiliado(M.Paciente_Dni),M.Bono_Consulta_Numero
+from gd_esquema.Maestra M
+where (M.Compra_Bono_Fecha is not null and M.Bono_Consulta_Numero is not null)
 
 
 
@@ -816,7 +846,6 @@ go
 
 		--Creo Indices
 		CREATE INDEX iNDICE_LAM ON Free_Running.Llegada_Atencion_Medica(Turno_Numero)
-		CREATE INDEX iNDICE_LAM2 ON Free_Running.Llegada_Atencion_Medica(Id)
 		CREATE INDEX iNDICE_AM ON Free_Running.Atencion_Medica(Llegada_Id)
 
 
@@ -839,9 +868,8 @@ where M.Consulta_Sintomas is not null
 CREATE INDEX iNDICE_AdM3 ON Free_Running.Consulta(Id_Atencion_Medica)
 
 SET IDENTITY_INSERT Free_Running.Bono_Farmacia ON
-INSERT INTO Free_Running.Bono_Farmacia(Id,Fecha_Compra,Fecha_Vencimiento,Afiliado_Compra,Afiliado_Utiliza,Precio,Consulta_Id,Plan_Correspondiente)
-select M.Bono_Farmacia_Numero,M.Compra_Bono_Fecha,M.Bono_Farmacia_Fecha_Vencimiento,
-		(Free_Running.suNroAfiliado(M.Paciente_Dni)) COMPRA,
+INSERT INTO Free_Running.Bono_Farmacia(Id,Fecha_Vencimiento,Afiliado_Utiliza,Precio,Consulta_Id,Plan_Correspondiente)
+select M.Bono_Farmacia_Numero,M.Bono_Farmacia_Fecha_Vencimiento,
 		
 		(select P.Nro_Afiliado 
 		from gd_esquema.Maestra M3 
@@ -869,13 +897,20 @@ SET IDENTITY_INSERT Free_Running.Bono_Farmacia OFF
 
 
 
+INSERT INTO Free_Running.Compra_Bono_Farmacia(Fecha_Compra,Afiliado_Compra,Bono_Farmacia)
+select M.Compra_Bono_Fecha,Free_Running.suNroAfiliado(M.Paciente_Dni),M.Bono_Farmacia_Numero
+from gd_esquema.Maestra M
+where M.Bono_Farmacia_Numero is not null and M.Compra_Bono_Fecha is not null
+
+
+INSERT INTO Free_Running.Medicamento(Medicamento)
+select distinct M.Bono_Farmacia_Medicamento
+from gd_esquema.Maestra M
+where M.Bono_Farmacia_Medicamento is not null
 
 
 
-
-
-
-INSERT INTO Free_Running.Medicamento(Bono_Farmacia,Medicamento)
+INSERT INTO Free_Running.Medicamento_por_BonoFarmacia(Bono_Farmacia,Medicamento)
 select BF.Id,M.Bono_Farmacia_Medicamento
 from Free_Running.Bono_Farmacia BF join Free_Running.Consulta C on C.Id = BF.Consulta_Id
 	 join Free_Running.Atencion_Medica AM on C.Id_Atencion_Medica=AM.Id
@@ -885,39 +920,14 @@ Where M.Bono_Farmacia_Numero is Not null and M.Compra_Bono_Fecha is null
 
 
 
-
-
-
-
 --Agenda
---Cada Medico tiene una Adenda Actual (kedan registradas las anteriores). Cada Agenda es valida x un Periodo
---Actualmente Cada Medico Tiene una sola a partir del dia de migracio, tomando todos las fechas menores a 120 dias
+--Cada Medico tiene una Adenda en donde se registran todos los horarios, actualmente la agenda se armo con los turnos futuros q no han sido canceldos
 
-INSERT INTO Free_Running.Agenda(Medico,Fecha_Inicio,Fecha_Fin)
-select Me.Id,(SELECT DATEADD(dd, 0, DATEDIFF(dd, 0,MIN(T.Fecha)))), (SELECT DATEADD(dd, 0, DATEDIFF(dd, 0,MAX(T.Fecha))))
+insert into Free_Running.Agenda(Medico,FechaHora_Turno)
+select Me.Id,T.Fecha
 from Free_Running.Medico Me join Free_Running.Turno T on T.Medico_Id = Me.Id
-where T.Fecha between getdate() and (getdate()+120)
-Group by Me.Id
+where T.Fecha between getdate() and (getdate()+120) and not exists (select * from Free_Running.Turno_Cancelado TC where TC.Turno_Numero = T.Numero)
 
-
-
-
---Agenda dia
---x cada Agenda.... Muestra Cuando Empieza y Cuando Termina un Medico Su Horario de Trabajo x dia de semana.
---Puede ser que un dia de semana tenga 2 periodos (rangos)
-
-INSERT INTO Free_Running.Agenda_Dia(Agenda,Dia_Semana,Hora_Inicio,Hora_Fin)
-select distinct A.Id,datename(dw,DATEADD(D, 0, DATEDIFF(D, 0, Turno_Fecha))),MIN(convert(varchar, Turno_Fecha, 8)),MAX(convert(varchar, Turno_Fecha, 8))
-From gd_esquema.Maestra M 
-	 join Free_Running.Medico Me on Me.Documento=M.Medico_Dni
-	 join  Free_Running.Agenda A on A.Medico=Me.Id
-where M.Turno_Numero is not null and M.Turno_Fecha  between A.Fecha_Inicio and A.Fecha_Fin
-Group by A.Id,datename(dw,DATEADD(D, 0, DATEDIFF(D, 0, Turno_Fecha)))
-having datename(dw,DATEADD(D, 0, DATEDIFF(D, 0, Turno_Fecha))) <> 'Domingo'
-
-
-INSERT INTO Free_Running.Usuario(Username,Usuario_Password,Habilitado) values('admin','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1)
-INSERT INTO Free_Running.Usuario_por_Rol(Username,Rol_Id) values('admin','Administrativo')
 
 
 
@@ -970,6 +980,7 @@ BEGIN
 		Select top 1 * 
 		from Free_Running.Agenda A 
 		where(A.Medico = @Medico)
+		order by A.FechaHora_Turno DESC
 
 END
 GO

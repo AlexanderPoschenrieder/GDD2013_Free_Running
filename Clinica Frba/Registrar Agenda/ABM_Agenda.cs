@@ -17,8 +17,6 @@ namespace Clinica_Frba.Registrar_Agenda
     public partial class ABM_Agenda : Form
     {
 
-        static ArrayList misDias = new ArrayList();
-
         public static Medico miMedico;
 
         public ABM_Agenda(Medico unMedic)
@@ -35,77 +33,27 @@ namespace Clinica_Frba.Registrar_Agenda
             dtpHoraFin.Value = Convert.ToDateTime("7:30");
             dtpFechaInicio.MinDate = DateTime.Today.AddDays(1);
             dtpFechaInicio.Value = DateTime.Today.AddDays(1);
-            dtpFechaFin.Value = DateTime.Today.AddDays(1);
-            dtpFechaFin.MinDate = DateTime.Today.AddDays(1);
-            dtpFechaFin.MaxDate = DateTime.Today.AddDays(121);
-            lbDiascargados.Items.Clear();
-            misDias.Clear();
+            dtpFechaFin.Value = DateTime.Today.AddDays(2);
+            dtpFechaFin.MinDate = DateTime.Today.AddDays(2);
+            dtpFechaFin.MaxDate = DateTime.Today.AddDays(122);
         }
 
-        public void incertarLita(AgendaDia unDia)
-        {
-            string agenda = "Dia: " + Convert.ToString(unDia.dia) + " Desde: " + Convert.ToString(unDia.HoraInicio.ToString("HH:mm")) + " Hasta: " + Convert.ToString(unDia.HoraFin.ToString("HH:mm"));
-            lbDiascargados.Items.Add(agenda);
-            misDias.Add(unDia.dia);
-            misDias.Add(unDia.HoraInicio);
-            misDias.Add(unDia.HoraFin);
 
-        }
-
-        public bool Repetido(string dia, DateTime inicio, DateTime fin)
-        {
-            bool a = false;
-            if (misDias.Count > 1)
-            {
-                for (int i = 0; i < misDias.Count; i = i + 3)
-                {
-                    if (igualDia(misDias[i], misDias[i + 1], misDias[i + 2], dia, inicio, fin))
-                    { a = true; }
-                }
-            }
-            return a;
-        }
-
-        public bool igualDia(object Ldia, object Linicio, object Lfin, string dia, DateTime inicio, DateTime fin)
-        {
-
-            bool i = false;
-            if (Convert.ToString(Ldia) == dia)
-            {
-                if (Convert.ToDateTime(Linicio) >= inicio && Convert.ToDateTime(Lfin) <= fin) { i = true; }
-                if (Convert.ToDateTime(Linicio) <= inicio && Convert.ToDateTime(Lfin) >= fin) { i = true; }
-                if (Convert.ToDateTime(Linicio) < inicio && Convert.ToDateTime(Lfin) > inicio) { i = true; }
-                if (Convert.ToDateTime(Linicio) < fin && Convert.ToDateTime(Lfin) > fin) { i = true; }
-            }
-            return i;
-
-        }
 
         public bool superaHs()
         {
             bool rta = false;
             int total = 0;
-            DateTime result = Convert.ToDateTime("00:00");
-            DateTime actualresult = Convert.ToDateTime("00:00");
-            for (int i = 0; i < misDias.Count; i = i + 3)
-            {
-                DateTime inicio = Convert.ToDateTime(misDias[i + 1]);
-                DateTime fin = Convert.ToDateTime(misDias[i + 2]);
-                int intInicio = Convert.ToInt32((inicio.ToString("HHmm")));
-                int intFin = Convert.ToInt32((fin.ToString("HHmm")));
-                int intRes = intFin - intInicio;
-                total = total + intRes;
-            }
-
             DateTime actualFin = Convert.ToDateTime(dtpHoraFin.Value);
             DateTime actualInicio = Convert.ToDateTime(dtpHoraInicio.Value);
             int aF = Convert.ToInt32((actualFin).ToString("HHmm"));
             int aI = Convert.ToInt32((actualInicio).ToString("HHmm"));
             int res = aF - aI;
-            total = res + total;
-            if (total > 4800) { total = total - res; rta = true; }
+            total = (res) * (cantDias());
+            if (total > 4800) { rta = true; }
             return rta;
         }
+
 
         public double difHs()
         {
@@ -117,9 +65,10 @@ namespace Clinica_Frba.Registrar_Agenda
             return result;
         }
 
+
         public void validarRangoHsInicio()
         {
-            if (cbDias.Text == "Sabado")
+            if (cbS.Checked)
             {
                 if (dtpHoraInicio.Value.Hour > 14) { dtpHoraInicio.Value = Convert.ToDateTime("10:00"); }
                 if (dtpHoraInicio.Value >= Convert.ToDateTime("14:31") && dtpHoraInicio.Value <= Convert.ToDateTime("14:45")) { dtpHoraInicio.Value = Convert.ToDateTime("10:00"); }
@@ -149,9 +98,11 @@ namespace Clinica_Frba.Registrar_Agenda
 
         }
 
+
+
         public void validarRangoSabado()
         {
-            if (cbDias.Text == "Sabado")
+            if (cbS.Checked)
             {
                 if (dtpHoraInicio.Value < Convert.ToDateTime("10:00"))
                 { dtpHoraInicio.Value = Convert.ToDateTime("10:00"); }
@@ -169,7 +120,7 @@ namespace Clinica_Frba.Registrar_Agenda
 
         public void validarRangoHsFin()
         {
-            if (cbDias.Text == "Sabado")
+            if (cbS.Checked)
             {
                 if (dtpHoraFin.Value.Hour > 15) { dtpHoraFin.Value = Convert.ToDateTime("10:30"); }
                 if (dtpHoraFin.Value.Hour == 15 && dtpHoraFin.Value.Minute == 59) { dtpHoraFin.Value = Convert.ToDateTime("14:30"); }
@@ -215,9 +166,9 @@ namespace Clinica_Frba.Registrar_Agenda
                 SqlDataReader drAgenda = cmd.ExecuteReader();
                 if (drAgenda.Read() == true)
                 {
-                    if (Convert.ToDateTime(drAgenda[3]) < DateTime.Now)
+                    if (Convert.ToDateTime(drAgenda[2]) < DateTime.Now)
                     {
-                        //MessageBox.Show("Agenda Actual Vencida: " + drAgenda[3]);
+                        MessageBox.Show("Agenda Actual Vencida: " + drAgenda[2]);
                         SqlConnection miConexion2 = Conexion.Conectar();
                         SqlCommand consultaAgenda = new SqlCommand("DELETE FROM Free_Running.Agenda  WHERE Medico ='" + miMedico.Id + "'", miConexion2);
                         consultaAgenda.ExecuteReader();
@@ -227,7 +178,7 @@ namespace Clinica_Frba.Registrar_Agenda
                     }
                     else
                     {
-                        MessageBox.Show("Ya Existe Una Agenda Hasta: " + drAgenda[3]);
+                        MessageBox.Show("Ya Existe Una Agenda Hasta: " + drAgenda[2]);
                         miConexion.Close();
                         return true;
                     }
@@ -240,33 +191,65 @@ namespace Clinica_Frba.Registrar_Agenda
             }
         }
 
+        public bool esDiaSeleccionado(DateTime FechaRec)
+        {
+            bool rta = false;
+            switch (FechaRec.ToString("dddd", new CultureInfo("es-ES")))
+            {
+                case "lunes": if (cbLunes.Checked) { rta = true; }
+                    break;
+                case "martes": if (cbMartes.Checked) { rta = true; }
+                    break;
+                case "miércoles": if (cbMierc.Checked) { rta = true; }
+                    break;
+                case "jueves": if (cbJ.Checked) { rta = true; }
+                    break;
+                case "viernes": if (cbV.Checked) { rta = true; }
+                    break;
+                case "sábado": if (cbS.Checked) { rta = true; }
+                    break;
+            }
+            return rta;
+
+        }
+
         public void insertarAgenda()
         {
             using (SqlConnection miConexion = Conexion.Conectar())
             {
-                SqlCommand consultaAgenda = new SqlCommand(string.Format("INSERT INTO Free_Running.Agenda(Medico,Fecha_Inicio,Fecha_Fin)values('{0}','{1}','{2}')", miMedico.Id, dtpFechaInicio.Value, dtpFechaFin.Value), miConexion);
-                consultaAgenda.ExecuteNonQuery();
-
-                SqlCommand miAgenda = new SqlCommand(string.Format("select * from Free_Running.Agenda A where ((A.Medico = '{0}') and (A.Fecha_Inicio = '{1}') and (A.Fecha_Fin='{2}'))", miMedico.Id, dtpFechaInicio.Value, dtpFechaFin.Value), miConexion);
-                SqlDataReader drAgenda = miAgenda.ExecuteReader();
-                drAgenda.Read();
-                int idAgenda = Convert.ToInt32(drAgenda[0]);
-                drAgenda.Dispose();
-
-
-                for (int i = 0; i < misDias.Count; i = i + 3)
+                DateTime fRecorrido = dtpFechaInicio.Value;
+                while (fRecorrido <= dtpFechaFin.Value)
                 {
+                    if (esDiaSeleccionado(fRecorrido))
+                    {
+                        MessageBox.Show("es dia");
+                        DateTime HoraInicio = Convert.ToDateTime(Convert.ToString(dtpHoraInicio.Value));
+                        DateTime HoraFin = Convert.ToDateTime(Convert.ToString(dtpHoraFin.Value));
+                        DateTime HoraRec;
+                        HoraRec = HoraInicio;
 
-                    SqlCommand consultaL = new SqlCommand(string.Format(
-                        "INSERT INTO Free_Running.Agenda_Dia(Agenda,Dia_Semana,Hora_Inicio,Hora_Fin)values('{0}','{1}','{2}','{3}')", idAgenda, Convert.ToString(misDias[i]), Convert.ToDateTime(misDias[i + 1]), Convert.ToString(misDias[i + 2])), miConexion);
-                    consultaL.ExecuteNonQuery();
+                        while (HoraRec <= HoraFin)
+                        {
 
+                            DateTime dt = (fRecorrido.AddHours(HoraRec.Hour)).AddMinutes(HoraRec.Minute);
+                            SqlCommand cargarAgenda = new SqlCommand(string.Format("insert into Free_Running.Agenda(Medico,FechaHora_Turno)values(" + miMedico.Id + ",@Fecha )"), miConexion);
+                            cargarAgenda.Parameters.Add(new SqlParameter("@Fecha", System.Data.SqlDbType.DateTime));
+                            cargarAgenda.Parameters["@Fecha"].Value = dt;
+                            cargarAgenda.ExecuteNonQuery();
+                            HoraRec = HoraRec.AddMinutes(30);
+
+                        }
+
+                    }
+                    fRecorrido = fRecorrido.AddDays(1);
                 }
+
             }
             MessageBox.Show("Operacion Realizada con Exito");
             limpiar();
 
         }
+
 
         private void btLimpiar_Click(object sender, EventArgs e)
         {
@@ -277,21 +260,21 @@ namespace Clinica_Frba.Registrar_Agenda
         {
             if (dtpFechaInicio.Value > dtpFechaFin.MaxDate)
             {
-                dtpFechaFin.MaxDate = dtpFechaInicio.Value.AddDays(120);
-                dtpFechaFin.MinDate = dtpFechaInicio.Value;
+                dtpFechaFin.MaxDate = dtpFechaInicio.Value.AddDays(121);
+                dtpFechaFin.MinDate = dtpFechaInicio.Value.AddDays(1);
             }
             if (dtpFechaInicio.Value <= dtpFechaFin.MaxDate && dtpFechaInicio.Value >= dtpFechaFin.MinDate)
             {
-                dtpFechaFin.MinDate = dtpFechaInicio.Value;
-                dtpFechaFin.MaxDate = dtpFechaInicio.Value.AddDays(120);
+                dtpFechaFin.MinDate = dtpFechaInicio.Value.AddDays(1);
+                dtpFechaFin.MaxDate = dtpFechaInicio.Value.AddDays(121);
             }
             if (dtpFechaInicio.Value < dtpFechaFin.MinDate)
             {
-                dtpFechaFin.MinDate = dtpFechaInicio.Value;
-                dtpFechaFin.MaxDate = dtpFechaInicio.Value.AddDays(120);
+                dtpFechaFin.MinDate = dtpFechaInicio.Value.AddDays(1);
+                dtpFechaFin.MaxDate = dtpFechaInicio.Value.AddDays(121);
             }
-            dtpFechaFin.MinDate = dtpFechaInicio.Value;
-            dtpFechaFin.Value = dtpFechaInicio.Value;
+            dtpFechaFin.MinDate = dtpFechaInicio.Value.AddDays(1);
+            dtpFechaFin.Value = dtpFechaInicio.Value.AddDays(1);
         }
 
         private void btCargar_Click(object sender, EventArgs e)
@@ -319,9 +302,54 @@ namespace Clinica_Frba.Registrar_Agenda
             else { MessageBox.Show("Complete el Dia"); }
         }
 
-        private void cbDias_TextChanged_1(object sender, EventArgs e)
+        public int cantDias()
         {
-            if (cbDias.Text == "Sabado")
+            int dias = 0;
+            if (cbLunes.Checked) { dias = dias + 1; }
+            if (cbMartes.Checked) { dias = dias + 1; }
+            if (cbMierc.Checked) { dias = dias + 1; }
+            if (cbJ.Checked) { dias = dias + 1; }
+            if (cbV.Checked) { dias = dias + 1; }
+            if (cbS.Checked) { dias = dias + 1; }
+            return dias;
+        }
+
+
+
+        private void dtpHoraFin_ValueChanged(object sender, EventArgs e)
+        {
+            validarRangoHsFin();
+        }
+
+        private void dtpHoraInicio_ValueChanged(object sender, EventArgs e)
+        {
+            validarRangoHsInicio();
+        }
+
+        private void btGuardar_Click(object sender, EventArgs e)
+        {
+            if (cbLunes.Checked || cbMartes.Checked || cbMierc.Checked || cbJ.Checked || cbV.Checked || cbS.Checked)
+            {
+                if (difHs() >= 0.5)
+                {
+                    if (!superaHs())
+                    {
+                        if (!hayAgenda())
+                        {
+                            insertarAgenda();
+                        }
+                    }
+                    else { MessageBox.Show("Ha Superado El Maximo Permitido de Hs Por Semana"); }
+                }
+                else { MessageBox.Show("La Hora de Inicio debe ser Menor A La hora Final"); }
+
+            }
+            else { MessageBox.Show("Debe Seleccionar por lo menos 1 dia"); }
+        }
+
+        private void cbS_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbS.Checked)
             {
                 if (dtpHoraInicio.Value < Convert.ToDateTime("10:00"))
                 { dtpHoraInicio.Value = Convert.ToDateTime("10:00"); }
@@ -337,25 +365,5 @@ namespace Clinica_Frba.Registrar_Agenda
             }
         }
 
-        private void dtpHoraFin_ValueChanged(object sender, EventArgs e)
-        {
-            validarRangoHsFin();
-        }
-
-        private void dtpHoraInicio_ValueChanged(object sender, EventArgs e)
-        {
-            validarRangoHsInicio();
-        }
-
-        private void btGuardar_Click(object sender, EventArgs e)
-        {
-            if (lbDiascargados.Items.Count > 0)
-            {
-                if (!hayAgenda()) { insertarAgenda(); }
-            }
-            else { MessageBox.Show("Debe Cargar Los Horarios"); }
-        }
-
     }
 }
-//limpiar al guardar , mje de operacion grabada con exito
