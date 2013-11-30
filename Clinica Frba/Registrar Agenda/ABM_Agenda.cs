@@ -10,6 +10,9 @@ using System.Data;
 using System.Drawing;
 using System.Configuration;
 using Clinica_Frba.Login;
+using System.Globalization;
+using System.Threading;
+
 
 
 namespace Clinica_Frba.Registrar_Agenda
@@ -38,8 +41,6 @@ namespace Clinica_Frba.Registrar_Agenda
             dtpFechaFin.MaxDate = DateTime.Today.AddDays(122);
         }
 
-
-
         public bool superaHs()
         {
             bool rta = false;
@@ -54,7 +55,6 @@ namespace Clinica_Frba.Registrar_Agenda
             return rta;
         }
 
-
         public double difHs()
         {
             double hFin = dtpHoraFin.Value.Hour * 60;
@@ -64,7 +64,6 @@ namespace Clinica_Frba.Registrar_Agenda
             double result = (mFin - mInicio) / 60;
             return result;
         }
-
 
         public void validarRangoHsInicio()
         {
@@ -97,8 +96,6 @@ namespace Clinica_Frba.Registrar_Agenda
             }
 
         }
-
-
 
         public void validarRangoSabado()
         {
@@ -250,12 +247,6 @@ namespace Clinica_Frba.Registrar_Agenda
 
         }
 
-
-        private void btLimpiar_Click(object sender, EventArgs e)
-        {
-            limpiar();
-        }
-
         private void dtpFechaInicio_ValueChanged_1(object sender, EventArgs e)
         {
             if (dtpFechaInicio.Value > dtpFechaFin.MaxDate)
@@ -275,32 +266,7 @@ namespace Clinica_Frba.Registrar_Agenda
             }
             dtpFechaFin.MinDate = dtpFechaInicio.Value.AddDays(1);
             dtpFechaFin.Value = dtpFechaInicio.Value.AddDays(1);
-        }
-
-        private void btCargar_Click(object sender, EventArgs e)
-        {
-            if (Validar.noVacio(cbDias.Text))
-            {
-
-                if (difHs() >= 0.5)
-                {
-                    if (!Repetido(cbDias.Text, dtpHoraInicio.Value, dtpHoraFin.Value))
-                    {
-
-                        if (!superaHs())
-                        {
-                            AgendaDia agendaDia = new AgendaDia(cbDias.Text, dtpHoraInicio.Value, dtpHoraFin.Value);
-                            incertarLita(agendaDia);
-
-                        }
-                        else { MessageBox.Show("Ha superado el limite de 48hs"); }
-                    }
-                    else { MessageBox.Show("Dia Repetido"); }
-                }
-                else { MessageBox.Show("La Hs de inicio debe ser menor que la Hs Final"); }
-            }
-            else { MessageBox.Show("Complete el Dia"); }
-        }
+        }  
 
         public int cantDias()
         {
@@ -313,8 +279,6 @@ namespace Clinica_Frba.Registrar_Agenda
             if (cbS.Checked) { dias = dias + 1; }
             return dias;
         }
-
-
 
         private void dtpHoraFin_ValueChanged(object sender, EventArgs e)
         {
@@ -363,6 +327,21 @@ namespace Clinica_Frba.Registrar_Agenda
                 if (dtpHoraFin.Value > Convert.ToDateTime("15:00"))
                 { dtpHoraFin.Value = Convert.ToDateTime("15:00"); }
             }
+        }
+
+        private void btLimpiar_Click_1(object sender, EventArgs e)
+        {
+            limpiar();
+        }
+
+        private void dtpHoraInicio_ValueChanged_1(object sender, EventArgs e)
+        {
+            validarRangoHsInicio();
+        }
+
+        private void dtpHoraFin_ValueChanged_1(object sender, EventArgs e)
+        {
+            validarRangoHsFin();
         }
 
     }

@@ -54,6 +54,7 @@
             this.btLlegada.TabIndex = 12;
             this.btLlegada.Text = "LLEGADA ATENCION MEDICA";
             this.btLlegada.UseVisualStyleBackColor = true;
+            this.btLlegada.Click += new System.EventHandler(this.btLlegada_Click);
             // 
             // btPedido
             // 

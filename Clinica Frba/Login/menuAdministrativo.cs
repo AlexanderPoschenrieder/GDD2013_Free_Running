@@ -48,6 +48,13 @@ namespace Clinica_Frba.Login
             this.Hide();
         }
 
+        private void btLlegada_Click(object sender, EventArgs e)
+        {
+            Clinica_Frba.Registro_de_LLegada.Registro_de_llegada ambLlegada = new Clinica_Frba.Registro_de_LLegada.Registro_de_llegada();
+            ambLlegada.ShowDialog();
+            this.Hide();
+        }
+
 
 
 

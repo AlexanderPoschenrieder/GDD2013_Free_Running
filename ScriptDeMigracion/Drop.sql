@@ -31,6 +31,8 @@ DROP TABLE Free_Running.Tipo_Cancelado
 DROP TABLE Free_Running.Compra_Bono_Consulta
 DROP TABLE Free_Running.Compra_Bono_Farmacia
 DROP TABLE Free_Running.Medicamento_por_BonoFarmacia
+
+
 DROP FUNCTION Free_Running.CantIntentosActual
 DROP PROCEDURE Free_Running.agregarIntentoFallido
 DROP PROCEDURE Free_Running.borrarIntentoFallido
@@ -44,10 +46,13 @@ DROP PROCEDURE Free_Running.AfiliadoUsoDist
 DROP PROCEDURE Free_Running.EspMasCanc
 DROP VIEW Free_Running.turnosPendientes
 DROP PROCEDURE Free_Running.cancelarTurno
+DROP PROCEDURE Free_Running.cancelarTurnosDelDia
 DROP FUNCTION Free_Running.calcula_plan_y_precio
 DROP FUNCTION Free_Running.turnosDePaciente
+DROP FUNCTION Free_Running.turnoLibre
 DROP FUNCTION Free_Running.calcularNroAfiliado
 DROP PROCEDURE Free_Running.InsertarPrincipal
+DROP PROCEDURE Free_Running.usuarioExisteActivo
 DROP FUNCTION Free_Running.suIdAfiliado
 DROP PROCEDURE Free_Running.puedeUsarBC
 DROP schema Free_Running

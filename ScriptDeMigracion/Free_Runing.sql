@@ -1,12 +1,4 @@
-﻿use GD2C2013
-go
-CREATE SCHEMA Free_Running AUTHORIZATION gd
-GO
-
-
---///////////////////////////////////////////CREACION TABLAS///////////////////////////////////////////--
-
-
+﻿
 use GD2C2013
 go
 CREATE SCHEMA Free_Running AUTHORIZATION gd
@@ -929,7 +921,8 @@ from Free_Running.Medico Me join Free_Running.Turno T on T.Medico_Id = Me.Id
 where T.Fecha between getdate() and (getdate()+120) and not exists (select * from Free_Running.Turno_Cancelado TC where TC.Turno_Numero = T.Numero)
 
 
-
+INSERT INTO Free_Running.Usuario(Username,Usuario_Password,Habilitado) values('admin','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1)
+INSERT INTO Free_Running.Usuario_por_Rol(Username,Rol_Id) values('admin','Administrativo')
 
 
 
@@ -946,8 +939,22 @@ RETURN @Return
 END
 GO
 
-CREATE PROCEDURE Free_Running.agregarIntentoFallido 
-    --@Fecha datetime, 
+
+
+
+CREATE FUNCTION Free_Running.especialidadCod(@espNombre varchar(255))
+RETURNS numeric(18,8)
+AS
+BEGIN
+DECLARE @Cod numeric(18,8)
+SET @Cod = (select E.Codigo from Free_Running.Especialidad E where E.Descripcion = @espNombre)
+RETURN @Cod
+END
+Go
+
+
+
+CREATE PROCEDURE Free_Running.agregarIntentoFallido  
     @User varchar(255) 
 AS 
 BEGIN
@@ -961,6 +968,8 @@ BEGIN
 END
 GO
 
+
+
 CREATE PROCEDURE Free_Running.borrarIntentoFallido 
     @Username varchar(255) 
 AS 
@@ -968,6 +977,25 @@ BEGIN
 
 		DELETE Free_Running.Intentos_Fallidos
 		WHERE Username = @Username;
+
+END
+GO
+
+
+CREATE PROCEDURE Free_Running.puedeUsarBC @NroAfiliado numeric(18,0), @BC numeric(18,0)
+AS 
+BEGIN
+declare @rta int, @afilidoCompro numeric(18,0)
+
+set @afilidoCompro = (select CBC.Afiliado_Compra from Free_Running.Compra_Bono_Consulta CBC where CBC.Bono_Consulta = @BC)
+
+set @rta = (select COUNT(*) 
+		   from Free_Running.Bono_Consulta BC 
+where BC.Id = @BC and BC.Afiliado_Utiliza is null and
+	  BC.Plan_Correspondiente = (select P.Plan_Medico from Free_Running.Paciente P where P.Nro_Afiliado = @NroAfiliado) and
+	   @afilidoCompro - (@afilidoCompro % 100)= @NroAfiliado - (@NroAfiliado % 100))
+	   
+return @rta
 
 END
 GO
@@ -1002,6 +1030,8 @@ END
 go
 
 
+
+--------------ver
 CREATE PROCEDURE Free_Running.AfiliadoBFvenc 
     @Inicio DateTime,
     @Fin DateTime  
@@ -1017,7 +1047,7 @@ END
 go
 
 
-
+--------------ver
 CREATE PROCEDURE Free_Running.EspMasCanc
     @Inicio DateTime,
     @Fin DateTime  
@@ -1036,6 +1066,7 @@ end
 
 go
 
+--------------ver
 CREATE PROCEDURE Free_Running.AfiliadoUsoDist
     @Inicio DateTime,
     @Fin DateTime  
@@ -1056,6 +1087,7 @@ group by B.Afiliado_Compra
  A
 end
 go
+
 
 
 /*FUNCION PARA LA COMPRA DE BONOS */
@@ -1205,9 +1237,4 @@ BEGIN
 	commit transaction
 END
 GO
-
-
-
-
-
 

@@ -68,6 +68,7 @@
             this.btLimpiar.TabIndex = 6;
             this.btLimpiar.Text = "Limpiar";
             this.btLimpiar.UseVisualStyleBackColor = true;
+            this.btLimpiar.Click += new System.EventHandler(this.btLimpiar_Click_1);
             // 
             // groupBox2
             // 
@@ -162,6 +163,7 @@
             this.dtpHoraFin.Size = new System.Drawing.Size(66, 26);
             this.dtpHoraFin.TabIndex = 22;
             this.dtpHoraFin.Value = new System.DateTime(2013, 10, 26, 7, 30, 0, 0);
+            this.dtpHoraFin.ValueChanged += new System.EventHandler(this.dtpHoraFin_ValueChanged_1);
             // 
             // dtpHoraInicio
             // 
@@ -176,6 +178,7 @@
             this.dtpHoraInicio.Size = new System.Drawing.Size(66, 26);
             this.dtpHoraInicio.TabIndex = 21;
             this.dtpHoraInicio.Value = new System.DateTime(2013, 10, 26, 7, 0, 0, 0);
+            this.dtpHoraInicio.ValueChanged += new System.EventHandler(this.dtpHoraInicio_ValueChanged_1);
             // 
             // label2
             // 
