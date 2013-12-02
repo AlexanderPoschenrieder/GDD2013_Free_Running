@@ -45,18 +45,23 @@ namespace Clinica_Frba.Listados_Estadisticos
                 }
             }
         }
-
         public void llenardgv(int renglon, SqlDataReader dr)
         {
             dvgTop.Rows[renglon].Cells["Afiliado"].Value = dr[0].ToString();
-            dvgTop.Rows[renglon].Cells["Cantidad"].Value = dr[1].ToString();
+            dvgTop.Rows[renglon].Cells["Nombre"].Value = dr[1].ToString();
+            dvgTop.Rows[renglon].Cells["Apellido"].Value = dr[2].ToString();
+            dvgTop.Rows[renglon].Cells["Mes"].Value = dr[3].ToString();
+            dvgTop.Rows[renglon].Cells["Cantidad"].Value = dr[4].ToString();
         }
 
         public void iniciarDGV()
         {
-            dvgTop.ColumnCount = 2;
+            dvgTop.ColumnCount = 5;
             dvgTop.Columns[0].Name = "Afiliado";
-            dvgTop.Columns[1].Name = "Cantidad";
+            dvgTop.Columns[1].Name = "Nombre";
+            dvgTop.Columns[2].Name = "Apellido";
+            dvgTop.Columns[3].Name = "Mes";
+            dvgTop.Columns[4].Name = "Cantidad";
 
         }
     }

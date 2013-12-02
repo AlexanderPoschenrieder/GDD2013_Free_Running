@@ -63,7 +63,7 @@ namespace Clinica_Frba.Listados_Estadisticos
             int sem = Convert.ToInt32(nSemestre.Value);
             fechas(año, sem);
             this.Hide();
-            Clinica_Frba.Listados_Estadisticos.EspMasBFvencidos top = new EspMasBFvencidos(inicio, fin);
+            Clinica_Frba.Listados_Estadisticos.EspMasBFRecetados top = new EspMasBFRecetados(inicio, fin);
             top.ShowDialog();
         }
 

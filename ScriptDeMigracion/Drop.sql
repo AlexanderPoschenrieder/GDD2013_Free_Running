@@ -43,7 +43,10 @@ DROP PROCEDURE Free_Running.existeAgenda
 DROP PROCEDURE Free_Running.EspeMasCanceladas 
 DROP PROCEDURE Free_Running.AfiliadoBFvenc 
 DROP PROCEDURE Free_Running.AfiliadoUsoDist
-DROP PROCEDURE Free_Running.EspMasCanc
+DROP VIEW Free_Running.vistaAfiliadoUsoDist
+DROP PROCEDURE Free_RunningFree_Running.EspMasBFRecetados
+
+
 DROP VIEW Free_Running.turnosPendientes
 DROP PROCEDURE Free_Running.cancelarTurno
 DROP PROCEDURE Free_Running.cancelarTurnosDelDia

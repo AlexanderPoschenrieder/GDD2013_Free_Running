@@ -40,14 +40,14 @@
             this.dvgTop.Location = new System.Drawing.Point(12, 12);
             this.dvgTop.Name = "dvgTop";
             this.dvgTop.ReadOnly = true;
-            this.dvgTop.Size = new System.Drawing.Size(268, 217);
+            this.dvgTop.Size = new System.Drawing.Size(580, 245);
             this.dvgTop.TabIndex = 2;
             // 
             // AfiliadosMasBnoPropios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 273);
+            this.ClientSize = new System.Drawing.Size(604, 269);
             this.Controls.Add(this.dvgTop);
             this.Name = "AfiliadosMasBnoPropios";
             this.Text = "AfiliadosMasBnoPropios";

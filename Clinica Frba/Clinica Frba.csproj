@@ -155,11 +155,11 @@
     <Compile Include="Listados Estadisticos\AfiliadosMasBnoPropios.Designer.cs">
       <DependentUpon>AfiliadosMasBnoPropios.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listados Estadisticos\EspMasBFvencidos.cs">
+    <Compile Include="Listados Estadisticos\EspMasBFRecetados.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listados Estadisticos\EspMasBFvencidos.Designer.cs">
-      <DependentUpon>EspMasBFvencidos.cs</DependentUpon>
+    <Compile Include="Listados Estadisticos\EspMasBFRecetados.Designer.cs">
+      <DependentUpon>EspMasBFRecetados.cs</DependentUpon>
     </Compile>
     <Compile Include="Listados Estadisticos\EspMasCanceladas.cs">
       <SubType>Form</SubType>
@@ -348,8 +348,8 @@
     <EmbeddedResource Include="Listados Estadisticos\AfiliadosMasBnoPropios.resx">
       <DependentUpon>AfiliadosMasBnoPropios.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Listados Estadisticos\EspMasBFvencidos.resx">
-      <DependentUpon>EspMasBFvencidos.cs</DependentUpon>
+    <EmbeddedResource Include="Listados Estadisticos\EspMasBFRecetados.resx">
+      <DependentUpon>EspMasBFRecetados.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados Estadisticos\EspMasCanceladas.resx">
       <DependentUpon>EspMasCanceladas.cs</DependentUpon>

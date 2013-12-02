@@ -40,14 +40,14 @@
             this.dvgTop.Location = new System.Drawing.Point(5, 12);
             this.dvgTop.Name = "dvgTop";
             this.dvgTop.ReadOnly = true;
-            this.dvgTop.Size = new System.Drawing.Size(275, 160);
+            this.dvgTop.Size = new System.Drawing.Size(604, 233);
             this.dvgTop.TabIndex = 1;
             // 
             // EspMasCanceladas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(287, 181);
+            this.ClientSize = new System.Drawing.Size(621, 257);
             this.Controls.Add(this.dvgTop);
             this.Name = "EspMasCanceladas";
             this.Text = "EspMasCanceladas";

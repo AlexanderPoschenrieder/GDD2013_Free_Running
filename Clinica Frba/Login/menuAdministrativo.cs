@@ -55,6 +55,13 @@ namespace Clinica_Frba.Login
             this.Hide();
         }
 
+        private void btEstadist_Click(object sender, EventArgs e)
+        {
+            Clinica_Frba.Listados_Estadisticos.Estadisticas ambEst = new Clinica_Frba.Listados_Estadisticos.Estadisticas();
+            ambEst.ShowDialog();
+            this.Hide();
+        }
+
 
 
 

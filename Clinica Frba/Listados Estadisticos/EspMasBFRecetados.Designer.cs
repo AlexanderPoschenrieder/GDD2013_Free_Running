@@ -1,6 +1,6 @@
 ﻿namespace Clinica_Frba.Listados_Estadisticos
 {
-    partial class EspMasBFvencidos
+    partial class EspMasBFRecetados
     {
         /// <summary>
         /// Required designer variable.
@@ -40,16 +40,16 @@
             this.dvgTop.Location = new System.Drawing.Point(12, 28);
             this.dvgTop.Name = "dvgTop";
             this.dvgTop.ReadOnly = true;
-            this.dvgTop.Size = new System.Drawing.Size(268, 217);
+            this.dvgTop.Size = new System.Drawing.Size(585, 217);
             this.dvgTop.TabIndex = 1;
             // 
-            // EspMasBFvencidos
+            // EspMasBFRecetados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 273);
+            this.ClientSize = new System.Drawing.Size(609, 263);
             this.Controls.Add(this.dvgTop);
-            this.Name = "EspMasBFvencidos";
+            this.Name = "EspMasBFRecetados";
             this.Text = "EspMasBFvencidos";
             ((System.ComponentModel.ISupportInitialize)(this.dvgTop)).EndInit();
             this.ResumeLayout(false);

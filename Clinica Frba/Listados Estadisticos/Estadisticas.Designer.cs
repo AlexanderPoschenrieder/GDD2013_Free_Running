@@ -73,7 +73,7 @@
             this.btEspMasBF.Name = "btEspMasBF";
             this.btEspMasBF.Size = new System.Drawing.Size(179, 39);
             this.btEspMasBF.TabIndex = 12;
-            this.btEspMasBF.Text = "Especialidades con mas bono farmacia vencidos";
+            this.btEspMasBF.Text = "Especialidades con mas bono farmacia recetados";
             this.btEspMasBF.UseVisualStyleBackColor = true;
             this.btEspMasBF.Click += new System.EventHandler(this.button4_Click_1);
             // 

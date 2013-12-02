@@ -45,6 +45,7 @@
             this.btEstadist.TabIndex = 13;
             this.btEstadist.Text = "LISTADO ESTADISTICA";
             this.btEstadist.UseVisualStyleBackColor = true;
+            this.btEstadist.Click += new System.EventHandler(this.btEstadist_Click);
             // 
             // btLlegada
             // 

@@ -48,14 +48,20 @@ namespace Clinica_Frba.Listados_Estadisticos
         public void llenardgv(int renglon, SqlDataReader dr)
         {
             dgvTop.Rows[renglon].Cells["Afiliado"].Value = dr[0].ToString();
-            dgvTop.Rows[renglon].Cells["Cantidad"].Value = dr[1].ToString();
+            dgvTop.Rows[renglon].Cells["Nombre"].Value = dr[1].ToString();
+            dgvTop.Rows[renglon].Cells["Apellido"].Value = dr[2].ToString();
+            dgvTop.Rows[renglon].Cells["Mes"].Value = dr[3].ToString();
+            dgvTop.Rows[renglon].Cells["Cantidad"].Value = dr[4].ToString();
         }
 
         public void iniciarDGV()
         {
-            dgvTop.ColumnCount = 2;
+            dgvTop.ColumnCount = 5;
             dgvTop.Columns[0].Name = "Afiliado";
-            dgvTop.Columns[1].Name = "Cantidad";
+            dgvTop.Columns[1].Name = "Nombre";
+            dgvTop.Columns[2].Name = "Apellido";
+            dgvTop.Columns[3].Name = "Mes";
+            dgvTop.Columns[4].Name = "Cantidad";
 
         }
 

@@ -12,9 +12,9 @@ using System.Configuration;
 
 namespace Clinica_Frba.Listados_Estadisticos
 {
-    public partial class EspMasBFvencidos : Form
+    public partial class EspMasBFRecetados : Form
     {
-        public EspMasBFvencidos(DateTime inicio, DateTime fin)
+        public EspMasBFRecetados(DateTime inicio, DateTime fin)
         {
             InitializeComponent();
             iniciarDGV();
@@ -32,7 +32,7 @@ namespace Clinica_Frba.Listados_Estadisticos
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = miConexion;
-                cmd.CommandText = "Free_Running.EspMasCanc";
+                cmd.CommandText = "Free_Running.EspMasBFRecetados";
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlParameter parInicio = cmd.Parameters.Add("@Inicio", SqlDbType.DateTime);
                 parInicio.Value = inicio;
@@ -51,14 +51,18 @@ namespace Clinica_Frba.Listados_Estadisticos
         public void llenardgv(int renglon, SqlDataReader dr)
         {
             dvgTop.Rows[renglon].Cells["Especialidad"].Value = dr[0].ToString();
-            dvgTop.Rows[renglon].Cells["Cantidad"].Value = dr[1].ToString();
+            dvgTop.Rows[renglon].Cells["Nombre"].Value = dr[1].ToString();
+            dvgTop.Rows[renglon].Cells["Mes"].Value = dr[2].ToString();
+            dvgTop.Rows[renglon].Cells["Cantidad"].Value = dr[3].ToString();
         }
 
         public void iniciarDGV()
         {
-            dvgTop.ColumnCount = 2;
+            dvgTop.ColumnCount = 4;
             dvgTop.Columns[0].Name = "Especialidad";
-            dvgTop.Columns[1].Name = "Cantidad";
+            dvgTop.Columns[1].Name = "Nombre";
+            dvgTop.Columns[2].Name = "Mes";
+            dvgTop.Columns[3].Name = "Cantidad";
 
         }
 
