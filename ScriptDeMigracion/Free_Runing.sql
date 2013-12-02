@@ -979,9 +979,10 @@ BEGIN
 
 		DELETE Free_Running.Intentos_Fallidos
 		WHERE Username = @Username;
-
 END
 GO
+
+
 
 
 CREATE PROCEDURE Free_Running.puedeUsarBC @NroAfiliado numeric(18,0), @BC numeric(18,0)
@@ -998,9 +999,10 @@ where BC.Id = @BC and BC.Afiliado_Utiliza is null and
 	   @afilidoCompro - (@afilidoCompro % 100)= @NroAfiliado - (@NroAfiliado % 100))
 	   
 return @rta
-
 END
 GO
+
+
 
 CREATE PROCEDURE Free_Running.existeAgenda 
     @Medico numeric(18, 0)
@@ -1011,7 +1013,6 @@ BEGIN
 		from Free_Running.Agenda A 
 		where(A.Medico = @Medico)
 		order by A.FechaHora_Turno DESC
-
 END
 GO
 
@@ -1023,11 +1024,12 @@ CREATE PROCEDURE Free_Running.EspeMasCanceladas
     @Fin DateTime  
 AS 
 BEGIN
-	select top 5 T.Especialidad_Codigo Especialidad, COUNT(*) Cantidad
+	select top 5 T.Especialidad_Codigo,E.Descripcion,DATENAME(month,T.Fecha) Mes, COUNT(*) Cantidad
 	from Free_Running.Turno_Cancelado TC join Free_Running.Turno T on (TC.Turno_Numero = T.Numero)
+	     join Free_Running.Especialidad E on (T.Especialidad_Codigo = E.Codigo)
 	where ((T.Fecha >= @Inicio) and (T.Fecha <= @Fin))
-	Group by T.Especialidad_Codigo
-	order by 2 DESC
+	Group by T.Especialidad_Codigo,E.Descripcion,DATENAME(month,T.Fecha)
+	order by 4 DESC
 END
 go
 
@@ -1039,54 +1041,68 @@ CREATE PROCEDURE Free_Running.AfiliadoBFvenc
     @Fin DateTime  
 AS 
 BEGIN
-	select top 5 P.Nro_Afiliado Afiliado, COUNT(*) Cantidad
+	select top 5 P.Nro_Afiliado,P.Nombre,P.Apellido, DATENAME(month,BF.Fecha_Vencimiento), COUNT(*) Cantidad
 	from Free_Running.Bono_Farmacia BF join Free_Running.Bono_Farmacia_Vencido V on (V.Bono_Farmacia_Id = BF.Id)
-		 join Free_Running.Paciente P on (BF.Afiliado_Compra = P.Nro_Afiliado)
-	where ((BF.Fecha_Compra >= @Inicio) and (BF.Fecha_Compra <= @Fin))
-	Group by P.Nro_Afiliado
-	order by 2 DESC
+		 join Free_Running.Compra_Bono_Farmacia CBF on (CBF.Bono_Farmacia = BF.Id)
+		 join Free_Running.Paciente P on (CBF.Afiliado_Compra = P.Nro_Afiliado) 
+	where ((BF.Fecha_Vencimiento >= @Inicio) and (BF.Fecha_Vencimiento <= @Fin))
+	Group by P.Nro_Afiliado,P.Nombre,P.Apellido,DATENAME(month,BF.Fecha_Vencimiento)
+	order by 5 DESC
 END
 go
 
 
---------------ver
-CREATE PROCEDURE Free_Running.EspMasCanc
+--------------ver------????????????
+CREATE PROCEDURE Free_Running.EspMasBFRecetados
     @Inicio DateTime,
     @Fin DateTime  
 AS 
 BEGIN
-select top 5 T.Especialidad_Codigo,Count(BF.Id)
+select top 5 T.Especialidad_Codigo,E.Descripcion,DATENAME(month,T.Fecha),Count(BF.Id)
 From Free_Running.Bono_Farmacia BF join Free_Running.Consulta C on (C.Id = BF.Consulta_Id)
 	 join Free_Running.Atencion_Medica AM on (Am.Id = C.Id_Atencion_Medica)
 	 join Free_Running.Llegada_Atencion_Medica LAM on (LAM.Id = AM.Llegada_Id)
 	 join Free_Running.Turno T on (LAM.Turno_Numero=T.Numero)
-where ((BF.Fecha_Compra >= @Inicio) and (BF.Fecha_Compra <= @Fin))
-group by T.Especialidad_Codigo
-Order by 2 DESC
+	 join Free_Running.Especialidad E on (T.Especialidad_Codigo = E.Codigo)
+
+where ((T.Fecha >= @Inicio) and (T.Fecha <= @Fin))
+group by T.Especialidad_Codigo,E.Descripcion,DATENAME(month,T.Fecha)
+Order by 4 DESC
 end
 
 
 go
 
 --------------ver
+
+create view Free_Running.vistaAfiliadoUsoDist
+as
+select Bc.Afiliado_Utiliza,P.Nombre,P.Apellido,CBc.Afiliado_Compra,lam.Fecha_Hs_Llegada fecha
+from Free_Running.Bono_Consulta Bc
+	 join Free_Running.Compra_Bono_Consulta CBc on (BC.Id = CBc.Bono_Consulta)
+	 join Free_Running.Paciente P on (P.Nro_Afiliado = Bc.Afiliado_Utiliza)
+	 join Free_Running.Llegada_Atencion_Medica Lam on (lam.Bono_Consulta = Bc.Id)
+where CBc.Afiliado_Compra<>Bc.Afiliado_Utiliza and Bc.Afiliado_Utiliza is not null
+Union
+select Bf.Afiliado_Utiliza,P.Nombre,P.Apellido,CBf.Afiliado_Compra,am.Fecha_Hs
+from Free_Running.Bono_Farmacia Bf
+	 join Free_Running.Compra_Bono_Farmacia CBf on (Bf.Id = CBf.Bono_Farmacia)
+	 join Free_Running.Paciente P on (P.Nro_Afiliado = Bf.Afiliado_Utiliza)
+	 join Free_Running.Consulta C on (C.Id = Bf.Consulta_Id)
+	 join Free_Running.Atencion_Medica AM on (Am.Id = C.Id_Atencion_Medica)
+where CBf.Afiliado_Compra<>Bf.Afiliado_Utiliza and Bf.Afiliado_Utiliza is not null
+go
+
 CREATE PROCEDURE Free_Running.AfiliadoUsoDist
     @Inicio DateTime,
     @Fin DateTime  
 AS 
 BEGIN
-select top 10 A.Afiliado_Compra, cant
-from(
-select Bc.Afiliado_Compra,Count(Bc.Afiliado_Utiliza) cant
-from Free_Running.Bono_Consulta Bc
-where Bc.Afiliado_Compra<>Bc.Afiliado_Utiliza and ((Bc.Fecha_Compra >= @Inicio) and (Bc.Fecha_Compra <= @Fin))
-group by Bc.Afiliado_Compra
-UNION
-select B.Afiliado_Compra,Count(B.Afiliado_Utiliza) cant
-from Free_Running.Bono_Farmacia B
-where B.Afiliado_Compra<>B.Afiliado_Utiliza and ((B.Fecha_Compra >= @Inicio) and (B.Fecha_Compra <= @Fin))
-group by B.Afiliado_Compra
-)
- A
+select top 10 vA.Afiliado_Utiliza,va.Nombre,va.Apellido,DATENAME(month,va.fecha),COUNT(va.Afiliado_Compra)
+from Free_Running.vistaAfiliadoUsoDist vA
+where ((va.fecha >= @Inicio) and (va.fecha <= @Fin))
+group by vA.Afiliado_Utiliza,va.Nombre,va.Apellido,DATENAME(month,va.fecha)
+order by 5 DESC
 end
 go
 
@@ -1105,6 +1121,9 @@ select p.Plan_Medico as PlanMedico,pm.Precio_Bono_Consulta as PrecioBonoConsulta
 )
 GO
 
+
+
+
 --Trigger para calcular la fecha actual
 CREATE TRIGGER [Free_Running].[insteadInsertTriggerConsulta]
    ON  [Free_Running].[Bono_Consulta]
@@ -1116,8 +1135,9 @@ BEGIN
 	select GETDATE(),i.Plan_Correspondiente,i.Afiliado_Compra,i.Precio
 	from inserted i
 END
-
 GO
+
+
 
 --Guarda la fecha de vencimiento al momento de hacer el insert
 CREATE TRIGGER [Free_Running].[insteadInsertTriggerFarmacia]
@@ -1142,6 +1162,7 @@ BEGIN
 END
 GO
 
+
 --Vista que muestra los turnos no cancelados
 create view Free_Running.turnosPendientes
 as
@@ -1152,6 +1173,8 @@ select * from
 	where tc.id is null
  )
  GO
+ 
+ 
  
  --Funcion para la vista de cancelarTurnos
 CREATE FUNCTION [Free_Running].[turnosDePaciente](@idPaciente int)
@@ -1239,3 +1262,4 @@ BEGIN
 	commit transaction
 END
 GO
+
