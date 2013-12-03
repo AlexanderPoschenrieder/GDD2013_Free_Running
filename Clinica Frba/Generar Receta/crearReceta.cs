@@ -26,7 +26,7 @@ namespace Clinica_Frba.Generar_Receta
         {
             if (Validar.noVacio(tbBF.Text) && Validar.noVacio(tbMedicamento.Text) && Validar.noVacio(tbCant.Text)) 
             { 
-                ;//si puede usarlo
+               
 
                 if (controlar_bono(Convert.ToUInt32(tbBF.Text)) < 5)
                 {
@@ -35,9 +35,18 @@ namespace Clinica_Frba.Generar_Receta
                         if (controlarUtiliza_bono(miAfiliado, Convert.ToUInt32(tbBF.Text)) > 0)
                         {
 
-                            //"insert into Free_Running.Medicamento_por_BonoFarmacia(Bono_Farmacia,Medicamento,Cantidad,Aclaracion_Cantidad)values(,,,"+ aLetra()+")";
-                            //update  miconsulta
+                            SqlConnection miconexion = Conexion.Conectar();
+                            SqlCommand cmdUpdate = new SqlCommand("update Free_Running.Bono_Farmacia set Consulta_Id = "+miconsulta+" where Id = "+Convert.ToUInt32(tbBF.Text), miconexion);
+                            SqlCommand cmdInsert = new SqlCommand("insert into Free_Running.Medicamento_por_BonoFarmacia(Bono_Farmacia,Medicamento,Cantidad,Aclaracion_Cantidad)values(" + Convert.ToUInt32(tbBF.Text) + "," + tbMedicamento.Text + "," + Convert.ToInt32(tbCant.Text) + "," + aLetra(Convert.ToInt32(tbCant.Text)) + ")", miconexion);
+                            using (miconexion)
+                            {
+                                cmdInsert.ExecuteNonQuery();
+                                cmdUpdate.ExecuteNonQuery();
+                                miconexion.Close();
+
+                            }
                             MessageBox.Show(" Medicamento Cargado Correctamente ");
+
                         }
                         else { MessageBox.Show(" Bono Invalido "); }   
 

@@ -28,20 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btReceta = new System.Windows.Forms.Button();
             this.btCancelarT = new System.Windows.Forms.Button();
             this.btRegRes = new System.Windows.Forms.Button();
             this.btAgenda = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // btReceta
-            // 
-            this.btReceta.Location = new System.Drawing.Point(12, 165);
-            this.btReceta.Name = "btReceta";
-            this.btReceta.Size = new System.Drawing.Size(171, 35);
-            this.btReceta.TabIndex = 7;
-            this.btReceta.Text = "RECETA MEDICA";
-            this.btReceta.UseVisualStyleBackColor = true;
             // 
             // btCancelarT
             // 
@@ -60,6 +50,7 @@
             this.btRegRes.TabIndex = 5;
             this.btRegRes.Text = "REGISTRO RESULTADO";
             this.btRegRes.UseVisualStyleBackColor = true;
+            this.btRegRes.Click += new System.EventHandler(this.btRegRes_Click);
             // 
             // btAgenda
             // 
@@ -75,8 +66,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(199, 218);
-            this.Controls.Add(this.btReceta);
+            this.ClientSize = new System.Drawing.Size(199, 171);
             this.Controls.Add(this.btCancelarT);
             this.Controls.Add(this.btRegRes);
             this.Controls.Add(this.btAgenda);
@@ -88,7 +78,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btReceta;
         private System.Windows.Forms.Button btCancelarT;
         private System.Windows.Forms.Button btRegRes;
         private System.Windows.Forms.Button btAgenda;

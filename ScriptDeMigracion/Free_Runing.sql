@@ -1298,3 +1298,72 @@ return @rta
 END
 GO
 
+
+
+CREATE  procedure [dbo].[obtener_Id]
+as 
+begin
+declare @Id numeric(18,0)
+set @Id=(select top 1 Id from Free_Running.Medico order by Id desc)
+return @Id
+end
+go
+
+
+
+
+CREATE  procedure [dbo].[Cantidad_afiliados]
+@Nro_Afiliado numeric (18,0)
+as begin
+declare @result int 
+if(exists(select Nro_Afiliado from Free_Running.Paciente where Nro_Afiliado=@Nro_Afiliado))
+begin
+set @result=1
+end
+else set @result=0
+return @result
+end
+go
+
+
+
+CREATE  procedure [dbo].[Cantidad_profesionales]
+@Id numeric(18,0)
+as begin
+declare @result int 
+if(exists(select Id from Free_Running.Medico where Id=@Id))
+begin
+set @result=1
+end
+else set @result=0
+return @result
+end
+go
+
+
+
+
+
+
+CREATE  procedure [dbo].[profesional_cargado]
+@Documento numeric(18,0)
+as 
+begin
+if((select Id from Free_Running.Medico where Documento=@Documento) is not null)
+return 1
+else return 0
+end
+go
+
+
+
+
+
+CREATE  procedure [dbo].[unicidad_de_datos]
+@Documento numeric(18,0)
+as 
+begin
+if((select Nro_Afiliado from Free_Running.Paciente where Documento=@Documento) is not null)
+return 1
+else return 0
+end
