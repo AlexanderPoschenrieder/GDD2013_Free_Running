@@ -17,11 +17,14 @@ namespace Clinica_Frba.Registro_Resultado_Atencion
         }
 
         public void insertarDatos(String sintomas, String enfermedades){
-            String stringInsert="insert into Free_Running.Consulta(Id_Atencion_Medica,Sintomas,Enfermedades) "+
+            UInt32 idConsulta;
+            String stringInsert = "insert into Free_Running.Consulta(Id_Atencion_Medica,Sintomas,Enfermedades) output @@IDENTITY  " +
                                     "values('{0}','{1}','{2}')";
             miConexion = Conexion.Conectar();
             commandInsert = new SqlCommand(string.Format(stringInsert,idAtencion,sintomas,enfermedades),miConexion);
-            commandInsert.ExecuteNonQuery();
+            idConsulta = (UInt32)commandInsert.ExecuteScalar();
+            Clinica_Frba.Generar_Receta.Receta receta = new Clinica_Frba.Generar_Receta.Receta(idConsulta,idAtencion);
+            receta.ShowDialog();
 
         }
     }

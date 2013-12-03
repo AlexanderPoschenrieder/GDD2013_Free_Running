@@ -143,6 +143,24 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Generar Receta\crearReceta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generar Receta\crearReceta.Designer.cs">
+      <DependentUpon>crearReceta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Generar Receta\Medicamentos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generar Receta\Medicamentos.Designer.cs">
+      <DependentUpon>Medicamentos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Generar Receta\Receta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generar Receta\Receta.Designer.cs">
+      <DependentUpon>Receta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Listados Estadisticos\AfiliadoBFvenc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -295,12 +313,6 @@
     </Compile>
     <Compile Include="Registro Resultado Atencion\ModeloAtencion.cs" />
     <Compile Include="Registro Resultado Atencion\ModeloRegistroResultadoAtencion.cs" />
-    <Compile Include="Generar Receta\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Generar Receta\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Abm de Afiliado\Agregar_Afiliado.resx">
@@ -341,6 +353,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Compra de Bono\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Receta\crearReceta.resx">
+      <DependentUpon>crearReceta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Receta\Medicamentos.resx">
+      <DependentUpon>Medicamentos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Receta\Receta.resx">
+      <DependentUpon>Receta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados Estadisticos\AfiliadoBFvenc.resx">
       <DependentUpon>AfiliadoBFvenc.cs</DependentUpon>

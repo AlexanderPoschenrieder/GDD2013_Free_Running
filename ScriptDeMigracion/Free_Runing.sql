@@ -4,7 +4,6 @@ go
 CREATE SCHEMA Free_Running AUTHORIZATION gd
 GO
 
-
 --///////////////////////////////////////////CREACION TABLAS///////////////////////////////////////////--
 
 
@@ -1260,6 +1259,42 @@ BEGIN
 		and tc.Id is null
 		and t.Medico_Id=@idMedico
 	commit transaction
+END
+GO
+
+
+create procedure controlar_cant_medicamentos
+@bono numeric(18,0)
+as begin
+return (select COUNT(*) from Free_Running.Medicamento_por_BonoFarmacia  where (Bono_Farmacia= @bono))
+end
+
+go
+
+create procedure afiliadoAtencionMedica
+ @atencionMedica int
+as begin
+return (select L.Nro_Afiliado
+from Free_Running.Atencion_Medica AM
+	 join Free_Running.Llegada_Atencion_Medica L on (AM.Llegada_Id = L.Id)
+where @atencionMedica = AM.Id)
+end
+
+
+CREATE PROCEDURE Free_Running.puedeUsarBF @NroAfiliado numeric(18,0), @Bf numeric(18,0)
+AS 
+BEGIN
+declare @rta int, @afilidoCompro numeric(18,0)
+
+set @afilidoCompro = (select CBf.Afiliado_Compra from Free_Running.Compra_Bono_Farmacia CBf where CBf.Bono_Farmacia = @Bf)
+
+set @rta = (select COUNT(*) 
+		   from Free_Running.Bono_Farmacia Bf 
+where Bf.Id = @Bf and Bf.Afiliado_Utiliza is null and
+	  Bf.Plan_Correspondiente = (select P.Plan_Medico from Free_Running.Paciente P where P.Nro_Afiliado = @NroAfiliado) and
+	   @afilidoCompro - (@afilidoCompro % 100)= @NroAfiliado - (@NroAfiliado % 100))
+	   
+return @rta
 END
 GO
 

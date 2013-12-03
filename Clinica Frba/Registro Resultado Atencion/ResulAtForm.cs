@@ -29,6 +29,7 @@ namespace Clinica_Frba.Registro_Resultado_Atencion
             {
                 miModelo.insertarDatos(tbSintomas.Text, tbEnfermedades.Text);
                 MessageBox.Show("Los datos han sido ingresados");
+
                 this.Close();
             }
         }

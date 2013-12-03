@@ -7,13 +7,13 @@ using System.Data.SqlTypes;
 
 namespace Clinica_Frba.Registro_Resultado_Atencion
 {
-    class ModeloAtencion
+    public class ModeloAtencion
     {
         DateTime fecha = DateTime.Today;
         SqlConnection miConexion;
         SqlCommand commandInsert;
 
-        int llegadaId;
+        public int llegadaId;
 
         public ModeloAtencion(int idLlegada) {
             llegadaId = idLlegada;
@@ -29,5 +29,6 @@ namespace Clinica_Frba.Registro_Resultado_Atencion
             miConexion.Close();
             return (int)idAtencion;
         }
+
     }
 }
