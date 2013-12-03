@@ -27,7 +27,7 @@ namespace Clinica_Frba.Login
             }
             if (misFuncionalidades.Contains("ROL")) { } else { btRol.Visible = false; }
             if (misFuncionalidades.Contains("AFILIADO")) { } else { btAfiliado.Visible = false; }
-            if (misFuncionalidades.Contains("PROFECIONAL")) { } else { btProf.Visible = false; }
+            if (misFuncionalidades.Contains("PROFESIONAL")) { } else { btProf.Visible = false; }
             if (misFuncionalidades.Contains("COMPRA_BONO")) { } else { btCompra.Visible = false; }
             if (misFuncionalidades.Contains("PEDIDO_TURNO")) { } else { btPedido.Visible = false; }
             if (misFuncionalidades.Contains("LLEGADA_ATENCION_MEDICA")) { } else { this.btLlegada.Visible = false; }
@@ -61,6 +61,14 @@ namespace Clinica_Frba.Login
             ambEst.ShowDialog();
             this.Hide();
         }
+
+        private void btProf_Click(object sender, EventArgs e)
+        {
+            Clinica_Frba.Abm_de_Profesional.Menu_Profesional abmProf = new Clinica_Frba.Abm_de_Profesional.Menu_Profesional();
+            abmProf.ShowDialog();
+
+        }
+
 
 
 

@@ -78,6 +78,30 @@
     <Compile Include="Abm de Afiliado\Modificar_Afiliado.Designer.cs">
       <DependentUpon>Modificar_Afiliado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm de Profesional\Agregar_Profesional.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm de Profesional\Agregar_Profesional.Designer.cs">
+      <DependentUpon>Agregar_Profesional.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm de Profesional\Eliminar_Profesional.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm de Profesional\Eliminar_Profesional.Designer.cs">
+      <DependentUpon>Eliminar_Profesional.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm de Profesional\Menu_Profesional.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm de Profesional\Menu_Profesional.Designer.cs">
+      <DependentUpon>Menu_Profesional.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm de Profesional\Modificar_Profesional.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm de Profesional\Modificar_Profesional.Designer.cs">
+      <DependentUpon>Modificar_Profesional.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm de Rol\ABM_ROL.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +131,12 @@
     </Compile>
     <Compile Include="Abm de Rol\ModificarRolFunciones.Designer.cs">
       <DependentUpon>ModificarRolFunciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Calendario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Calendario.Designer.cs">
+      <DependentUpon>Calendario.cs</DependentUpon>
     </Compile>
     <Compile Include="Cancelar Atencion\CancelarAtencionPaciente.cs">
       <SubType>Form</SubType>
@@ -142,6 +172,11 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GD2C2013DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD2C2013DataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Generar Receta\crearReceta.cs">
       <SubType>Form</SubType>
@@ -281,12 +316,6 @@
     <Compile Include="Abm de Afiliado\Menu_Afiliado.Designer.cs">
       <DependentUpon>Menu_Afiliado.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm de Profesional\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm de Profesional\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Abm de Especialidades Medicas\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -327,6 +356,18 @@
     <EmbeddedResource Include="Abm de Afiliado\Menu_Afiliado.resx">
       <DependentUpon>Menu_Afiliado.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm de Profesional\Agregar_Profesional.resx">
+      <DependentUpon>Agregar_Profesional.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm de Profesional\Eliminar_Profesional.resx">
+      <DependentUpon>Eliminar_Profesional.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm de Profesional\Menu_Profesional.resx">
+      <DependentUpon>Menu_Profesional.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm de Profesional\Modificar_Profesional.resx">
+      <DependentUpon>Modificar_Profesional.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm de Rol\ABM_ROL.resx">
       <DependentUpon>ABM_ROL.cs</DependentUpon>
     </EmbeddedResource>
@@ -341,6 +382,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm de Rol\ModificarRolFunciones.resx">
       <DependentUpon>ModificarRolFunciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Calendario.resx">
+      <DependentUpon>Calendario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Cancelar Atencion\CancelarAtencionPaciente.resx">
       <DependentUpon>CancelarAtencionPaciente.cs</DependentUpon>
@@ -430,6 +474,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="app.config" />
+    <None Include="GD2C2013DataSet.xsc">
+      <DependentUpon>GD2C2013DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2013DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD2C2013DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD2C2013DataSet.xss">
+      <DependentUpon>GD2C2013DataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

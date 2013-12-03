@@ -81,8 +81,9 @@
             this.btProf.Name = "btProf";
             this.btProf.Size = new System.Drawing.Size(194, 32);
             this.btProf.TabIndex = 9;
-            this.btProf.Text = "PROFECIONAL";
+            this.btProf.Text = "PROFESIONAL";
             this.btProf.UseVisualStyleBackColor = true;
+            this.btProf.Click += new System.EventHandler(this.btProf_Click);
             // 
             // btAfiliado
             // 

@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Data.SqlClient;//necesario para establecer la conexion
+using System.Configuration;//necesario para establecer la conexion
+using Clinica_Frba.Properties;
 
 
 
@@ -109,6 +113,76 @@ namespace Clinica_Frba
                 case -1:
                     throw new Exception("El afiliado no está activo");
             }            
+        }
+
+        public static bool existe_afiliado(string campo, long Parametro, string procedimiento)
+        {
+            bool result;
+
+            SqlConnection miconexion = Conexion.Conectar();
+
+            SqlCommand cmd = new SqlCommand("dbo." + procedimiento, miconexion);
+
+            using (miconexion)
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@" + campo, Parametro);
+
+                cmd.Parameters.Add("@RETURN_VALUE", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;//Valor devuelto
+
+                cmd.ExecuteNonQuery();
+
+                int resultado = (int)cmd.Parameters["@RETURN_VALUE"].Value;
+                miconexion.Close();
+
+                if (resultado == 1)
+                {
+                    result = true;
+                }
+
+                else result = false;
+
+                return result;
+            }
+        }
+
+
+        public static bool IsValidEmail(string strMailAddress)
+        {
+
+            return Regex.IsMatch(strMailAddress, @"^(?("")("".+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-Z])@))" + @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,6}))$");
+
+        }
+
+        public static bool integridad_de_datos(long Documento, string procedimiento)
+        {
+
+            SqlConnection miconexion = Conexion.Conectar();
+
+            SqlCommand cmd = new SqlCommand("dbo." + procedimiento, miconexion);
+            using (miconexion)
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                //parametros si los hubieran
+
+                cmd.Parameters.AddWithValue("@Documento", Documento);
+                cmd.Parameters.Add("@RETURN_VALUE", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;//Valor devuelto
+
+                cmd.ExecuteNonQuery();
+
+                int valorDeVerdad = (int)cmd.Parameters["@RETURN_VALUE"].Value;
+                miconexion.Close();
+
+                if (valorDeVerdad == 1)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
         }
 
     }
