@@ -18,14 +18,7 @@ namespace Clinica_Frba.Cancelar_Atencion
             miModelo = new ModeloCancelarAtencion(id_Paciente);
             InitializeComponent();
             dataGridTurnos.MultiSelect = false;
-
-            while(miModelo.dr_turnos.Read()){
-                dataGridTurnos.Rows.Add(new Object[]{
-                    miModelo.dr_turnos.GetDateTime(1),
-                    miModelo.dr_turnos.GetString(2),
-                    Convert.ToInt64(miModelo.dr_turnos.GetValue(0))
-                });
-            }
+            llenarTurnos();
             dataGridTurnos.Columns["idTurno"].Visible = false;
         }
 
@@ -42,7 +35,27 @@ namespace Clinica_Frba.Cancelar_Atencion
                 long idTurno = (long)dataGridTurnos.Rows[index].Cells["idTurno"].Value;
                 MotivoCancelacionForm ventanaMotivo = new MotivoCancelacionForm(idTurno);
                 ventanaMotivo.ShowDialog();
+                actualizarGrid();               
             }
+        }
+
+        private void llenarTurnos(){
+            while (miModelo.dr_turnos.Read())
+            {
+                dataGridTurnos.Rows.Add(new Object[]{
+                    miModelo.dr_turnos.GetDateTime(1),
+                    miModelo.dr_turnos.GetString(2),
+                    Convert.ToInt64(miModelo.dr_turnos.GetValue(0))
+                });
+            }
+        }
+
+        //actualiza la grilla para que el turno anteriormente cancelado no aparezca
+        private void actualizarGrid() {
+            dataGridTurnos.Rows.Clear();
+            miModelo.obtenerTurnos();
+            llenarTurnos();        
+        
         }
     }
 }

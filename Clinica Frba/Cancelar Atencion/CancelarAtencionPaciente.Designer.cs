@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.dataGridTurnos = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.botonSeleccionar = new System.Windows.Forms.Button();
             this.Turno_Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Especialidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idTurno = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.botonSeleccionar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridTurnos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,8 +48,26 @@
             this.dataGridTurnos.Location = new System.Drawing.Point(14, 33);
             this.dataGridTurnos.Name = "dataGridTurnos";
             this.dataGridTurnos.ReadOnly = true;
-            this.dataGridTurnos.Size = new System.Drawing.Size(272, 110);
+            this.dataGridTurnos.Size = new System.Drawing.Size(247, 110);
             this.dataGridTurnos.TabIndex = 0;
+            // 
+            // Turno_Fecha
+            // 
+            this.Turno_Fecha.HeaderText = "Fecha";
+            this.Turno_Fecha.Name = "Turno_Fecha";
+            this.Turno_Fecha.ReadOnly = true;
+            // 
+            // Especialidad
+            // 
+            this.Especialidad.HeaderText = "Especialidad";
+            this.Especialidad.Name = "Especialidad";
+            this.Especialidad.ReadOnly = true;
+            // 
+            // idTurno
+            // 
+            this.idTurno.HeaderText = "idTurno";
+            this.idTurno.Name = "idTurno";
+            this.idTurno.ReadOnly = true;
             // 
             // label1
             // 
@@ -70,29 +88,11 @@
             this.botonSeleccionar.UseVisualStyleBackColor = true;
             this.botonSeleccionar.Click += new System.EventHandler(this.botonSeleccionar_Click);
             // 
-            // Turno_Fecha
-            // 
-            this.Turno_Fecha.HeaderText = "Fecha";
-            this.Turno_Fecha.Name = "Turno_Fecha";
-            this.Turno_Fecha.ReadOnly = true;
-            // 
-            // Especialidad
-            // 
-            this.Especialidad.HeaderText = "Especialidad";
-            this.Especialidad.Name = "Especialidad";
-            this.Especialidad.ReadOnly = true;
-            // 
-            // idTurno
-            // 
-            this.idTurno.HeaderText = "idTurno";
-            this.idTurno.Name = "idTurno";
-            this.idTurno.ReadOnly = true;
-            // 
             // CancelarAtencionPaciente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(325, 191);
+            this.ClientSize = new System.Drawing.Size(284, 191);
             this.Controls.Add(this.botonSeleccionar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridTurnos);

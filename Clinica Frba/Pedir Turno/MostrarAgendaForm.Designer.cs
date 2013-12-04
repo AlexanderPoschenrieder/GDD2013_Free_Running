@@ -61,7 +61,7 @@
             this.horariosDisponibles.Location = new System.Drawing.Point(230, 36);
             this.horariosDisponibles.Name = "horariosDisponibles";
             this.horariosDisponibles.ReadOnly = true;
-            this.horariosDisponibles.Size = new System.Drawing.Size(181, 260);
+            this.horariosDisponibles.Size = new System.Drawing.Size(145, 260);
             this.horariosDisponibles.TabIndex = 6;
             this.horariosDisponibles.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.horariosDisponibles_CellMouseClick);
             // 
@@ -74,7 +74,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(31, 30);
+            this.label1.Location = new System.Drawing.Point(19, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(161, 13);
             this.label1.TabIndex = 7;
@@ -84,7 +84,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(447, 308);
+            this.ClientSize = new System.Drawing.Size(209, 308);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.horariosDisponibles);
             this.Controls.Add(this.botonSeleccionar);

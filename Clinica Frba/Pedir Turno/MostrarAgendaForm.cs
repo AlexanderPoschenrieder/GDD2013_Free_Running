@@ -45,6 +45,7 @@ namespace Clinica_Frba.Pedir_Turno
             InitializeComponent();
             label1.Text = "Seleccione una fecha o un intervalo";
             botonSeleccionar.Enabled = false;
+            miModelo = new ModeloAgenda(nroMedico);
             calendarioDeAgenda.BoldedDates = miModelo.turnos.ToArray<DateTime>();
             
             //Le cargo las acciones correspondientes-----------------------------------------
@@ -103,12 +104,6 @@ namespace Clinica_Frba.Pedir_Turno
         {
             botonSeleccionar.Enabled = true;
         }
-
-
-
-
-
-
 
     }
 }

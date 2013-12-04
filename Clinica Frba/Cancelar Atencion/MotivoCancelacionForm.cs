@@ -66,6 +66,8 @@ namespace Clinica_Frba.Cancelar_Atencion
             stringInsert=stringInsert + armarStringTurno(turnoACancelar, "Paciente");
             commandInsert= new SqlCommand(stringInsert,miConexion);
             commandInsert.ExecuteNonQuery();
+            MessageBox.Show("Su turno ha sido cancelado");
+            this.Close();
         }
 
         private string armarStringTurno(long idTurno,String PacMed) {

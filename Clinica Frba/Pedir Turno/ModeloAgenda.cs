@@ -34,7 +34,7 @@ namespace Clinica_Frba.Pedir_Turno
         {
             nroMedico = nro_Medico;
             turnos = new List<DateTime>();
-            turnosDelMedico();
+            agendaDelMedico();
         }
         //
         //Metodos para ABM Cancelar Atencion Medico
@@ -49,7 +49,17 @@ namespace Clinica_Frba.Pedir_Turno
             }
             (new Clinica_Frba.Cancelar_Atencion.MotivoCancelacionForm(diasACancelar,nroMedico)).ShowDialog();
         }
+        public void agendaDelMedico() {
+            miConexion = Conexion.Conectar();             //selecciono los horarios de la agenda del medico
+            consultaTurnos = new SqlCommand(string.Format("select a.FechaHora_Turno from Free_Running.agenda a where a.Medico = {0}", nroMedico), miConexion);
+            drTurnos = consultaTurnos.ExecuteReader();
 
+            while (drTurnos.Read())
+            {
+                turnos.Add(Convert.ToDateTime(drTurnos[0]));
+            }
+        
+        }
         //
         //Metodos para ABM Pedir turno
         //
