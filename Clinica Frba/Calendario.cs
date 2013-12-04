@@ -24,7 +24,8 @@ namespace Clinica_Frba
             this.Close();
         }
 
-        private void monthCalendar1_DockChanged(object sender, EventArgs e)
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
             fecsha_nac.Text = monthCalendar1.SelectionStart.ToString(); 
         }

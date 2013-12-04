@@ -1,6 +1,6 @@
 ﻿namespace Clinica_Frba.Abm_de_Afiliado
 {
-    partial class Choice_window1
+    partial class Ventana_Desicion
     {
         /// <summary>
         /// Required designer variable.
@@ -35,42 +35,42 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(155, 61);
+            this.button2.Location = new System.Drawing.Point(268, 64);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
+            this.button2.TabIndex = 8;
             this.button2.Text = "No";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(48, 61);
+            this.button1.Location = new System.Drawing.Point(143, 64);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
+            this.button1.TabIndex = 7;
             this.button1.Text = "Si";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(45, 26);
+            this.label1.Location = new System.Drawing.Point(127, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(200, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "¿Desea dar de alta tambien a sus hijo/s?";
+            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.TabIndex = 6;
             // 
-            // Choice_window1
+            // Ventana_Desicion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(276, 116);
+            this.ClientSize = new System.Drawing.Size(470, 116);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
-            this.Name = "Choice_window1";
-            this.Text = "Choice_window1";
+            this.Name = "Ventana_Desicion";
+            this.Text = "Ventana_Desicion";
             this.ResumeLayout(false);
             this.PerformLayout();
 

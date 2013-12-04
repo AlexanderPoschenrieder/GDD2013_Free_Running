@@ -9,15 +9,26 @@ using System.Windows.Forms;
 
 namespace Clinica_Frba.Abm_de_Afiliado
 {
-    public partial class Choice_window1 : Form
+    public partial class Ventana_Desicion : Form
     {
-        public Choice_window1()
+        public bool Bandera;
+
+        public Ventana_Desicion(string pregunta)
         {
             InitializeComponent();
+            Bandera = false;
+            label1.Text = pregunta;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Bandera = true;
+            this.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            Bandera = false;
             this.Close();
         }
     }

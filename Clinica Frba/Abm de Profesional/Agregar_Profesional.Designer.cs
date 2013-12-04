@@ -409,7 +409,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox FechaNactxt;
         private System.Windows.Forms.TextBox Mailtxt;
         private System.Windows.Forms.TextBox Teltxt;
         private System.Windows.Forms.TextBox Directxt;
@@ -417,5 +416,6 @@
         private System.Windows.Forms.TextBox Apellidotxt;
         private System.Windows.Forms.TextBox Nombretxt;
         private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.TextBox FechaNactxt;
     }
 }

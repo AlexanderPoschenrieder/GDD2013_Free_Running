@@ -1367,3 +1367,35 @@ if((select Nro_Afiliado from Free_Running.Paciente where Documento=@Documento) i
 return 1
 else return 0
 end
+go
+
+
+create PROCEDURE [dbo].[Obtener_Nro_afiliado]
+as 
+begin
+
+return (select top 1 Nro_Afiliado from Free_Running.Paciente order by Nro_Afiliado desc )
+end
+go
+
+
+create procedure [dbo].[numero_principal]
+as 
+begin
+declare @Nro_Anterior numeric(18,0)
+declare @Retorno numeric(18,0)
+
+set @Nro_Anterior=(select top 1 Nro_Afiliado from Free_Running.Paciente order by Nro_Afiliado desc)
+set @Retorno = (@Nro_Anterior-(@Nro_Anterior%100)+100)
+return @Retorno
+end
+go
+
+create procedure [dbo].[get_NroAfiliado]
+as 
+begin
+declare @Nro_afiliado numeric(18,0)
+set @Nro_afiliado= (select top 1 Nro_Afiliado from Free_Running.Paciente order by Nro_Afiliado desc)
+
+return @Nro_afiliado
+end

@@ -34,7 +34,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(66, 193);
+            this.button1.Location = new System.Drawing.Point(77, 193);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(69, 23);
             this.button1.TabIndex = 8;
@@ -46,16 +46,16 @@
             // 
             this.monthCalendar1.Location = new System.Drawing.Point(19, 18);
             this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 7;
-            this.monthCalendar1.DockChanged += new System.EventHandler(this.monthCalendar1_DockChanged);
+            this.monthCalendar1.TabIndex = 9;
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             // 
             // Calendario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(222, 234);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.monthCalendar1);
+            this.Controls.Add(this.button1);
             this.Name = "Calendario";
             this.Text = "Calendario";
             this.ResumeLayout(false);
