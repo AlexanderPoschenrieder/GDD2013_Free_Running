@@ -22,6 +22,7 @@ namespace Clinica_Frba.Pedir_Turno
             generarComboEspecialidades();
             gridResultados.MultiSelect = false;
             gridResultados.ReadOnly = true;
+            gridResultados.Columns["idMedico"].Visible = false;
         }
 
         private void generarComboEspecialidades()
@@ -46,7 +47,7 @@ namespace Clinica_Frba.Pedir_Turno
                     
                 });
             }
-            gridResultados.Columns["idMedico"].Visible = false;
+          
             gridResultados.Update();
         }
 
@@ -71,11 +72,15 @@ namespace Clinica_Frba.Pedir_Turno
             }
             else 
             {
-                int index = (int)gridResultados.SelectedCells[0].RowIndex;
-                UInt32 idMedico = Convert.ToUInt32(gridResultados.Rows[index].Cells["idMedico"].Value);
-                MostrarAgendaForm ventana = new MostrarAgendaForm(idMedico,nroPaciente);
-                ventana.ShowDialog();
-                this.Close();
+                //Si hay excepcion no abre
+                try
+                {
+                    int index = (int)gridResultados.SelectedCells[0].RowIndex;
+                    UInt32 idMedico = Convert.ToUInt32(gridResultados.Rows[index].Cells["idMedico"].Value);
+                    MostrarAgendaForm ventana = new MostrarAgendaForm(idMedico, nroPaciente);
+                    ventana.ShowDialog();
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
             };
         }
 

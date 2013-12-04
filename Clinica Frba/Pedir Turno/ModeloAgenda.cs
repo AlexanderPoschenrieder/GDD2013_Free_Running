@@ -34,7 +34,7 @@ namespace Clinica_Frba.Pedir_Turno
         {
             nroMedico = nro_Medico;
             turnos = new List<DateTime>();
-            turnosDelMedico();            
+            turnosDelMedico();
         }
         //
         //Metodos para ABM Cancelar Atencion Medico
@@ -56,7 +56,7 @@ namespace Clinica_Frba.Pedir_Turno
         public void turnosDelMedico()
         {
             miConexion = Conexion.Conectar();             //selecciono los horarios de la agenda del medico que...no esten relacionados con un turno o... que si lo estan, entonces que esten cancelados
-            consultaTurnos = new SqlCommand(string.Format("select A.FechaHora_Turno from Free_Running.Agenda A left join Free_Running.Turno T on (T.Fecha = A.FechaHora_Turno)where (T.Numero is null or exists (select * from Free_Running.Turno_Cancelado TC where TC.Turno_Numero = T.Numero and TC.Tipo <> 'Sistema')) and  getdate() < A.FechaHora_Turno and A.Medico = {0}", nroMedico), miConexion);
+            consultaTurnos = new SqlCommand(string.Format("select * from Free_Running.turnosLibresMedico({0})", nroMedico), miConexion);
             drTurnos = consultaTurnos.ExecuteReader();
             
             while (drTurnos.Read())
@@ -64,27 +64,9 @@ namespace Clinica_Frba.Pedir_Turno
                turnos.Add(Convert.ToDateTime(drTurnos[0]));
             }
 
-            if (turnos.Count() == 0) { MessageBox.Show("No hay Turnos Disponibles"); }
+            if (turnos.Count() == 0) { throw new Exception("No hay turnos disponibles para este profesional"); }
             drTurnos.Close();
-        }
 
-
-        //no va
-        public void quitarTurnosOcupados() { 
-           String stringComando="select Free_Running.turnoLibre('{0}',{1})";
-           SqlCommand ComandoChequearTurno;
-           List<DateTime> turnosAux= new List<DateTime>(); 
-
-           miConexion = Conexion.Conectar();
-           foreach (DateTime turno in turnos)
-           {
-
-               ComandoChequearTurno = new SqlCommand(string.Format(stringComando, turno.ToString("yyyy-dd-MM HH:mm:ss"), nroMedico),miConexion);
-               if (Convert.ToInt16(ComandoChequearTurno.ExecuteScalar()) == 1) {
-                   turnosAux.Add(turno);
-               }
-           }
-           turnos = turnosAux;
         }
 
         public void horariosDelDia(DateTime dia)

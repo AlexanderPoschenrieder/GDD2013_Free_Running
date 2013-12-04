@@ -14,7 +14,7 @@ namespace Clinica_Frba.Pedir_Turno
         ModeloAgenda miModelo;
         DateTime diaSeleccionado;
 
-        //Constructor para la ABM  Cancelar Consulta Medico
+        //Constructor para la ABM  Pedir Turno
         public MostrarAgendaForm(UInt32 nroMedico,int nro_Paciente)
         {
             InitializeComponent();
@@ -24,11 +24,20 @@ namespace Clinica_Frba.Pedir_Turno
             //---------------------------------------------------------------
             
             calendarioDeAgenda.MaxSelectionCount = 1;//limito la seleccion a un dia
-            miModelo = new ModeloAgenda(nroMedico,nro_Paciente);
-            calendarioDeAgenda.BoldedDates = miModelo.turnos.ToArray<DateTime>();
-            //Le cargo las acciones correspondientes-----------------------------------------
-            this.calendarioDeAgenda.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.calendarioDeAgenda_DateSelected);
-            this.botonSeleccionar.Click += new System.EventHandler(this.botonSeleccionar_Click);
+            
+            //Pruebo que tenga sentido abrir la seleccion de turnos, si no hay turnos hay excepcion
+            try
+            {
+                miModelo = new ModeloAgenda(nroMedico, nro_Paciente);
+                calendarioDeAgenda.BoldedDates = miModelo.turnos.ToArray<DateTime>();
+                //Le cargo las acciones correspondientes-----------------------------------------
+                this.calendarioDeAgenda.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.calendarioDeAgenda_DateSelected);
+                this.botonSeleccionar.Click += new System.EventHandler(this.botonSeleccionar_Click);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
 //Constructor para la ABM cancelar Turno Medico
@@ -36,7 +45,6 @@ namespace Clinica_Frba.Pedir_Turno
             InitializeComponent();
             label1.Text = "Seleccione una fecha o un intervalo";
             botonSeleccionar.Enabled = false;
-            miModelo = new ModeloAgenda(nroMedico);
             calendarioDeAgenda.BoldedDates = miModelo.turnos.ToArray<DateTime>();
             
             //Le cargo las acciones correspondientes-----------------------------------------
@@ -45,7 +53,7 @@ namespace Clinica_Frba.Pedir_Turno
             
         }
 
-//Accones para la ABM pedir Turno------------------------------------------------------
+//Acciones para la ABM pedir Turno------------------------------------------------------
         private void calendarioDeAgenda_DateSelected(object sender, DateRangeEventArgs e)
         {
             diaSeleccionado= calendarioDeAgenda.SelectionRange.Start;
