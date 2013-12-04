@@ -1,7 +1,6 @@
 ------ELIMINAR TODO
 
 
-DROP TABLE Free_Running.Agenda_Dia
 DROP TABLE Free_Running.Agenda
 DROP TABLE Free_Running.Bono_Consulta_Cancelado
 DROP TABLE Free_Running.Bono_Farmacia_Vencido
@@ -59,4 +58,6 @@ DROP PROCEDURE Free_Running.InsertarPrincipal
 DROP PROCEDURE Free_Running.usuarioExisteActivo
 DROP FUNCTION Free_Running.suIdAfiliado
 DROP PROCEDURE Free_Running.puedeUsarBC
+DROP PROCEDURE Free_Running.EspMasBFRecetados
+DROP PROCEDURE Free_Running.puedeUsarBF
 DROP schema Free_Running

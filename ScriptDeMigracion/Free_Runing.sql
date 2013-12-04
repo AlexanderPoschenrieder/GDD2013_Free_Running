@@ -1401,8 +1401,3 @@ set @Nro_afiliado= (select top 1 Nro_Afiliado from Free_Running.Paciente order b
 return @Nro_afiliado
 end
 
-
-select A.FechaHora_Turno from Free_Running.Agenda A left join Free_Running.Turno T on (T.Fecha = A.FechaHora_Turno)where (T.Numero is null or exists (select * from Free_Running.Turno_Cancelado TC where TC.Turno_Numero = T.Numero and TC.Tipo <> 'Sistema' ))and getdate() < A.FechaHora_Turno and A.Medico = 3
-
-select *
-from Free_Running.Medico
