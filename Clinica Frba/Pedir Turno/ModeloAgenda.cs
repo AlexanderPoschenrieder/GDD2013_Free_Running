@@ -5,6 +5,7 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Data.Sql;
 using System.Globalization;
+using System.Windows.Forms;
 
 namespace Clinica_Frba.Pedir_Turno
 {
@@ -24,12 +25,13 @@ namespace Clinica_Frba.Pedir_Turno
             nroPaciente = nro_Paciente;
             turnos=new List<DateTime>();
             turnosDelMedico();
-            quitarTurnosOcupados();
+            //quitarTurnosOcupados();
 
         }
 
         //Constructor para la ABM Cancelar Turno Medico
-        public ModeloAgenda(UInt32 nro_Medico) {
+        public ModeloAgenda(UInt32 nro_Medico) 
+        {
             nroMedico = nro_Medico;
             turnos = new List<DateTime>();
             turnosDelMedico();            
@@ -53,41 +55,21 @@ namespace Clinica_Frba.Pedir_Turno
         //
         public void turnosDelMedico()
         {
-            miConexion = Conexion.Conectar();
-            consultaTurnos = new SqlCommand(string.Format("select A.Fecha_Inicio,A.Fecha_Fin,AD.Dia_Semana,AD.Hora_Inicio,AD.Hora_Fin from Free_Running.Agenda A join Free_Running.Agenda_Dia AD on (A.Id = AD.Agenda) where A.Medico={0}", nroMedico), miConexion);
+            miConexion = Conexion.Conectar();             //selecciono los horarios de la agenda del medico que...no esten relacionados con un turno o... que si lo estan, entonces que esten cancelados
+            consultaTurnos = new SqlCommand(string.Format("select A.FechaHora_Turno from Free_Running.Agenda A left join Free_Running.Turno T on (T.Fecha = A.FechaHora_Turno)where (T.Numero is null or exists (select * from Free_Running.Turno_Cancelado TC where TC.Turno_Numero = T.Numero and TC.Tipo <> 'Sistema')) and  getdate() < A.FechaHora_Turno and A.Medico = {0}", nroMedico), miConexion);
             drTurnos = consultaTurnos.ExecuteReader();
             
             while (drTurnos.Read())
             {
-
-                DateTime FechaInicio = Convert.ToDateTime(drTurnos[0]);
-                DateTime FechaFin = Convert.ToDateTime(drTurnos[1]);
-                DateTime HoraInicio = Convert.ToDateTime(Convert.ToString(drTurnos[3]));
-                DateTime HoraFin = Convert.ToDateTime(Convert.ToString(drTurnos[4]));
-                String DiaSemana = Convert.ToString(drTurnos[2]);
-                DateTime FechaRec;
-                DateTime HoraRec;
-                FechaRec = (FechaInicio>DateTime.Today)?FechaInicio:DateTime.Today;
-
-                while (FechaRec <= FechaFin)
-                {             
-                    while (String.Compare(FechaRec.ToString("dddd", new CultureInfo("es-ES")), DiaSemana, true) == 0)
-                    {
-                        HoraRec = HoraInicio;
-                        while (HoraRec <= HoraFin)
-                        {                            
-                            turnos.Add(new DateTime(FechaRec.Year,FechaRec.Month,FechaRec.Day,HoraRec.Hour,HoraRec.Minute,0));
-                            HoraRec = HoraRec.AddMinutes(30);
-                        }
-
-                        FechaRec = FechaRec.AddDays(1);
-                    }
-                    FechaRec = FechaRec.AddDays(1);
-                }
+               turnos.Add(Convert.ToDateTime(drTurnos[0]));
             }
+
+            if (turnos.Count() == 0) { MessageBox.Show("No hay Turnos Disponibles"); }
             drTurnos.Close();
         }
 
+
+        //no va
         public void quitarTurnosOcupados() { 
            String stringComando="select Free_Running.turnoLibre('{0}',{1})";
            SqlCommand ComandoChequearTurno;
@@ -110,7 +92,8 @@ namespace Clinica_Frba.Pedir_Turno
            listaHorarios = turnos.FindAll(turno => turno.Date == dia.Date);
         }
 
-        public void reservarTurno(DateTime fecha) {
+        public void reservarTurno(DateTime fecha) 
+        {
             (new FinalizarPedidoTurno(fecha,nroMedico,nroPaciente)).ShowDialog();
         }
     }

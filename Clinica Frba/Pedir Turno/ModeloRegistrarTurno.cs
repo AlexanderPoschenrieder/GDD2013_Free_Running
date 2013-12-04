@@ -32,8 +32,8 @@ namespace Clinica_Frba.Pedir_Turno
 
         public void generarTurno(int idEspec) {
             String stringInsert= string.Format(
-                "insert into Free_Running.Turno(Fecha,Nro_Afiliado,Especialidad_Codigo,Medico_Id)"+
-                "values(cast('{0}' as DateTime),{1},{2},{3})",
+                "insert into Free_Running.Turno(Fecha,Nro_Afiliado,Especialidad_Codigo,Medico_Id,Numero)"+
+                "values(cast('{0}' as DateTime),{1},{2},{3},(select (MAX(Numero) + 1) from Free_Running.Turno))",
                     fechaHora.ToString("yyyy-dd-MM HH:mm:ss"),
                     nro_paciente,
                     idEspec,

@@ -38,7 +38,7 @@
             // 
             // botonSeleccionar
             // 
-            this.botonSeleccionar.Location = new System.Drawing.Point(12, 206);
+            this.botonSeleccionar.Location = new System.Drawing.Point(62, 252);
             this.botonSeleccionar.Name = "botonSeleccionar";
             this.botonSeleccionar.Size = new System.Drawing.Size(75, 23);
             this.botonSeleccionar.TabIndex = 5;
@@ -47,18 +47,21 @@
             // 
             // calendarioDeAgenda
             // 
-            this.calendarioDeAgenda.Location = new System.Drawing.Point(5, 36);
+            this.calendarioDeAgenda.Location = new System.Drawing.Point(18, 63);
             this.calendarioDeAgenda.Name = "calendarioDeAgenda";
             this.calendarioDeAgenda.TabIndex = 4;
             // 
             // horariosDisponibles
             // 
+            this.horariosDisponibles.AllowUserToAddRows = false;
+            this.horariosDisponibles.AllowUserToDeleteRows = false;
             this.horariosDisponibles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.horariosDisponibles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.HoraInicio});
-            this.horariosDisponibles.Location = new System.Drawing.Point(206, 36);
+            this.horariosDisponibles.Location = new System.Drawing.Point(230, 36);
             this.horariosDisponibles.Name = "horariosDisponibles";
-            this.horariosDisponibles.Size = new System.Drawing.Size(144, 150);
+            this.horariosDisponibles.ReadOnly = true;
+            this.horariosDisponibles.Size = new System.Drawing.Size(181, 260);
             this.horariosDisponibles.TabIndex = 6;
             this.horariosDisponibles.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.horariosDisponibles_CellMouseClick);
             // 
@@ -66,11 +69,12 @@
             // 
             this.HoraInicio.HeaderText = "Hora Inicio";
             this.HoraInicio.Name = "HoraInicio";
+            this.HoraInicio.ReadOnly = true;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 11);
+            this.label1.Location = new System.Drawing.Point(31, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(161, 13);
             this.label1.TabIndex = 7;
@@ -80,7 +84,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(192, 241);
+            this.ClientSize = new System.Drawing.Size(447, 308);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.horariosDisponibles);
             this.Controls.Add(this.botonSeleccionar);

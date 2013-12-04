@@ -34,10 +34,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.gridResultados = new System.Windows.Forms.DataGridView();
-            this.SeleccionarButton = new System.Windows.Forms.Button();
             this.NombreProfesional = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idMedico = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SeleccionarButton = new System.Windows.Forms.Button();
             this.botonLimpiar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridResultados)).BeginInit();
             this.SuspendLayout();
@@ -88,6 +88,8 @@
             // 
             // gridResultados
             // 
+            this.gridResultados.AllowUserToAddRows = false;
+            this.gridResultados.AllowUserToDeleteRows = false;
             this.gridResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridResultados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NombreProfesional,
@@ -95,18 +97,9 @@
             this.idMedico});
             this.gridResultados.Location = new System.Drawing.Point(13, 136);
             this.gridResultados.Name = "gridResultados";
-            this.gridResultados.Size = new System.Drawing.Size(267, 118);
+            this.gridResultados.ReadOnly = true;
+            this.gridResultados.Size = new System.Drawing.Size(344, 118);
             this.gridResultados.TabIndex = 5;
-            // 
-            // SeleccionarButton
-            // 
-            this.SeleccionarButton.Location = new System.Drawing.Point(14, 260);
-            this.SeleccionarButton.Name = "SeleccionarButton";
-            this.SeleccionarButton.Size = new System.Drawing.Size(75, 23);
-            this.SeleccionarButton.TabIndex = 6;
-            this.SeleccionarButton.Text = "Seleccionar";
-            this.SeleccionarButton.UseVisualStyleBackColor = true;
-            this.SeleccionarButton.Click += new System.EventHandler(this.SeleccionarButton_Click);
             // 
             // NombreProfesional
             // 
@@ -123,6 +116,16 @@
             this.idMedico.HeaderText = "idMedico";
             this.idMedico.Name = "idMedico";
             // 
+            // SeleccionarButton
+            // 
+            this.SeleccionarButton.Location = new System.Drawing.Point(14, 260);
+            this.SeleccionarButton.Name = "SeleccionarButton";
+            this.SeleccionarButton.Size = new System.Drawing.Size(75, 23);
+            this.SeleccionarButton.TabIndex = 6;
+            this.SeleccionarButton.Text = "Seleccionar";
+            this.SeleccionarButton.UseVisualStyleBackColor = true;
+            this.SeleccionarButton.Click += new System.EventHandler(this.SeleccionarButton_Click);
+            // 
             // botonLimpiar
             // 
             this.botonLimpiar.Location = new System.Drawing.Point(205, 106);
@@ -137,7 +140,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 289);
+            this.ClientSize = new System.Drawing.Size(391, 289);
             this.Controls.Add(this.botonLimpiar);
             this.Controls.Add(this.SeleccionarButton);
             this.Controls.Add(this.gridResultados);

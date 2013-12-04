@@ -13,6 +13,7 @@ namespace Clinica_Frba.Pedir_Turno
     {
         private ModeloBusquedaProfesional miModelo;
         int nroPaciente;
+        
         public BusquedaProfesionalForm(int nro_Paciente)
         {
             miModelo = new ModeloBusquedaProfesional();
