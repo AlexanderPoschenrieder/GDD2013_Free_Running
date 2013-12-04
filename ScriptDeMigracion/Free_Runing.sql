@@ -1370,6 +1370,7 @@ end
 go
 
 
+
 create PROCEDURE [dbo].[Obtener_Nro_afiliado]
 as 
 begin

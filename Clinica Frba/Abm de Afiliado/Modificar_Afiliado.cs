@@ -75,24 +75,44 @@ namespace Clinica_Frba.Abm_de_Afiliado
             }
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (Validar.noVacio(Nombretxt.Text) & Validar.noVacio(Apellidotxt.Text) & Validar.noVacio(Doctxt.Text) & Validar.noVacio(Directxt.Text) & Validar.noVacio(Teltxt.Text) & Validar.noVacio(Mailtxt.Text) & Validar.noVacio(FechaNactxt.Text) & Validar.noVacio(TipoDoctxt.Text) & Validar.noVacio(CantFamHijtxt.Text) & Validar.noVacio(Estadotxt.Text) & Validar.noVacio(NroAfiliadotxt.Text) & Validar.IsValidEmail(Mailtxt.Text))
             {
+                if (Validar.existe_afiliado("Nro_Afiliado", Convert.ToUInt32(NroAfiliadotxt.Text), "Cantidad_afiliados"))
+                {
                 Login.Paciente.actualizar_usuario(Convert.ToUInt32(NroAfiliadotxt.Text), Usertxt.Text);
                 Login.Paciente.actualizar_afiliado(Convert.ToUInt32(NroAfiliadotxt.Text), Nombretxt.Text, Apellidotxt.Text, Convert.ToUInt32(Doctxt.Text), Directxt.Text, Convert.ToUInt32(Teltxt.Text), Mailtxt.Text, Convert.ToDateTime(FechaNactxt.Text), Sexotxt.Text, TipoDoctxt.Text, EstadoCivtxt.Text, Convert.ToInt32(CantFamHijtxt.Text), Convert.ToUInt32(PlanMedtxt.Text), Estadotxt.Text);
                 this.pacienteTableAdapter.Fill(this.gD2C2013DataSet1.Paciente);
                 MessageBox.Show("Afiliado Acualizado de forma exitosa", "Actualizacion de datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 limpiar_campos();
+                }
+                else
+                {
+                    MessageBox.Show(" Id Incorrecto ", "Actualizacion de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-
-
             else
             {
                 MessageBox.Show("Completar correctamente los campos ", "Actualizacion de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                limpiar_campos();
             }
         }
+
 
         private void limpiar_campos()
         {

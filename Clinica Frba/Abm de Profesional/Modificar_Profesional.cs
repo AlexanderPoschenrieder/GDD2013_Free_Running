@@ -32,20 +32,27 @@ namespace Clinica_Frba.Abm_de_Profesional
         {
             if (Validar.noVacio(Nombretxt.Text) & Validar.noVacio(Apellidotxt.Text) & Validar.noVacio(Doctxt.Text) & Validar.noVacio(Directxt.Text) & Validar.noVacio(Teltxt.Text) & Validar.noVacio(Mailtxt.Text) & Validar.noVacio(FechaNactxt.Text) & Validar.noVacio(TipoDoctxt.Text) & Validar.noVacio(Matriculatxt.Text) & Validar.noVacio(Usertxt.Text) & Validar.noVacio(Sexotxt.Text) & Validar.IsValidEmail(Mailtxt.Text) & Validar.noVacio(Idtxt.Text))
             {
+                
+                if (Validar.existe_afiliado("Id", Convert.ToUInt32(Idtxt.Text), "Cantidad_profesionales"))
+                {
 
-
-                Login.Medico.actualizar_usuario(Convert.ToUInt32(Idtxt.Text), Usertxt.Text);
-                Login.Medico.actualizar_profesional(Convert.ToUInt32(Idtxt.Text), Nombretxt.Text, Apellidotxt.Text, Sexotxt.Text, TipoDoctxt.Text, Convert.ToUInt32(Doctxt.Text), Directxt.Text, Convert.ToUInt32(Teltxt.Text), Mailtxt.Text, Convert.ToDateTime(FechaNactxt.Text), Convert.ToUInt32(Matriculatxt.Text), Usertxt.Text);
-                this.medicoTableAdapter.Fill(this.gD2C2013DataSet.Medico);
-                MessageBox.Show("Profesional Acualizado de forma exitosa", "Actualizacion de datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                limpiar_campos();
+                    Login.Medico.actualizar_usuario(Convert.ToUInt32(Idtxt.Text), Usertxt.Text);
+                    Login.Medico.actualizar_profesional(Convert.ToUInt32(Idtxt.Text), Nombretxt.Text, Apellidotxt.Text, Sexotxt.Text, TipoDoctxt.Text, Convert.ToUInt32(Doctxt.Text), Directxt.Text, Convert.ToUInt32(Teltxt.Text), Mailtxt.Text, Convert.ToDateTime(FechaNactxt.Text), Convert.ToUInt32(Matriculatxt.Text), Usertxt.Text);
+                    this.medicoTableAdapter.Fill(this.gD2C2013DataSet.Medico);
+                    MessageBox.Show("Profesional Acualizado de forma exitosa", "Actualizacion de datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    limpiar_campos();
+                }
+                else
+                {
+                    MessageBox.Show(" Id Incorrecto ", "Actualizacion de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    limpiar_campos();
+                }
             }
 
 
             else
             {
                 MessageBox.Show("Completar correctamente los campos ", "Actualizacion de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                limpiar_campos();
             }
         }
 
