@@ -14,10 +14,10 @@ namespace Clinica_Frba.Listados_Estadisticos
 {
     public partial class AfiliadoBFvenc : Form
     {
-        public AfiliadoBFvenc(DateTime inicio, DateTime fin)
+        public AfiliadoBFvenc(DateTime inicio, DateTime fin, Decimal semestre)
         {
             InitializeComponent();
-            iniciarDGV();
+            iniciarDGV(semestre);
             cargar(inicio, fin);
 
         }
@@ -50,18 +50,38 @@ namespace Clinica_Frba.Listados_Estadisticos
             dgvTop.Rows[renglon].Cells["Afiliado"].Value = dr[0].ToString();
             dgvTop.Rows[renglon].Cells["Nombre"].Value = dr[1].ToString();
             dgvTop.Rows[renglon].Cells["Apellido"].Value = dr[2].ToString();
-            dgvTop.Rows[renglon].Cells["Mes"].Value = dr[3].ToString();
-            dgvTop.Rows[renglon].Cells["Cantidad"].Value = dr[4].ToString();
+            dgvTop.Rows[renglon].Cells[3].Value = Convert.ToInt32(dr[3]);
+            dgvTop.Rows[renglon].Cells[4].Value = Convert.ToInt32(dr[4]);
+            dgvTop.Rows[renglon].Cells[5].Value = Convert.ToInt32(dr[5]);
+            dgvTop.Rows[renglon].Cells[6].Value = Convert.ToInt32(dr[6]);
+            dgvTop.Rows[renglon].Cells[7].Value = Convert.ToInt32(dr[7]);
+            dgvTop.Rows[renglon].Cells[8].Value = Convert.ToInt32(dr[8]);
         }
 
-        public void iniciarDGV()
+        public void iniciarDGV(Decimal semestre)
         {
-            dgvTop.ColumnCount = 5;
+            dgvTop.ColumnCount = 9;
             dgvTop.Columns[0].Name = "Afiliado";
             dgvTop.Columns[1].Name = "Nombre";
             dgvTop.Columns[2].Name = "Apellido";
-            dgvTop.Columns[3].Name = "Mes";
-            dgvTop.Columns[4].Name = "Cantidad";
+            if (semestre == 1)
+            {
+                dgvTop.Columns[3].Name = "Enero";
+                dgvTop.Columns[4].Name = "Febrero";
+                dgvTop.Columns[5].Name = "Marzo";
+                dgvTop.Columns[6].Name = "Abril";
+                dgvTop.Columns[7].Name = "Mayo";
+                dgvTop.Columns[8].Name = "Junio";
+            }
+            else
+            {
+                dgvTop.Columns[3].Name = "Julio";
+                dgvTop.Columns[4].Name = "Agosto";
+                dgvTop.Columns[5].Name = "Septiembre";
+                dgvTop.Columns[6].Name = "Octubre";
+                dgvTop.Columns[7].Name = "Noviembre";
+                dgvTop.Columns[8].Name = "Diciembre";
+            }
 
         }
 

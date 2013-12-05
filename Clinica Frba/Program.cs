@@ -17,8 +17,8 @@ namespace Clinica_Frba
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Login.ABMLogin());//Form1()
-            Application.Run(new Clinica_Frba.Pedir_Turno.MostrarAgendaForm(1));
-            //Application.Run(new Clinica_Frba.Listados_Estadisticos.Estadisticas());
+            //Application.Run(new Clinica_Frba.Pedir_Turno.MostrarAgendaForm(1));
+            Application.Run(new Clinica_Frba.Listados_Estadisticos.Estadisticas());
         }
     }
 }

@@ -1018,59 +1018,141 @@ GO
 
 
 
+
+CREATE FUNCTION Free_Running.mesVencido(@mes1 varchar(255) , @mes2 varchar(255),@Inicio DateTime,@Fin DateTime,@Esp numeric(18,8))
+RETURNS numeric(18,8)
+AS
+BEGIN
+DECLARE @Cant numeric(18,8)
+SET @Cant = (select COUNT(*) Cantidad 
+from Free_Running.Turno_Cancelado TC 
+join Free_Running.Turno T on (TC.Turno_Numero = T.Numero)
+where ((T.Fecha >= @Inicio) and (T.Fecha <= @Fin)) 
+and T.Especialidad_Codigo = @Esp 
+and (DATENAME(month,T.Fecha) = @mes1 or DATENAME(month,T.Fecha) = @mes2))
+RETURN @Cant
+END
+Go
+
+
 CREATE PROCEDURE Free_Running.EspeMasCanceladas 
     @Inicio DateTime,
     @Fin DateTime  
 AS 
 BEGIN
-	select top 5 T.Especialidad_Codigo,E.Descripcion,DATENAME(month,T.Fecha) Mes, COUNT(*) Cantidad
-	from Free_Running.Turno_Cancelado TC join Free_Running.Turno T on (TC.Turno_Numero = T.Numero)
-	     join Free_Running.Especialidad E on (T.Especialidad_Codigo = E.Codigo)
-	where ((T.Fecha >= @Inicio) and (T.Fecha <= @Fin))
-	Group by T.Especialidad_Codigo,E.Descripcion,DATENAME(month,T.Fecha)
-	order by 4 DESC
+	select top 5 E.Descripcion,Free_Running.mesVencido('Enero','Julio',@Inicio,@Fin,E.Codigo)
+							  ,Free_Running.mesVencido('Febrero','Agosto',@Inicio,@Fin,E.Codigo) 
+							  ,Free_Running.mesVencido('Marzo','Septiembre',@Inicio,@Fin,E.Codigo) 
+							  ,Free_Running.mesVencido('Abril','Octubre',@Inicio,@Fin,E.Codigo) 
+							  ,Free_Running.mesVencido('Mayo','Noviembre',@Inicio,@Fin,E.Codigo) 
+							  ,Free_Running.mesVencido('Junio','Diciembre',@Inicio,@Fin,E.Codigo) 
+	from Free_Running.Especialidad E
+	order by (select COUNT(*) Total from Free_Running.Turno_Cancelado TC 
+								join Free_Running.Turno T on (TC.Turno_Numero = T.Numero)
+								where ((T.Fecha >= @Inicio) and (T.Fecha <= @Fin)) 
+								and T.Especialidad_Codigo = E.Codigo) DESC
 END
 go
 
 
 
---------------ver
+
+
+
+
+
+CREATE FUNCTION Free_Running.BFVenc(@mes1 varchar(255) , @mes2 varchar(255),@Inicio DateTime,@Fin DateTime,@Afiliado numeric(18,8))
+RETURNS numeric(18,8)
+AS
+BEGIN
+DECLARE @Cant numeric(18,8)
+SET @Cant = (select COUNT(*) Cantidad 
+from Free_Running.Bono_Farmacia BF 
+	 join Free_Running.Bono_Farmacia_Vencido V on (V.Bono_Farmacia_Id = BF.Id)
+	 join Free_Running.Compra_Bono_Farmacia CBF on (CBF.Bono_Farmacia = BF.Id)
+where ((BF.Fecha_Vencimiento >= @Inicio) and (BF.Fecha_Vencimiento <= @Fin))
+and @Afiliado = CBF.Afiliado_Compra
+and (DATENAME(month,BF.Fecha_Vencimiento) = @mes1 or DATENAME(month,BF.Fecha_Vencimiento) = @mes2))
+RETURN @Cant
+END
+Go
+
+
 CREATE PROCEDURE Free_Running.AfiliadoBFvenc 
     @Inicio DateTime,
     @Fin DateTime  
 AS 
 BEGIN
-	select top 5 P.Nro_Afiliado,P.Nombre,P.Apellido, DATENAME(month,BF.Fecha_Vencimiento), COUNT(*) Cantidad
-	from Free_Running.Bono_Farmacia BF join Free_Running.Bono_Farmacia_Vencido V on (V.Bono_Farmacia_Id = BF.Id)
-		 join Free_Running.Compra_Bono_Farmacia CBF on (CBF.Bono_Farmacia = BF.Id)
-		 join Free_Running.Paciente P on (CBF.Afiliado_Compra = P.Nro_Afiliado) 
-	where ((BF.Fecha_Vencimiento >= @Inicio) and (BF.Fecha_Vencimiento <= @Fin))
-	Group by P.Nro_Afiliado,P.Nombre,P.Apellido,DATENAME(month,BF.Fecha_Vencimiento)
-	order by 5 DESC
+	
+	select top 5 P.Nro_Afiliado,P.Apellido,P.Nombre,Free_Running.BFVenc('Enero','Julio',@Inicio,@Fin,P.Nro_Afiliado)
+											 ,Free_Running.BFVenc('Febrero','Agosto',@Inicio,@Fin,P.Nro_Afiliado) 
+											 ,Free_Running.BFVenc('Marzo','Septiembre',@Inicio,@Fin,P.Nro_Afiliado) 
+											 ,Free_Running.BFVenc('Abril','Octubre',@Inicio,@Fin,P.Nro_Afiliado) 
+											 ,Free_Running.BFVenc('Mayo','Noviembre',@Inicio,@Fin,P.Nro_Afiliado) 
+											 ,Free_Running.BFVenc('Junio','Diciembre',@Inicio,@Fin,P.Nro_Afiliado) 
+	from Free_Running.Paciente p
+	
+	order by (select COUNT(*) from Free_Running.Bono_Farmacia BF  join Free_Running.Bono_Farmacia_Vencido V on (V.Bono_Farmacia_Id = BF.Id)
+	 join Free_Running.Compra_Bono_Farmacia CBF on (CBF.Bono_Farmacia = BF.Id) where ((BF.Fecha_Vencimiento >= @Inicio) and (BF.Fecha_Vencimiento <= @Fin))
+	 and  P.Nro_Afiliado = CBF.Afiliado_Compra) DESC
 END
 go
 
 
---------------ver------????????????
+
+
+
+
+
+
+CREATE FUNCTION Free_Running.BFRecetados(@mes1 varchar(255) , @mes2 varchar(255),@Inicio DateTime,@Fin DateTime,@Esp numeric(18,8))
+RETURNS numeric(18,8)
+AS
+BEGIN
+DECLARE @Cant numeric(18,8)
+SET @Cant = (select COUNT(*) Cantidad 
+from Free_Running.Bono_Farmacia BF join Free_Running.Consulta C on (C.Id = BF.Consulta_Id)
+	 join Free_Running.Atencion_Medica AM on (Am.Id = C.Id_Atencion_Medica)
+	 join Free_Running.Llegada_Atencion_Medica LAM on (LAM.Id = AM.Llegada_Id)
+	 join Free_Running.Turno T on (LAM.Turno_Numero=T.Numero)
+where ((T.Fecha >= @Inicio) and (T.Fecha <= @Fin))
+and @Esp = T.Especialidad_Codigo
+and (DATENAME(month,T.Fecha) = @mes1 or DATENAME(month,T.Fecha) = @mes2))
+RETURN @Cant
+END
+Go
+
+
 CREATE PROCEDURE Free_Running.EspMasBFRecetados
     @Inicio DateTime,
     @Fin DateTime  
 AS 
-BEGIN
-select top 5 T.Especialidad_Codigo,E.Descripcion,DATENAME(month,T.Fecha),Count(BF.Id)
-From Free_Running.Bono_Farmacia BF join Free_Running.Consulta C on (C.Id = BF.Consulta_Id)
-	 join Free_Running.Atencion_Medica AM on (Am.Id = C.Id_Atencion_Medica)
-	 join Free_Running.Llegada_Atencion_Medica LAM on (LAM.Id = AM.Llegada_Id)
-	 join Free_Running.Turno T on (LAM.Turno_Numero=T.Numero)
-	 join Free_Running.Especialidad E on (T.Especialidad_Codigo = E.Codigo)
-
-where ((T.Fecha >= @Inicio) and (T.Fecha <= @Fin))
-group by T.Especialidad_Codigo,E.Descripcion,DATENAME(month,T.Fecha)
-Order by 4 DESC
+BEGIN 
+	select top 5 E.Descripcion,Free_Running.BFRecetados('Enero','Julio',@Inicio,@Fin,E.Codigo)
+							  ,Free_Running.BFRecetados('Febrero','Agosto',@Inicio,@Fin,E.Codigo) 
+							  ,Free_Running.BFRecetados('Marzo','Septiembre',@Inicio,@Fin,E.Codigo) 
+							  ,Free_Running.BFRecetados('Abril','Octubre',@Inicio,@Fin,E.Codigo) 
+							  ,Free_Running.BFRecetados('Mayo','Noviembre',@Inicio,@Fin,E.Codigo) 
+							  ,Free_Running.BFRecetados('Junio','Diciembre',@Inicio,@Fin,E.Codigo) 
+	from Free_Running.Especialidad E
+	order by (select COUNT(*) Cantidad from Free_Running.Bono_Farmacia BF join Free_Running.Consulta C on (C.Id = BF.Consulta_Id)
+										join Free_Running.Atencion_Medica AM on (Am.Id = C.Id_Atencion_Medica)
+										join Free_Running.Llegada_Atencion_Medica LAM on (LAM.Id = AM.Llegada_Id)
+										join Free_Running.Turno T on (LAM.Turno_Numero=T.Numero)
+										where ((T.Fecha >= @Inicio) and (T.Fecha <= @Fin))and E.Codigo = T.Especialidad_Codigo
+			) DESC
 end
-
-
 go
+
+
+
+
+
+
+
+
+
+
 
 --------------ver
 
