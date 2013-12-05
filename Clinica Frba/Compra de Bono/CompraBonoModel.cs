@@ -9,80 +9,64 @@ namespace Clinica_Frba.Compra_de_Bono
 {
     class CompraBonoModel
     {
-        List<Bono> carrito = new List<Bono>();
-        List<Bono> carritoConsulta = new List<Bono>();
-        List<Bono> carritoFarmacia = new List<Bono>();
+        int nro_paciente;
+        int cantidadFarmacia = 0;
+        int precioFarmacia;
+        int cantidadConsulta = 0;
+        int precioConsulta;
+        int planCorrespondiente;
         SqlConnection miConexion;
-        SqlCommand commandInsert;
-        String stringInsert;
+        SqlCommand compraBonos;
+        SqlCommand commandConsulta;
+        SqlDataReader dr_datos;
         public int montoTotal { get; set; }
 
-        public String comprarBonoFarmacia(int idPaciente)
+        public CompraBonoModel(int nroPaciente)
         {
-            Bono bonoAux = new Bono(idPaciente,"Bono Farmacia",2);
-            carrito.Add(bonoAux);
-            carritoFarmacia.Add(bonoAux);
-            montoTotal += bonoAux.precio;
+            nro_paciente = nroPaciente;
+            obtenerDatos();
+        }
+
+        public String comprarBonoFarmacia()
+        {
+            cantidadFarmacia++;
+            montoTotal += precioFarmacia;
             return "Bono Farmacia";
         }
-        public String comprarBonoConsulta(int idPaciente)
+        public String comprarBonoConsulta()
         {
-            Bono bonoAux = new Bono(idPaciente,"Bono Consulta",1);
-            carrito.Add(bonoAux);
-            carritoConsulta.Add(bonoAux);
-            montoTotal += bonoAux.precio;
+            cantidadConsulta++;
+            montoTotal += precioConsulta;
             return "Bono Consulta";
         }
 
-        private String armarStringInsert()
+        private void obtenerDatos()
         {
-            int i = 0;
-            //Verifica que la lista no este vacia para hacer el insert
-            //
-            if (carritoFarmacia.Count != 0)
-            {
-                stringInsert = "begin transaction "
-                    +"insert into Free_Running.Bono_Farmacia(Afiliado_Compra,Precio,Plan_Correspondiente) values";
+            String stringConsulta = string.Format("select CAST(PlanMedico as int), CAST(PrecioBonoConsulta as int),CAST(PrecioBonoFarmacia as int) from Free_Running.Calcula_plan_y_precio({0});", nro_paciente);
+            miConexion = Conexion.Conectar();
+            commandConsulta = new SqlCommand(stringConsulta, miConexion);
 
-                //Agrega por cada Bono los valores al value()----------------------  
-                foreach (Bono bonoF in carritoFarmacia)
-                {
-                    if (i == 0)
-                    { stringInsert = stringInsert + bonoF.stringInsert(); }
-                    else
-                    {
-                        stringInsert = stringInsert + "," + bonoF.stringInsert();
-                    }
-                    i++;
-                }
-            }
-                //Verifica que la lista no este vacia, si lo esta no hace insert
-            if (carritoConsulta.Count != 0)
-            {
-                stringInsert = stringInsert + ";" + "insert into Free_Running.Bono_Consulta(Afiliado_Compra,Precio,Plan_Correspondiente) values";
-                i = 0;
-                //Agrega por cada Bono los valores al value()----------------------  
-                foreach (Bono bonoC in carritoConsulta)
-                {
-                    if (i == 0)
-                    { stringInsert = stringInsert + bonoC.stringInsert(); }
-                    else
-                    {
-                        stringInsert = stringInsert + "," + bonoC.stringInsert();
-                    }
-                    i++;
-                }
-            }
-            stringInsert = stringInsert + " commit transaction";
-            return stringInsert;
+            //Realizo una consulta
+            dr_datos = commandConsulta.ExecuteReader();
+            dr_datos.Read();
+            precioFarmacia = (int)dr_datos.GetValue(2);
+            precioConsulta = (int)dr_datos.GetValue(1);
+            planCorrespondiente = (int)dr_datos.GetInt32(0);
+            miConexion.Close();
         }
 
         public void finalizarCompra()
         {
             miConexion = Conexion.Conectar();
-            armarStringInsert();
-            commandInsert = new SqlCommand(stringInsert, miConexion);
-            commandInsert.ExecuteNonQuery();
+            compraBonos = new SqlCommand(
+                string.Format(
+                "exec GD2C2013.Free_Running.comprarBonosFarmacia @Afiliado_Compra={0},@plan= {1},@precio= {2},@cantidad={3}; "
+                , nro_paciente, planCorrespondiente, precioFarmacia, cantidadFarmacia) +
+                string.Format(
+                "exec GD2C2013.Free_Running.comprarBonosConsulta @Afiliado_Compra={0},@plan= {1},@precio= {2},@cantidad={3}"
+                , nro_paciente, planCorrespondiente, precioFarmacia, cantidadConsulta), miConexion);
+
+            compraBonos.ExecuteNonQuery();
             miConexion.Close();
             MessageBox.Show(string.Format("Gracias por su compra, su monto total es: ${0}", montoTotal));
         }
