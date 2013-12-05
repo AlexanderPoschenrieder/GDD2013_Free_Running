@@ -1148,24 +1148,16 @@ go
 
 
 
-
-
-
-
-
-
---------------ver
-
 create view Free_Running.vistaAfiliadoUsoDist
 as
-select Bc.Afiliado_Utiliza,P.Nombre,P.Apellido,CBc.Afiliado_Compra,lam.Fecha_Hs_Llegada fecha
+select Bc.Afiliado_Utiliza,CBc.Fecha_Compra fecha
 from Free_Running.Bono_Consulta Bc
 	 join Free_Running.Compra_Bono_Consulta CBc on (BC.Id = CBc.Bono_Consulta)
 	 join Free_Running.Paciente P on (P.Nro_Afiliado = Bc.Afiliado_Utiliza)
 	 join Free_Running.Llegada_Atencion_Medica Lam on (lam.Bono_Consulta = Bc.Id)
 where CBc.Afiliado_Compra<>Bc.Afiliado_Utiliza and Bc.Afiliado_Utiliza is not null
 Union
-select Bf.Afiliado_Utiliza,P.Nombre,P.Apellido,CBf.Afiliado_Compra,am.Fecha_Hs
+select Bf.Afiliado_Utiliza,CBf.Fecha_Compra
 from Free_Running.Bono_Farmacia Bf
 	 join Free_Running.Compra_Bono_Farmacia CBf on (Bf.Id = CBf.Bono_Farmacia)
 	 join Free_Running.Paciente P on (P.Nro_Afiliado = Bf.Afiliado_Utiliza)
@@ -1174,16 +1166,35 @@ from Free_Running.Bono_Farmacia Bf
 where CBf.Afiliado_Compra<>Bf.Afiliado_Utiliza and Bf.Afiliado_Utiliza is not null
 go
 
+CREATE FUNCTION Free_Running.BonoUsoDist(@mes1 varchar(255) , @mes2 varchar(255),@Inicio DateTime,@Fin DateTime,@NroAfiliado numeric(18,8))
+RETURNS numeric(18,8)
+AS
+BEGIN
+DECLARE @Cant numeric(18,8)
+SET @Cant = (select COUNT(*) Cantidad 
+from Free_Running.vistaAfiliadoUsoDist vA
+where ((vA.fecha >= @Inicio) and (vA.fecha <= @Fin))
+and @NroAfiliado = vA.Afiliado_Utiliza
+and (DATENAME(month,vA.fecha) = @mes1 or DATENAME(month,vA.fecha) = @mes2))
+RETURN @Cant
+END
+Go
+
+
+
 CREATE PROCEDURE Free_Running.AfiliadoUsoDist
     @Inicio DateTime,
     @Fin DateTime  
 AS 
 BEGIN
-select top 10 vA.Afiliado_Utiliza,va.Nombre,va.Apellido,DATENAME(month,va.fecha),COUNT(va.Afiliado_Compra)
-from Free_Running.vistaAfiliadoUsoDist vA
-where ((va.fecha >= @Inicio) and (va.fecha <= @Fin))
-group by vA.Afiliado_Utiliza,va.Nombre,va.Apellido,DATENAME(month,va.fecha)
-order by 5 DESC
+select top 10 P.Nro_Afiliado,P.Nombre,P.Apellido,Free_Running.BonoUsoDist('Enero','Julio',@Inicio,@Fin,P.Nro_Afiliado)
+							  ,Free_Running.BonoUsoDist('Febrero','Agosto',@Inicio,@Fin,P.Nro_Afiliado) 
+							  ,Free_Running.BonoUsoDist('Marzo','Septiembre',@Inicio,@Fin,P.Nro_Afiliado) 
+							  ,Free_Running.BonoUsoDist('Abril','Octubre',@Inicio,@Fin,P.Nro_Afiliado) 
+							  ,Free_Running.BonoUsoDist('Mayo','Noviembre',@Inicio,@Fin,P.Nro_Afiliado) 
+							  ,Free_Running.BonoUsoDist('Junio','Diciembre',@Inicio,@Fin,P.Nro_Afiliado) 
+from Free_Running.Paciente P
+order by (select COUNT(*) from Free_Running.vistaAfiliadoUsoDist vA where ((vA.fecha >= @Inicio) and (vA.fecha <= @Fin)) and P.Nro_Afiliado = vA.Afiliado_Utiliza)
 end
 go
 
@@ -1362,7 +1373,7 @@ from Free_Running.Atencion_Medica AM
 where @atencionMedica = AM.Id)
 end
 
-
+go
 CREATE PROCEDURE Free_Running.puedeUsarBF @NroAfiliado numeric(18,0), @Bf numeric(18,0)
 AS 
 BEGIN

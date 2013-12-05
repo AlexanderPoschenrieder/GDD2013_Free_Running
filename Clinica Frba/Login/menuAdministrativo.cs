@@ -36,7 +36,7 @@ namespace Clinica_Frba.Login
 
         private void btRol_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            //this.Hide();
             Abm_de_Rol.ABM_ROL abmRol = new Clinica_Frba.Abm_de_Rol.ABM_ROL();
             abmRol.ShowDialog();
         }
@@ -45,21 +45,21 @@ namespace Clinica_Frba.Login
         {
             Clinica_Frba.Abm_de_Afiliado.Menu_Afiliado mAfiliado = new Clinica_Frba.Abm_de_Afiliado.Menu_Afiliado();
             mAfiliado.ShowDialog();
-            this.Hide();
+            //this.Hide();
         }
 
         private void btLlegada_Click(object sender, EventArgs e)
         {
             Clinica_Frba.Registro_de_LLegada.Registro_de_llegada ambLlegada = new Clinica_Frba.Registro_de_LLegada.Registro_de_llegada();
             ambLlegada.ShowDialog();
-            this.Hide();
+            //this.Hide();
         }
 
         private void btEstadist_Click(object sender, EventArgs e)
         {
             Clinica_Frba.Listados_Estadisticos.Estadisticas ambEst = new Clinica_Frba.Listados_Estadisticos.Estadisticas();
             ambEst.ShowDialog();
-            this.Hide();
+            //this.Hide();
         }
 
         private void btProf_Click(object sender, EventArgs e)

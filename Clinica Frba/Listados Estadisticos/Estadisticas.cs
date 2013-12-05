@@ -41,7 +41,6 @@ namespace Clinica_Frba.Listados_Estadisticos
             DateTime año = Convert.ToDateTime(dtpAño.Value);
             int sem = Convert.ToInt32(nSemestre.Value);
             fechas(año, sem);
-            this.Hide();
             Clinica_Frba.Listados_Estadisticos.EspMasCanceladas top = new EspMasCanceladas(inicio, fin, nSemestre.Value);
             top.ShowDialog();
 
@@ -52,7 +51,6 @@ namespace Clinica_Frba.Listados_Estadisticos
             DateTime año = Convert.ToDateTime(dtpAño.Value);
             int sem = Convert.ToInt32(nSemestre.Value);
             fechas(año, sem);
-            this.Hide();
             Clinica_Frba.Listados_Estadisticos.AfiliadoBFvenc top = new AfiliadoBFvenc(inicio, fin, nSemestre.Value);
             top.ShowDialog();
         }
@@ -62,7 +60,6 @@ namespace Clinica_Frba.Listados_Estadisticos
             DateTime año = Convert.ToDateTime(dtpAño.Value);
             int sem = Convert.ToInt32(nSemestre.Value);
             fechas(año, sem);
-            this.Hide();
             Clinica_Frba.Listados_Estadisticos.EspMasBFRecetados top = new EspMasBFRecetados(inicio, fin, nSemestre.Value);
             top.ShowDialog();
         }
@@ -72,8 +69,7 @@ namespace Clinica_Frba.Listados_Estadisticos
             DateTime año = Convert.ToDateTime(dtpAño.Value);
             int sem = Convert.ToInt32(nSemestre.Value);
             fechas(año, sem);
-            this.Hide();
-            Clinica_Frba.Listados_Estadisticos.AfiliadosMasBnoPropios top = new AfiliadosMasBnoPropios(inicio, fin);
+            Clinica_Frba.Listados_Estadisticos.AfiliadosMasBnoPropios top = new AfiliadosMasBnoPropios(inicio, fin, nSemestre.Value);
             top.ShowDialog();
         }
 

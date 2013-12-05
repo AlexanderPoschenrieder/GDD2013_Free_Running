@@ -38,14 +38,9 @@ namespace Clinica_Frba.Login
             if (misFuncionalidades.Contains("CANCELACION_TURNO")) { } else { btCancelarT.Visible = false; }
         }
 
-        private void btAgenda_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btAgenda_Click_1(object sender, EventArgs e)
         {
-            this.Hide();
+            //this.Hide();
             Clinica_Frba.Registrar_Agenda.ABM_Agenda agenda = new Clinica_Frba.Registrar_Agenda.ABM_Agenda(miMedico);
             agenda.ShowDialog();
         }
@@ -53,7 +48,7 @@ namespace Clinica_Frba.Login
         private void btRegRes_Click(object sender, EventArgs e)
         {
             //Clinica_Frba.Registro_Resultado_Atencion.AtencionForm atencion = new Clinica_Frba.Registro_Resultado_Atencion.AtencionForm();
-            this.Hide();
+            //this.Hide();
         }
 
     }

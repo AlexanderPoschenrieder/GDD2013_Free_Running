@@ -54,10 +54,15 @@ DROP FUNCTION Free_Running.turnosDePaciente
 DROP FUNCTION Free_Running.turnoLibre
 DROP FUNCTION Free_Running.calcularNroAfiliado
 DROP FUNCTION Free_Running.especialidadCod
+DROP FUNCTION Free_Running.BFRecetados
 DROP PROCEDURE Free_Running.InsertarPrincipal
 DROP PROCEDURE Free_Running.usuarioExisteActivo
 DROP FUNCTION Free_Running.suIdAfiliado
+DROP FUNCTION Free_Running.BFVenc
+DROP FUNCTION Free_Running.mesVencido
 DROP PROCEDURE Free_Running.puedeUsarBC
 DROP PROCEDURE Free_Running.EspMasBFRecetados
+DROP FUNCTION Free_Running.turnosLibresMedico
 DROP PROCEDURE Free_Running.puedeUsarBF
+
 DROP schema Free_Running
