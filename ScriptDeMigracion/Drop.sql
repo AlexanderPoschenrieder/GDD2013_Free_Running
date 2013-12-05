@@ -44,9 +44,18 @@ DROP PROCEDURE Free_Running.AfiliadoBFvenc
 DROP PROCEDURE Free_Running.AfiliadoUsoDist
 DROP VIEW Free_Running.vistaAfiliadoUsoDist
 DROP PROCEDURE Free_RunningFree_Running.EspMasBFRecetados
-
-
 DROP VIEW Free_Running.turnosPendientes
+
+DROP procedure controlar_cant_medicamentos
+DROP procedure afiliadoAtencionMedica
+DROP  procedure [dbo].[Cantidad_profesionales]
+DROP  procedure [dbo].[Cantidad_afiliados]
+DROP  procedure [dbo].[obtener_Id]
+DROP  procedure [dbo].[profesional_cargado]
+DROP  procedure [dbo].[unicidad_de_datos]
+DROP PROCEDURE [dbo].[Obtener_Nro_afiliado]
+DROP procedure [dbo].[get_NroAfiliado]
+DROP procedure [dbo].[numero_principal]
 DROP PROCEDURE Free_Running.cancelarTurno
 DROP PROCEDURE Free_Running.cancelarTurnosDelDia
 DROP FUNCTION Free_Running.calcula_plan_y_precio
@@ -59,10 +68,12 @@ DROP PROCEDURE Free_Running.InsertarPrincipal
 DROP PROCEDURE Free_Running.usuarioExisteActivo
 DROP FUNCTION Free_Running.suIdAfiliado
 DROP FUNCTION Free_Running.BFVenc
+DROP FUNCTION Free_Running.BonoUsoDist
 DROP FUNCTION Free_Running.mesVencido
 DROP PROCEDURE Free_Running.puedeUsarBC
 DROP PROCEDURE Free_Running.EspMasBFRecetados
 DROP FUNCTION Free_Running.turnosLibresMedico
 DROP PROCEDURE Free_Running.puedeUsarBF
-
+DROP PROCEDURE Free_Running.comprarBonosConsulta
+DROP PROCEDURE Free_Running.comprarBonosFarmacia
 DROP schema Free_Running
