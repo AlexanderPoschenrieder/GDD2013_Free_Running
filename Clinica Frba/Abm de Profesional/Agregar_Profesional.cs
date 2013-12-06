@@ -23,25 +23,26 @@ namespace Clinica_Frba.Abm_de_Profesional
                 //inicializo la variable con los datos del form
                 Login.Medico unMedico = new Login.Medico(0, Nombretxt.Text, Apellidotxt.Text, Sexotxt.Text, TipoDoctxt.Text, Convert.ToUInt32(Doctxt.Text), Directxt.Text, Convert.ToUInt32(Teltxt.Text), Mailtxt.Text, Convert.ToDateTime(FechaNactxt.Text), Convert.ToUInt32(Matriculatxt.Text), Usertxt.Text, Convert.ToUInt32(Especialtxt.Text), Clavetxt.Text);
 
-                if (Validar.integridad_de_datos(unMedico.Documento, "profesional_cargado"))
+
+                if (Validar.integridad_de_datos(unMedico.Documento, unMedico.Tipo_Documento, "profesional_cargado"))
                 {
 
                     unMedico.agregar_usuario();
                     unMedico.Insertar_profesional();
                     unMedico.Insertar_especialidad(Login.Medico.obtener_IdMedico("obtener_Id"));
-                    MessageBox.Show("Profesional cargado de forma exitosa", "Insercion de datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Validar.MsnAccept("Profesional cargado de forma exitosa", "Insercion de datos"); 
                     limpiar_campos();
                 }
                 else
                 {
-                    MessageBox.Show("El Profesional ya se encuentra registrado en el sistema", "Insercion de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Validar.MsnError("El Profesional ya se encuentra registrado en el sistema", "Insercion de datos");
                     limpiar_campos();
                 }
             }
             else
             {
-                MessageBox.Show("Existen campos vacios en el formulario", "Completar formulario", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                limpiar_campos();
+                Validar.MsnAccept("Existen campos vacios en el formulario", "Completar formulario");
+                //limpiar_campos();
             }
             
         }

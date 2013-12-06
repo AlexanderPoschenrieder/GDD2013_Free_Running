@@ -1406,12 +1406,12 @@ go
 
 
 
-
 CREATE  procedure [dbo].[profesional_cargado]
-@Documento numeric(18,0)
+@Documento numeric(18,0),
+@Tipo_Documento varchar(255)
 as 
 begin
-if((select Id from Free_Running.Medico where Documento=@Documento) is not null)
+if((select Id from Free_Running.Medico where Documento=@Documento and Tipo_Documento=@Tipo_Documento) is not null)
 return 1
 else return 0
 end
@@ -1420,12 +1420,12 @@ go
 
 
 
-
 CREATE  procedure [dbo].[unicidad_de_datos]
-@Documento numeric(18,0)
+@Documento numeric(18,0),
+@Tipo_Documento varchar(255)
 as 
 begin
-if((select Nro_Afiliado from Free_Running.Paciente where Documento=@Documento) is not null)
+if((select Nro_Afiliado from Free_Running.Paciente where Documento=@Documento and Tipo_Documento=@Tipo_Documento) is not null)
 return 1
 else return 0
 end

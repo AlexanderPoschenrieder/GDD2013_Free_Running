@@ -155,7 +155,7 @@ namespace Clinica_Frba
 
         }
 
-        public static bool integridad_de_datos(long Documento, string procedimiento)
+        public static bool integridad_de_datos(long Documento, string Tipo_documento, string procedimiento)
         {
 
             SqlConnection miconexion = Conexion.Conectar();
@@ -167,7 +167,8 @@ namespace Clinica_Frba
                 //parametros si los hubieran
 
                 cmd.Parameters.AddWithValue("@Documento", Documento);
-                cmd.Parameters.Add("@RETURN_VALUE", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;//Valor devuelto
+                cmd.Parameters.AddWithValue("@Tipo_Documento", Tipo_documento);
+                cmd.Parameters.Add("@RETURN_VALUE", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
 
                 cmd.ExecuteNonQuery();
 
@@ -183,6 +184,16 @@ namespace Clinica_Frba
                     return true;
                 }
             }
+        }
+
+        public static void MsnAccept(string msn1, string msn2)
+        {
+            MessageBox.Show(msn1, msn2, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public static void MsnError(string msn1, string msn2)
+        {
+            MessageBox.Show(msn1, msn2, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
     }

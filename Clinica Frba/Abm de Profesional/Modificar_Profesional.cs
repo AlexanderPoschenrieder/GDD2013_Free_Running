@@ -39,12 +39,12 @@ namespace Clinica_Frba.Abm_de_Profesional
                     Login.Medico.actualizar_usuario(Convert.ToUInt32(Idtxt.Text), Usertxt.Text);
                     Login.Medico.actualizar_profesional(Convert.ToUInt32(Idtxt.Text), Nombretxt.Text, Apellidotxt.Text, Sexotxt.Text, TipoDoctxt.Text, Convert.ToUInt32(Doctxt.Text), Directxt.Text, Convert.ToUInt32(Teltxt.Text), Mailtxt.Text, Convert.ToDateTime(FechaNactxt.Text), Convert.ToUInt32(Matriculatxt.Text), Usertxt.Text);
                     this.medicoTableAdapter.Fill(this.gD2C2013DataSet.Medico);
-                    MessageBox.Show("Profesional Acualizado de forma exitosa", "Actualizacion de datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Validar.MsnAccept("Profesional Acualizado de forma exitosa", "Actualizacion de datos");
                     limpiar_campos();
                 }
                 else
                 {
-                    MessageBox.Show(" Id Incorrecto ", "Actualizacion de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Validar.MsnError(" Id Incorrecto ", "Actualizacion de datos");
                     limpiar_campos();
                 }
             }
@@ -52,7 +52,7 @@ namespace Clinica_Frba.Abm_de_Profesional
 
             else
             {
-                MessageBox.Show("Completar correctamente los campos ", "Actualizacion de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Validar.MsnError("Completar correctamente los campos ", "Actualizacion de datos");
             }
         }
 

@@ -90,7 +90,7 @@ namespace Clinica_Frba.Abm_de_Afiliado
 
                 int cantHijos = Convert.ToInt32(CantFamHijtxt.Text);
 
-                if (Validar.integridad_de_datos(Documento, "unicidad_de_datos"))
+                if (Validar.integridad_de_datos(Documento, Tipo_documento, "unicidad_de_datos"))
                 {
                
 
@@ -102,7 +102,7 @@ namespace Clinica_Frba.Abm_de_Afiliado
                                 Login.Paciente Padre = new Login.Paciente(Login.Paciente.obtener_NroPrincipal("numero_principal") + 1, Nombre, Apellido, Documento, Direccion, Telefono, Mail, Fecha_nac, Sexo, Tipo_documento, Estado_civil, Cant_familiares, Plan_medico, Estado, usuario, clave);
                                 Padre.insertar_usuario();
                                 Padre.insertarAFiliadoConFamilia();
-                                MessageBox.Show("Afiliado cargado de forma exitosa", "Ingreso de Afiliados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                Validar.MsnAccept("Afiliado cargado de forma exitosa", "Ingreso de Afiliados");
                                 Abm_de_Afiliado.Agregar_Conyugue conyugue = new Agregar_Conyugue(Padre);
                                 conyugue.ShowDialog();
                                 bandera = true;
@@ -130,7 +130,7 @@ namespace Clinica_Frba.Abm_de_Afiliado
                                     Login.Paciente Padre = new Login.Paciente(Login.Paciente.obtener_NroPrincipal("numero_principal") + 1, Nombre, Apellido, Documento, Direccion, Telefono, Mail, Fecha_nac, Sexo, Tipo_documento, Estado_civil, Cant_familiares, Plan_medico, Estado, usuario, clave);
                                     Padre.insertar_usuario();
                                     Padre.insertarAFiliadoConFamilia();
-                                    MessageBox.Show("Afiliado cargado de forma exitosa", "Ingreso de Afiliados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    Validar.MsnAccept("Afiliado cargado de forma exitosa", "Ingreso de Afiliados");
                                     Login.Paciente unPaciente = new Login.Paciente(obtener_NroAfiliado(), Nombre, Apellido, Documento, Direccion, Telefono, Mail, Fecha_nac, Sexo, Tipo_documento, Estado_civil, Cant_familiares, Plan_medico, Estado, usuario, clave);
                                     Abm_de_Afiliado.Agregar_Hijo_Familiar familiar = new Agregar_Hijo_Familiar(unPaciente);
                                     familiar.ShowDialog();
@@ -147,20 +147,20 @@ namespace Clinica_Frba.Abm_de_Afiliado
                         Login.Paciente Padre = new Login.Paciente(Login.Paciente.obtener_NroPrincipal("numero_principal"), Nombre, Apellido, Documento, Direccion, Telefono, Mail, Fecha_nac, Sexo, Tipo_documento, Estado_civil, Cant_familiares, Plan_medico, Estado, usuario, clave);
                         Padre.insertar_usuario();
                         Padre.insertarAFiliadoConFamilia();
-                        MessageBox.Show("Afiliado cargado de forma exitosa", "Ingreso de Afiliados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Validar.MsnAccept("Afiliado cargado de forma exitosa", "Ingreso de Afiliados");
                     }
 
                     limpiar_campos();
                 }
                 else
                 {
-                    MessageBox.Show("El usuario ya se encuentra registrado en el sistema", "Completar formulario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Validar.MsnError("El usuario ya se encuentra registrado en el sistema", "Completar formulario"); 
                     limpiar_campos();
                 }
             }
         else
            {
-                    MessageBox.Show("Existen campos vacios en el formulario, o los mismos tienen valores incorrectos", "Completar formulario", MessageBoxButtons.OK, MessageBoxIcon.Information);
+               Validar.MsnError("Existen campos vacios en el formulario, o los mismos tienen valores incorrectos", "Completar formulario");
            }
        }
         

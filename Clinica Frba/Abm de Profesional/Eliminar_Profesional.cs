@@ -28,18 +28,18 @@ namespace Clinica_Frba.Abm_de_Profesional
                 {
                     Login.Medico.eliminar_especialidad(Id_Profesional);
                     Login.Usuario.Eliminar_usuario("Id", Id_Profesional, "Free_Running.Medico"); //ejecuta el método que elimina al Profesional
-                    MessageBox.Show("El profesional fue eliminado de forma exitosa", "Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Validar.MsnAccept("El profesional fue eliminado de forma exitosa", "Eliminar");
                     Idtxt.Clear();
                 }
                 else
                 {
-                    MessageBox.Show("Dicho Profesional no se encuentra en el sistema", "Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Validar.MsnError("Dicho Profesional no se encuentra en el sistema", "Eliminar");
                     Idtxt.Clear();
                 }
             }
             else
             {
-                MessageBox.Show("Completar los datos", "Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Validar.MsnError("Completar los datos", "Eliminar");
             }
         }
 

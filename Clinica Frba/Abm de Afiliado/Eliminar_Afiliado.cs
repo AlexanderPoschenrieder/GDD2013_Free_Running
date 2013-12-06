@@ -27,19 +27,19 @@ namespace Clinica_Frba.Abm_de_Afiliado
                 {
                     Login.Paciente.sinTurnos(Numero_afiliado);//elimino los turnos del paciente
                     Login.Usuario.Eliminar_usuario("Nro_Afiliado", Numero_afiliado, "Free_Running.Paciente");//ejecuta el método que elimina al afiliado
-                    MessageBox.Show("El Afiliado fue eliminado de forma exitosa", "Eliminar Afiliado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Validar.MsnAccept("El Afiliado fue eliminado de forma exitosa", "Eliminar Afiliado");
                     NroAfiliadotxt.Clear();
                 }
                 else
                 {
-                    MessageBox.Show("El Afiliado no se encuentra en el Sistema", "Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Validar.MsnError("El Afiliado no se encuentra en el Sistema", "Eliminar");
                     NroAfiliadotxt.Clear();
                 }
             }
 
             else
             {
-                MessageBox.Show("Completar los datos", "Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Validar.MsnError("Completar los datos", "Eliminar");
             }
         }
 
