@@ -16,8 +16,8 @@ namespace Clinica_Frba
             //Clinica_Frba.Pedir_Turno.BusquedaProfesionalForm ventana;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login.ABMLogin());//Form1()
-            //Application.Run(new Clinica_Frba.Pedir_Turno.MostrarAgendaForm(1));
+            //Application.Run(new Login.ABMLogin());//Form1()
+            Application.Run(new Clinica_Frba.Pedir_Turno.BusquedaProfesionalForm(100));
             //Application.Run(new Clinica_Frba.Listados_Estadisticos.Estadisticas());
         }
     }

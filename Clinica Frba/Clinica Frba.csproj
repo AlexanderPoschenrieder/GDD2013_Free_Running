@@ -164,6 +164,7 @@
     <Compile Include="Cancelar Atencion\MotivoCancelacionForm.Designer.cs">
       <DependentUpon>MotivoCancelacionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compra de Bono\ModeloBusquedaPaciente.cs" />
     <Compile Include="Compra de Bono\CompraBonoModel.cs" />
     <Compile Include="Compra de Bono\Form1.cs">
       <SubType>Form</SubType>

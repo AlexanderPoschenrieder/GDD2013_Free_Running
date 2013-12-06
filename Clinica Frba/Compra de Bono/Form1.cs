@@ -39,6 +39,12 @@ namespace Clinica_Frba.Compra_de_Bono
         private void buttonFinalizar_Click(object sender, EventArgs e)
         {
             modelo.finalizarCompra();
+            this.Close();
+        }
+
+        private void botonCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

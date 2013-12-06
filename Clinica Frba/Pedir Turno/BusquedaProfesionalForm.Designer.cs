@@ -28,28 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.NombreProfTB = new System.Windows.Forms.TextBox();
             this.comboEspecialidad = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.gridResultados = new System.Windows.Forms.DataGridView();
-            this.NombreProfesional = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idMedico = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SeleccionarButton = new System.Windows.Forms.Button();
             this.botonLimpiar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.NombreProfesional = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridResultados)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(162, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Ingrese el nombre del profesional";
             // 
             // NombreProfTB
             // 
@@ -94,27 +87,12 @@
             this.gridResultados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NombreProfesional,
             this.Apellido,
-            this.idMedico});
+            this.Id});
             this.gridResultados.Location = new System.Drawing.Point(13, 136);
             this.gridResultados.Name = "gridResultados";
             this.gridResultados.ReadOnly = true;
             this.gridResultados.Size = new System.Drawing.Size(344, 118);
             this.gridResultados.TabIndex = 5;
-            // 
-            // NombreProfesional
-            // 
-            this.NombreProfesional.HeaderText = "Nombre";
-            this.NombreProfesional.Name = "NombreProfesional";
-            // 
-            // Apellido
-            // 
-            this.Apellido.HeaderText = "Apellido";
-            this.Apellido.Name = "Apellido";
-            // 
-            // idMedico
-            // 
-            this.idMedico.HeaderText = "idMedico";
-            this.idMedico.Name = "idMedico";
             // 
             // SeleccionarButton
             // 
@@ -124,7 +102,7 @@
             this.SeleccionarButton.TabIndex = 6;
             this.SeleccionarButton.Text = "Seleccionar";
             this.SeleccionarButton.UseVisualStyleBackColor = true;
-            this.SeleccionarButton.Click += new System.EventHandler(this.SeleccionarButton_Click);
+            
             // 
             // botonLimpiar
             // 
@@ -136,11 +114,57 @@
             this.botonLimpiar.UseVisualStyleBackColor = true;
             this.botonLimpiar.Click += new System.EventHandler(this.botonLimpiar_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(91, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Ingrese el nombre";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(205, 12);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(75, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Ingrese el DNI";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(208, 32);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(149, 20);
+            this.textBox1.TabIndex = 9;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // NombreProfesional
+            // 
+            this.NombreProfesional.HeaderText = "Nombre";
+            this.NombreProfesional.Name = "NombreProfesional";
+            this.NombreProfesional.ReadOnly = true;
+            // 
+            // Apellido
+            // 
+            this.Apellido.HeaderText = "Apellido";
+            this.Apellido.Name = "Apellido";
+            this.Apellido.ReadOnly = true;
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
             // BusquedaProfesionalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(391, 289);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.botonLimpiar);
             this.Controls.Add(this.SeleccionarButton);
             this.Controls.Add(this.gridResultados);
@@ -159,16 +183,18 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox NombreProfTB;
         private System.Windows.Forms.ComboBox comboEspecialidad;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView gridResultados;
         private System.Windows.Forms.Button SeleccionarButton;
+        private System.Windows.Forms.Button botonLimpiar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombreProfesional;
         private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idMedico;
-        private System.Windows.Forms.Button botonLimpiar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
     }
 }

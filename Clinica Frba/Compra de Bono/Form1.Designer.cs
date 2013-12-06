@@ -32,11 +32,12 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.gridCarrito = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button3 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.labelMonto = new System.Windows.Forms.Label();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.botonCancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridCarrito)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,6 +83,13 @@
             this.gridCarrito.Size = new System.Drawing.Size(245, 150);
             this.gridCarrito.TabIndex = 3;
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Bono";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 200;
+            // 
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(12, 242);
@@ -104,7 +112,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(146, 245);
+            this.label3.Location = new System.Drawing.Point(186, 245);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(72, 13);
             this.label3.TabIndex = 6;
@@ -113,24 +121,28 @@
             // labelMonto
             // 
             this.labelMonto.AutoSize = true;
-            this.labelMonto.Location = new System.Drawing.Point(225, 246);
+            this.labelMonto.Location = new System.Drawing.Point(260, 246);
             this.labelMonto.Name = "labelMonto";
             this.labelMonto.Size = new System.Drawing.Size(13, 13);
             this.labelMonto.TabIndex = 7;
             this.labelMonto.Text = "0";
             // 
-            // dataGridViewTextBoxColumn1
+            // botonCancelar
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Bono";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 200;
+            this.botonCancelar.Location = new System.Drawing.Point(104, 241);
+            this.botonCancelar.Name = "botonCancelar";
+            this.botonCancelar.Size = new System.Drawing.Size(75, 23);
+            this.botonCancelar.TabIndex = 8;
+            this.botonCancelar.Text = "Cancelar";
+            this.botonCancelar.UseVisualStyleBackColor = true;
+            this.botonCancelar.Click += new System.EventHandler(this.botonCancelar_Click);
             // 
             // CompraBonoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 266);
+            this.Controls.Add(this.botonCancelar);
             this.Controls.Add(this.labelMonto);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
@@ -158,5 +170,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label labelMonto;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.Button botonCancelar;
     }
 }
