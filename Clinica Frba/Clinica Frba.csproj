@@ -172,12 +172,6 @@
     <Compile Include="Compra de Bono\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra de Bono\CompraBonoAdmin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Compra de Bono\CompraBonoAdmin.Designer.cs">
-      <DependentUpon>CompraBonoAdmin.cs</DependentUpon>
-    </Compile>
     <Compile Include="Conexion.cs" />
     <Compile Include="GD2C2013DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -405,9 +399,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Cancelar Atencion\MotivoCancelacionForm.resx">
       <DependentUpon>MotivoCancelacionForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Compra de Bono\CompraBonoAdmin.resx">
-      <DependentUpon>CompraBonoAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra de Bono\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

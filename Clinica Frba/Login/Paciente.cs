@@ -58,7 +58,7 @@ namespace Clinica_Frba.Login
 
         public long insertarAFiliadoConFamilia()
         {
-            long nro = 0;
+            
             SqlConnection miConexion = Conexion.Conectar();
             SqlCommand cmm = new SqlCommand(
             "INSERT INTO Free_Running.Paciente(Nro_Afiliado,Nombre,Apellido,Documento,Direccion,Telefono,Mail,Fecha_Nac,Sexo,Tipo_Documento,Estado_Civil,Cant_Familiares,Plan_Medico,Estado) values(@Nro_Afiliado,@Nombre,@Apellido,@Documento,@Direccion,@Telefono,@Mail,@Fecha_Nac,@Sexo,@Tipo_Documento,@Estado_Civil,@Cant_Familiares,@Plan_Medico,@Estado)", miConexion);

@@ -50,6 +50,7 @@
             this.ClientSize = new System.Drawing.Size(567, 256);
             this.Controls.Add(this.dgvTop);
             this.Name = "AfiliadoBFvenc";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AfiliadoBFvenc";
             ((System.ComponentModel.ISupportInitialize)(this.dgvTop)).EndInit();
             this.ResumeLayout(false);

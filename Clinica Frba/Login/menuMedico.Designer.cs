@@ -72,6 +72,7 @@
             this.Controls.Add(this.btRegRes);
             this.Controls.Add(this.btAgenda);
             this.Name = "menuMedico";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "menuMedico";
             this.ResumeLayout(false);
 

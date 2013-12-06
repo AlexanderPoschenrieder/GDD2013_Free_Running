@@ -127,7 +127,8 @@
             this.Controls.Add(this.dgvProfecional);
             this.Controls.Add(this.gbBuscarTurno);
             this.Name = "Registro_de_llegada";
-            this.Text = "Registro_de_llegada";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "ABM Registro de llegada";
             ((System.ComponentModel.ISupportInitialize)(this.dgvProfecional)).EndInit();
             this.gbBuscarTurno.ResumeLayout(false);
             this.gbBuscarTurno.PerformLayout();

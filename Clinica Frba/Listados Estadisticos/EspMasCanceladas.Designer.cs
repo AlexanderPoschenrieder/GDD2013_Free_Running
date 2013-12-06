@@ -50,6 +50,7 @@
             this.ClientSize = new System.Drawing.Size(621, 257);
             this.Controls.Add(this.dvgTop);
             this.Name = "EspMasCanceladas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EspMasCanceladas";
             ((System.ComponentModel.ISupportInitialize)(this.dvgTop)).EndInit();
             this.ResumeLayout(false);

@@ -50,6 +50,7 @@
             this.ClientSize = new System.Drawing.Size(819, 317);
             this.Controls.Add(this.dvgTop);
             this.Name = "AfiliadosMasBnoPropios";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AfiliadosMasBnoPropios";
             ((System.ComponentModel.ISupportInitialize)(this.dvgTop)).EndInit();
             this.ResumeLayout(false);

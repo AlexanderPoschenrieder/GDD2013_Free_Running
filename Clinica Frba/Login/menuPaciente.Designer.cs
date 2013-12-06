@@ -60,6 +60,7 @@
             this.Controls.Add(this.btCancelar);
             this.Controls.Add(this.btComprar);
             this.Name = "menuPaciente";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "menuPaciente";
             this.ResumeLayout(false);
 

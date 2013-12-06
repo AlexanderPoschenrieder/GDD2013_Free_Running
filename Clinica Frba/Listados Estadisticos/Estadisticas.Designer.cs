@@ -143,6 +143,7 @@
             this.Controls.Add(this.nSemestre);
             this.Controls.Add(this.dtpAño);
             this.Name = "Estadisticas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Estadisticas";
             ((System.ComponentModel.ISupportInitialize)(this.nSemestre)).EndInit();
             this.ResumeLayout(false);

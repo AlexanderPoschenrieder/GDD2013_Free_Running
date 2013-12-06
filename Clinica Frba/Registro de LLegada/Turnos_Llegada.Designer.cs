@@ -49,11 +49,11 @@
             this.groupBox1.Size = new System.Drawing.Size(533, 100);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "Validar Turno";
             // 
             // btLimpiar
             // 
-            this.btLimpiar.Location = new System.Drawing.Point(395, 42);
+            this.btLimpiar.Location = new System.Drawing.Point(394, 44);
             this.btLimpiar.Name = "btLimpiar";
             this.btLimpiar.Size = new System.Drawing.Size(75, 23);
             this.btLimpiar.TabIndex = 4;
@@ -63,7 +63,7 @@
             // 
             // btValidar
             // 
-            this.btValidar.Location = new System.Drawing.Point(287, 42);
+            this.btValidar.Location = new System.Drawing.Point(286, 44);
             this.btValidar.Name = "btValidar";
             this.btValidar.Size = new System.Drawing.Size(75, 23);
             this.btValidar.TabIndex = 3;
@@ -74,7 +74,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(64, 50);
+            this.label1.Location = new System.Drawing.Point(63, 49);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 2;
@@ -82,7 +82,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(139, 44);
+            this.textBox1.Location = new System.Drawing.Point(138, 45);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(134, 20);
             this.textBox1.TabIndex = 1;
@@ -107,7 +107,8 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvTurnos);
             this.Name = "Turnos_Llegada";
-            this.Text = "Turnos_Llegada";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Proximos Turnos";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTurnos)).EndInit();

@@ -35,11 +35,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lbAfiliado = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btConfirmar
             // 
-            this.btConfirmar.Location = new System.Drawing.Point(121, 137);
+            this.btConfirmar.Location = new System.Drawing.Point(134, 137);
             this.btConfirmar.Name = "btConfirmar";
             this.btConfirmar.Size = new System.Drawing.Size(75, 23);
             this.btConfirmar.TabIndex = 14;
@@ -49,7 +51,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(152, 72);
+            this.textBox1.Location = new System.Drawing.Point(109, 87);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 13;
@@ -58,7 +60,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(64, 75);
+            this.label6.Location = new System.Drawing.Point(21, 90);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(82, 13);
             this.label6.TabIndex = 12;
@@ -67,7 +69,7 @@
             // lbTurno
             // 
             this.lbTurno.AutoSize = true;
-            this.lbTurno.Location = new System.Drawing.Point(152, 45);
+            this.lbTurno.Location = new System.Drawing.Point(109, 60);
             this.lbTurno.Name = "lbTurno";
             this.lbTurno.Size = new System.Drawing.Size(35, 13);
             this.lbTurno.TabIndex = 11;
@@ -76,7 +78,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(85, 45);
+            this.label5.Location = new System.Drawing.Point(42, 60);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 13);
             this.label5.TabIndex = 10;
@@ -85,7 +87,7 @@
             // lbAfiliado
             // 
             this.lbAfiliado.AutoSize = true;
-            this.lbAfiliado.Location = new System.Drawing.Point(152, 17);
+            this.lbAfiliado.Location = new System.Drawing.Point(109, 32);
             this.lbAfiliado.Name = "lbAfiliado";
             this.lbAfiliado.Size = new System.Drawing.Size(35, 13);
             this.lbAfiliado.TabIndex = 9;
@@ -94,28 +96,39 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(79, 17);
+            this.label2.Location = new System.Drawing.Point(36, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 13);
             this.label2.TabIndex = 8;
             this.label2.Text = "Afiliado Nro: ";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btConfirmar);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.lbAfiliado);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.lbTurno);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(230, 179);
+            this.groupBox1.TabIndex = 15;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Ingresar Bono Consulta";
+            // 
             // LlegadaConfirmada
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(316, 176);
-            this.Controls.Add(this.btConfirmar);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.lbTurno);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.lbAfiliado);
-            this.Controls.Add(this.label2);
+            this.ClientSize = new System.Drawing.Size(255, 207);
+            this.Controls.Add(this.groupBox1);
             this.Name = "LlegadaConfirmada";
-            this.Text = "LlegadaConfirmada";
+            this.Text = "Llegada Confirmada";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -128,5 +141,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lbAfiliado;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

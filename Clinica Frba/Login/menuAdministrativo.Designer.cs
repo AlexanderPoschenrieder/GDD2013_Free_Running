@@ -119,6 +119,7 @@
             this.Controls.Add(this.btAfiliado);
             this.Controls.Add(this.btRol);
             this.Name = "menuAdministrativo";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "menuAdministrativo";
             this.ResumeLayout(false);
 
