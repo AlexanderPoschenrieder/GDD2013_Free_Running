@@ -19,11 +19,11 @@ namespace Clinica_Frba.Abm_de_Rol
             tbRol.Text = miRol;
             iniciarDGV("Eliminar", dgvFun);
             iniciarDGV("Agregar", dgvAgregar);
-            inicializar();
+            inicializar(Rol);
            
         }
 
-        public void inicializar() 
+        public void inicializar(string miRol) 
         {
             dgvFun.Rows.Clear();
             dgvAgregar.Rows.Clear();
@@ -31,6 +31,24 @@ namespace Clinica_Frba.Abm_de_Rol
             tablaAgregar = "SELECT Id Funcionalidad FROM Free_Running.Funcionalidad F Where (not exists (select * from Free_Running.Funcionalidad_por_Rol FxR Where FxR.Rol_Id = '" + Rol + "' and F.Id = FxR.Funcionalidad_Id))";
             cargardatagridview("", tablaEliminar, dgvFun);
             cargardatagridview("", tablaAgregar, dgvAgregar);
+            cbEstado.Text = estadoRol(miRol);
+        }
+
+        public String estadoRol(string miRol) 
+        {
+            string rta = "Inhabilitado";
+            SqlConnection con = Conexion.Conectar();
+            SqlCommand comando = new SqlCommand("select R.Habilitado from Free_Running.Rol R where R.Id = '"+miRol+"'", con);
+            SqlDataReader dr;
+            dr = comando.ExecuteReader();
+            if (dr.Read())
+            {
+                if (Convert.ToInt16(dr[0]) == 1) { rta = "Habilitado"; }
+            }
+            else { MessageBox.Show("Rol Incorrecto"); }
+
+            return rta;
+
         }
 
 
@@ -103,11 +121,14 @@ namespace Clinica_Frba.Abm_de_Rol
         {
             if (Validar.noVacio(tbRol.Text))
             {
+                int estado = 0;
+                if (cbEstado.Text == "Habilitado"){estado = 1;}
                 SqlConnection con = Conexion.Conectar();
-                SqlCommand cRol = new SqlCommand("UPDATE Free_Running.Rol SET Id='"+ tbRol.Text +"' WHERE Id ='"+ Rol +"'", con);
+
+                SqlCommand cRol = new SqlCommand("UPDATE Free_Running.Rol SET Id='" + tbRol.Text + "', Habilitado ='"+estado+"' WHERE Id ='" + Rol + "'", con);
                 cRol.ExecuteNonQuery();
                 Rol = tbRol.Text;
-                inicializar();
+                inicializar(Rol);
             }
             else { MessageBox.Show("Campo Vacio"); }
         }
@@ -134,13 +155,13 @@ namespace Clinica_Frba.Abm_de_Rol
 
         private void btLimpiar_Click(object sender, EventArgs e)
         {
-            inicializar();
+            inicializar(Rol);
             tbBuscar1.Text = "";
         }
 
         private void btLimpiar2_Click(object sender, EventArgs e)
         {
-            inicializar();
+            inicializar(Rol);
             tbBuscFunc2.Text = "";
         }
     }

@@ -19,21 +19,21 @@ namespace Clinica_Frba.Abm_de_Rol
         private void btAlta_Click(object sender, EventArgs e)
         {
             AltaRol alta = new AltaRol();
-            this.Hide();
+            //this.Hide();
             alta.ShowDialog();
         }
 
         private void btBaja_Click(object sender, EventArgs e)
         {
             BajaRol baja = new BajaRol();
-            this.Hide();
+            //this.Hide();
             baja.ShowDialog();
         }
 
         private void btModificar_Click(object sender, EventArgs e)
         {
             ModificarRol modif = new ModificarRol();
-            this.Hide();
+            //this.Hide();
             modif.ShowDialog();
         }
 
