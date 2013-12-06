@@ -74,6 +74,7 @@
             this.btCompra.TabIndex = 10;
             this.btCompra.Text = "COMPRA BONO";
             this.btCompra.UseVisualStyleBackColor = true;
+            this.btCompra.Click += new System.EventHandler(this.btCompra_Click);
             // 
             // btProf
             // 

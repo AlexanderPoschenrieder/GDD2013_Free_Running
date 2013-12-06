@@ -1214,37 +1214,6 @@ select p.Plan_Medico as PlanMedico,pm.Precio_Bono_Consulta as PrecioBonoConsulta
 GO
 
 
-
-
---Trigger para calcular la fecha actual
-CREATE TRIGGER [Free_Running].[insteadInsertTriggerConsulta]
-   ON  [Free_Running].[Bono_Consulta]
-   instead of INSERT
-AS 
-BEGIN
-	insert into Free_Running.Bono_Consulta
-	(Fecha_Compra,Plan_Correspondiente,Afiliado_Compra,Precio)
-	select GETDATE(),i.Plan_Correspondiente,i.Afiliado_Compra,i.Precio
-	from inserted i
-END
-GO
-
-
-
---Guarda la fecha de vencimiento al momento de hacer el insert
-CREATE TRIGGER [Free_Running].[insteadInsertTriggerFarmacia]
-   ON  [Free_Running].[Bono_Farmacia]
-   Instead of INSERT
-AS 
-BEGIN
-	insert into Free_Running.Bono_Farmacia
-	(Fecha_Compra,Fecha_Vencimiento,Plan_Correspondiente,Afiliado_Compra,Precio)
-	select GETDATE(),Free_Running.calcula_fecha_vencimiento(GETDATE()),i.Plan_Correspondiente,i.Afiliado_Compra,i.Precio
-	from inserted i
-END
-
-GO
-
 --cancelar turno------------------------------------------------------
 CREATE PROCEDURE Free_Running.cancelarTurno(@idTurno int,@detalle varchar(255),@tipo varchar(255),@canceladoPor varchar(255))
 AS

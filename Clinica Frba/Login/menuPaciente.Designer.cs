@@ -40,6 +40,7 @@
             this.btCancelar.TabIndex = 3;
             this.btCancelar.Text = "Cancelar Turno";
             this.btCancelar.UseVisualStyleBackColor = true;
+            this.btCancelar.Click += new System.EventHandler(this.btCancelar_Click);
             // 
             // btComprar
             // 
@@ -49,6 +50,7 @@
             this.btComprar.TabIndex = 2;
             this.btComprar.Text = "Comprar Bono";
             this.btComprar.UseVisualStyleBackColor = true;
+            this.btComprar.Click += new System.EventHandler(this.btComprar_Click);
             // 
             // menuPaciente
             // 

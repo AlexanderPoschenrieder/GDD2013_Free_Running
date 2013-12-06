@@ -40,7 +40,7 @@ namespace Clinica_Frba.Login
 
         private void btAgenda_Click_1(object sender, EventArgs e)
         {
-            //this.Hide();
+           // this.Hide();
             Clinica_Frba.Registrar_Agenda.ABM_Agenda agenda = new Clinica_Frba.Registrar_Agenda.ABM_Agenda(miMedico);
             agenda.ShowDialog();
         }
@@ -49,6 +49,13 @@ namespace Clinica_Frba.Login
         {
             //Clinica_Frba.Registro_Resultado_Atencion.AtencionForm atencion = new Clinica_Frba.Registro_Resultado_Atencion.AtencionForm();
             //this.Hide();
+        }
+
+        private void btCancelarT_Click(object sender, EventArgs e)
+        {
+            //El flow para cancelar el turno por parte del medico comienza en la vista mostrarAgenda
+            Clinica_Frba.Pedir_Turno.MostrarAgendaForm abmCancelarTurno = new Clinica_Frba.Pedir_Turno.MostrarAgendaForm((UInt32)miMedico.Id);
+            abmCancelarTurno.ShowDialog();
         }
 
     }

@@ -41,6 +41,7 @@
             this.btCancelarT.TabIndex = 6;
             this.btCancelarT.Text = "CANCELACION TURNO";
             this.btCancelarT.UseVisualStyleBackColor = true;
+            this.btCancelarT.Click += new System.EventHandler(this.btCancelarT_Click);
             // 
             // btRegRes
             // 

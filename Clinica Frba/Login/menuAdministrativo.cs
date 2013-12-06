@@ -69,6 +69,12 @@ namespace Clinica_Frba.Login
 
         }
 
+        private void btCompra_Click(object sender, EventArgs e)
+        {
+            Clinica_Frba.Compra_de_Bono.CompraBonoAdmin abmBono = new Clinica_Frba.Compra_de_Bono.CompraBonoAdmin();
+            abmBono.ShowDialog();
+        }
+
 
 
 
