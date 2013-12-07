@@ -90,7 +90,7 @@
             this.Controls.Add(this.tbSintomas);
             this.Controls.Add(this.label1);
             this.Name = "ResulAtForm";
-            this.Text = "Form1";
+            this.Text = "Ingrese síntomas";
             this.ResumeLayout(false);
             this.PerformLayout();
 
