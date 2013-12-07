@@ -1252,7 +1252,7 @@ RETURN
 )
 
 GO
-
+/*
 CREATE FUNCTION Free_Running.diasAtencionMedico(@idMedico int)
 
 RETURNS TABLE 
@@ -1267,6 +1267,7 @@ RETURN
 	
 )
 GO
+*/
 
 CREATE PROCEDURE Free_Running.usuarioExisteActivo(@nroAfiliado int, @salida int output)
 AS

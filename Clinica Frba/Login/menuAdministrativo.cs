@@ -29,7 +29,7 @@ namespace Clinica_Frba.Login
             if (misFuncionalidades.Contains("AFILIADO")) { } else { btAfiliado.Visible = false; }
             if (misFuncionalidades.Contains("PROFESIONAL")) { } else { btProf.Visible = false; }
             if (misFuncionalidades.Contains("COMPRA_BONO")) { } else { btCompra.Visible = false; }
-            if (misFuncionalidades.Contains("PEDIDO_TURNO")) { } else { btPedido.Visible = false; }
+         
             if (misFuncionalidades.Contains("LLEGADA_ATENCION_MEDICA")) { } else { this.btLlegada.Visible = false; }
             if (misFuncionalidades.Contains("LISTADO_ESTADISTICO")) { } else { btEstadist.Visible = false; }
         }
@@ -74,6 +74,7 @@ namespace Clinica_Frba.Login
             Clinica_Frba.Pedir_Turno.BusquedaProfesionalForm abmBono = new Clinica_Frba.Pedir_Turno.BusquedaProfesionalForm();
             abmBono.ShowDialog();
         }
+
 
 
 

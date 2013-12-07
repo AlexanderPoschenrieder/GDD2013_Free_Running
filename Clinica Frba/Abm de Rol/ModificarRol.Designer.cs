@@ -107,6 +107,7 @@
             this.Controls.Add(this.dgvRol);
             this.Controls.Add(this.groupBox1);
             this.Name = "ModificarRol";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ModificarRol";
             this.Load += new System.EventHandler(this.ModificarRol_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRol)).EndInit();

@@ -72,6 +72,7 @@
             this.Controls.Add(this.btBaja);
             this.Controls.Add(this.btAlta);
             this.Name = "ABM_ROL";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM_ROL";
             this.ResumeLayout(false);
 

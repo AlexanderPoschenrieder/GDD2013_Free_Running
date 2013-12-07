@@ -101,6 +101,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Name = "AltaRol";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AltaRol";
             this.ResumeLayout(false);
             this.PerformLayout();

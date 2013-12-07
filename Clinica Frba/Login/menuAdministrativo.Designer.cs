@@ -30,7 +30,6 @@
         {
             this.btEstadist = new System.Windows.Forms.Button();
             this.btLlegada = new System.Windows.Forms.Button();
-            this.btPedido = new System.Windows.Forms.Button();
             this.btCompra = new System.Windows.Forms.Button();
             this.btProf = new System.Windows.Forms.Button();
             this.btAfiliado = new System.Windows.Forms.Button();
@@ -39,7 +38,7 @@
             // 
             // btEstadist
             // 
-            this.btEstadist.Location = new System.Drawing.Point(12, 292);
+            this.btEstadist.Location = new System.Drawing.Point(12, 245);
             this.btEstadist.Name = "btEstadist";
             this.btEstadist.Size = new System.Drawing.Size(194, 32);
             this.btEstadist.TabIndex = 13;
@@ -49,22 +48,13 @@
             // 
             // btLlegada
             // 
-            this.btLlegada.Location = new System.Drawing.Point(12, 245);
+            this.btLlegada.Location = new System.Drawing.Point(12, 198);
             this.btLlegada.Name = "btLlegada";
             this.btLlegada.Size = new System.Drawing.Size(194, 32);
             this.btLlegada.TabIndex = 12;
             this.btLlegada.Text = "LLEGADA ATENCION MEDICA";
             this.btLlegada.UseVisualStyleBackColor = true;
             this.btLlegada.Click += new System.EventHandler(this.btLlegada_Click);
-            // 
-            // btPedido
-            // 
-            this.btPedido.Location = new System.Drawing.Point(12, 198);
-            this.btPedido.Name = "btPedido";
-            this.btPedido.Size = new System.Drawing.Size(194, 32);
-            this.btPedido.TabIndex = 11;
-            this.btPedido.Text = "PEDIDO TURNO";
-            this.btPedido.UseVisualStyleBackColor = true;
             // 
             // btCompra
             // 
@@ -110,10 +100,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(220, 341);
+            this.ClientSize = new System.Drawing.Size(220, 289);
             this.Controls.Add(this.btEstadist);
             this.Controls.Add(this.btLlegada);
-            this.Controls.Add(this.btPedido);
             this.Controls.Add(this.btCompra);
             this.Controls.Add(this.btProf);
             this.Controls.Add(this.btAfiliado);
@@ -129,7 +118,6 @@
 
         private System.Windows.Forms.Button btEstadist;
         private System.Windows.Forms.Button btLlegada;
-        private System.Windows.Forms.Button btPedido;
         private System.Windows.Forms.Button btCompra;
         private System.Windows.Forms.Button btProf;
         private System.Windows.Forms.Button btAfiliado;

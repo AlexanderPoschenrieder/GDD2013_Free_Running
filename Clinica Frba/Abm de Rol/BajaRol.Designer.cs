@@ -106,6 +106,7 @@
             this.Controls.Add(this.dgvRol);
             this.Controls.Add(this.groupBox1);
             this.Name = "BajaRol";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BajaRol";
             this.Load += new System.EventHandler(this.BajaRol_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRol)).EndInit();
