@@ -1522,17 +1522,17 @@ END
 GO
 
 
-CREATE FUNCTION Free_Running.llegadasTurnos(@medico int)
+CREATE FUNCTION [Free_Running].[llegadasTurnos](@medico int)
 RETURNS TABLE 
 AS
 RETURN 
 (
-	select lam.Fecha_Hs_Llegada,t.Medico_Id,(pc.Apellido+','+pc.Nombre) as Paciente,lam.Id as Id
+	select lam.Fecha_Hs_Llegada,(pc.Apellido+','+pc.Nombre) as Paciente,lam.Id as Id
 	from Free_Running.Llegada_Atencion_Medica lam 
 	left join Free_Running.Paciente pc on lam.Nro_Afiliado=pc.Nro_Afiliado
 	left join Free_Running.Turno t on t.Numero= lam.Turno_Numero
 	left join Free_Running.Atencion_Medica am on am.Llegada_Id=lam.Id 
-	where am.Id is null
-	and t.Medico_Id=@medico
+	where t.Medico_Id=@medico
+	and am.Id is null
 )
-GO
+
