@@ -81,7 +81,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboEspecialidades);
             this.Name = "FinalizarPedidoTurno";
-            this.Text = "Form1";
+            this.Text = "Especialidad";
             this.ResumeLayout(false);
             this.PerformLayout();
 

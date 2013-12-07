@@ -57,5 +57,15 @@ namespace Clinica_Frba.Cancelar_Atencion
             llenarTurnos();        
         
         }
+
+        private void CancelarAtencionPaciente_Load(object sender, EventArgs e)
+        {
+         
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

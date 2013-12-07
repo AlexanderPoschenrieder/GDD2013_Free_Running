@@ -333,6 +333,12 @@
     <Compile Include="Registro Resultado Atencion\AtencionForm.Designer.cs">
       <DependentUpon>AtencionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Registro Resultado Atencion\ListaDeLlegadas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registro Resultado Atencion\ListaDeLlegadas.designer.cs">
+      <DependentUpon>ListaDeLlegadas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Registro Resultado Atencion\ResulAtForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -470,6 +476,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Registro Resultado Atencion\AtencionForm.resx">
       <DependentUpon>AtencionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro Resultado Atencion\ListaDeLlegadas.resx">
+      <DependentUpon>ListaDeLlegadas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Registro Resultado Atencion\ResulAtForm.resx">
       <DependentUpon>ResulAtForm.cs</DependentUpon>

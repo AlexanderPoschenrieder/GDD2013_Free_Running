@@ -47,7 +47,8 @@ namespace Clinica_Frba.Login
 
         private void btRegRes_Click(object sender, EventArgs e)
         {
-            //Clinica_Frba.Registro_Resultado_Atencion.AtencionForm atencion = new Clinica_Frba.Registro_Resultado_Atencion.AtencionForm();
+            Clinica_Frba.Registro_Resultado_Atencion.ListaDeLlegadas atencion = new Clinica_Frba.Registro_Resultado_Atencion.ListaDeLlegadas((UInt32)miMedico.Id);
+            atencion.ShowDialog();
             //this.Hide();
         }
 

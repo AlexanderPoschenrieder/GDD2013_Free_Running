@@ -34,6 +34,7 @@
             this.idTurno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.botonSeleccionar = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridTurnos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,16 +89,28 @@
             this.botonSeleccionar.UseVisualStyleBackColor = true;
             this.botonSeleccionar.Click += new System.EventHandler(this.botonSeleccionar_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(185, 152);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Cancelar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // CancelarAtencionPaciente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 191);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.botonSeleccionar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridTurnos);
             this.Name = "CancelarAtencionPaciente";
-            this.Text = "Form1";
+            this.Text = "Turnos";
+            this.Load += new System.EventHandler(this.CancelarAtencionPaciente_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridTurnos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -112,5 +125,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Turno_Fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn Especialidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn idTurno;
+        private System.Windows.Forms.Button button1;
     }
 }

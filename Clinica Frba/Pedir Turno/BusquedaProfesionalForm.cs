@@ -31,7 +31,6 @@ namespace Clinica_Frba.Pedir_Turno
             gridResultados.ReadOnly = true;
             gridResultados.Columns["Id"].Visible = false;
 
-
         }
 
         //Constructor para la ABM compraBono
@@ -119,8 +118,7 @@ namespace Clinica_Frba.Pedir_Turno
                 int index = (int)gridResultados.SelectedCells[0].RowIndex;
                 int idPac = Convert.ToInt32(gridResultados.Rows[index].Cells["Id"].Value);
                 Compra_de_Bono.CompraBonoForm ventana = new Clinica_Frba.Compra_de_Bono.CompraBonoForm(idPac);
-                ventana.ShowDialog();
-            
+                ventana.ShowDialog();            
             }
         
         }
@@ -133,6 +131,11 @@ namespace Clinica_Frba.Pedir_Turno
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             miModelo.dni = textBox1.Text;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

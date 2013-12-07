@@ -152,7 +152,7 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.gridCarrito);
             this.Name = "CompraBonoForm";
-            this.Text = "Form1";
+            this.Text = "Compra de bonos";
             ((System.ComponentModel.ISupportInitialize)(this.gridCarrito)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -48,5 +48,10 @@ namespace Clinica_Frba.Generar_Receta
                 return idAfiliado;
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

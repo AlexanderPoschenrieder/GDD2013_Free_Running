@@ -105,5 +105,10 @@ namespace Clinica_Frba.Pedir_Turno
             botonSeleccionar.Enabled = true;
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }

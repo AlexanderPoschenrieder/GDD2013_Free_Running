@@ -33,14 +33,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.gridResultados = new System.Windows.Forms.DataGridView();
+            this.NombreProfesional = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SeleccionarButton = new System.Windows.Forms.Button();
             this.botonLimpiar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.NombreProfesional = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridResultados)).BeginInit();
             this.SuspendLayout();
             // 
@@ -94,6 +95,24 @@
             this.gridResultados.Size = new System.Drawing.Size(344, 118);
             this.gridResultados.TabIndex = 5;
             // 
+            // NombreProfesional
+            // 
+            this.NombreProfesional.HeaderText = "Nombre";
+            this.NombreProfesional.Name = "NombreProfesional";
+            this.NombreProfesional.ReadOnly = true;
+            // 
+            // Apellido
+            // 
+            this.Apellido.HeaderText = "Apellido";
+            this.Apellido.Name = "Apellido";
+            this.Apellido.ReadOnly = true;
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
             // SeleccionarButton
             // 
             this.SeleccionarButton.Location = new System.Drawing.Point(14, 260);
@@ -102,7 +121,6 @@
             this.SeleccionarButton.TabIndex = 6;
             this.SeleccionarButton.Text = "Seleccionar";
             this.SeleccionarButton.UseVisualStyleBackColor = true;
-            
             // 
             // botonLimpiar
             // 
@@ -140,29 +158,22 @@
             this.textBox1.TabIndex = 9;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // NombreProfesional
+            // button2
             // 
-            this.NombreProfesional.HeaderText = "Nombre";
-            this.NombreProfesional.Name = "NombreProfesional";
-            this.NombreProfesional.ReadOnly = true;
-            // 
-            // Apellido
-            // 
-            this.Apellido.HeaderText = "Apellido";
-            this.Apellido.Name = "Apellido";
-            this.Apellido.ReadOnly = true;
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
+            this.button2.Location = new System.Drawing.Point(282, 260);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "Cancelar";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // BusquedaProfesionalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(391, 289);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.botonLimpiar);
@@ -174,7 +185,7 @@
             this.Controls.Add(this.NombreProfTB);
             this.Controls.Add(this.label1);
             this.Name = "BusquedaProfesionalForm";
-            this.Text = "Form1";
+            this.Text = "Búsqueda";
             ((System.ComponentModel.ISupportInitialize)(this.gridResultados)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -196,5 +207,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn NombreProfesional;
         private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.Button button2;
     }
 }
