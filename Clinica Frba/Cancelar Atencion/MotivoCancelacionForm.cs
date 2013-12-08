@@ -62,11 +62,12 @@ namespace Clinica_Frba.Cancelar_Atencion
 
         private void button1_Click(object sender, EventArgs e)
         {
-            miConexion = Conexion.Conectar();
-            stringInsert=stringInsert + armarStringTurno(turnoACancelar, "Paciente");
-            commandInsert= new SqlCommand(stringInsert,miConexion);
-            commandInsert.ExecuteNonQuery();
-            MessageBox.Show("Su turno ha sido cancelado");
+                miConexion = Conexion.Conectar();
+                stringInsert = stringInsert + armarStringTurno(turnoACancelar, "Paciente");
+                commandInsert = new SqlCommand(stringInsert, miConexion);
+                commandInsert.ExecuteNonQuery();
+                MessageBox.Show("Su turno ha sido cancelado");
+
             this.Close();
         }
 
@@ -77,5 +78,7 @@ namespace Clinica_Frba.Cancelar_Atencion
                 tbDetalle.Text,
                 comboMotivos.Text);
         }
+
+
     }
 }

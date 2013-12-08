@@ -38,6 +38,7 @@
             // 
             // comboMotivos
             // 
+            this.comboMotivos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboMotivos.FormattingEnabled = true;
             this.comboMotivos.Location = new System.Drawing.Point(13, 35);
             this.comboMotivos.Name = "comboMotivos";
