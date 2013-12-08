@@ -59,9 +59,11 @@
             this.ClientSize = new System.Drawing.Size(160, 127);
             this.Controls.Add(this.btCancelar);
             this.Controls.Add(this.btComprar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "menuPaciente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "menuPaciente";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.menuPaciente_FormClosing);
             this.ResumeLayout(false);
 
         }

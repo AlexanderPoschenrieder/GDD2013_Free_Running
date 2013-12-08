@@ -106,6 +106,7 @@
             this.ClientSize = new System.Drawing.Size(563, 464);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvTurnos);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Turnos_Llegada";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Proximos Turnos";

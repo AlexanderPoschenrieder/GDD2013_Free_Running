@@ -81,7 +81,7 @@
             this.TipoDoctxt.Location = new System.Drawing.Point(151, 105);
             this.TipoDoctxt.Name = "TipoDoctxt";
             this.TipoDoctxt.Size = new System.Drawing.Size(100, 21);
-            this.TipoDoctxt.TabIndex = 172;
+            this.TipoDoctxt.TabIndex = 2;
             this.TipoDoctxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TipoDoctxt_KeyPress);
             // 
             // label6
@@ -107,7 +107,7 @@
             this.Teltxt.Location = new System.Drawing.Point(151, 177);
             this.Teltxt.Name = "Teltxt";
             this.Teltxt.Size = new System.Drawing.Size(100, 20);
-            this.Teltxt.TabIndex = 166;
+            this.Teltxt.TabIndex = 4;
             this.Teltxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Teltxt_KeyPress);
             // 
             // Mailtxt
@@ -115,14 +115,14 @@
             this.Mailtxt.Location = new System.Drawing.Point(151, 218);
             this.Mailtxt.Name = "Mailtxt";
             this.Mailtxt.Size = new System.Drawing.Size(100, 20);
-            this.Mailtxt.TabIndex = 168;
+            this.Mailtxt.TabIndex = 5;
             // 
             // NroDoctxt
             // 
             this.NroDoctxt.Location = new System.Drawing.Point(151, 140);
             this.NroDoctxt.Name = "NroDoctxt";
             this.NroDoctxt.Size = new System.Drawing.Size(100, 20);
-            this.NroDoctxt.TabIndex = 164;
+            this.NroDoctxt.TabIndex = 3;
             this.NroDoctxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NroDoctxt_KeyPress);
             // 
             // label4
@@ -166,7 +166,7 @@
             this.Apellidotxt.Location = new System.Drawing.Point(151, 64);
             this.Apellidotxt.Name = "Apellidotxt";
             this.Apellidotxt.Size = new System.Drawing.Size(100, 20);
-            this.Apellidotxt.TabIndex = 162;
+            this.Apellidotxt.TabIndex = 1;
             this.Apellidotxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Apellidotxt_KeyPress);
             // 
             // Nombretxt
@@ -174,7 +174,7 @@
             this.Nombretxt.Location = new System.Drawing.Point(151, 25);
             this.Nombretxt.Name = "Nombretxt";
             this.Nombretxt.Size = new System.Drawing.Size(100, 20);
-            this.Nombretxt.TabIndex = 161;
+            this.Nombretxt.TabIndex = 0;
             this.Nombretxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Nombretxt_KeyPress);
             // 
             // Clavetxt
@@ -182,7 +182,7 @@
             this.Clavetxt.Location = new System.Drawing.Point(148, 508);
             this.Clavetxt.Name = "Clavetxt";
             this.Clavetxt.Size = new System.Drawing.Size(100, 20);
-            this.Clavetxt.TabIndex = 160;
+            this.Clavetxt.TabIndex = 13;
             // 
             // label14
             // 
@@ -207,14 +207,14 @@
             this.Usertxt.Location = new System.Drawing.Point(148, 480);
             this.Usertxt.Name = "Usertxt";
             this.Usertxt.Size = new System.Drawing.Size(100, 20);
-            this.Usertxt.TabIndex = 157;
+            this.Usertxt.TabIndex = 12;
             // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(257, 290);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(25, 22);
-            this.button2.TabIndex = 156;
+            this.button2.TabIndex = 7;
             this.button2.Text = "...";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -233,14 +233,14 @@
             this.Directxt.Location = new System.Drawing.Point(151, 254);
             this.Directxt.Name = "Directxt";
             this.Directxt.Size = new System.Drawing.Size(100, 20);
-            this.Directxt.TabIndex = 143;
+            this.Directxt.TabIndex = 6;
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(148, 557);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 154;
+            this.button1.TabIndex = 14;
             this.button1.Text = "Aceptar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -273,14 +273,14 @@
             this.PlanMedtxt.Location = new System.Drawing.Point(151, 441);
             this.PlanMedtxt.Name = "PlanMedtxt";
             this.PlanMedtxt.Size = new System.Drawing.Size(100, 21);
-            this.PlanMedtxt.TabIndex = 148;
+            this.PlanMedtxt.TabIndex = 11;
             // 
             // CantFamHijtxt
             // 
             this.CantFamHijtxt.Location = new System.Drawing.Point(151, 405);
             this.CantFamHijtxt.Name = "CantFamHijtxt";
             this.CantFamHijtxt.Size = new System.Drawing.Size(100, 20);
-            this.CantFamHijtxt.TabIndex = 147;
+            this.CantFamHijtxt.TabIndex = 10;
             this.CantFamHijtxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CantFamHijtxt_KeyPress);
             // 
             // label10
@@ -314,7 +314,7 @@
             this.EstCiviltxt.Location = new System.Drawing.Point(151, 366);
             this.EstCiviltxt.Name = "EstCiviltxt";
             this.EstCiviltxt.Size = new System.Drawing.Size(100, 21);
-            this.EstCiviltxt.TabIndex = 146;
+            this.EstCiviltxt.TabIndex = 9;
             // 
             // label8
             // 
@@ -335,7 +335,7 @@
             this.Sexotxt.Location = new System.Drawing.Point(151, 327);
             this.Sexotxt.Name = "Sexotxt";
             this.Sexotxt.Size = new System.Drawing.Size(100, 21);
-            this.Sexotxt.TabIndex = 145;
+            this.Sexotxt.TabIndex = 8;
             // 
             // label7
             // 
@@ -353,6 +353,7 @@
             this.FechaNactxt1.ReadOnly = true;
             this.FechaNactxt1.Size = new System.Drawing.Size(100, 20);
             this.FechaNactxt1.TabIndex = 144;
+            this.FechaNactxt1.TabStop = false;
             // 
             // Agregar_Afiliado
             // 
@@ -390,7 +391,9 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.Sexotxt);
             this.Controls.Add(this.label7);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Agregar_Afiliado";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agregar_Afiliado";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -106,6 +106,7 @@
             this.ClientSize = new System.Drawing.Size(457, 421);
             this.Controls.Add(this.dgvRol);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ModificarRol";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ModificarRol";

@@ -92,7 +92,7 @@
             this.button1.Location = new System.Drawing.Point(546, 31);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 140;
+            this.button1.TabIndex = 2;
             this.button1.Text = "Filtrar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -102,7 +102,7 @@
             this.Idtxt.Location = new System.Drawing.Point(416, 33);
             this.Idtxt.Name = "Idtxt";
             this.Idtxt.Size = new System.Drawing.Size(100, 20);
-            this.Idtxt.TabIndex = 139;
+            this.Idtxt.TabIndex = 1;
             this.Idtxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Idtxt_KeyPress);
             // 
             // TipoDoctxt
@@ -116,14 +116,14 @@
             this.TipoDoctxt.Location = new System.Drawing.Point(348, 363);
             this.TipoDoctxt.Name = "TipoDoctxt";
             this.TipoDoctxt.Size = new System.Drawing.Size(100, 21);
-            this.TipoDoctxt.TabIndex = 138;
+            this.TipoDoctxt.TabIndex = 6;
             // 
             // Usertxt
             // 
             this.Usertxt.Location = new System.Drawing.Point(760, 407);
             this.Usertxt.Name = "Usertxt";
             this.Usertxt.Size = new System.Drawing.Size(100, 20);
-            this.Usertxt.TabIndex = 137;
+            this.Usertxt.TabIndex = 13;
             // 
             // label12
             // 
@@ -139,7 +139,7 @@
             this.button3.Location = new System.Drawing.Point(662, 449);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(25, 22);
-            this.button3.TabIndex = 135;
+            this.button3.TabIndex = 11;
             this.button3.Text = "...";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -284,7 +284,7 @@
             this.Sexotxt.Location = new System.Drawing.Point(158, 448);
             this.Sexotxt.Name = "Sexotxt";
             this.Sexotxt.Size = new System.Drawing.Size(100, 21);
-            this.Sexotxt.TabIndex = 132;
+            this.Sexotxt.TabIndex = 5;
             // 
             // label11
             // 
@@ -381,7 +381,7 @@
             this.Matriculatxt.Location = new System.Drawing.Point(760, 364);
             this.Matriculatxt.Name = "Matriculatxt";
             this.Matriculatxt.Size = new System.Drawing.Size(100, 20);
-            this.Matriculatxt.TabIndex = 121;
+            this.Matriculatxt.TabIndex = 12;
             this.Matriculatxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Matriculatxt_KeyPress);
             // 
             // FechaNactxt
@@ -391,6 +391,7 @@
             this.FechaNactxt.ReadOnly = true;
             this.FechaNactxt.Size = new System.Drawing.Size(100, 20);
             this.FechaNactxt.TabIndex = 120;
+            this.FechaNactxt.TabStop = false;
             this.FechaNactxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FechaNactxt_KeyPress);
             // 
             // Mailtxt
@@ -398,14 +399,14 @@
             this.Mailtxt.Location = new System.Drawing.Point(556, 407);
             this.Mailtxt.Name = "Mailtxt";
             this.Mailtxt.Size = new System.Drawing.Size(100, 20);
-            this.Mailtxt.TabIndex = 119;
+            this.Mailtxt.TabIndex = 10;
             // 
             // Teltxt
             // 
             this.Teltxt.Location = new System.Drawing.Point(556, 364);
             this.Teltxt.Name = "Teltxt";
             this.Teltxt.Size = new System.Drawing.Size(100, 20);
-            this.Teltxt.TabIndex = 118;
+            this.Teltxt.TabIndex = 9;
             this.Teltxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Teltxt_KeyPress);
             // 
             // Directxt
@@ -413,14 +414,14 @@
             this.Directxt.Location = new System.Drawing.Point(348, 449);
             this.Directxt.Name = "Directxt";
             this.Directxt.Size = new System.Drawing.Size(100, 20);
-            this.Directxt.TabIndex = 117;
+            this.Directxt.TabIndex = 8;
             // 
             // Doctxt
             // 
             this.Doctxt.Location = new System.Drawing.Point(348, 407);
             this.Doctxt.Name = "Doctxt";
             this.Doctxt.Size = new System.Drawing.Size(100, 20);
-            this.Doctxt.TabIndex = 116;
+            this.Doctxt.TabIndex = 7;
             this.Doctxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Doctxt_KeyPress);
             // 
             // Apellidotxt
@@ -428,7 +429,7 @@
             this.Apellidotxt.Location = new System.Drawing.Point(158, 407);
             this.Apellidotxt.Name = "Apellidotxt";
             this.Apellidotxt.Size = new System.Drawing.Size(100, 20);
-            this.Apellidotxt.TabIndex = 115;
+            this.Apellidotxt.TabIndex = 4;
             this.Apellidotxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Apellidotxt_KeyPress);
             // 
             // Nombretxt
@@ -436,7 +437,7 @@
             this.Nombretxt.Location = new System.Drawing.Point(158, 364);
             this.Nombretxt.Name = "Nombretxt";
             this.Nombretxt.Size = new System.Drawing.Size(100, 20);
-            this.Nombretxt.TabIndex = 114;
+            this.Nombretxt.TabIndex = 3;
             this.Nombretxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Nombretxt_KeyPress);
             // 
             // button2
@@ -444,7 +445,7 @@
             this.button2.Location = new System.Drawing.Point(410, 504);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(148, 23);
-            this.button2.TabIndex = 113;
+            this.button2.TabIndex = 14;
             this.button2.Text = "Modificar Datos";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);

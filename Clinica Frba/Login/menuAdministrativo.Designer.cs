@@ -107,9 +107,11 @@
             this.Controls.Add(this.btProf);
             this.Controls.Add(this.btAfiliado);
             this.Controls.Add(this.btRol);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "menuAdministrativo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "menuAdministrativo";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.menuAdministrativo_FormClosing);
             this.ResumeLayout(false);
 
         }

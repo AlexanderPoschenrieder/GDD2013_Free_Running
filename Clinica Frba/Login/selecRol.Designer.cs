@@ -69,7 +69,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btAceptar);
             this.Controls.Add(this.cbRoles);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "selecRol";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Selecionar Rol";

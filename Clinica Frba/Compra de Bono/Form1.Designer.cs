@@ -151,7 +151,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.gridCarrito);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "CompraBonoForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Compra de bonos";
             ((System.ComponentModel.ISupportInitialize)(this.gridCarrito)).EndInit();
             this.ResumeLayout(false);

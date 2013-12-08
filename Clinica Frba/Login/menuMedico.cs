@@ -59,5 +59,10 @@ namespace Clinica_Frba.Login
             abmCancelarTurno.ShowDialog();
         }
 
+        private void menuMedico_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
     }
 }

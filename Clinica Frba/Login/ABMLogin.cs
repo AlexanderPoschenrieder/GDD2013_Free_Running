@@ -35,6 +35,11 @@ namespace Clinica_Frba.Login
             realizarLogin();
         }
 
+        private void ABMLogin_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
 
     }
 }

@@ -103,7 +103,7 @@
             this.Estadotxt.Location = new System.Drawing.Point(834, 340);
             this.Estadotxt.Name = "Estadotxt";
             this.Estadotxt.Size = new System.Drawing.Size(100, 21);
-            this.Estadotxt.TabIndex = 153;
+            this.Estadotxt.TabIndex = 15;
             this.Estadotxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Estadotxt_KeyPress);
             // 
             // TipoDoctxt
@@ -117,7 +117,7 @@
             this.TipoDoctxt.Location = new System.Drawing.Point(454, 420);
             this.TipoDoctxt.Name = "TipoDoctxt";
             this.TipoDoctxt.Size = new System.Drawing.Size(100, 21);
-            this.TipoDoctxt.TabIndex = 152;
+            this.TipoDoctxt.TabIndex = 11;
             this.TipoDoctxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TipoDoctxt_KeyPress);
             // 
             // dataGridView1
@@ -270,7 +270,7 @@
             this.Usertxt.Location = new System.Drawing.Point(834, 377);
             this.Usertxt.Name = "Usertxt";
             this.Usertxt.Size = new System.Drawing.Size(100, 20);
-            this.Usertxt.TabIndex = 150;
+            this.Usertxt.TabIndex = 16;
             // 
             // label16
             // 
@@ -286,7 +286,7 @@
             this.button3.Location = new System.Drawing.Point(559, 338);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(25, 22);
-            this.button3.TabIndex = 148;
+            this.button3.TabIndex = 9;
             this.button3.Text = "...";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -319,7 +319,7 @@
             this.PlanMedtxt.Location = new System.Drawing.Point(667, 421);
             this.PlanMedtxt.Name = "PlanMedtxt";
             this.PlanMedtxt.Size = new System.Drawing.Size(100, 21);
-            this.PlanMedtxt.TabIndex = 146;
+            this.PlanMedtxt.TabIndex = 14;
             // 
             // EstadoCivtxt
             // 
@@ -340,7 +340,7 @@
             this.EstadoCivtxt.Location = new System.Drawing.Point(667, 340);
             this.EstadoCivtxt.Name = "EstadoCivtxt";
             this.EstadoCivtxt.Size = new System.Drawing.Size(100, 21);
-            this.EstadoCivtxt.TabIndex = 145;
+            this.EstadoCivtxt.TabIndex = 12;
             this.EstadoCivtxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EstadoCivtxt_KeyPress);
             // 
             // Sexotxt
@@ -353,7 +353,7 @@
             this.Sexotxt.Location = new System.Drawing.Point(454, 381);
             this.Sexotxt.Name = "Sexotxt";
             this.Sexotxt.Size = new System.Drawing.Size(100, 21);
-            this.Sexotxt.TabIndex = 144;
+            this.Sexotxt.TabIndex = 10;
             this.Sexotxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Sexotxt_KeyPress);
             // 
             // label14
@@ -478,7 +478,7 @@
             this.btFiltrar.Location = new System.Drawing.Point(525, 20);
             this.btFiltrar.Name = "btFiltrar";
             this.btFiltrar.Size = new System.Drawing.Size(75, 23);
-            this.btFiltrar.TabIndex = 130;
+            this.btFiltrar.TabIndex = 2;
             this.btFiltrar.Text = "Filtrar";
             this.btFiltrar.UseVisualStyleBackColor = true;
             this.btFiltrar.Click += new System.EventHandler(this.button2_Click);
@@ -497,7 +497,7 @@
             this.NroAfiliadotxt.Location = new System.Drawing.Point(397, 22);
             this.NroAfiliadotxt.Name = "NroAfiliadotxt";
             this.NroAfiliadotxt.Size = new System.Drawing.Size(100, 20);
-            this.NroAfiliadotxt.TabIndex = 128;
+            this.NroAfiliadotxt.TabIndex = 1;
             this.NroAfiliadotxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NroAfiliadotxt_KeyPress);
             // 
             // btMod
@@ -505,7 +505,7 @@
             this.btMod.Location = new System.Drawing.Point(434, 463);
             this.btMod.Name = "btMod";
             this.btMod.Size = new System.Drawing.Size(132, 23);
-            this.btMod.TabIndex = 127;
+            this.btMod.TabIndex = 17;
             this.btMod.Text = "Modificar datos";
             this.btMod.UseVisualStyleBackColor = true;
             this.btMod.Click += new System.EventHandler(this.button1_Click);
@@ -515,7 +515,7 @@
             this.CantFamHijtxt.Location = new System.Drawing.Point(667, 378);
             this.CantFamHijtxt.Name = "CantFamHijtxt";
             this.CantFamHijtxt.Size = new System.Drawing.Size(100, 20);
-            this.CantFamHijtxt.TabIndex = 126;
+            this.CantFamHijtxt.TabIndex = 13;
             this.CantFamHijtxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CantFamHijtxt_KeyPress);
             // 
             // FechaNactxt
@@ -525,20 +525,21 @@
             this.FechaNactxt.ReadOnly = true;
             this.FechaNactxt.Size = new System.Drawing.Size(100, 20);
             this.FechaNactxt.TabIndex = 125;
+            this.FechaNactxt.TabStop = false;
             // 
             // Mailtxt
             // 
             this.Mailtxt.Location = new System.Drawing.Point(275, 421);
             this.Mailtxt.Name = "Mailtxt";
             this.Mailtxt.Size = new System.Drawing.Size(100, 20);
-            this.Mailtxt.TabIndex = 124;
+            this.Mailtxt.TabIndex = 8;
             // 
             // Teltxt
             // 
             this.Teltxt.Location = new System.Drawing.Point(275, 378);
             this.Teltxt.Name = "Teltxt";
             this.Teltxt.Size = new System.Drawing.Size(100, 20);
-            this.Teltxt.TabIndex = 123;
+            this.Teltxt.TabIndex = 7;
             this.Teltxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Teltxt_KeyPress);
             // 
             // Directxt
@@ -546,14 +547,14 @@
             this.Directxt.Location = new System.Drawing.Point(275, 340);
             this.Directxt.Name = "Directxt";
             this.Directxt.Size = new System.Drawing.Size(100, 20);
-            this.Directxt.TabIndex = 122;
+            this.Directxt.TabIndex = 6;
             // 
             // Doctxt
             // 
             this.Doctxt.Location = new System.Drawing.Point(104, 421);
             this.Doctxt.Name = "Doctxt";
             this.Doctxt.Size = new System.Drawing.Size(100, 20);
-            this.Doctxt.TabIndex = 121;
+            this.Doctxt.TabIndex = 5;
             this.Doctxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Doctxt_KeyPress);
             // 
             // Apellidotxt
@@ -561,7 +562,7 @@
             this.Apellidotxt.Location = new System.Drawing.Point(104, 378);
             this.Apellidotxt.Name = "Apellidotxt";
             this.Apellidotxt.Size = new System.Drawing.Size(100, 20);
-            this.Apellidotxt.TabIndex = 120;
+            this.Apellidotxt.TabIndex = 4;
             this.Apellidotxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Apellidotxt_KeyPress);
             // 
             // Nombretxt
@@ -569,7 +570,7 @@
             this.Nombretxt.Location = new System.Drawing.Point(104, 340);
             this.Nombretxt.Name = "Nombretxt";
             this.Nombretxt.Size = new System.Drawing.Size(100, 20);
-            this.Nombretxt.TabIndex = 119;
+            this.Nombretxt.TabIndex = 3;
             this.Nombretxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Nombretxt_KeyPress);
             // 
             // pacienteTableAdapter
@@ -616,7 +617,9 @@
             this.Controls.Add(this.Doctxt);
             this.Controls.Add(this.Apellidotxt);
             this.Controls.Add(this.Nombretxt);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Modificar_Afiliado";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificar_Afiliado";
             this.Load += new System.EventHandler(this.Modificar_Afiliado_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

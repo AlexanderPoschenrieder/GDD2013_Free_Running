@@ -65,7 +65,7 @@
             this.gbBuscarTurno.Size = new System.Drawing.Size(602, 127);
             this.gbBuscarTurno.TabIndex = 6;
             this.gbBuscarTurno.TabStop = false;
-            this.gbBuscarTurno.Text = "Buscar Profecional";
+            this.gbBuscarTurno.Text = "Buscar Profesional";
             // 
             // btLimpiar
             // 
@@ -115,9 +115,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(16, 31);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 13);
+            this.label2.Size = new System.Drawing.Size(99, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Profecional Apellido";
+            this.label2.Text = "Profesional Apellido";
             // 
             // Registro_de_llegada
             // 
@@ -126,6 +126,7 @@
             this.ClientSize = new System.Drawing.Size(628, 480);
             this.Controls.Add(this.dgvProfecional);
             this.Controls.Add(this.gbBuscarTurno);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Registro_de_llegada";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM Registro de llegada";

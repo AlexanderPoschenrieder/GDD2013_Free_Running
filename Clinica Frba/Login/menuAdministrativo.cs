@@ -75,6 +75,11 @@ namespace Clinica_Frba.Login
             abmBono.ShowDialog();
         }
 
+        private void menuAdministrativo_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
 
 
 

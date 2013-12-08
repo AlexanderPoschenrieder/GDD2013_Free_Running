@@ -46,5 +46,10 @@ namespace Clinica_Frba.Login
             Clinica_Frba.Cancelar_Atencion.CancelarAtencionPaciente abmCancelar = new Clinica_Frba.Cancelar_Atencion.CancelarAtencionPaciente((int)miPaciente.Nro_Afiliado);
             abmCancelar.ShowDialog();
         }
+
+        private void menuPaciente_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

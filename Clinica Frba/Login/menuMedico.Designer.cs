@@ -71,9 +71,11 @@
             this.Controls.Add(this.btCancelarT);
             this.Controls.Add(this.btRegRes);
             this.Controls.Add(this.btAgenda);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "menuMedico";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "menuMedico";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.menuMedico_FormClosing);
             this.ResumeLayout(false);
 
         }

@@ -73,7 +73,7 @@
             this.Matriculatxt.Location = new System.Drawing.Point(110, 332);
             this.Matriculatxt.Name = "Matriculatxt";
             this.Matriculatxt.Size = new System.Drawing.Size(100, 20);
-            this.Matriculatxt.TabIndex = 142;
+            this.Matriculatxt.TabIndex = 10;
             this.Matriculatxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Matriculatxt_KeyPress);
             // 
             // label10
@@ -96,14 +96,14 @@
             this.TipoDoctxt.Location = new System.Drawing.Point(110, 92);
             this.TipoDoctxt.Name = "TipoDoctxt";
             this.TipoDoctxt.Size = new System.Drawing.Size(100, 21);
-            this.TipoDoctxt.TabIndex = 140;
+            this.TipoDoctxt.TabIndex = 3;
             // 
             // Clavetxt
             // 
             this.Clavetxt.Location = new System.Drawing.Point(110, 422);
             this.Clavetxt.Name = "Clavetxt";
             this.Clavetxt.Size = new System.Drawing.Size(100, 20);
-            this.Clavetxt.TabIndex = 139;
+            this.Clavetxt.TabIndex = 13;
             // 
             // label14
             // 
@@ -128,14 +128,14 @@
             this.Usertxt.Location = new System.Drawing.Point(110, 394);
             this.Usertxt.Name = "Usertxt";
             this.Usertxt.Size = new System.Drawing.Size(100, 20);
-            this.Usertxt.TabIndex = 136;
+            this.Usertxt.TabIndex = 12;
             // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(216, 268);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(25, 22);
-            this.button2.TabIndex = 135;
+            this.button2.TabIndex = 8;
             this.button2.Text = "...";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -150,7 +150,7 @@
             this.Sexotxt.Location = new System.Drawing.Point(110, 305);
             this.Sexotxt.Name = "Sexotxt";
             this.Sexotxt.Size = new System.Drawing.Size(100, 21);
-            this.Sexotxt.TabIndex = 134;
+            this.Sexotxt.TabIndex = 9;
             // 
             // Especialtxt
             // 
@@ -193,7 +193,7 @@
             this.Especialtxt.Location = new System.Drawing.Point(110, 358);
             this.Especialtxt.Name = "Especialtxt";
             this.Especialtxt.Size = new System.Drawing.Size(100, 21);
-            this.Especialtxt.TabIndex = 133;
+            this.Especialtxt.TabIndex = 11;
             // 
             // label11
             // 
@@ -292,20 +292,21 @@
             this.FechaNactxt.ReadOnly = true;
             this.FechaNactxt.Size = new System.Drawing.Size(100, 20);
             this.FechaNactxt.TabIndex = 122;
+            this.FechaNactxt.TabStop = false;
             // 
             // Mailtxt
             // 
             this.Mailtxt.Location = new System.Drawing.Point(110, 236);
             this.Mailtxt.Name = "Mailtxt";
             this.Mailtxt.Size = new System.Drawing.Size(100, 20);
-            this.Mailtxt.TabIndex = 121;
+            this.Mailtxt.TabIndex = 7;
             // 
             // Teltxt
             // 
             this.Teltxt.Location = new System.Drawing.Point(110, 203);
             this.Teltxt.Name = "Teltxt";
             this.Teltxt.Size = new System.Drawing.Size(100, 20);
-            this.Teltxt.TabIndex = 120;
+            this.Teltxt.TabIndex = 6;
             this.Teltxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Teltxt_KeyPress);
             // 
             // Directxt
@@ -313,14 +314,14 @@
             this.Directxt.Location = new System.Drawing.Point(110, 165);
             this.Directxt.Name = "Directxt";
             this.Directxt.Size = new System.Drawing.Size(100, 20);
-            this.Directxt.TabIndex = 119;
+            this.Directxt.TabIndex = 5;
             // 
             // Doctxt
             // 
             this.Doctxt.Location = new System.Drawing.Point(110, 127);
             this.Doctxt.Name = "Doctxt";
             this.Doctxt.Size = new System.Drawing.Size(100, 20);
-            this.Doctxt.TabIndex = 118;
+            this.Doctxt.TabIndex = 4;
             this.Doctxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Doctxt_KeyPress);
             // 
             // Apellidotxt
@@ -328,7 +329,7 @@
             this.Apellidotxt.Location = new System.Drawing.Point(110, 58);
             this.Apellidotxt.Name = "Apellidotxt";
             this.Apellidotxt.Size = new System.Drawing.Size(100, 20);
-            this.Apellidotxt.TabIndex = 117;
+            this.Apellidotxt.TabIndex = 2;
             this.Apellidotxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Apellidotxt_KeyPress);
             // 
             // Nombretxt
@@ -336,7 +337,7 @@
             this.Nombretxt.Location = new System.Drawing.Point(110, 23);
             this.Nombretxt.Name = "Nombretxt";
             this.Nombretxt.Size = new System.Drawing.Size(100, 20);
-            this.Nombretxt.TabIndex = 116;
+            this.Nombretxt.TabIndex = 1;
             this.Nombretxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Nombretxt_KeyPress);
             // 
             // button1
@@ -344,7 +345,7 @@
             this.button1.Location = new System.Drawing.Point(110, 477);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 144;
+            this.button1.TabIndex = 14;
             this.button1.Text = "Aceptar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);

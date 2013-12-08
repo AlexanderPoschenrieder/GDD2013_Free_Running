@@ -31,6 +31,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tbRol = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cbEstado = new System.Windows.Forms.ComboBox();
             this.btLimpiarRol = new System.Windows.Forms.Button();
             this.btModificar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -45,8 +47,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbBuscFunc2 = new System.Windows.Forms.TextBox();
             this.btBuscar2 = new System.Windows.Forms.Button();
-            this.cbEstado = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFun)).BeginInit();
@@ -84,6 +84,27 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Nombre del Rol";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(541, 38);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(40, 13);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Estado";
+            // 
+            // cbEstado
+            // 
+            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstado.FormattingEnabled = true;
+            this.cbEstado.Items.AddRange(new object[] {
+            "Habilitado",
+            "Inhabilitado"});
+            this.cbEstado.Location = new System.Drawing.Point(587, 33);
+            this.cbEstado.Name = "cbEstado";
+            this.cbEstado.Size = new System.Drawing.Size(121, 21);
+            this.cbEstado.TabIndex = 4;
             // 
             // btLimpiarRol
             // 
@@ -229,27 +250,6 @@
             this.btBuscar2.UseVisualStyleBackColor = true;
             this.btBuscar2.Click += new System.EventHandler(this.btBuscar2_Click);
             // 
-            // cbEstado
-            // 
-            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Items.AddRange(new object[] {
-            "Habilitado",
-            "Inhabilitado"});
-            this.cbEstado.Location = new System.Drawing.Point(587, 33);
-            this.cbEstado.Name = "cbEstado";
-            this.cbEstado.Size = new System.Drawing.Size(121, 21);
-            this.cbEstado.TabIndex = 4;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(541, 38);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(40, 13);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Estado";
-            // 
             // ModificarRolFunciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -258,6 +258,7 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ModificarRolFunciones";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ModificarRolFunciones";

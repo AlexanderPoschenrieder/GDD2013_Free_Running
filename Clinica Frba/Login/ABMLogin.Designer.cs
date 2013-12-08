@@ -88,10 +88,11 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tbPass);
             this.Controls.Add(this.tbUser);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ABMLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABMLogin";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ABMLogin_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

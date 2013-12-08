@@ -105,6 +105,7 @@
             this.ClientSize = new System.Drawing.Size(436, 423);
             this.Controls.Add(this.dgvRol);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "BajaRol";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BajaRol";
