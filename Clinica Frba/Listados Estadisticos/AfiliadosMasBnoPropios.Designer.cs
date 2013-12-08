@@ -49,9 +49,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(819, 317);
             this.Controls.Add(this.dvgTop);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AfiliadosMasBnoPropios";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AfiliadosMasBnoPropios";
+            this.Text = "TOP 10 Afiliados cos Mas Bonos Utilizados no Propios";
             ((System.ComponentModel.ISupportInitialize)(this.dvgTop)).EndInit();
             this.ResumeLayout(false);
 

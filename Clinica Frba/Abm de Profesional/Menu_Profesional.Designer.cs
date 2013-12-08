@@ -72,6 +72,7 @@
             this.Controls.Add(this.btMod);
             this.Controls.Add(this.btAgregar);
             this.Name = "Menu_Profesional";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu_Profesional";
             this.ResumeLayout(false);
 

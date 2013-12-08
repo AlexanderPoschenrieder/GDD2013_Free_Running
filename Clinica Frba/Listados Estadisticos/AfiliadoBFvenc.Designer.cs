@@ -49,9 +49,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(567, 256);
             this.Controls.Add(this.dgvTop);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AfiliadoBFvenc";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AfiliadoBFvenc";
+            this.Text = "TOP 5 Afiliados con Bono Farmacia mas Vencidos";
             ((System.ComponentModel.ISupportInitialize)(this.dgvTop)).EndInit();
             this.ResumeLayout(false);
 

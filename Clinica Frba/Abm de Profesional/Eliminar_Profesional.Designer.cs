@@ -69,6 +69,7 @@
             this.Controls.Add(this.Idtxt);
             this.Controls.Add(this.label1);
             this.Name = "Eliminar_Profesional";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Eliminar_Profesional";
             this.ResumeLayout(false);
             this.PerformLayout();

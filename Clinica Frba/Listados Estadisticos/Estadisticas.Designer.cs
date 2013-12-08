@@ -42,7 +42,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 62);
+            this.label2.Location = new System.Drawing.Point(172, 39);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 13);
             this.label2.TabIndex = 15;
@@ -51,7 +51,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 18);
+            this.label1.Location = new System.Drawing.Point(32, 37);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(26, 13);
             this.label1.TabIndex = 14;
@@ -59,47 +59,47 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 285);
+            this.button3.Location = new System.Drawing.Point(12, 267);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(179, 39);
+            this.button3.Size = new System.Drawing.Size(275, 39);
             this.button3.TabIndex = 13;
-            this.button3.Text = "Afiliados con mas bonos utilizados no propios";
+            this.button3.Text = "TOP 10 Afiliados con mas bonos utilizados no propios";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // btEspMasBF
             // 
-            this.btEspMasBF.Location = new System.Drawing.Point(12, 225);
+            this.btEspMasBF.Location = new System.Drawing.Point(12, 207);
             this.btEspMasBF.Name = "btEspMasBF";
-            this.btEspMasBF.Size = new System.Drawing.Size(179, 39);
+            this.btEspMasBF.Size = new System.Drawing.Size(275, 39);
             this.btEspMasBF.TabIndex = 12;
-            this.btEspMasBF.Text = "Especialidades con mas bono farmacia recetados";
+            this.btEspMasBF.Text = "TOP 5 Especialidades con mas bono farmacia recetados";
             this.btEspMasBF.UseVisualStyleBackColor = true;
             this.btEspMasBF.Click += new System.EventHandler(this.button4_Click_1);
             // 
             // btAfiliadoBFvenc
             // 
-            this.btAfiliadoBFvenc.Location = new System.Drawing.Point(12, 164);
+            this.btAfiliadoBFvenc.Location = new System.Drawing.Point(12, 146);
             this.btAfiliadoBFvenc.Name = "btAfiliadoBFvenc";
-            this.btAfiliadoBFvenc.Size = new System.Drawing.Size(179, 39);
+            this.btAfiliadoBFvenc.Size = new System.Drawing.Size(275, 39);
             this.btAfiliadoBFvenc.TabIndex = 11;
-            this.btAfiliadoBFvenc.Text = "Afiliados con mas bonos farmacia vencidos";
+            this.btAfiliadoBFvenc.Text = "TOP 5 Afiliados con mas bonos farmacia vencidos";
             this.btAfiliadoBFvenc.UseVisualStyleBackColor = true;
             this.btAfiliadoBFvenc.Click += new System.EventHandler(this.btAfiliadoBFvenc_Click_1);
             // 
             // btEspCanc
             // 
-            this.btEspCanc.Location = new System.Drawing.Point(12, 104);
+            this.btEspCanc.Location = new System.Drawing.Point(12, 86);
             this.btEspCanc.Name = "btEspCanc";
-            this.btEspCanc.Size = new System.Drawing.Size(179, 39);
+            this.btEspCanc.Size = new System.Drawing.Size(275, 39);
             this.btEspCanc.TabIndex = 10;
-            this.btEspCanc.Text = "especialidades más canceladas";
+            this.btEspCanc.Text = "TOP 5 Especialidades más canceladas";
             this.btEspCanc.UseVisualStyleBackColor = true;
             this.btEspCanc.Click += new System.EventHandler(this.btEspCanc_Click_1);
             // 
             // nSemestre
             // 
-            this.nSemestre.Location = new System.Drawing.Point(67, 58);
+            this.nSemestre.Location = new System.Drawing.Point(227, 35);
             this.nSemestre.Maximum = new decimal(new int[] {
             2,
             0,
@@ -123,7 +123,7 @@
             // 
             this.dtpAño.CustomFormat = "yyyy";
             this.dtpAño.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpAño.Location = new System.Drawing.Point(44, 15);
+            this.dtpAño.Location = new System.Drawing.Point(64, 34);
             this.dtpAño.Name = "dtpAño";
             this.dtpAño.ShowUpDown = true;
             this.dtpAño.Size = new System.Drawing.Size(66, 20);
@@ -133,7 +133,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(205, 340);
+            this.ClientSize = new System.Drawing.Size(299, 340);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button3);
@@ -142,6 +142,7 @@
             this.Controls.Add(this.btEspCanc);
             this.Controls.Add(this.nSemestre);
             this.Controls.Add(this.dtpAño);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Estadisticas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Estadisticas";

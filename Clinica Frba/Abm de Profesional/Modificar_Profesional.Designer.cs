@@ -489,6 +489,7 @@
             this.Controls.Add(this.Nombretxt);
             this.Controls.Add(this.button2);
             this.Name = "Modificar_Profesional";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificar_Profesional";
             this.Load += new System.EventHandler(this.Modificar_Profesional_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

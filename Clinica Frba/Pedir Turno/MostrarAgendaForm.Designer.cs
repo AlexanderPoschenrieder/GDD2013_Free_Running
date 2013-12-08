@@ -95,13 +95,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(209, 308);
+            this.ClientSize = new System.Drawing.Size(207, 308);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.horariosDisponibles);
             this.Controls.Add(this.botonSeleccionar);
             this.Controls.Add(this.calendarioDeAgenda);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MostrarAgendaForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Calendario";
             ((System.ComponentModel.ISupportInitialize)(this.horariosDisponibles)).EndInit();
             this.ResumeLayout(false);

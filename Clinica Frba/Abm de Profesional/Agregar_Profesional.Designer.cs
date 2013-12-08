@@ -385,6 +385,7 @@
             this.Controls.Add(this.Apellidotxt);
             this.Controls.Add(this.Nombretxt);
             this.Name = "Agregar_Profesional";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agregar_Profesional";
             this.ResumeLayout(false);
             this.PerformLayout();

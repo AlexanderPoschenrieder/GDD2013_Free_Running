@@ -59,7 +59,7 @@
             this.comboEspecialidad.Location = new System.Drawing.Point(13, 79);
             this.comboEspecialidad.Name = "comboEspecialidad";
             this.comboEspecialidad.Size = new System.Drawing.Size(159, 21);
-            this.comboEspecialidad.TabIndex = 2;
+            this.comboEspecialidad.TabIndex = 3;
             // 
             // label2
             // 
@@ -127,7 +127,7 @@
             this.botonLimpiar.Location = new System.Drawing.Point(205, 106);
             this.botonLimpiar.Name = "botonLimpiar";
             this.botonLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.botonLimpiar.TabIndex = 7;
+            this.botonLimpiar.TabIndex = 5;
             this.botonLimpiar.Text = "Limpiar";
             this.botonLimpiar.UseVisualStyleBackColor = true;
             this.botonLimpiar.Click += new System.EventHandler(this.botonLimpiar_Click);
@@ -155,7 +155,7 @@
             this.textBox1.Location = new System.Drawing.Point(208, 32);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(149, 20);
-            this.textBox1.TabIndex = 9;
+            this.textBox1.TabIndex = 2;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // button2
@@ -163,7 +163,7 @@
             this.button2.Location = new System.Drawing.Point(282, 260);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 10;
+            this.button2.TabIndex = 7;
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -184,7 +184,9 @@
             this.Controls.Add(this.comboEspecialidad);
             this.Controls.Add(this.NombreProfTB);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "BusquedaProfesionalForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Búsqueda";
             ((System.ComponentModel.ISupportInitialize)(this.gridResultados)).EndInit();
             this.ResumeLayout(false);
