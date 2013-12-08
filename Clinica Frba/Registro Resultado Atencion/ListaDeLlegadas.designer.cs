@@ -30,11 +30,11 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridLlegadas = new System.Windows.Forms.DataGridView();
-            this.botonSeleccionar = new System.Windows.Forms.Button();
-            this.botonCancelar = new System.Windows.Forms.Button();
             this.FechaHora = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Paciente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.botonSeleccionar = new System.Windows.Forms.Button();
+            this.botonCancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridLlegadas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,6 +62,24 @@
             this.dataGridLlegadas.Size = new System.Drawing.Size(243, 161);
             this.dataGridLlegadas.TabIndex = 1;
             // 
+            // FechaHora
+            // 
+            this.FechaHora.HeaderText = "Fecha y hora";
+            this.FechaHora.Name = "FechaHora";
+            this.FechaHora.ReadOnly = true;
+            // 
+            // Paciente
+            // 
+            this.Paciente.HeaderText = "Paciente";
+            this.Paciente.Name = "Paciente";
+            this.Paciente.ReadOnly = true;
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
             // botonSeleccionar
             // 
             this.botonSeleccionar.Location = new System.Drawing.Point(16, 211);
@@ -82,24 +100,6 @@
             this.botonCancelar.UseVisualStyleBackColor = true;
             this.botonCancelar.Click += new System.EventHandler(this.botonCancelar_Click);
             // 
-            // FechaHora
-            // 
-            this.FechaHora.HeaderText = "Fecha y hora";
-            this.FechaHora.Name = "FechaHora";
-            this.FechaHora.ReadOnly = true;
-            // 
-            // Paciente
-            // 
-            this.Paciente.HeaderText = "Paciente";
-            this.Paciente.Name = "Paciente";
-            this.Paciente.ReadOnly = true;
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            // 
             // ListaDeLlegadas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -109,7 +109,9 @@
             this.Controls.Add(this.botonSeleccionar);
             this.Controls.Add(this.dataGridLlegadas);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ListaDeLlegadas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Selección de Atención";
             this.Load += new System.EventHandler(this.ListaDeLlegadas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridLlegadas)).EndInit();

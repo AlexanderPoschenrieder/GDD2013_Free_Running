@@ -33,6 +33,7 @@ namespace Clinica_Frba.Login
             }
             if (misFuncionalidades.Contains("COMPRA_BONO")) { } else { btComprar.Visible = false; }
             if (misFuncionalidades.Contains("CANCELACION_TURNO")) { } else { btCancelar.Visible = false; }
+            if (misFuncionalidades.Contains("PEDIDO_TURNO")) { } else { btPedido.Visible = false; }
         }
 
         private void btComprar_Click(object sender, EventArgs e)
@@ -50,6 +51,12 @@ namespace Clinica_Frba.Login
         private void menuPaciente_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Clinica_Frba.Pedir_Turno.BusquedaProfesionalForm abmPedirTurno = new Clinica_Frba.Pedir_Turno.BusquedaProfesionalForm((int)miPaciente.Nro_Afiliado);
+            abmPedirTurno.ShowDialog();
         }
     }
 }

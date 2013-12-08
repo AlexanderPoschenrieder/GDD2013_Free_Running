@@ -55,7 +55,7 @@
             this.btGuardar.Location = new System.Drawing.Point(347, 424);
             this.btGuardar.Name = "btGuardar";
             this.btGuardar.Size = new System.Drawing.Size(75, 23);
-            this.btGuardar.TabIndex = 7;
+            this.btGuardar.TabIndex = 12;
             this.btGuardar.Text = "Guardar";
             this.btGuardar.UseVisualStyleBackColor = true;
             this.btGuardar.Click += new System.EventHandler(this.btGuardar_Click);
@@ -65,7 +65,7 @@
             this.btLimpiar.Location = new System.Drawing.Point(12, 424);
             this.btLimpiar.Name = "btLimpiar";
             this.btLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btLimpiar.TabIndex = 6;
+            this.btLimpiar.TabIndex = 11;
             this.btLimpiar.Text = "Limpiar";
             this.btLimpiar.UseVisualStyleBackColor = true;
             this.btLimpiar.Click += new System.EventHandler(this.btLimpiar_Click_1);
@@ -95,7 +95,7 @@
             this.cbS.Location = new System.Drawing.Point(26, 195);
             this.cbS.Name = "cbS";
             this.cbS.Size = new System.Drawing.Size(63, 17);
-            this.cbS.TabIndex = 28;
+            this.cbS.TabIndex = 8;
             this.cbS.Text = "Sábado";
             this.cbS.UseVisualStyleBackColor = true;
             this.cbS.CheckedChanged += new System.EventHandler(this.cbS_CheckedChanged);
@@ -106,7 +106,7 @@
             this.cbV.Location = new System.Drawing.Point(26, 164);
             this.cbV.Name = "cbV";
             this.cbV.Size = new System.Drawing.Size(61, 17);
-            this.cbV.TabIndex = 27;
+            this.cbV.TabIndex = 7;
             this.cbV.Text = "Viernes";
             this.cbV.UseVisualStyleBackColor = true;
             // 
@@ -116,7 +116,7 @@
             this.cbMierc.Location = new System.Drawing.Point(26, 102);
             this.cbMierc.Name = "cbMierc";
             this.cbMierc.Size = new System.Drawing.Size(71, 17);
-            this.cbMierc.TabIndex = 26;
+            this.cbMierc.TabIndex = 5;
             this.cbMierc.Text = "Miércoles";
             this.cbMierc.UseVisualStyleBackColor = true;
             // 
@@ -126,7 +126,7 @@
             this.cbJ.Location = new System.Drawing.Point(26, 133);
             this.cbJ.Name = "cbJ";
             this.cbJ.Size = new System.Drawing.Size(60, 17);
-            this.cbJ.TabIndex = 25;
+            this.cbJ.TabIndex = 6;
             this.cbJ.Text = "Jueves";
             this.cbJ.UseVisualStyleBackColor = true;
             // 
@@ -136,7 +136,7 @@
             this.cbMartes.Location = new System.Drawing.Point(26, 71);
             this.cbMartes.Name = "cbMartes";
             this.cbMartes.Size = new System.Drawing.Size(58, 17);
-            this.cbMartes.TabIndex = 24;
+            this.cbMartes.TabIndex = 4;
             this.cbMartes.Text = "Martes";
             this.cbMartes.UseVisualStyleBackColor = true;
             // 
@@ -146,7 +146,7 @@
             this.cbLunes.Location = new System.Drawing.Point(26, 40);
             this.cbLunes.Name = "cbLunes";
             this.cbLunes.Size = new System.Drawing.Size(55, 17);
-            this.cbLunes.TabIndex = 23;
+            this.cbLunes.TabIndex = 3;
             this.cbLunes.Text = "Lunes";
             this.cbLunes.UseVisualStyleBackColor = true;
             // 
@@ -161,7 +161,7 @@
             this.dtpHoraFin.Name = "dtpHoraFin";
             this.dtpHoraFin.ShowUpDown = true;
             this.dtpHoraFin.Size = new System.Drawing.Size(66, 26);
-            this.dtpHoraFin.TabIndex = 22;
+            this.dtpHoraFin.TabIndex = 10;
             this.dtpHoraFin.Value = new System.DateTime(2013, 10, 26, 7, 30, 0, 0);
             this.dtpHoraFin.ValueChanged += new System.EventHandler(this.dtpHoraFin_ValueChanged_1);
             // 
@@ -176,7 +176,7 @@
             this.dtpHoraInicio.Name = "dtpHoraInicio";
             this.dtpHoraInicio.ShowUpDown = true;
             this.dtpHoraInicio.Size = new System.Drawing.Size(66, 26);
-            this.dtpHoraInicio.TabIndex = 21;
+            this.dtpHoraInicio.TabIndex = 9;
             this.dtpHoraInicio.Value = new System.DateTime(2013, 10, 26, 7, 0, 0, 0);
             this.dtpHoraInicio.ValueChanged += new System.EventHandler(this.dtpHoraInicio_ValueChanged_1);
             // 
@@ -236,7 +236,7 @@
             this.dtpFechaInicio.Location = new System.Drawing.Point(85, 35);
             this.dtpFechaInicio.Name = "dtpFechaInicio";
             this.dtpFechaInicio.Size = new System.Drawing.Size(107, 26);
-            this.dtpFechaInicio.TabIndex = 6;
+            this.dtpFechaInicio.TabIndex = 1;
             this.dtpFechaInicio.Value = new System.DateTime(2013, 10, 27, 0, 0, 0, 0);
             this.dtpFechaInicio.ValueChanged += new System.EventHandler(this.dtpFechaInicio_ValueChanged_1);
             // 
@@ -247,7 +247,7 @@
             this.dtpFechaFin.Location = new System.Drawing.Point(282, 35);
             this.dtpFechaFin.Name = "dtpFechaFin";
             this.dtpFechaFin.Size = new System.Drawing.Size(107, 26);
-            this.dtpFechaFin.TabIndex = 7;
+            this.dtpFechaFin.TabIndex = 2;
             this.dtpFechaFin.Value = new System.DateTime(2013, 10, 27, 0, 0, 0, 0);
             // 
             // ABM_Agenda
@@ -259,6 +259,7 @@
             this.Controls.Add(this.btLimpiar);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ABM_Agenda";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM Agenda";

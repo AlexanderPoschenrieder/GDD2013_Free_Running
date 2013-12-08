@@ -1252,22 +1252,6 @@ RETURN
 )
 
 GO
-/*
-CREATE FUNCTION Free_Running.diasAtencionMedico(@idMedico int)
-
-RETURNS TABLE 
-AS
-RETURN 
-(
-	select a.Fecha_Inicio, a.Fecha_Fin,ad.Dia_Semana,ad.Hora_Inicio,ad.Hora_Fin
-	from Free_Running.Agenda a left join Free_Running.Agenda_Dia ad on (a.Id=ad.Agenda)
-		join Free_Running.Medico m on (a.Medico= m.Id)
-	where m.Id=@idMedico
-	
-	
-)
-GO
-*/
 
 CREATE PROCEDURE Free_Running.usuarioExisteActivo(@nroAfiliado int, @salida int output)
 AS

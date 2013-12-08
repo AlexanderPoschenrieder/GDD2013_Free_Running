@@ -89,7 +89,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tbSintomas);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ResulAtForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ingrese síntomas";
             this.ResumeLayout(false);
             this.PerformLayout();

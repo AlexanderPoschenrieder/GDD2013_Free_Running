@@ -39,6 +39,12 @@ namespace Clinica_Frba.Registrar_Agenda
             dtpFechaFin.Value = DateTime.Today.AddDays(2);
             dtpFechaFin.MinDate = DateTime.Today.AddDays(2);
             dtpFechaFin.MaxDate = DateTime.Today.AddDays(122);
+            cbLunes.Checked = false;
+            cbMartes.Checked = false;
+            cbMierc.Checked = false;
+            cbJ.Checked = false;
+            cbV.Checked = false;
+            cbS.Checked = false;
         }
 
         public bool superaHs()
@@ -138,7 +144,7 @@ namespace Clinica_Frba.Registrar_Agenda
                 if (dtpHoraFin.Value >= Convert.ToDateTime("20:01") && dtpHoraFin.Value <= Convert.ToDateTime("20:15")) { dtpHoraFin.Value = Convert.ToDateTime("07:30"); }
                 if (dtpHoraFin.Value <= Convert.ToDateTime("07:29") && dtpHoraFin.Value > Convert.ToDateTime("05:29")) { dtpHoraFin.Value = Convert.ToDateTime("20:00"); }
                 if (dtpHoraFin.Value > Convert.ToDateTime("07:28") && dtpHoraFin.Value <= Convert.ToDateTime("20:59"))
-                {//30
+                {
                     if (dtpHoraFin.Value.Minute >= 01 && dtpHoraFin.Value.Minute <= 15) { dtpHoraFin.Value = dtpHoraFin.Value.AddMinutes(29); }
                     if (dtpHoraFin.Value.Minute >= 31 && dtpHoraFin.Value.Minute <= 45) { dtpHoraFin.Value = dtpHoraFin.Value.AddMinutes(29); }
                     if (dtpHoraFin.Value.Minute <= 29 && dtpHoraFin.Value.Minute >= 16) { dtpHoraFin.Value = dtpHoraFin.Value.AddMinutes(-29); }

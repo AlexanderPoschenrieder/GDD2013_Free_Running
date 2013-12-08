@@ -108,7 +108,9 @@
             this.Controls.Add(this.botonSeleccionar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridTurnos);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "CancelarAtencionPaciente";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Turnos";
             this.Load += new System.EventHandler(this.CancelarAtencionPaciente_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridTurnos)).EndInit();

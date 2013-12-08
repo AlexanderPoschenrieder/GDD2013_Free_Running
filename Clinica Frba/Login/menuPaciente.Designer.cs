@@ -30,11 +30,12 @@
         {
             this.btCancelar = new System.Windows.Forms.Button();
             this.btComprar = new System.Windows.Forms.Button();
+            this.btPedido = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btCancelar
             // 
-            this.btCancelar.Location = new System.Drawing.Point(12, 69);
+            this.btCancelar.Location = new System.Drawing.Point(12, 76);
             this.btCancelar.Name = "btCancelar";
             this.btCancelar.Size = new System.Drawing.Size(137, 41);
             this.btCancelar.TabIndex = 3;
@@ -44,7 +45,7 @@
             // 
             // btComprar
             // 
-            this.btComprar.Location = new System.Drawing.Point(12, 12);
+            this.btComprar.Location = new System.Drawing.Point(12, 19);
             this.btComprar.Name = "btComprar";
             this.btComprar.Size = new System.Drawing.Size(137, 41);
             this.btComprar.TabIndex = 2;
@@ -52,11 +53,22 @@
             this.btComprar.UseVisualStyleBackColor = true;
             this.btComprar.Click += new System.EventHandler(this.btComprar_Click);
             // 
+            // btPedido
+            // 
+            this.btPedido.Location = new System.Drawing.Point(12, 133);
+            this.btPedido.Name = "btPedido";
+            this.btPedido.Size = new System.Drawing.Size(137, 41);
+            this.btPedido.TabIndex = 4;
+            this.btPedido.Text = "Pedir Turno";
+            this.btPedido.UseVisualStyleBackColor = true;
+            this.btPedido.Click += new System.EventHandler(this.button1_Click);
+            // 
             // menuPaciente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(160, 127);
+            this.ClientSize = new System.Drawing.Size(160, 192);
+            this.Controls.Add(this.btPedido);
             this.Controls.Add(this.btCancelar);
             this.Controls.Add(this.btComprar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -72,5 +84,6 @@
 
         private System.Windows.Forms.Button btCancelar;
         private System.Windows.Forms.Button btComprar;
+        private System.Windows.Forms.Button btPedido;
     }
 }
