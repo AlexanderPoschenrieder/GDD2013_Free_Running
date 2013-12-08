@@ -1536,4 +1536,3 @@ RETURN
 	and t.Medico_Id=@medico
 )
 GO
-

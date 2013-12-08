@@ -69,6 +69,7 @@ DROP PROCEDURE Free_Running.usuarioExisteActivo
 DROP FUNCTION Free_Running.suIdAfiliado
 DROP FUNCTION Free_Running.BFVenc
 DROP FUNCTION Free_Running.BonoUsoDist
+DROP FUNCTION Free_Running.llegadasTurnos
 DROP FUNCTION Free_Running.mesVencido
 DROP PROCEDURE Free_Running.puedeUsarBC
 DROP PROCEDURE Free_Running.EspMasBFRecetados
