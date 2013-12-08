@@ -21,7 +21,7 @@ namespace Clinica_Frba.Login
         }
         public menuPaciente(Usuario unUser)
         {
-            miPaciente = unUser.generarPaciente();
+            miPaciente = unUser.generarPaciente1();
             ArrayList misFuncionalidades = new ArrayList();
             InitializeComponent();
             SqlConnection miConexion = Conexion.Conectar();

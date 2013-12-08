@@ -1529,4 +1529,3 @@ RETURN
 	where t.Medico_Id=@medico
 	and am.Id is null
 )
-

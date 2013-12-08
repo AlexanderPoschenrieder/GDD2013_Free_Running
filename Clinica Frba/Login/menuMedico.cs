@@ -21,9 +21,9 @@ namespace Clinica_Frba.Login
 
         public static Medico miMedico;
 
-        public menuMedico(Medico unMedico)
+        public menuMedico(Usuario unUsuario)
         {
-            miMedico = unMedico;
+            miMedico = unUsuario.generarMedico();
             ArrayList misFuncionalidades = new ArrayList();
             InitializeComponent();
             SqlConnection miConexion = Conexion.Conectar();

@@ -18,10 +18,10 @@ namespace Clinica_Frba.Login
         public String pPass { get; set; }
 
         public Usuario() { }
-        public Usuario(String u, String c)
+        public Usuario(String usuario, String clave)
         {
-            this.pPass = c;
-            this.pUser = u;
+            this.pPass = clave;
+            this.pUser = usuario;
         }
 
         public bool Login()
@@ -114,12 +114,12 @@ namespace Clinica_Frba.Login
         {
             if (unRol == "Afiliado")
             {
-                Clinica_Frba.Login.menuPaciente menuPaciente = new menuPaciente(this.generarPaciente());
+                Clinica_Frba.Login.menuPaciente menuPaciente = new menuPaciente(this);                
                 menuPaciente.ShowDialog();
             }
 
             if (unRol == "Administrativo")
-            { 
+            {
                 Clinica_Frba.Login.menuAdministrativo menuAdmin = new menuAdministrativo();
                 menuAdmin.ShowDialog();
             }
@@ -127,7 +127,7 @@ namespace Clinica_Frba.Login
             {
                 if (unRol == "Profesional")
                 {
-                    Clinica_Frba.Login.menuMedico menuMedico = new menuMedico(this.generarMedico());
+                    Clinica_Frba.Login.menuMedico menuMedico = new menuMedico(this);
                     menuMedico.ShowDialog();
                 }
                 else
@@ -171,21 +171,21 @@ namespace Clinica_Frba.Login
             }
             else
             {                   //ABRO el MENU PARA SELECCIONAR UN ROL
-                    Clinica_Frba.Login.selecRol menuRol = new selecRol(this);
-                    menuRol.ShowDialog();  
+                Clinica_Frba.Login.selecRol menuRol = new selecRol(this);
+                menuRol.ShowDialog();
             }
         }
 
-        public Paciente generarPaciente()
+        public Paciente generarPaciente1()
         {
             SqlConnection miConexion = Conexion.Conectar();
-            SqlCommand consultaP = new SqlCommand("select * from Free_Running.Paciente P where P.Username = '" + this.pUser + "'", miConexion);
+            SqlCommand consultaP = new SqlCommand("select p.Nro_Afiliado, p.Nombre,p.Apellido, p.Documento, p.Direccion , p.Telefono,p.Mail,p.Fecha_Nac,p.Sexo,p.Tipo_Documento, p.Estado_Civil, p.Cant_Familiares,p.Plan_Medico,p.Estado,p.Username from Free_Running.Paciente p where P.Username = '" + this.pUser + "'", miConexion);
             SqlDataReader drP = consultaP.ExecuteReader();
             drP.Read();
-            Paciente miP = new Paciente(Convert.ToUInt32(drP[0]), Convert.ToString(drP[1]), Convert.ToString(drP[2]), Convert.ToUInt32(drP[3]), Convert.ToString(drP[4]), Convert.ToUInt32(drP[5]), Convert.ToString(drP[6]), Convert.ToDateTime(drP[7]), Convert.ToString(drP[8]), Convert.ToString(drP[9]), Convert.ToString(drP[10]), Convert.ToInt32(drP[11]), Convert.ToInt32(drP[12]), Convert.ToString(drP[13]), Convert.ToString(drP[14]),"");
+            Paciente miP = new Paciente(Convert.ToUInt32(drP[0]), Convert.ToString(drP[1]), Convert.ToString(drP[2]), Convert.ToUInt32(drP[3]), Convert.ToString(drP[4]), Convert.ToUInt32(drP[5]), Convert.ToString(drP[6]), Convert.ToDateTime(drP[7]), Convert.ToString(drP[8]), Convert.ToString(drP[9]), Convert.ToString(drP[10]), Convert.ToInt32(drP[11]), Convert.ToInt32(drP[12]), Convert.ToString(drP[13]), Convert.ToString(drP[14]), "");
             return miP;
 
-                
+
         }
 
         public Medico generarMedico()
@@ -195,14 +195,14 @@ namespace Clinica_Frba.Login
             SqlCommand consultaMedico = new SqlCommand("select * from Free_Running.Medico where Username='" + this.pUser + "'", miConexion);
             SqlDataReader dr_Medico = consultaMedico.ExecuteReader();
             dr_Medico.Read();
-            Medico miMedico = new Medico(Convert.ToUInt32(dr_Medico[0]), Convert.ToString(dr_Medico[1]), Convert.ToString(dr_Medico[2]), Convert.ToString(dr_Medico[3]), Convert.ToString(dr_Medico[4]), Convert.ToUInt32(dr_Medico[5]), Convert.ToString(dr_Medico[6]), Convert.ToUInt32(dr_Medico[7]), Convert.ToString(dr_Medico[8]), Convert.ToDateTime(dr_Medico[9]), Convert.ToUInt32(dr_Medico[10]), Convert.ToString(dr_Medico[11]),1,"");
+            Medico miMedico = new Medico(Convert.ToUInt32(dr_Medico[0]), Convert.ToString(dr_Medico[1]), Convert.ToString(dr_Medico[2]), Convert.ToString(dr_Medico[3]), Convert.ToString(dr_Medico[4]), Convert.ToUInt32(dr_Medico[5]), Convert.ToString(dr_Medico[6]), Convert.ToUInt32(dr_Medico[7]), Convert.ToString(dr_Medico[8]), Convert.ToDateTime(dr_Medico[9]), Convert.ToUInt32(dr_Medico[10]), Convert.ToString(dr_Medico[11]), 1, "");
             return miMedico;
 
         }
 
 
         static public void Eliminar_usuario(string campo_a_modificar, long Parametro, string Tabla)//ver como lo haria polimorficamente
-            //Elimina un usuario de la base de datos.
+        //Elimina un usuario de la base de datos.
         {
             SqlConnection miconexion = Conexion.Conectar();
 
@@ -221,7 +221,7 @@ namespace Clinica_Frba.Login
 
 
         static public void filtrar_tabla(string campo_a_modificar, string tabla, long Parametro, DataGridView dataGridView)
-           //lleno la tabla para modificar los datos
+        //lleno la tabla para modificar los datos
         {
             DataSet ds = new DataSet();
             SqlDataAdapter adapt;
