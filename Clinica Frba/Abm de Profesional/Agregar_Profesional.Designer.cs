@@ -87,6 +87,7 @@
             // 
             // TipoDoctxt
             // 
+            this.TipoDoctxt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TipoDoctxt.FormattingEnabled = true;
             this.TipoDoctxt.Items.AddRange(new object[] {
             "DNI",
@@ -141,6 +142,7 @@
             // 
             // Sexotxt
             // 
+            this.Sexotxt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Sexotxt.FormattingEnabled = true;
             this.Sexotxt.Items.AddRange(new object[] {
             "M",
@@ -152,6 +154,7 @@
             // 
             // Especialtxt
             // 
+            this.Especialtxt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Especialtxt.FormattingEnabled = true;
             this.Especialtxt.Items.AddRange(new object[] {
             "10000",
@@ -286,6 +289,7 @@
             // 
             this.FechaNactxt.Location = new System.Drawing.Point(110, 270);
             this.FechaNactxt.Name = "FechaNactxt";
+            this.FechaNactxt.ReadOnly = true;
             this.FechaNactxt.Size = new System.Drawing.Size(100, 20);
             this.FechaNactxt.TabIndex = 122;
             // 
