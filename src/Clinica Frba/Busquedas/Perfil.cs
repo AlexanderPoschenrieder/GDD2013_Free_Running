@@ -14,6 +14,5 @@ namespace Clinica_Frba.Busquedas
             parametro = param;
             perfil = perf;
         }        
-
     }
 }

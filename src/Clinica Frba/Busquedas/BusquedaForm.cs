@@ -12,6 +12,9 @@ namespace Clinica_Frba.Busquedas
     public partial class BusquedaForm : Form
     {
         private ModeloBusquedaProfesional miModelo;
+        delegate void funcionVentana();
+        funcionVentana ventanaALevantar;
+        UInt32 idBuscado;
         Perfil miPerfil;
         
         //Constructor para la ABM pedirTurno
@@ -23,8 +26,8 @@ namespace Clinica_Frba.Busquedas
                 InitializeComponent();
                 label2.Visible = false;//Deshabilito el filtro que no va
                 comboEspecialidad.Visible = false;//
-                //Le marco la accion ante el click del boton seleccionar
-                this.SeleccionarButton.Click += new System.EventHandler(this.SeleccionarButton_Paciente);
+                //Le marco la ventana a levantar ante el click del boton seleccionar
+                ventanaALevantar = () =>(new Clinica_Frba.Compra_de_Bono.CompraBonoForm((int)idBuscado)).ShowDialog();
             }
             else
             {
@@ -34,16 +37,26 @@ namespace Clinica_Frba.Busquedas
                 label3.Visible = false;//Deshabilito el filtro que no va
                 textBox1.Visible = false;//
                 generarComboEspecialidades();
-                //Le marco la accion ante el click del boton seleccionar
+                //Le marco la ventana a levantar ante el click del boton seleccionar
                 switch (perf.perfil){
-                    case "P": 
-                        this.SeleccionarButton.Click += new System.EventHandler(this.SeleccionarButton_Click);
+                    case "P":
+                        ventanaALevantar = () =>
+                        //ABM Pedir turno
+                        {
+                            try
+                            {
+                                (new Clinica_Frba.Pedir_Turno.MostrarAgendaForm(idBuscado, (int)miPerfil.parametro)).ShowDialog();
+                            }
+                            catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        };        
                         break;
                     case "M":
-                        this.SeleccionarButton.Click += new System.EventHandler(this.SeleccionarButton_Llegada);
+                        //ABM llegada turnos
+                        ventanaALevantar = () => (new Clinica_Frba.Registro_de_LLegada.Turnos_Llegada(idBuscado, comboEspecialidad.Text)).ShowDialog();
                         break;
                     case "A":
-                        this.SeleccionarButton.Click += new System.EventHandler(this.SeleccionarButton_Agenda);
+                        //ABM registrar Agenda
+                        ventanaALevantar = () => (new Clinica_Frba.Registrar_Agenda.ABM_Agenda(idBuscado)).ShowDialog();
                         break;
                 }
             }
@@ -52,8 +65,9 @@ namespace Clinica_Frba.Busquedas
             gridResultados.ReadOnly = true;
             gridResultados.Columns["Id"].Visible = false;  
         }
+
         private void generarComboEspecialidades()
-        {//BINDEA EL COMBO CON LAS ESPECIALIDADES
+        {
             while (miModelo.dr_Especialidades.Read())
             {
                 comboEspecialidad.Items.Add(miModelo.dr_Especialidades.GetString(0));
@@ -91,59 +105,18 @@ namespace Clinica_Frba.Busquedas
             armarGrilla();
 
         }
-
-        //Accion para abrir la ventana para PedirTurno
-        private void SeleccionarButton_Click(object sender, EventArgs e)
-        {
-            if (gridResultados.SelectedCells.Count == 0)
-            {
-                MessageBox.Show("Seleccione al profesional buscado");
-            }
-            else 
-            {
-                //Si hay excepcion no abre
-                try
-                {
-                    int index = (int)gridResultados.SelectedCells[0].RowIndex;
-                    UInt32 idMedico = Convert.ToUInt32(gridResultados.Rows[index].Cells["Id"].Value);
-                    Clinica_Frba.Pedir_Turno.MostrarAgendaForm ventana = new Clinica_Frba.Pedir_Turno.MostrarAgendaForm(idMedico, (int)miPerfil.parametro);
-                    ventana.ShowDialog();
-                }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
-            };
-        }
-
-        //Accion para que levante la ventana registro de llegada
-        private void SeleccionarButton_Llegada(object sender, EventArgs e)
-        {
-            int index = (int)gridResultados.SelectedCells[0].RowIndex;
-            UInt32 miProfesional = Convert.ToUInt32(gridResultados.Rows[index].Cells["Id"].Value);
-            Clinica_Frba.Registro_de_LLegada.Turnos_Llegada turnoLlegada = new Clinica_Frba.Registro_de_LLegada.Turnos_Llegada(miProfesional, comboEspecialidad.Text);
-            turnoLlegada.ShowDialog();
-        }
-
-        //Accion para levantar la ventana de Registrar Agenda
-        private void SeleccionarButton_Agenda(object sender, EventArgs e)
-        {
-            int index = (int)gridResultados.SelectedCells[0].RowIndex;
-            UInt32 miProfesional = Convert.ToUInt32(gridResultados.Rows[index].Cells["Id"].Value);
-            Clinica_Frba.Registrar_Agenda.ABM_Agenda agenda = new Clinica_Frba.Registrar_Agenda.ABM_Agenda(miProfesional);
-            agenda.ShowDialog();
-        }
-
-        //Accion para que levante la ventana de CompraBono
-        private void SeleccionarButton_Paciente(object sender, EventArgs e) {
+        
+        private void SeleccionarButton_Click(object sender, EventArgs e) {
             if (gridResultados.SelectedCells.Count == 0)
             {
                 MessageBox.Show("Seleccione al paciente buscado");
             }
-            else {
+            else
+            {
                 int index = (int)gridResultados.SelectedCells[0].RowIndex;
-                int idPac = Convert.ToInt32(gridResultados.Rows[index].Cells["Id"].Value);
-                Compra_de_Bono.CompraBonoForm ventana = new Clinica_Frba.Compra_de_Bono.CompraBonoForm(idPac);
-                ventana.ShowDialog();            
-            }
-        
+                idBuscado= Convert.ToUInt32(gridResultados.Rows[index].Cells["Id"].Value);
+                ventanaALevantar();
+            }    
         }
 
         private void botonLimpiar_Click(object sender, EventArgs e)
@@ -165,6 +138,5 @@ namespace Clinica_Frba.Busquedas
         {
             Validar.SoloNumeros(e);
         }
-
     }
 }

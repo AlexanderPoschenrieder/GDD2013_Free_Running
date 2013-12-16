@@ -15,8 +15,7 @@ namespace Clinica_Frba
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-           // Application.Run(new Login.ABMLogin());
-            Application.Run(new Clinica_Frba.Busquedas.BusquedaForm(new Clinica_Frba.Busquedas.Perfil("pac",null)));
+            Application.Run(new Login.ABMLogin());
         }
     }
 }

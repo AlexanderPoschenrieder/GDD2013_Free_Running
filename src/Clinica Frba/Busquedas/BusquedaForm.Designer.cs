@@ -121,6 +121,7 @@
             this.SeleccionarButton.TabIndex = 6;
             this.SeleccionarButton.Text = "Seleccionar";
             this.SeleccionarButton.UseVisualStyleBackColor = true;
+            this.SeleccionarButton.Click += new System.EventHandler(this.SeleccionarButton_Click);
             // 
             // botonLimpiar
             // 
@@ -169,7 +170,7 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // BusquedaProfesionalForm
+            // BusquedaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -186,7 +187,7 @@
             this.Controls.Add(this.NombreProfTB);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "BusquedaProfesionalForm";
+            this.Name = "BusquedaForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Búsqueda";
             ((System.ComponentModel.ISupportInitialize)(this.gridResultados)).EndInit();
