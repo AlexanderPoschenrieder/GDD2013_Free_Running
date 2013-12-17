@@ -1326,16 +1326,8 @@ END
 GO
 
 
-create procedure controlar_cant_medicamentos
-@bono numeric(18,0)
-as begin
-return (select COUNT(*) from Free_Running.Medicamento_por_BonoFarmacia  where (Bono_Farmacia= @bono))
-end
-
-go
-
 create procedure afiliadoAtencionMedica
- @atencionMedica int
+ @atencionMedica numeric(18,0)
 as begin
 return (select L.Nro_Afiliado
 from Free_Running.Atencion_Medica AM
@@ -1344,6 +1336,8 @@ where @atencionMedica = AM.Id)
 end
 
 go
+
+
 CREATE PROCEDURE Free_Running.puedeUsarBF @NroAfiliado numeric(18,0), @Bf numeric(18,0)
 AS 
 BEGIN

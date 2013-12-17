@@ -27,9 +27,8 @@ namespace Clinica_Frba.Generar_Receta
         crearReceta ventanaCrearReceta;
         public void iniciarDGV(DataGridView dgv)
         {
-            dgv.ColumnCount = 2;
-            dgv.Columns[0].Name = "Id";
-            dgv.Columns[1].Name = "Medicamento";
+            dgv.ColumnCount = 1;
+            dgv.Columns[0].Name = "Medicamento";
             DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
             dgv.Columns.Add(btn);
             btn.HeaderText = "Seleccionar";
@@ -48,8 +47,7 @@ namespace Clinica_Frba.Generar_Receta
             while (drTurno.Read())
             {
                 int renglon = dgv.Rows.Add();
-                dgv.Rows[renglon].Cells["Id"].Value = drTurno[0];
-                dgv.Rows[renglon].Cells["Medicamento"].Value = drTurno[1];
+                dgv.Rows[renglon].Cells["Medicamento"].Value = drTurno[0];
             }
         }
 
@@ -73,13 +71,11 @@ namespace Clinica_Frba.Generar_Receta
 
         private void dgvMedicamento_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 2)
+            if (e.ColumnIndex == 1)
             {
                 int miFila = dgvMedicamento.CurrentCell.RowIndex;
-                UInt32 id = Convert.ToUInt32(dgvMedicamento.Rows[miFila].Cells["Id"].Value);
                 string Medicamento = Convert.ToString(dgvMedicamento.Rows[miFila].Cells["Medicamento"].Value);
                 ventanaCrearReceta.tbMedicamento.Text = Medicamento;
-                ventanaCrearReceta.idMedicamento = id;
                 this.Close();
             }
         }

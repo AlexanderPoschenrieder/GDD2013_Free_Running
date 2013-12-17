@@ -26,9 +26,8 @@ namespace Clinica_Frba.Generar_Receta
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            //
             Clinica_Frba.Generar_Receta.crearReceta crearReceta = new crearReceta(consulta,miAfiliado());
+            crearReceta.ShowDialog();
         }
 
 
@@ -41,9 +40,9 @@ namespace Clinica_Frba.Generar_Receta
                 cmd.CommandType = CommandType.StoredProcedure;
                 //parametros si los hubieran
                 cmd.Parameters.AddWithValue("@atencionMedica", idAtencion);
-                cmd.Parameters.Add("@RETURN_VALUE", SqlDbType.BigInt).Direction = ParameterDirection.ReturnValue;//Valor devuelto
+                cmd.Parameters.Add("@RETURN_VALUE", SqlDbType.Decimal).Direction = ParameterDirection.ReturnValue;//Valor devuelto
                 cmd.ExecuteNonQuery();
-                UInt32 idAfiliado = (UInt32)cmd.Parameters["@RETURN_VALUE"].Value;
+                UInt32 idAfiliado = Convert.ToUInt32(cmd.Parameters["@RETURN_VALUE"].Value);
                 miconexion.Close();
                 return idAfiliado;
             }

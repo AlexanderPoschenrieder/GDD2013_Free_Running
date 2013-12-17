@@ -32,12 +32,12 @@ namespace Clinica_Frba.Generar_Receta
                 {
                     if (Convert.ToInt32(tbCant.Text) <= 3 && Convert.ToInt32(tbCant.Text) > 0 ) 
                     {
-                        if (controlarUtiliza_bono(miAfiliado, Convert.ToUInt32(tbBF.Text)) > 0)
+                        if (controlarUtiliza_bono(miAfiliado, Convert.ToUInt32(tbBF.Text)) == 1)
                         {
 
                             SqlConnection miconexion = Conexion.Conectar();
                             SqlCommand cmdUpdate = new SqlCommand("update Free_Running.Bono_Farmacia set Consulta_Id = "+miconsulta+" where Id = "+Convert.ToUInt32(tbBF.Text), miconexion);
-                            SqlCommand cmdInsert = new SqlCommand("insert into Free_Running.Medicamento_por_BonoFarmacia(Bono_Farmacia,Medicamento,Cantidad,Aclaracion_Cantidad)values(" + Convert.ToUInt32(tbBF.Text) + "," + tbMedicamento.Text + "," + Convert.ToInt32(tbCant.Text) + "," + aLetra(Convert.ToInt32(tbCant.Text)) + ")", miconexion);
+                            SqlCommand cmdInsert = new SqlCommand("insert into Free_Running.Medicamento_por_BonoFarmacia(Bono_Farmacia,Medicamento,Cantidad,Aclaracion_Cantidad)values(" + Convert.ToUInt32(tbBF.Text) + ",'" + tbMedicamento.Text + "'," + Convert.ToInt32(tbCant.Text) + ",'" + aLetra(Convert.ToInt32(tbCant.Text)) + "')", miconexion);
                             using (miconexion)
                             {
                                 cmdInsert.ExecuteNonQuery();
@@ -60,43 +60,55 @@ namespace Clinica_Frba.Generar_Receta
 
 
 
-               
+
+            }
+            else
+            {
+                MessageBox.Show("Completar los campos");
             }
         }
 
         static int controlar_bono(UInt32 Nro_bono)
         {
             SqlConnection miconexion = Conexion.Conectar();
-            SqlCommand cmd = new SqlCommand("dbo.controlar_cant_medicamentos", miconexion);
+            SqlCommand cmd = new SqlCommand("select COUNT(*) from Free_Running.Medicamento_por_BonoFarmacia  where Bono_Farmacia= "+Nro_bono, miconexion);
+            Int32 count;
             using (miconexion)
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                //parametros si los hubieran
-                cmd.Parameters.AddWithValue("@bono", Nro_bono);
-                cmd.Parameters.Add("@RETURN_VALUE", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;//Valor devuelto
-                cmd.ExecuteNonQuery();
-                int Cantidad = (int)cmd.Parameters["@RETURN_VALUE"].Value;
+
+                count = (Int32)cmd.ExecuteScalar();
                 miconexion.Close();
-                return Cantidad;
+                
             }
+            return count;
         }
 
-        static int controlarUtiliza_bono(UInt32 Nro_Afiliado, UInt32 Nro_bono)
+        public int controlarUtiliza_bono(UInt32 Nro_Afiliado, UInt32 Nro_bono)
         {
             SqlConnection miconexion = Conexion.Conectar();
-            SqlCommand cmd = new SqlCommand("dbo.controlar_utilizar_medicamentos", miconexion);
+            SqlCommand cmd = new SqlCommand("Free_Running.puedeUsarBF", miconexion);
+            Int32 rta = 1;
             using (miconexion)
             {
                 cmd.CommandType = CommandType.StoredProcedure;
-                //parametros si los hubieran
-                cmd.Parameters.AddWithValue("@NroAfiliado", Nro_Afiliado);
-                cmd.Parameters.AddWithValue("@Bf", Nro_bono);
-                cmd.Parameters.Add("@RETURN_VALUE", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;//Valor devuelto
+                cmd.Parameters.AddWithValue("@NroAfiliado", (long)Nro_Afiliado);
+                cmd.Parameters.AddWithValue("@Bf", (long)Nro_bono);
+                cmd.Parameters.Add("@RETURN_VALUE", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
                 cmd.ExecuteNonQuery();
-                int Cantidad = (int)cmd.Parameters["@RETURN_VALUE"].Value;
-                miconexion.Close();
-                return Cantidad;
+                int resultado = (int)cmd.Parameters["@RETURN_VALUE"].Value;
+
+                if (resultado >= 1)
+                {
+                    miconexion.Close();
+                    
+                }
+                else
+                {
+                    miconexion.Close();
+                    rta = 0;
+                }   
             }
+            return rta;
         }
 
         public String aLetra(int num)
