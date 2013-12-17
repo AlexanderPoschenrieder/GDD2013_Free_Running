@@ -36,30 +36,6 @@ namespace Clinica_Frba.Abm_de_Afiliado
 
         }
 
-        public long obtener_NroAfiliado()
-        {
-            SqlConnection miconexion = Conexion.Conectar();
-
-            SqlCommand command = new SqlCommand("dbo.get_NroAfiliado", miconexion);
-
-            using (miconexion)
-            {
-                command.CommandType = CommandType.StoredProcedure;
-
-                command.Parameters.Add("@RETURN_VALUE", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;//Valor devuelto
-
-                command.ExecuteNonQuery();
-
-                int valor = (int)command.Parameters["@RETURN_VALUE"].Value;
-
-                miconexion.Close();
-
-                long resultado = (long)Convert.ToUInt32(valor);
-
-                return resultado;
-            }
-        }
-
         public void limpiar_campos()
         {
             Nombretxt.Clear(); Apellidotxt.Clear(); NroDoctxt.Clear(); Mailtxt.Clear(); Teltxt.Clear(); FechaNactxt1.Clear(); Directxt.Clear(); CantFamHijtxt.Clear(); Usertxt.Clear(); Clavetxt.Clear(); Sexotxt.SelectedIndex = -1; EstCiviltxt.SelectedIndex = -1; PlanMedtxt.SelectedIndex = -1; TipoDoctxt.SelectedIndex = -1;
@@ -92,59 +68,59 @@ namespace Clinica_Frba.Abm_de_Afiliado
 
                 if (Validar.integridad_de_datos(Documento, Tipo_documento, "unicidad_de_datos") & Validar.existeUsuario(Usertxt.Text))
                 {
-               
+
 
                     if (quest_conyugue())//Pregunta si tiene conyugue
                     {
-                            if (conyugue_window("¿Desea afiliar al conyugue?"))//Pregunta si quiere agregar al conyugue
-                            {
+                        if (conyugue_window("¿Desea afiliar al conyugue?"))//Pregunta si quiere agregar al conyugue
+                        {
 
-                                Login.Paciente Padre = new Login.Paciente(Login.Paciente.obtener_NroPrincipal("numero_principal") + 1, Nombre, Apellido, Documento, Direccion, Telefono, Mail, Fecha_nac, Sexo, Tipo_documento, Estado_civil, Cant_familiares, Plan_medico, Estado, usuario, clave);
-                                Padre.insertar_usuario();
-                                Padre.insertarAFiliadoConFamilia();
-                                Validar.MsnAccept("Afiliado cargado de forma exitosa", "Ingreso de Afiliados");
-                                Abm_de_Afiliado.Agregar_Conyugue conyugue = new Agregar_Conyugue(Padre);
-                                conyugue.ShowDialog();
-                                bandera = true;
-                            }
+                            Login.Paciente Padre = new Login.Paciente(Login.Paciente.Obtener_NroAfiliado("Con Familia") + 1, Nombre, Apellido, Documento, Direccion, Telefono, Mail, Fecha_nac, Sexo, Tipo_documento, Estado_civil, Cant_familiares, Plan_medico, Estado, usuario, clave);
+                            Padre.insertar_usuario();
+                            Padre.insertarAFiliadoConFamilia();
+                            Validar.MsnAccept("Afiliado cargado de forma exitosa", "Ingreso de Afiliados");
+                            Abm_de_Afiliado.Agregar_Conyugue conyugue = new Agregar_Conyugue(Padre);
+                            conyugue.ShowDialog();
+                            bandera = true;
+                        }
 
                     }
 
                     if (cantHijos > 0)//Verifica que tenga hijos
                     {
-                            int i = 0;
-                            int limite = cantHijos;
+                        int i = 0;
+                        int limite = cantHijos;
 
-                            while (i < limite && conyugue_window("¿Desea afiliar hijo/s?"))//Pregunta por cada hijo si desea afiliarlo
+                        while (i < limite && conyugue_window("¿Desea afiliar hijo/s?"))//Pregunta por cada hijo si desea afiliarlo
+                        {
+                            if (bandera)
                             {
-                                if (bandera)
-                                {
-                                    Login.Paciente unFamiliar = new Login.Paciente(obtener_NroAfiliado(), Nombre, Apellido, Documento, Direccion, Telefono, Mail, Fecha_nac, Sexo, Tipo_documento, Estado_civil, Cant_familiares, Plan_medico, Estado, usuario, clave);
-                                    Abm_de_Afiliado.Agregar_Hijo_Familiar familiar = new Agregar_Hijo_Familiar(unFamiliar);
-                                    familiar.ShowDialog();
+                                Login.Paciente unFamiliar = new Login.Paciente(Login.Paciente.Obtener_NroAfiliado("Sin Familia"), Nombre, Apellido, Documento, Direccion, Telefono, Mail, Fecha_nac, Sexo, Tipo_documento, Estado_civil, Cant_familiares, Plan_medico, Estado, usuario, clave);
+                                Abm_de_Afiliado.Agregar_Hijo_Familiar familiar = new Agregar_Hijo_Familiar(unFamiliar);
+                                familiar.ShowDialog();
 
-                                    i++;
-                                }
-                                else
-                                {
-                                    Login.Paciente Padre = new Login.Paciente(Login.Paciente.obtener_NroPrincipal("numero_principal") + 1, Nombre, Apellido, Documento, Direccion, Telefono, Mail, Fecha_nac, Sexo, Tipo_documento, Estado_civil, Cant_familiares, Plan_medico, Estado, usuario, clave);
-                                    Padre.insertar_usuario();
-                                    Padre.insertarAFiliadoConFamilia();
-                                    Validar.MsnAccept("Afiliado cargado de forma exitosa", "Ingreso de Afiliados");
-                                    Login.Paciente unPaciente = new Login.Paciente(obtener_NroAfiliado(), Nombre, Apellido, Documento, Direccion, Telefono, Mail, Fecha_nac, Sexo, Tipo_documento, Estado_civil, Cant_familiares, Plan_medico, Estado, usuario, clave);
-                                    Abm_de_Afiliado.Agregar_Hijo_Familiar familiar = new Agregar_Hijo_Familiar(unPaciente);
-                                    familiar.ShowDialog();
-                                    bandera = true;
-                                    i++;
-                                }
-
+                                i++;
                             }
+                            else
+                            {
+                                Login.Paciente Padre = new Login.Paciente(Login.Paciente.Obtener_NroAfiliado("Con Familia") + 1, Nombre, Apellido, Documento, Direccion, Telefono, Mail, Fecha_nac, Sexo, Tipo_documento, Estado_civil, Cant_familiares, Plan_medico, Estado, usuario, clave);
+                                Padre.insertar_usuario();
+                                Padre.insertarAFiliadoConFamilia();
+                                Validar.MsnAccept("Afiliado cargado de forma exitosa", "Ingreso de Afiliados");
+                                Login.Paciente unPaciente = new Login.Paciente(Login.Paciente.Obtener_NroAfiliado("Sin Familia"), Nombre, Apellido, Documento, Direccion, Telefono, Mail, Fecha_nac, Sexo, Tipo_documento, Estado_civil, Cant_familiares, Plan_medico, Estado, usuario, clave);
+                                Abm_de_Afiliado.Agregar_Hijo_Familiar familiar = new Agregar_Hijo_Familiar(unPaciente);
+                                familiar.ShowDialog();
+                                bandera = true;
+                                i++;
+                            }
+
+                        }
 
                     }
 
                     if (!bandera)
                     {
-                        Login.Paciente Padre = new Login.Paciente(Login.Paciente.obtener_NroPrincipal("numero_principal"), Nombre, Apellido, Documento, Direccion, Telefono, Mail, Fecha_nac, Sexo, Tipo_documento, Estado_civil, Cant_familiares, Plan_medico, Estado, usuario, clave);
+                        Login.Paciente Padre = new Login.Paciente(Login.Paciente.Obtener_NroAfiliado("Con Familia"), Nombre, Apellido, Documento, Direccion, Telefono, Mail, Fecha_nac, Sexo, Tipo_documento, Estado_civil, Cant_familiares, Plan_medico, Estado, usuario, clave);
                         Padre.insertar_usuario();
                         Padre.insertarAFiliadoConFamilia();
                         Validar.MsnAccept("Afiliado cargado de forma exitosa", "Ingreso de Afiliados");
@@ -154,15 +130,17 @@ namespace Clinica_Frba.Abm_de_Afiliado
                 }
                 else
                 {
-                    Validar.MsnError("El usuario ya se encuentra registrado en el sistema", "Completar formulario"); 
+                    Validar.MsnError("El usuario ya se encuentra registrado en el sistema", "Completar formulario");
                     limpiar_campos();
                 }
             }
-        else
-           {
-               Validar.MsnError("Existen campos vacios en el formulario, o los mismos tienen valores incorrectos", "Completar formulario");
-           }
-       }
+
+             else
+             {
+                 Validar.MsnError("Existen campos vacios en el formulario, o los mismos tienen valores incorrectos", "Completar formulario");
+             }
+        }
+        
         
 
 

@@ -154,19 +154,6 @@ namespace Clinica_Frba.Login
 
         }
 
-        static public void actualizar_usuario(long Id, string nombreUsuario)
-        {
-            SqlConnection miConexion = Conexion.Conectar();
-            SqlCommand cmm = new SqlCommand(
-
-            "UPDATE Free_Running.Usuario SET Username = @Username WHERE Username = (SELECT Username FROM Free_Running.Medico WHERE Id= @Id)", miConexion);
-
-            cmm.Parameters.AddWithValue("@Id", Id);
-            cmm.Parameters.AddWithValue("@Username", nombreUsuario);
-            cmm.ExecuteNonQuery();
-            miConexion.Close();
-
-        }
 
         static public void actualizar_profesional(long Id, string nombre, string apellido, string sexo, string tipo_Documento, long documento, string direccion, long telefono, string mail, DateTime fecha_Nac, long matricula, string username)
         {

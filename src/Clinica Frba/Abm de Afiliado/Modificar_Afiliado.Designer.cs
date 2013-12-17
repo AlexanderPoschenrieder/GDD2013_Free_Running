@@ -82,6 +82,10 @@
             this.Apellidotxt = new System.Windows.Forms.TextBox();
             this.Nombretxt = new System.Windows.Forms.TextBox();
             this.pacienteTableAdapter = new Clinica_Frba.GD2C2013DataSet1TableAdapters.PacienteTableAdapter();
+            this.Habilitadotxt = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.Clavetxt = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pacienteBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2013DataSet1)).BeginInit();
@@ -146,7 +150,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(39, 66);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(892, 230);
+            this.dataGridView1.Size = new System.Drawing.Size(1020, 230);
             this.dataGridView1.TabIndex = 151;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -577,11 +581,52 @@
             // 
             this.pacienteTableAdapter.ClearBeforeFill = true;
             // 
+            // Habilitadotxt
+            // 
+            this.Habilitadotxt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Habilitadotxt.FormattingEnabled = true;
+            this.Habilitadotxt.Items.AddRange(new object[] {
+            "Si",
+            "No"});
+            this.Habilitadotxt.Location = new System.Drawing.Point(981, 336);
+            this.Habilitadotxt.Name = "Habilitadotxt";
+            this.Habilitadotxt.Size = new System.Drawing.Size(100, 21);
+            this.Habilitadotxt.TabIndex = 160;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(940, 342);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(29, 13);
+            this.label18.TabIndex = 159;
+            this.label18.Text = "Apto";
+            // 
+            // Clavetxt
+            // 
+            this.Clavetxt.Location = new System.Drawing.Point(834, 417);
+            this.Clavetxt.Name = "Clavetxt";
+            this.Clavetxt.Size = new System.Drawing.Size(100, 20);
+            this.Clavetxt.TabIndex = 157;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(794, 420);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(34, 13);
+            this.label17.TabIndex = 158;
+            this.label17.Text = "Clave";
+            // 
             // Modificar_Afiliado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(970, 506);
+            this.ClientSize = new System.Drawing.Size(1092, 506);
+            this.Controls.Add(this.Habilitadotxt);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.Clavetxt);
+            this.Controls.Add(this.label17);
             this.Controls.Add(this.Estadotxt);
             this.Controls.Add(this.TipoDoctxt);
             this.Controls.Add(this.dataGridView1);
@@ -685,5 +730,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn planMedicoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn estadoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn usernameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ComboBox Habilitadotxt;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox Clavetxt;
+        private System.Windows.Forms.Label label17;
     }
 }

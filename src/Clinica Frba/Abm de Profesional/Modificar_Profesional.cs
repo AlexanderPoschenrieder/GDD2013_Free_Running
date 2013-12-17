@@ -18,7 +18,7 @@ namespace Clinica_Frba.Abm_de_Profesional
 
         private void Modificar_Profesional_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2013DataSet.Medico' Puede moverla o quitarla según sea necesario.
+            // Cargo las filas de la tabla medico
             this.medicoTableAdapter.Fill(this.gD2C2013DataSet.Medico);
         }
 
@@ -30,23 +30,30 @@ namespace Clinica_Frba.Abm_de_Profesional
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (Validar.noVacio(Nombretxt.Text) & Validar.noVacio(Apellidotxt.Text) & Validar.noVacio(Doctxt.Text) & Validar.noVacio(Directxt.Text) & Validar.noVacio(Teltxt.Text) & Validar.noVacio(Mailtxt.Text) & Validar.noVacio(FechaNactxt.Text) & Validar.noVacio(TipoDoctxt.Text) & Validar.noVacio(Matriculatxt.Text) & Validar.noVacio(Usertxt.Text) & Validar.noVacio(Sexotxt.Text) & Validar.IsValidEmail(Mailtxt.Text) & Validar.noVacio(Idtxt.Text))
-            {               
+            if (Validar.noVacio(Nombretxt.Text) & Validar.noVacio(Apellidotxt.Text) & Validar.noVacio(Doctxt.Text) & Validar.noVacio(Directxt.Text) & Validar.noVacio(Teltxt.Text) & Validar.noVacio(Mailtxt.Text) & Validar.noVacio(FechaNactxt.Text) & Validar.noVacio(TipoDoctxt.Text) & Validar.noVacio(Matriculatxt.Text) & Validar.noVacio(Usertxt.Text) & Validar.noVacio(Sexotxt.Text) & Validar.IsValidEmail(Mailtxt.Text) & Validar.noVacio(Idtxt.Text) & Validar.noVacio(Clavetxt.Text) & Validar.noVacio(Habilitadotxt.Text))
+            {
                 if (Validar.existe_afiliado("Id", Convert.ToUInt32(Idtxt.Text), "Cantidad_profesionales"))
                 {
                     if (Validar.usuarioIgualExistente(Usertxt.Text, Convert.ToUInt32(Idtxt.Text)))
                     {
                         if (Validar.noRepiteDocumento(Convert.ToUInt32(Idtxt.Text), Convert.ToUInt32(Doctxt.Text), TipoDoctxt.Text, "Sin_Doc_repetido_Prof"))
                         {
-                            Login.Medico.actualizar_usuario(Convert.ToUInt32(Idtxt.Text), Usertxt.Text);
-                            Login.Medico.actualizar_profesional(Convert.ToUInt32(Idtxt.Text), Nombretxt.Text, Apellidotxt.Text, Sexotxt.Text, TipoDoctxt.Text, Convert.ToUInt32(Doctxt.Text), Directxt.Text, Convert.ToUInt32(Teltxt.Text), Mailtxt.Text, Convert.ToDateTime(FechaNactxt.Text), Convert.ToUInt32(Matriculatxt.Text), Usertxt.Text);
-                            this.medicoTableAdapter.Fill(this.gD2C2013DataSet.Medico);
-                            Validar.MsnAccept("Profesional Acualizado de forma exitosa", "Actualizacion de datos");
-                            limpiar_campos();
+                            if (!Validar.existeUsuario(Usertxt.Text))
+                            {
+                                Login.Usuario.actualizacion_usuario("Medico", "Id", Convert.ToUInt32(Idtxt.Text), Usertxt.Text, Clavetxt.Text, Habilitadotxt.Text);
+                                Login.Medico.actualizar_profesional(Convert.ToUInt32(Idtxt.Text), Nombretxt.Text, Apellidotxt.Text, Sexotxt.Text, TipoDoctxt.Text, Convert.ToUInt32(Doctxt.Text), Directxt.Text, Convert.ToUInt32(Teltxt.Text), Mailtxt.Text, Convert.ToDateTime(FechaNactxt.Text), Convert.ToUInt32(Matriculatxt.Text), Usertxt.Text);
+                                this.medicoTableAdapter.Fill(this.gD2C2013DataSet.Medico);
+                                Validar.MsnAccept("Profesional Acualizado de forma exitosa", "Actualizacion de datos");
+                                limpiar_campos();
+                            }
+                            else
+                            {
+                                Validar.MsnError("Usuario no existente en el sistema", "Actualizacion de datos");
+                            }
                         }
                         else
                         {
-                            Validar.MsnError("Numero de documentio repetido","Actualizacion de datos");
+                            Validar.MsnError("Numero de documentio repetido", "Actualizacion de datos");
                         }
                     }
                     else
@@ -75,7 +82,7 @@ namespace Clinica_Frba.Abm_de_Profesional
 
         public void limpiar_campos()
         {
-            Idtxt.Clear(); Nombretxt.Clear(); Apellidotxt.Clear(); Sexotxt.SelectedIndex = -1; TipoDoctxt.SelectedIndex = -1; Doctxt.Clear(); Directxt.Clear(); Teltxt.Clear(); Mailtxt.Clear(); FechaNactxt.Clear(); Matriculatxt.Clear(); Usertxt.Clear();
+            Idtxt.Clear(); Nombretxt.Clear(); Apellidotxt.Clear(); Sexotxt.SelectedIndex = -1; TipoDoctxt.SelectedIndex = -1; Doctxt.Clear(); Directxt.Clear(); Teltxt.Clear(); Mailtxt.Clear(); FechaNactxt.Clear(); Matriculatxt.Clear(); Usertxt.Clear(); Habilitadotxt.SelectedIndex = -1; Clavetxt.Clear();
         }
 
         private void Idtxt_KeyPress(object sender, KeyPressEventArgs e)

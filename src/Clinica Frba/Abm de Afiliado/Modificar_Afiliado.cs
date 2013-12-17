@@ -18,7 +18,7 @@ namespace Clinica_Frba.Abm_de_Afiliado
 
         private void Modificar_Afiliado_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2013DataSet1.Paciente' Puede moverla o quitarla según sea necesario.
+            // Cargo las filas de la tabla paciente
             this.pacienteTableAdapter.Fill(this.gD2C2013DataSet1.Paciente);
         }
 
@@ -77,7 +77,7 @@ namespace Clinica_Frba.Abm_de_Afiliado
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Validar.noVacio(Nombretxt.Text) & Validar.noVacio(Apellidotxt.Text) & Validar.noVacio(Doctxt.Text) & Validar.noVacio(Directxt.Text) & Validar.noVacio(Teltxt.Text) & Validar.noVacio(Mailtxt.Text) & Validar.noVacio(FechaNactxt.Text) & Validar.noVacio(TipoDoctxt.Text) & Validar.noVacio(CantFamHijtxt.Text) & Validar.noVacio(Estadotxt.Text) & Validar.noVacio(NroAfiliadotxt.Text) & Validar.IsValidEmail(Mailtxt.Text) & Validar.noVacio(Usertxt.Text))
+            if (Validar.noVacio(Nombretxt.Text) & Validar.noVacio(Apellidotxt.Text) & Validar.noVacio(Doctxt.Text) & Validar.noVacio(Directxt.Text) & Validar.noVacio(Teltxt.Text) & Validar.noVacio(Mailtxt.Text) & Validar.noVacio(FechaNactxt.Text) & Validar.noVacio(TipoDoctxt.Text) & Validar.noVacio(CantFamHijtxt.Text) & Validar.noVacio(Estadotxt.Text) & Validar.noVacio(NroAfiliadotxt.Text) & Validar.IsValidEmail(Mailtxt.Text) & Validar.noVacio(Clavetxt.Text) & Validar.noVacio(Habilitadotxt.Text))
             {
                 if (Validar.existe_afiliado("Nro_Afiliado", Convert.ToUInt32(NroAfiliadotxt.Text), "Cantidad_afiliados"))
                 {
@@ -85,18 +85,25 @@ namespace Clinica_Frba.Abm_de_Afiliado
                     {
                         if (Validar.noRepiteDocumento(Convert.ToUInt32(NroAfiliadotxt.Text), Convert.ToUInt32(Doctxt.Text), TipoDoctxt.Text, "Sin_Doc_repetido_Afi"))
                         {
-                            Login.Paciente.actualizar_usuario(Convert.ToUInt32(NroAfiliadotxt.Text), Usertxt.Text);
-                            Login.Paciente.actualizar_afiliado(Convert.ToUInt32(NroAfiliadotxt.Text), Nombretxt.Text, Apellidotxt.Text, Convert.ToUInt32(Doctxt.Text), Directxt.Text, Convert.ToUInt32(Teltxt.Text), Mailtxt.Text, Convert.ToDateTime(FechaNactxt.Text), Sexotxt.Text, TipoDoctxt.Text, EstadoCivtxt.Text, Convert.ToInt32(CantFamHijtxt.Text), Convert.ToUInt32(PlanMedtxt.Text), Estadotxt.Text,Usertxt.Text);
-                            this.pacienteTableAdapter.Fill(this.gD2C2013DataSet1.Paciente);
-                            Validar.MsnAccept("Afiliado Acualizado de forma exitosa", "Actualizacion de datos");
-                            limpiar_campos();
+                            if (!Validar.existeUsuario(Usertxt.Text))
+                            {
+                                Login.Usuario.actualizacion_usuario("Paciente", "Nro_Afiliado", Convert.ToUInt32(NroAfiliadotxt.Text), Usertxt.Text, Clavetxt.Text, Habilitadotxt.Text);
+                                Login.Paciente.actualizar_afiliado(Convert.ToUInt32(NroAfiliadotxt.Text), Nombretxt.Text, Apellidotxt.Text, Convert.ToUInt32(Doctxt.Text), Directxt.Text, Convert.ToUInt32(Teltxt.Text), Mailtxt.Text, Convert.ToDateTime(FechaNactxt.Text), Sexotxt.Text, TipoDoctxt.Text, EstadoCivtxt.Text, Convert.ToInt32(CantFamHijtxt.Text), Convert.ToUInt32(PlanMedtxt.Text), Estadotxt.Text, Usertxt.Text);
+                                this.pacienteTableAdapter.Fill(this.gD2C2013DataSet1.Paciente);
+                                Validar.MsnAccept("Afiliado Acualizado de forma exitosa", "Actualizacion de datos");
+                                limpiar_campos();
+                            }
+                            else
+                            {
+                                Validar.MsnError("Usuario no existente en el sistema", "Actualizacion de datos");
+                            }
                         }
-                        else 
+                        else
                         {
                             Validar.MsnError("Numero de documentio repetido", "Actualizacion de datos");
                         }
                     }
-                    else 
+                    else
                     {
                         Validar.MsnError("Usuario incorrecto, dicho usuario ya exixte en el sistema", "Actualizacion de datos");
                     }
@@ -112,10 +119,9 @@ namespace Clinica_Frba.Abm_de_Afiliado
             }
         }
 
-
         private void limpiar_campos()
         {
-            NroAfiliadotxt.Clear(); Nombretxt.Clear(); Apellidotxt.Clear(); Doctxt.Clear(); Directxt.Clear(); Teltxt.Clear(); Mailtxt.Clear(); FechaNactxt.Clear(); Sexotxt.SelectedIndex = -1; TipoDoctxt.SelectedIndex = -1; EstadoCivtxt.SelectedIndex = -1; CantFamHijtxt.Clear(); PlanMedtxt.SelectedIndex = -1; Estadotxt.SelectedIndex = -1; Usertxt.Clear();
+            NroAfiliadotxt.Clear(); Nombretxt.Clear(); Apellidotxt.Clear(); Doctxt.Clear(); Directxt.Clear(); Teltxt.Clear(); Mailtxt.Clear(); FechaNactxt.Clear(); Sexotxt.SelectedIndex = -1; TipoDoctxt.SelectedIndex = -1; EstadoCivtxt.SelectedIndex = -1; CantFamHijtxt.Clear(); PlanMedtxt.SelectedIndex = -1; Estadotxt.SelectedIndex = -1; Usertxt.Clear(); Habilitadotxt.SelectedIndex = -1; Clavetxt.Clear();
         }
 
         private void button3_Click(object sender, EventArgs e)

@@ -98,48 +98,6 @@ namespace Clinica_Frba.Login
 
         }
 
-        static public long obtener_NroPrincipal(string cadena)
-        {
-            SqlConnection miconexion = Conexion.Conectar();
-
-            SqlCommand command = new SqlCommand("dbo." + cadena, miconexion);
-
-            using (miconexion)
-            {
-                command.CommandType = CommandType.StoredProcedure;
-
-                command.Parameters.Add("@RETURN_VALUE", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;//Valor devuelto
-
-                command.ExecuteNonQuery();
-
-                int valor = (int)command.Parameters["@RETURN_VALUE"].Value;
-                miconexion.Close();
-                long resultado = (long)Convert.ToUInt32(valor);
-
-                return resultado;
-            }
-        }
-
-
-
-
-
-        public static long actualizar_NroAfiliado(long Nro_Afiliado_Actual)
-        {
-            long Nro_Modificado = Nro_Afiliado_Actual + 1;
-            SqlConnection miconexion = Conexion.Conectar();
-            /*SqlCommand cmd = new SqlCommand("UPDATE Free_Running.Paciente SET Nro_Afiliado= " + Nro_Modificado + " WHERE Nro_Afiliado =" + Nro_Afiliado_Actual, miconexion);*/
-            SqlCommand cmd = new SqlCommand("UPDATE Free_Running.Paciente SET Nro_Afiliado= " + Nro_Modificado + " WHERE Nro_Afiliado =" + Nro_Afiliado_Actual, miconexion);
-            using (miconexion)
-            {
-                cmd.ExecuteNonQuery();
-                miconexion.Close();
-                return Nro_Modificado;
-
-
-            }
-        }
-
         static public void sinTurnos(long Parametro)
         {
 
@@ -185,18 +143,27 @@ namespace Clinica_Frba.Login
 
         }
 
-        static public void actualizar_usuario(long nA, string nombreUsuario)
+        static public long Obtener_NroAfiliado(string cadena)
         {
-            SqlConnection miConexion = Conexion.Conectar();
-            SqlCommand cmm = new SqlCommand(
+            string procedimiento;
 
-            "UPDATE Free_Running.Usuario SET Username = @Username WHERE Username= (SELECT Username FROM Free_Running.Paciente WHERE Nro_Afiliado= @Nro_Afiliado)", miConexion);
+            SqlConnection miconexion = Conexion.Conectar();
 
-            cmm.Parameters.AddWithValue("@Nro_Afiliado", nA);
-            cmm.Parameters.AddWithValue("@Username", nombreUsuario);
-            cmm.ExecuteNonQuery();
-            miConexion.Close();
+            if (cadena == "Con Familia") { procedimiento = "dbo.numero_principal"; } else { procedimiento = "dbo.get_NroAfiliado"; }
 
+            SqlCommand command = new SqlCommand(procedimiento, miconexion);
+
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add("@RETURN_VALUE", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
+            command.ExecuteNonQuery();
+
+            int valor = (int)command.Parameters["@RETURN_VALUE"].Value;
+
+            miconexion.Close();
+
+            long resultado = (long)Convert.ToUInt32(valor);
+
+            return resultado;
         }
     
     }

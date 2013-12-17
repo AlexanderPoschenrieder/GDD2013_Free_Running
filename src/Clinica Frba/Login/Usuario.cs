@@ -247,6 +247,26 @@ namespace Clinica_Frba.Login
             }
 
         }
+
+        static public void actualizacion_usuario(string tabla, string parametro, long nA, string nombreUsuario, string clave, string habilitado)
+        {
+            int value;
+            if (habilitado == "Si") { value = 1; } else { value = 0; }
+
+            string cadena = "UPDATE Free_Running.Usuario SET Username=@Username,Usuario_Password=@Usuario_Password,Habilitado=@Habilitado WHERE Username= (SELECT Username FROM Free_Running." + tabla + " WHERE " + parametro + "=@Numero)";
+            SqlConnection miConexion = Conexion.Conectar();
+            SqlCommand cmm = new SqlCommand(cadena, miConexion);
+
+            cmm.Parameters.AddWithValue("@Numero", nA);
+            cmm.Parameters.AddWithValue("@Username", nombreUsuario);
+            cmm.Parameters.AddWithValue("@Usuario_Password", clave);
+            cmm.Parameters.AddWithValue("@Habilitado", value);
+            cmm.ExecuteNonQuery();
+            miConexion.Close();
+
+        }
+
+
     }
 
 }
