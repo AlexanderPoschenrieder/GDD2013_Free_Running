@@ -371,7 +371,8 @@ GO
  
   --Relaciono un Registro del Historial con un Plan Medico
  ALTER TABLE Free_Running.Historial_Plan_Med ADD CONSTRAINT FK_HistPlanMed_PlanMedCodigo FOREIGN KEY (Plan_Med_Codigo) 
- REFERENCES Free_Running.Plan_Medico(Codigo) 
+ REFERENCES Free_Running.Plan_Medico(Codigo)
+ ON update cascade
  GO
  
  
@@ -379,7 +380,7 @@ GO
  
  
  ALTER TABLE Free_Running.Historial_Plan_Med ADD CONSTRAINT FK_HistPlanMed_NroAfiliado FOREIGN KEY (Nro_Afiliado) 
- REFERENCES Free_Running.Paciente(Nro_Afiliado) 
+ REFERENCES Free_Running.Paciente(Nro_Afiliado)
  GO
  
 
@@ -388,7 +389,7 @@ GO
  GO
  
  ALTER TABLE Free_Running.Medicamento_por_BonoFarmacia ADD CONSTRAINT FK_MxF_Medicamento FOREIGN KEY (Medicamento) 
- REFERENCES Free_Running.Medicamento(Medicamento) 
+ REFERENCES Free_Running.Medicamento(Medicamento)
  GO
 
   
@@ -421,19 +422,23 @@ GO
  
  
  ALTER TABLE Free_Running.Compra_Bono ADD CONSTRAINT FK_Compra_Bono_Afiliado_Compra FOREIGN KEY (Afiliado_Compra) 
- REFERENCES Free_Running.Paciente(Nro_Afiliado) 
+ REFERENCES Free_Running.Paciente(Nro_Afiliado)
  GO
  
  
  ALTER TABLE Free_Running.Bono_Farmacia ADD CONSTRAINT FK_Bono_Farmacia FOREIGN KEY (Consulta_Id) 
  REFERENCES Free_Running.Consulta(Id) 
  GO
+ 
  ALTER TABLE Free_Running.Bono_Farmacia ADD CONSTRAINT FK_Bono_Farmacia_Afiliado_Utiliza FOREIGN KEY (Afiliado_Utiliza) 
  REFERENCES Free_Running.Paciente(Nro_Afiliado) 
  GO
+ 
  ALTER TABLE Free_Running.Bono_Farmacia ADD CONSTRAINT FK_Bono_Farmacia_Plan_Correspondiente FOREIGN KEY (Plan_Correspondiente) 
- REFERENCES Free_Running.Plan_Medico(Codigo) 
+ REFERENCES Free_Running.Plan_Medico(Codigo)
+ ON update cascade
  GO
+ 
   ALTER TABLE Free_Running.Bono_Farmacia ADD CONSTRAINT FK_Bono_Farmacia_CompraId FOREIGN KEY (CompraId) 
  REFERENCES Free_Running.Compra_Bono(Id) 
  GO
@@ -441,8 +446,9 @@ GO
  ALTER TABLE Free_Running.Bono_Consulta ADD CONSTRAINT FK_Bono_Consulta_Afiliado_Utiliza FOREIGN KEY (Afiliado_Utiliza) 
  REFERENCES Free_Running.Paciente(Nro_Afiliado) 
  GO
+ 
  ALTER TABLE Free_Running.Bono_Consulta ADD CONSTRAINT FK_Bono_Consulta_Plan_Correspondiente FOREIGN KEY (Plan_Correspondiente) 
- REFERENCES Free_Running.Plan_Medico(Codigo) 
+ REFERENCES Free_Running.Plan_Medico(Codigo)
  GO
  
  ALTER TABLE Free_Running.Bono_Consulta ADD CONSTRAINT FK_Bono_Consulta_CompraId FOREIGN KEY (CompraId) 
@@ -492,11 +498,13 @@ GO
 
 
  ALTER TABLE Free_Running.Llegada_Atencion_Medica ADD CONSTRAINT FK_Llegada_Atencion_Medica_Nro_Afiliado FOREIGN KEY (Nro_Afiliado) 
- REFERENCES Free_Running.Paciente(Nro_Afiliado) 
+ REFERENCES Free_Running.Paciente(Nro_Afiliado)
  GO
+ 
  ALTER TABLE Free_Running.Llegada_Atencion_Medica ADD CONSTRAINT FK_Llegada_Atencion_Medica_Turno_Numero FOREIGN KEY (Turno_Numero) 
  REFERENCES Free_Running.Turno(Numero) 
  GO
+ 
  ALTER TABLE Free_Running.Llegada_Atencion_Medica ADD CONSTRAINT FK_Llegada_Atencion_Medica_Bono_Consulta  FOREIGN KEY (Bono_Consulta ) 
  REFERENCES Free_Running.Bono_Consulta(Id) 
  GO
@@ -523,10 +531,12 @@ GO
  ALTER TABLE Free_Running.Funcionalidad_por_Rol ADD CONSTRAINT FK_Func_por_Rol_Rol_Id  FOREIGN KEY (Rol_Id) 
  REFERENCES Free_Running.Rol(Id) 
  ON update cascade
- ON delete cascade
  GO 
+ 
  ALTER TABLE Free_Running.Funcionalidad_por_Rol ADD CONSTRAINT FK_Func_por_Rol_Funcionalidad_Id  FOREIGN KEY (Funcionalidad_Id) 
  REFERENCES Free_Running.Funcionalidad(Id)
+ ON update cascade
+ ON delete cascade
  GO
  
  
