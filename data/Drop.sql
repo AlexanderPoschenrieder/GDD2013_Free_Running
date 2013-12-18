@@ -9,6 +9,10 @@ DROP TABLE Free_Running.Historial_Plan_Med
 DROP TABLE Free_Running.Intentos_Fallidos
 DROP TABLE Free_Running.Turno_Cancelado
 DROP TABLE Free_Running.Medicamento
+DROP TABLE Free_Running.Consulta_por_Sintomas
+DROP TABLE Free_Running.Consulta_por_Enfermedades
+DROP TABLE Free_Running.Sintomas
+DROP TABLE Free_Running.Enfermedades
 DROP TABLE Free_Running.Usuario_por_Rol
 DROP TABLE Free_Running.Funcionalidad
 DROP TABLE Free_Running.Rol
@@ -81,5 +85,6 @@ DROP PROCEDURE Free_Running.comprarBonosConsulta
 DROP PROCEDURE Free_Running.comprarBonosFarmacia
 drop PROCEDURE Sin_Doc_repetido_Afi
 drop PROCEDURE Sin_Doc_repetido_Prof
+drop PROCEDURE Free_Running.comprarBonos
 
 DROP schema Free_Running

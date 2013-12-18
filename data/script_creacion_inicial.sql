@@ -70,12 +70,52 @@ GO
 --TABLA CONSULTA: Tabla que Registra una Consulta que se realizo satisfactoriamente
 CREATE TABLE Free_Running.Consulta (
 Id numeric(18, 0) NOT NULL identity(1,1),
-Id_Atencion_Medica numeric(18, 0)NOT NULL,
-Sintomas	varchar(255) NOT NULL,
-Enfermedades	varchar(255) NOT NULL,
+Id_Atencion_Medica numeric(18, 0)NOT NULL
 CONSTRAINT PK_Consulta PRIMARY KEY CLUSTERED (Id ASC)
 )
 GO
+
+
+
+
+--TABLA Sintomas: Muestra los distintos sintomas que puede tener un paciente
+CREATE TABLE Free_Running.Sintomas (
+Id varchar(255) NOT NULL
+CONSTRAINT PK_Sintoma PRIMARY KEY CLUSTERED (Id ASC)
+)
+GO
+
+
+
+--TABLA Enfermedades: Muestra los distintas enfermedades que puede tener un paciente
+CREATE TABLE Free_Running.Enfermedades (
+Id varchar(255) NOT NULL
+CONSTRAINT PK_Enfermedades PRIMARY KEY CLUSTERED (Id ASC)
+)
+GO
+
+
+
+----TABLA CONSULTA POR SINTOMAS: relaciona una consulta con muchos sintomas y muchos sintomas con una consulta
+CREATE TABLE Free_Running.Consulta_por_Sintomas (
+Consulta_Id numeric(18, 0) NOT NULL,
+Sintoma_Id varchar(255) NOT NULL
+CONSTRAINT PK_Consulta_x_Sintoma PRIMARY KEY CLUSTERED (Consulta_Id ASC, Sintoma_Id ASC)
+)
+GO
+
+
+
+
+----TABLA CONSULTA POR ENFERMEDADES:
+CREATE TABLE Free_Running.Consulta_por_Enfermedades (
+Consulta_Id numeric(18, 0) NOT NULL,
+Enfermedades_Id varchar(255) NOT NULL
+CONSTRAINT PK_Consulta_x_Enfermedades PRIMARY KEY CLUSTERED (Consulta_Id ASC, Enfermedades_Id ASC)
+)
+GO
+
+
 
 --TABLA MEDICOS: Contiene todos los Profecionales de la Clinica
 CREATE TABLE Free_Running.Medico (
@@ -358,6 +398,28 @@ GO
  REFERENCES Free_Running.Atencion_Medica(Id) 
  GO
  
+ 
+ ALTER TABLE Free_Running.Consulta_por_Sintomas ADD CONSTRAINT FK_Consulta_x_S  FOREIGN KEY (Consulta_Id) 
+ REFERENCES Free_Running.Consulta(Id)
+ GO
+
+ ALTER TABLE Free_Running.Consulta_por_Sintomas ADD CONSTRAINT FK_Sintomas_x_C FOREIGN KEY (Sintoma_Id) 
+ REFERENCES Free_Running.Sintomas(Id)
+ GO
+ 
+ 
+  ALTER TABLE Free_Running.Consulta_por_Enfermedades ADD CONSTRAINT FK_Consulta_x_E  FOREIGN KEY (Consulta_Id) 
+ REFERENCES Free_Running.Consulta(Id)
+ GO
+
+ ALTER TABLE Free_Running.Consulta_por_Enfermedades  ADD CONSTRAINT FK_Enfermedades_x_C FOREIGN KEY (Enfermedades_Id) 
+ REFERENCES Free_Running.Enfermedades(Id)
+ GO
+ 
+ 
+ 
+ 
+ 
  ALTER TABLE Free_Running.Compra_Bono ADD CONSTRAINT FK_Compra_Bono_Afiliado_Compra FOREIGN KEY (Afiliado_Compra) 
  REFERENCES Free_Running.Paciente(Nro_Afiliado) 
  GO
@@ -542,7 +604,6 @@ go
 
 		--Creo Indices
 		CREATE INDEX iNDICE_DOCUMENTO ON Free_Running.Paciente (Documento);
-		--CREATE INDEX iNDICE_NroAfiliado ON Free_Running.Paciente (Nro_Afiliado);
 		
 		go
 
@@ -833,8 +894,21 @@ go
 
 
 
+--Sintomas
+Insert into Free_Running.Sintomas(Id)
+select distinct M.Consulta_Sintomas
+from gd_esquema.Maestra M
+where M.Consulta_Sintomas is not null
 
 
+
+
+
+--Enfermedades
+insert into Free_Running.Enfermedades(Id)
+select distinct M.Consulta_Enfermedades
+from gd_esquema.Maestra M
+where M.Consulta_Enfermedades is not null
 
 
 
@@ -842,13 +916,31 @@ go
 
 --Consulta
 --Representa el Diagnostico para una determinada Atencion Medica
-INSERT INTO Free_Running.Consulta(Id_Atencion_Medica,Sintomas,Enfermedades)
-select Free_Running.suNroAtencion(M.Turno_Numero),M.Consulta_Sintomas,M.Consulta_Enfermedades
+INSERT INTO Free_Running.Consulta(Id_Atencion_Medica)
+select Free_Running.suNroAtencion(M.Turno_Numero)
 from gd_esquema.Maestra M
 where M.Consulta_Sintomas is not null
 
 
 
+
+
+Insert INTO Free_Running.Consulta_por_Sintomas(Consulta_Id,Sintoma_Id)
+select c.Id,M.Consulta_Sintomas
+from Free_Running.Consulta c join Free_Running.Atencion_Medica am on (c.Id_Atencion_Medica = am.Id)
+	join Free_Running.Llegada_Atencion_Medica Lam on (am.Llegada_Id = lam.Id)
+	join gd_esquema.Maestra M on (lam.Turno_Numero = M.Turno_Numero)
+where am.Confirmacion = 'Confirmado' and M.Consulta_Sintomas is not null
+
+
+
+
+Insert INTO Free_Running.Consulta_por_Enfermedades(Consulta_Id,Enfermedades_Id)
+select c.Id,M.Consulta_Enfermedades
+from Free_Running.Consulta c join Free_Running.Atencion_Medica am on (c.Id_Atencion_Medica = am.Id)
+	join Free_Running.Llegada_Atencion_Medica Lam on (am.Llegada_Id = lam.Id)
+	join gd_esquema.Maestra M on (lam.Turno_Numero = M.Turno_Numero)
+where am.Confirmacion = 'Confirmado' and M.Consulta_Enfermedades is not null
 
 
 
