@@ -1412,7 +1412,7 @@ declare @rta int, @afilidoCompro numeric(18,0)
 set @afilidoCompro = (select CBf.Afiliado_Compra 
 					  from Free_Running.Bono_Farmacia BF
 				      join Free_Running.Compra_Bono CBf on (BF.CompraId = CBf.Id) 
-					  where BF.Id = @BC)
+					  where BF.Id = @Bf)
 					  
 set @rta = (select COUNT(*) 
 		   from Free_Running.Bono_Farmacia Bf 
