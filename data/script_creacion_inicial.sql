@@ -1545,49 +1545,38 @@ RETURN
 )
 GO
 
---------------------------------------------
----------------VER------------------- 
---------------------------------------------
-CREATE PROCEDURE Free_Running.comprarBonosConsulta(@Afiliado_Compra int,@precio int, @plan int, @cantidad int)
+
+CREATE PROCEDURE Free_Running.comprarBonos(@Afiliado_Compra int,@precio int, @plan int, @cantidadConsulta int,@cantidadFarmacia int)
 AS
 BEGIN
 	declare @contador int
+	declare @idCompra int
 	set @contador=0
+	insert into Free_Running.Compra_Bono(Fecha_Compra,Afiliado_Compra)
+	values(GETDATE(),@Afiliado_Compra)
+	set @idCompra= @@IDENTITY
+	--inserto los bonos consulta
 	--begin transaction
-	while (@contador<@cantidad)
+	while (@contador<@cantidadConsulta)
 		begin
-		insert into Free_Running.Bono_Consulta(Plan_Correspondiente,Precio)
-		values(@plan,@precio)
-		insert into Free_Running.Compra_Bono_Consulta(Fecha_Compra,Afiliado_Compra,Bono_Consulta)
-		values(GETDATE(),@Afiliado_Compra,@@IDENTITY)
+		insert into Free_Running.Bono_Consulta(Plan_Correspondiente,Precio,CompraId)
+		values(@plan,@precio,@idCompra)
 		set @contador=@contador+1
 		end
+	
+	
+	--inserto los bonos farmacia
+	set @contador=0
+	while (@contador<@cantidadFarmacia)
+		begin
+		insert into Free_Running.Bono_Farmacia(Fecha_Vencimiento,Plan_Correspondiente,Precio,CompraId)
+		values(Free_Running.calcula_fecha_vencimiento(GETDATE()),@plan,@precio,@idCompra)
+		set @contador=@contador+1
+		end
+		
 	--commit transaction
 END
 GO
-
-
---------------------------------------------
-----------------------VER------------------
---------------------------------------------
-CREATE PROCEDURE Free_Running.comprarBonosFarmacia(@Afiliado_Compra int,@precio int, @plan int, @cantidad int)
-AS
-BEGIN
-	declare @contador int
-	set @contador=0
-	--begin transaction
-	while (@contador<@cantidad)
-		begin
-		insert into Free_Running.Bono_Farmacia(Fecha_Vencimiento,Plan_Correspondiente,Precio)
-		values(Free_Running.calcula_fecha_vencimiento(GETDATE()),@plan,@precio)
-		insert into Free_Running.Compra_Bono_Farmacia(Fecha_Compra,Afiliado_Compra,Bono_Farmacia)
-		values(GETDATE(),@Afiliado_Compra,@@IDENTITY)
-		set @contador=@contador+1
-		end
-	--commit transaction
-END
-GO
-
 
 
 
