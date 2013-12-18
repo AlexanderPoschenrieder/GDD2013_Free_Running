@@ -178,14 +178,14 @@ namespace Clinica_Frba.Login
 
         public Paciente generarPaciente()
         {
-
             SqlConnection miConexion = Conexion.Conectar();
-            SqlCommand consultaPaciente = new SqlCommand("select * from Free_Running.Paciente where Username='" + this.pUser + "'", miConexion);
-            SqlDataReader dr_paciente = consultaPaciente.ExecuteReader();
-            dr_paciente.Read();
-            Paciente miPaciente = new Paciente(Convert.ToUInt32(dr_paciente[0]), Convert.ToString(dr_paciente[1]), Convert.ToString(dr_paciente[2]), Convert.ToUInt32(dr_paciente[3]), Convert.ToString(dr_paciente[4]), Convert.ToUInt32(dr_paciente[5]), Convert.ToString(dr_paciente[6]), Convert.ToDateTime(dr_paciente[7]), Convert.ToString(dr_paciente[8]), Convert.ToString(dr_paciente[9]), Convert.ToString(dr_paciente[10]), Convert.ToInt32(dr_paciente[11]), Convert.ToUInt32(dr_paciente[12]), Convert.ToString(dr_paciente[13]), Convert.ToString(dr_paciente[14]), Convert.ToString(dr_paciente[15]));
-            return miPaciente;
+            SqlCommand consultaP = new SqlCommand("select * from Free_Running.Paciente P where P.Username = '" + this.pUser + "'", miConexion);
+            SqlDataReader drP = consultaP.ExecuteReader();
+            drP.Read();
+            Paciente miP = new Paciente(Convert.ToUInt32(drP[0]), Convert.ToString(drP[1]), Convert.ToString(drP[2]), Convert.ToUInt32(drP[3]), Convert.ToString(drP[4]), Convert.ToUInt32(drP[5]), Convert.ToString(drP[6]), Convert.ToDateTime(drP[7]), Convert.ToString(drP[8]), Convert.ToString(drP[9]), Convert.ToString(drP[10]), Convert.ToInt32(drP[11]), Convert.ToInt32(drP[12]), Convert.ToString(drP[13]), Convert.ToString(drP[14]),"");
+            return miP;
 
+                
         }
 
         public Medico generarMedico()

@@ -1530,4 +1530,3 @@ RETURN
 	and am.Id is null
 )
 
-
