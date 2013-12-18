@@ -93,6 +93,7 @@
             this.Name = "ResulAtForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ingrese síntomas";
+            this.Load += new System.EventHandler(this.ResulAtForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

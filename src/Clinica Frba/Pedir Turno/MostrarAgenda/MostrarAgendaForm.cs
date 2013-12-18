@@ -28,7 +28,7 @@ namespace Clinica_Frba.Pedir_Turno
             //Pruebo que tenga sentido abrir la seleccion de turnos, si no hay turnos hay excepcion
             try
             {
-                miModelo = new ModeloAgenda(nroMedico, nro_Paciente);
+                miModelo = new ModeloAgendaPaciente(nroMedico, nro_Paciente);
                 calendarioDeAgenda.BoldedDates = miModelo.turnos.ToArray<DateTime>();
                 //Le cargo las acciones correspondientes-----------------------------------------
                 this.calendarioDeAgenda.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.calendarioDeAgenda_DateSelected);
@@ -45,7 +45,7 @@ namespace Clinica_Frba.Pedir_Turno
             InitializeComponent();
             label1.Text = "Seleccione una fecha o un intervalo";
             botonSeleccionar.Enabled = false;
-            miModelo = new ModeloAgenda(nroMedico);
+            miModelo = new ModeloAgendaMedico(nroMedico);
             calendarioDeAgenda.BoldedDates = miModelo.turnos.ToArray<DateTime>();
             
             //Le cargo las acciones correspondientes-----------------------------------------

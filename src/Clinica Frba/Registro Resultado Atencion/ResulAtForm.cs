@@ -33,5 +33,10 @@ namespace Clinica_Frba.Registro_Resultado_Atencion
                 this.Close();
             }
         }
+
+        private void ResulAtForm_Load(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

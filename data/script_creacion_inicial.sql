@@ -130,30 +130,19 @@ CONSTRAINT PK_Agenda PRIMARY KEY CLUSTERED (Id ASC)
 )
 GO
 
-
-
---TABLA COMPRA BONO CONSULTA: Muestra todas las compras que se hicieron de los Bonos Consulta
-CREATE TABLE Free_Running.Compra_Bono_Consulta (
-Id numeric(18, 0) NOT NULL identity(1,1),
-Fecha_Compra	datetime NOT NULL, 
-Afiliado_Compra numeric(18, 0) NOT NULL,
-Bono_Consulta numeric(18,0) NOT NULL
-CONSTRAINT PK__Compra_Bono_Consulta PRIMARY KEY CLUSTERED (Id ASC)
-)
-GO
-
 --TABLA BONO CONSULTA: Contiene TODOS los Bonos Consulta Comprados Cancelados o No, Utilizados o No
 CREATE TABLE Free_Running.Bono_Consulta (
 Id numeric(18, 0) NOT NULL identity(1,1),
 Numero	numeric(18, 0) NULL,
 Afiliado_Utiliza numeric(18, 0) NULL,
 Precio numeric(18, 0) NULL,
+CompraId numeric(18,0) NOT NULL,
 Plan_Correspondiente numeric(18, 0) NOT NULL,
 CONSTRAINT PK_Bono_Consulta PRIMARY KEY CLUSTERED (Id ASC)
 )
 GO
 
---TABLA BONO CONSULTA CANSELADO: Representa un Bono Consulta que se Utilizo al momento de Llegar a la Clinica pero que No se pudo realizar la Consulta
+--TABLA BONO CONSULTA CANCELADO: Representa un Bono Consulta que se Utilizo al momento de Llegar a la Clinica pero que No se pudo realizar la Consulta
 CREATE TABLE Free_Running.Bono_Consulta_Cancelado (
 Id	numeric(18, 0) NOT NULL identity(1,1),
 Bono_Consulta numeric(18, 0) NOT NULL,
@@ -161,13 +150,12 @@ CONSTRAINT PK_Bono_Consulta_Cancelado PRIMARY KEY CLUSTERED (Id ASC)
 )
 GO
 
---TABLA COMPRA BONO FARMACIA: Muestra todas las compras que se hicieron de los Bonos Farmacia
-CREATE TABLE Free_Running.Compra_Bono_Farmacia (
+--TABLA COMPRA BONO: Muestra todas las compras que se hicieron de los Bonos 
+CREATE TABLE Free_Running.Compra_Bono (
 Id numeric(18, 0) NOT NULL identity(1,1),
 Fecha_Compra	datetime NOT NULL, 
 Afiliado_Compra numeric(18, 0) NOT NULL,
-Bono_Farmacia numeric(18, 0) NOT NULL
-CONSTRAINT PK__Compra_Bono_Farmacia PRIMARY KEY CLUSTERED (Id ASC)
+CONSTRAINT PK__Compra_Bono PRIMARY KEY CLUSTERED (Id ASC)
 )
 GO
 
@@ -179,6 +167,7 @@ Fecha_Preinscripcion_Medicamento	varchar(255) NULL,
 Plan_Correspondiente numeric(18, 0) NOT NULL,
 Afiliado_Utiliza numeric(18, 0) NULL,
 Precio numeric(18, 0) NOT NULL,
+CompraId numeric(18,0) NOT NULL,
 Consulta_Id numeric(18, 0) NULL,
 CONSTRAINT PK_Bono_Farmacia PRIMARY KEY CLUSTERED (Id ASC)
 )
@@ -367,42 +356,23 @@ GO
  REFERENCES Free_Running.Atencion_Medica(Id) 
  GO
  
+ ALTER TABLE Free_Running.Compra_Bono ADD CONSTRAINT FK_Compra_Bono_Afiliado_Compra FOREIGN KEY (Afiliado_Compra) 
+ REFERENCES Free_Running.Paciente(Nro_Afiliado) 
+ GO
  
-ALTER TABLE Free_Running.Bono_Farmacia ADD CONSTRAINT FK_Bono_Farmacia FOREIGN KEY (Consulta_Id) 
+ 
+ ALTER TABLE Free_Running.Bono_Farmacia ADD CONSTRAINT FK_Bono_Farmacia FOREIGN KEY (Consulta_Id) 
  REFERENCES Free_Running.Consulta(Id) 
  GO
-
  ALTER TABLE Free_Running.Bono_Farmacia ADD CONSTRAINT FK_Bono_Farmacia_Afiliado_Utiliza FOREIGN KEY (Afiliado_Utiliza) 
  REFERENCES Free_Running.Paciente(Nro_Afiliado) 
  GO
  ALTER TABLE Free_Running.Bono_Farmacia ADD CONSTRAINT FK_Bono_Farmacia_Plan_Correspondiente FOREIGN KEY (Plan_Correspondiente) 
  REFERENCES Free_Running.Plan_Medico(Codigo) 
  GO
-
- 
- 
- ALTER TABLE Free_Running.Compra_Bono_Farmacia ADD CONSTRAINT FK_Compra_BF_Afiliado_Compra FOREIGN KEY (Afiliado_Compra) 
- REFERENCES Free_Running.Paciente(Nro_Afiliado) 
+  ALTER TABLE Free_Running.Bono_Farmacia ADD CONSTRAINT FK_Bono_Farmacia_CompraId FOREIGN KEY (CompraId) 
+ REFERENCES Free_Running.Compra_Bono(Id) 
  GO
- ALTER TABLE Free_Running.Compra_Bono_Farmacia ADD CONSTRAINT FK_Compra_BF_BonoFarmacia FOREIGN KEY (Bono_Farmacia) 
- REFERENCES Free_Running.Bono_Farmacia(Id) 
- GO
- 
- 
- 
- 
- 
-
- 
- 
- ALTER TABLE Free_Running.Compra_Bono_Consulta ADD CONSTRAINT FK_Compra_BC_Afiliado_Compra FOREIGN KEY (Afiliado_Compra) 
- REFERENCES Free_Running.Paciente(Nro_Afiliado) 
- GO
- ALTER TABLE Free_Running.Compra_Bono_Consulta ADD CONSTRAINT FK_Compra_BC_BonoConsulta FOREIGN KEY (Bono_Consulta) 
- REFERENCES Free_Running.Bono_Consulta(Id) 
- GO
- 
- 
  
  ALTER TABLE Free_Running.Bono_Consulta ADD CONSTRAINT FK_Bono_Consulta_Afiliado_Utiliza FOREIGN KEY (Afiliado_Utiliza) 
  REFERENCES Free_Running.Paciente(Nro_Afiliado) 
@@ -410,14 +380,10 @@ ALTER TABLE Free_Running.Bono_Farmacia ADD CONSTRAINT FK_Bono_Farmacia FOREIGN K
  ALTER TABLE Free_Running.Bono_Consulta ADD CONSTRAINT FK_Bono_Consulta_Plan_Correspondiente FOREIGN KEY (Plan_Correspondiente) 
  REFERENCES Free_Running.Plan_Medico(Codigo) 
  GO
- 
- 
+ ALTER TABLE Free_Running.Bono_Consulta ADD CONSTRAINT FK_Bono_Farmacia_CompraId FOREIGN KEY (CompraId) 
+ REFERENCES Free_Running.Compra_Bono(Id) 
+ GO
 
-
-
-
-
- 
  ALTER TABLE Free_Running.Bono_Consulta_Cancelado ADD CONSTRAINT FK_Bono_Consulta FOREIGN KEY (Bono_Consulta) 
  REFERENCES Free_Running.Bono_Consulta(Id) 
  GO

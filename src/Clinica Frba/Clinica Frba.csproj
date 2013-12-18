@@ -180,11 +180,11 @@
       <DependentUpon>MotivoCancelacionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Compra de Bono\CompraBonoModel.cs" />
-    <Compile Include="Compra de Bono\Form1.cs">
+    <Compile Include="Compra de Bono\CompraBonoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compra de Bono\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Compra de Bono\CompraBonoForm.Designer.cs">
+      <DependentUpon>CompraBonoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Conexion.cs" />
     <Compile Include="GD2C2013DataSet.Designer.cs">
@@ -278,6 +278,8 @@
       <DependentUpon>selecRol.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\Usuario.cs" />
+    <Compile Include="Pedir Turno\ModelosAgenda\ModeloAgendaMedico.cs" />
+    <Compile Include="Pedir Turno\ModelosAgenda\ModeloAgendaPaciente.cs" />
     <Compile Include="Pedir Turno\ModeloRegistrarTurno.cs" />
     <Compile Include="Pedir Turno\FinalizarPedidoTurno.cs">
       <SubType>Form</SubType>
@@ -285,7 +287,7 @@
     <Compile Include="Pedir Turno\FinalizarPedidoTurno.Designer.cs">
       <DependentUpon>FinalizarPedidoTurno.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pedir Turno\ModeloAgenda.cs" />
+    <Compile Include="Pedir Turno\ModelosAgenda\ModeloAgenda.cs" />
     <Compile Include="Pedir Turno\MostrarAgendaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -408,8 +410,8 @@
     <EmbeddedResource Include="Cancelar Atencion\MotivoCancelacionForm.resx">
       <DependentUpon>MotivoCancelacionForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Compra de Bono\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Compra de Bono\CompraBonoForm.resx">
+      <DependentUpon>CompraBonoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Generar Receta\crearReceta.resx">
       <DependentUpon>crearReceta.cs</DependentUpon>
