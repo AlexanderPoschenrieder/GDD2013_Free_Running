@@ -380,7 +380,8 @@ GO
  ALTER TABLE Free_Running.Bono_Consulta ADD CONSTRAINT FK_Bono_Consulta_Plan_Correspondiente FOREIGN KEY (Plan_Correspondiente) 
  REFERENCES Free_Running.Plan_Medico(Codigo) 
  GO
- ALTER TABLE Free_Running.Bono_Consulta ADD CONSTRAINT FK_Bono_Farmacia_CompraId FOREIGN KEY (CompraId) 
+ 
+ ALTER TABLE Free_Running.Bono_Consulta ADD CONSTRAINT FK_Bono_Consulta_CompraId FOREIGN KEY (CompraId) 
  REFERENCES Free_Running.Compra_Bono(Id) 
  GO
 
@@ -650,6 +651,9 @@ Having datename(dw,DATEADD(D, 0, DATEDIFF(D, 0, M.Turno_Fecha)))= 'Domingo'
 
 
 
+
+
+
 --Rol
 INSERT INTO Free_Running.Rol(Id,Habilitado)
 Values
@@ -715,6 +719,31 @@ go
 
 
 
+create view Free_Running.V_CompraBono
+as
+select M.Compra_Bono_Fecha Fecha_Compra,Free_Running.suNroAfiliado(M.Paciente_Dni) Afiliado
+from gd_esquema.Maestra M
+where M.Bono_Farmacia_Numero is not null and M.Compra_Bono_Fecha is not null
+union
+select M.Compra_Bono_Fecha,Free_Running.suNroAfiliado(M.Paciente_Dni)
+from gd_esquema.Maestra M
+where (M.Compra_Bono_Fecha is not null and M.Bono_Consulta_Numero is not null)
+go
+
+
+INSERT INTO Free_Running.Compra_Bono(Fecha_Compra,Afiliado_Compra)
+select a.Fecha_Compra,a.Afiliado
+from Free_Running.V_CompraBono a
+group by a.Fecha_Compra,a.Afiliado
+
+
+CREATE INDEX iNDICE_CB_Afiliado ON Free_Running.Compra_Bono(Afiliado_Compra)
+CREATE INDEX iNDICE_CB_Fecha ON Free_Running.Compra_Bono(Fecha_Compra)
+go
+
+
+
+
 
 
 
@@ -723,7 +752,7 @@ go
 --TODOS LOS BONO COLSUTA COMPRADOS utilizados o NO
 SET IDENTITY_INSERT Free_Running.Bono_Consulta ON
 go
-INSERT INTO Free_Running.Bono_Consulta(Id,Afiliado_Utiliza,Precio,Plan_Correspondiente)--,Numero)
+INSERT INTO Free_Running.Bono_Consulta(Id,Afiliado_Utiliza,Precio,Plan_Correspondiente,CompraId)
 
 select  M.Bono_Consulta_Numero,
 
@@ -738,7 +767,9 @@ select  M.Bono_Consulta_Numero,
 	from Free_Running.Plan_Medico P
 	where M.Plan_Med_Codigo = P.Codigo)) Precio,
 	
-	M.Plan_Med_Codigo Plan_Correspondiente
+	M.Plan_Med_Codigo Plan_Correspondiente,
+	
+	(select a.Id from Free_Running.Compra_Bono a where a.Fecha_Compra = M.Compra_Bono_Fecha and a.Afiliado_Compra = Free_Running.suNroAfiliado(M.Paciente_Dni))
 
 from gd_esquema.Maestra M
 where (M.Compra_Bono_Fecha is not null and M.Bono_Consulta_Numero is not null)
@@ -746,10 +777,9 @@ SET IDENTITY_INSERT Free_Running.Bono_Consulta OFF
 go
 
 
-INSERT INTO Free_Running.Compra_Bono_Consulta(Fecha_Compra,Afiliado_Compra,Bono_Consulta)
-select M.Compra_Bono_Fecha,Free_Running.suNroAfiliado(M.Paciente_Dni),M.Bono_Consulta_Numero
-from gd_esquema.Maestra M
-where (M.Compra_Bono_Fecha is not null and M.Bono_Consulta_Numero is not null)
+
+
+
 
 
 
@@ -800,6 +830,14 @@ go
 
 
 
+
+
+
+
+
+
+
+
 --Consulta
 --Representa el Diagnostico para una determinada Atencion Medica
 INSERT INTO Free_Running.Consulta(Id_Atencion_Medica,Sintomas,Enfermedades)
@@ -818,7 +856,7 @@ where M.Consulta_Sintomas is not null
 CREATE INDEX iNDICE_AdM3 ON Free_Running.Consulta(Id_Atencion_Medica)
 
 SET IDENTITY_INSERT Free_Running.Bono_Farmacia ON
-INSERT INTO Free_Running.Bono_Farmacia(Id,Fecha_Vencimiento,Afiliado_Utiliza,Precio,Consulta_Id,Plan_Correspondiente)
+INSERT INTO Free_Running.Bono_Farmacia(Id,Fecha_Vencimiento,Afiliado_Utiliza,Precio,Consulta_Id,Plan_Correspondiente,CompraId)
 select M.Bono_Farmacia_Numero,M.Bono_Farmacia_Fecha_Vencimiento,
 		
 		(select P.Nro_Afiliado 
@@ -839,7 +877,9 @@ select M.Bono_Farmacia_Numero,M.Bono_Farmacia_Fecha_Vencimiento,
 		join gd_esquema.Maestra MC on (MC.Turno_Numero = Ll.Turno_Numero)
 		where MC.Turno_Numero is not null and M.Bono_Farmacia_Numero = MC.Bono_Farmacia_Numero) CONSULTA,
 		
-		M.Plan_Med_Codigo
+		M.Plan_Med_Codigo,
+		
+		(select a.Id from Free_Running.Compra_Bono a where a.Fecha_Compra = M.Compra_Bono_Fecha and a.Afiliado_Compra = Free_Running.suNroAfiliado(M.Paciente_Dni))
 		
 from gd_esquema.Maestra M
 where M.Bono_Farmacia_Numero is not null and M.Compra_Bono_Fecha is not null
@@ -847,16 +887,22 @@ SET IDENTITY_INSERT Free_Running.Bono_Farmacia OFF
 
 
 
-INSERT INTO Free_Running.Compra_Bono_Farmacia(Fecha_Compra,Afiliado_Compra,Bono_Farmacia)
-select M.Compra_Bono_Fecha,Free_Running.suNroAfiliado(M.Paciente_Dni),M.Bono_Farmacia_Numero
-from gd_esquema.Maestra M
-where M.Bono_Farmacia_Numero is not null and M.Compra_Bono_Fecha is not null
+
+
+
+
+
+
 
 
 INSERT INTO Free_Running.Medicamento(Medicamento)
 select distinct M.Bono_Farmacia_Medicamento
 from gd_esquema.Maestra M
 where M.Bono_Farmacia_Medicamento is not null
+
+
+
+
 
 
 
@@ -867,9 +913,13 @@ from Free_Running.Bono_Farmacia BF join Free_Running.Consulta C on C.Id = BF.Con
 	 join Free_Running.Llegada_Atencion_Medica LAM on LAM.Id=AM.Llegada_Id
 	 join gd_esquema.Maestra M on M.Bono_Farmacia_Numero = LAM.Bono_Consulta
 Where M.Bono_Farmacia_Numero is Not null and M.Compra_Bono_Fecha is null
-
-
 go
+
+
+
+
+
+
 
 --Agenda
 --Cada Medico tiene una Adenda en donde se registran todos los horarios, actualmente la agenda se armo con los turnos futuros q no han sido canceldos
@@ -884,6 +934,14 @@ INSERT INTO Free_Running.Usuario(Username,Usuario_Password,Habilitado) values('a
 INSERT INTO Free_Running.Usuario_por_Rol(Username,Rol_Id) values('admin','Administrativo')
 
 go
+
+
+
+
+
+
+
+
 
 
 
