@@ -4,8 +4,10 @@ go
 CREATE SCHEMA Free_Running AUTHORIZATION gd
 GO
 
---///////////////////////////////////////////CREACION TABLAS///////////////////////////////////////////--
 
+-----------------------------------------------------------------------------------------------------------------
+--///////////////////////////////////////////CREACION TABLAS///////////////////////////////////////////--
+-----------------------------------------------------------------------------------------------------------------
 
 --TABLA PACIENTES: Tabla de todos los Pacientes de la Clinica - esten o no activos 
 
@@ -945,7 +947,13 @@ go
 
 
 
---PROCEDIMIENTOS
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+--///////////////////////////////////////////CREACION PROCEDIMIENTOS///////////////////////////////////////////--
+-----------------------------------------------------------------------------------------------------------------
 
 
 
@@ -1057,7 +1065,10 @@ AS
 BEGIN
 declare @rta int, @afilidoCompro numeric(18,0)
 
-set @afilidoCompro = (select CBC.Afiliado_Compra from Free_Running.Compra_Bono_Consulta CBC where CBC.Bono_Consulta = @BC)
+set @afilidoCompro = (select CB.Afiliado_Compra
+					  from Free_Running.Bono_Consulta BC 
+					  join Free_Running.Compra_Bono CB on (BC.CompraId = CB.Id) 
+					  where BC.Id = @BC)
 
 set @rta = (select COUNT(*) 
 		   from Free_Running.Bono_Consulta BC 
@@ -1135,9 +1146,9 @@ AS
 BEGIN
 DECLARE @Cant numeric(18,8)
 SET @Cant = (select COUNT(*) Cantidad 
-from Free_Running.Bono_Farmacia BF 
+	 from Free_Running.Bono_Farmacia BF 
 	 join Free_Running.Bono_Farmacia_Vencido V on (V.Bono_Farmacia_Id = BF.Id)
-	 join Free_Running.Compra_Bono_Farmacia CBF on (CBF.Bono_Farmacia = BF.Id)
+	 join Free_Running.Compra_Bono CBF on (CBF.Id = BF.CompraId)
 where ((BF.Fecha_Vencimiento >= @Inicio) and (BF.Fecha_Vencimiento <= @Fin))
 and @Afiliado = CBF.Afiliado_Compra
 and (DATENAME(month,BF.Fecha_Vencimiento) = @mes1 or DATENAME(month,BF.Fecha_Vencimiento) = @mes2))
@@ -1161,7 +1172,7 @@ BEGIN
 	from Free_Running.Paciente p
 	
 	order by (select COUNT(*) from Free_Running.Bono_Farmacia BF  join Free_Running.Bono_Farmacia_Vencido V on (V.Bono_Farmacia_Id = BF.Id)
-	 join Free_Running.Compra_Bono_Farmacia CBF on (CBF.Bono_Farmacia = BF.Id) where ((BF.Fecha_Vencimiento >= @Inicio) and (BF.Fecha_Vencimiento <= @Fin))
+	 join Free_Running.Compra_Bono CBF on (CBF.Id = BF.CompraId) where ((BF.Fecha_Vencimiento >= @Inicio) and (BF.Fecha_Vencimiento <= @Fin))
 	 and  P.Nro_Afiliado = CBF.Afiliado_Compra) DESC
 END
 go
@@ -1220,19 +1231,22 @@ create view Free_Running.vistaAfiliadoUsoDist
 as
 select Bc.Afiliado_Utiliza,CBc.Fecha_Compra fecha
 from Free_Running.Bono_Consulta Bc
-	 join Free_Running.Compra_Bono_Consulta CBc on (BC.Id = CBc.Bono_Consulta)
+	 join Free_Running.Compra_Bono CBc on (BC.CompraId = CBc.Id)
 	 join Free_Running.Paciente P on (P.Nro_Afiliado = Bc.Afiliado_Utiliza)
 	 join Free_Running.Llegada_Atencion_Medica Lam on (lam.Bono_Consulta = Bc.Id)
 where CBc.Afiliado_Compra<>Bc.Afiliado_Utiliza and Bc.Afiliado_Utiliza is not null
 Union
 select Bf.Afiliado_Utiliza,CBf.Fecha_Compra
 from Free_Running.Bono_Farmacia Bf
-	 join Free_Running.Compra_Bono_Farmacia CBf on (Bf.Id = CBf.Bono_Farmacia)
+	 join Free_Running.Compra_Bono CBf on (Bf.CompraId = CBf.Id)
 	 join Free_Running.Paciente P on (P.Nro_Afiliado = Bf.Afiliado_Utiliza)
 	 join Free_Running.Consulta C on (C.Id = Bf.Consulta_Id)
 	 join Free_Running.Atencion_Medica AM on (Am.Id = C.Id_Atencion_Medica)
 where CBf.Afiliado_Compra<>Bf.Afiliado_Utiliza and Bf.Afiliado_Utiliza is not null
 go
+
+
+
 
 CREATE FUNCTION Free_Running.BonoUsoDist(@mes1 varchar(255) , @mes2 varchar(255),@Inicio DateTime,@Fin DateTime,@NroAfiliado numeric(18,8))
 RETURNS numeric(18,8)
@@ -1395,8 +1409,11 @@ AS
 BEGIN
 declare @rta int, @afilidoCompro numeric(18,0)
 
-set @afilidoCompro = (select CBf.Afiliado_Compra from Free_Running.Compra_Bono_Farmacia CBf where CBf.Bono_Farmacia = @Bf)
-
+set @afilidoCompro = (select CBf.Afiliado_Compra 
+					  from Free_Running.Bono_Farmacia BF
+				      join Free_Running.Compra_Bono CBf on (BF.CompraId = CBf.Id) 
+					  where BF.Id = @BC)
+					  
 set @rta = (select COUNT(*) 
 		   from Free_Running.Bono_Farmacia Bf 
 where Bf.Id = @Bf and Bf.Afiliado_Utiliza is null and
@@ -1528,7 +1545,9 @@ RETURN
 )
 GO
 
-
+--------------------------------------------
+---------------VER------------------- 
+--------------------------------------------
 CREATE PROCEDURE Free_Running.comprarBonosConsulta(@Afiliado_Compra int,@precio int, @plan int, @cantidad int)
 AS
 BEGIN
@@ -1547,6 +1566,10 @@ BEGIN
 END
 GO
 
+
+--------------------------------------------
+----------------------VER------------------
+--------------------------------------------
 CREATE PROCEDURE Free_Running.comprarBonosFarmacia(@Afiliado_Compra int,@precio int, @plan int, @cantidad int)
 AS
 BEGIN
@@ -1564,6 +1587,8 @@ BEGIN
 	--commit transaction
 END
 GO
+
+
 
 
 CREATE FUNCTION [Free_Running].[llegadasTurnos](@medico int)
