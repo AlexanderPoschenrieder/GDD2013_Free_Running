@@ -66,6 +66,7 @@
             // tbRol
             // 
             this.tbRol.Location = new System.Drawing.Point(99, 33);
+            this.tbRol.MaxLength = 255;
             this.tbRol.Name = "tbRol";
             this.tbRol.Size = new System.Drawing.Size(193, 20);
             this.tbRol.TabIndex = 1;
@@ -174,6 +175,7 @@
             // tbBuscar1
             // 
             this.tbBuscar1.Location = new System.Drawing.Point(99, 37);
+            this.tbBuscar1.MaxLength = 255;
             this.tbBuscar1.Name = "tbBuscar1";
             this.tbBuscar1.Size = new System.Drawing.Size(145, 20);
             this.tbBuscar1.TabIndex = 1;
@@ -236,6 +238,7 @@
             // tbBuscFunc2
             // 
             this.tbBuscFunc2.Location = new System.Drawing.Point(99, 37);
+            this.tbBuscFunc2.MaxLength = 255;
             this.tbBuscFunc2.Name = "tbBuscFunc2";
             this.tbBuscFunc2.Size = new System.Drawing.Size(145, 20);
             this.tbBuscFunc2.TabIndex = 1;

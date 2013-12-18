@@ -272,6 +272,7 @@
             // Usertxt
             // 
             this.Usertxt.Location = new System.Drawing.Point(834, 377);
+            this.Usertxt.MaxLength = 255;
             this.Usertxt.Name = "Usertxt";
             this.Usertxt.Size = new System.Drawing.Size(100, 20);
             this.Usertxt.TabIndex = 16;
@@ -534,6 +535,7 @@
             // Mailtxt
             // 
             this.Mailtxt.Location = new System.Drawing.Point(275, 421);
+            this.Mailtxt.MaxLength = 255;
             this.Mailtxt.Name = "Mailtxt";
             this.Mailtxt.Size = new System.Drawing.Size(100, 20);
             this.Mailtxt.TabIndex = 8;
@@ -549,6 +551,7 @@
             // Directxt
             // 
             this.Directxt.Location = new System.Drawing.Point(275, 340);
+            this.Directxt.MaxLength = 255;
             this.Directxt.Name = "Directxt";
             this.Directxt.Size = new System.Drawing.Size(100, 20);
             this.Directxt.TabIndex = 6;
@@ -564,6 +567,7 @@
             // Apellidotxt
             // 
             this.Apellidotxt.Location = new System.Drawing.Point(104, 378);
+            this.Apellidotxt.MaxLength = 255;
             this.Apellidotxt.Name = "Apellidotxt";
             this.Apellidotxt.Size = new System.Drawing.Size(100, 20);
             this.Apellidotxt.TabIndex = 4;
@@ -572,6 +576,7 @@
             // Nombretxt
             // 
             this.Nombretxt.Location = new System.Drawing.Point(104, 340);
+            this.Nombretxt.MaxLength = 255;
             this.Nombretxt.Name = "Nombretxt";
             this.Nombretxt.Size = new System.Drawing.Size(100, 20);
             this.Nombretxt.TabIndex = 3;
@@ -605,6 +610,7 @@
             // Clavetxt
             // 
             this.Clavetxt.Location = new System.Drawing.Point(834, 417);
+            this.Clavetxt.MaxLength = 255;
             this.Clavetxt.Name = "Clavetxt";
             this.Clavetxt.Size = new System.Drawing.Size(100, 20);
             this.Clavetxt.TabIndex = 157;

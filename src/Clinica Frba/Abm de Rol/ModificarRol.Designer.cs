@@ -95,6 +95,7 @@
             // tbRol
             // 
             this.tbRol.Location = new System.Drawing.Point(71, 32);
+            this.tbRol.MaxLength = 255;
             this.tbRol.Name = "tbRol";
             this.tbRol.Size = new System.Drawing.Size(186, 20);
             this.tbRol.TabIndex = 1;

@@ -48,6 +48,7 @@
             // NombreProfTB
             // 
             this.NombreProfTB.Location = new System.Drawing.Point(13, 32);
+            this.NombreProfTB.MaxLength = 255;
             this.NombreProfTB.Name = "NombreProfTB";
             this.NombreProfTB.Size = new System.Drawing.Size(159, 20);
             this.NombreProfTB.TabIndex = 1;

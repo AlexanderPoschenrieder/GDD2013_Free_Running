@@ -37,10 +37,11 @@
             this.dvgTop.AllowUserToAddRows = false;
             this.dvgTop.AllowUserToDeleteRows = false;
             this.dvgTop.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgTop.Location = new System.Drawing.Point(12, 12);
+            this.dvgTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dvgTop.Location = new System.Drawing.Point(0, 0);
             this.dvgTop.Name = "dvgTop";
             this.dvgTop.ReadOnly = true;
-            this.dvgTop.Size = new System.Drawing.Size(795, 246);
+            this.dvgTop.Size = new System.Drawing.Size(819, 317);
             this.dvgTop.TabIndex = 2;
             // 
             // AfiliadosMasBnoPropios

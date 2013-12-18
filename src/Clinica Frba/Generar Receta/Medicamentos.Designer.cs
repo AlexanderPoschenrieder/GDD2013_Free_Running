@@ -92,6 +92,7 @@
             // tbMedica
             // 
             this.tbMedica.Location = new System.Drawing.Point(124, 18);
+            this.tbMedica.MaxLength = 255;
             this.tbMedica.Name = "tbMedica";
             this.tbMedica.Size = new System.Drawing.Size(134, 20);
             this.tbMedica.TabIndex = 1;
