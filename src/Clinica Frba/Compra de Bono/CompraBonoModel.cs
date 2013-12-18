@@ -60,12 +60,9 @@ namespace Clinica_Frba.Compra_de_Bono
             miConexion = Conexion.Conectar();
             compraBonos = new SqlCommand(
                 string.Format(
-                "exec GD2C2013.Free_Running.comprarBonosFarmacia @Afiliado_Compra={0},@plan= {1},@precio= {2},@cantidad={3}; "
-                , nro_paciente, planCorrespondiente, precioFarmacia, cantidadFarmacia) +
-                string.Format(
-                "exec GD2C2013.Free_Running.comprarBonosConsulta @Afiliado_Compra={0},@plan= {1},@precio= {2},@cantidad={3}"
-                , nro_paciente, planCorrespondiente, precioFarmacia, cantidadConsulta), miConexion);
-
+                "exec GD2C2013.Free_Running.comprarBonos @Afiliado_Compra={0},@plan= {1},@precio= {2},@cantidadConsulta={3},@cantidadFarmacia={4}; "
+                , nro_paciente, planCorrespondiente, precioFarmacia,cantidadConsulta, cantidadFarmacia));
+                
             compraBonos.ExecuteNonQuery();
             miConexion.Close();
             MessageBox.Show(string.Format("Gracias por su compra, su monto total es: ${0}", montoTotal));
