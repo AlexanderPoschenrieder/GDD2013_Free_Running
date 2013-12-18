@@ -34,18 +34,21 @@ namespace Clinica_Frba.Generar_Receta
                     {
                         if (controlarUtiliza_bono(miAfiliado, Convert.ToUInt32(tbBF.Text)) == 1)
                         {
-
-                            SqlConnection miconexion = Conexion.Conectar();
-                            SqlCommand cmdUpdate = new SqlCommand("update Free_Running.Bono_Farmacia set Consulta_Id = "+miconsulta+" where Id = "+Convert.ToUInt32(tbBF.Text), miconexion);
-                            SqlCommand cmdInsert = new SqlCommand("insert into Free_Running.Medicamento_por_BonoFarmacia(Bono_Farmacia,Medicamento,Cantidad,Aclaracion_Cantidad)values(" + Convert.ToUInt32(tbBF.Text) + ",'" + tbMedicamento.Text + "'," + Convert.ToInt32(tbCant.Text) + ",'" + aLetra(Convert.ToInt32(tbCant.Text)) + "')", miconexion);
-                            using (miconexion)
+                            if (!controlar_Repetido(Convert.ToUInt32(tbBF.Text), tbMedicamento.Text))
                             {
-                                cmdInsert.ExecuteNonQuery();
-                                cmdUpdate.ExecuteNonQuery();
-                                miconexion.Close();
+                                SqlConnection miconexion = Conexion.Conectar();
+                                SqlCommand cmdUpdate = new SqlCommand("update Free_Running.Bono_Farmacia set Consulta_Id = " + miconsulta + " where Id = " + Convert.ToUInt32(tbBF.Text), miconexion);
+                                SqlCommand cmdInsert = new SqlCommand("insert into Free_Running.Medicamento_por_BonoFarmacia(Bono_Farmacia,Medicamento,Cantidad,Aclaracion_Cantidad)values(" + Convert.ToUInt32(tbBF.Text) + ",'" + tbMedicamento.Text + "'," + Convert.ToInt32(tbCant.Text) + ",'" + aLetra(Convert.ToInt32(tbCant.Text)) + "')", miconexion);
+                                using (miconexion)
+                                {
+                                    cmdInsert.ExecuteNonQuery();
+                                    cmdUpdate.ExecuteNonQuery();
+                                    miconexion.Close();
 
+                                }
+                                MessageBox.Show(" Medicamento Cargado Correctamente ");
                             }
-                            MessageBox.Show(" Medicamento Cargado Correctamente ");
+                            else { MessageBox.Show("Ya existe ese Medicamento para ese bono farmacia"); }
 
                         }
                         else { MessageBox.Show(" Bono Invalido "); }   
@@ -82,6 +85,26 @@ namespace Clinica_Frba.Generar_Receta
             }
             return count;
         }
+
+        static bool controlar_Repetido(UInt32 Nro_bono, String Med)
+        {
+            SqlConnection miconexion = Conexion.Conectar();
+            SqlCommand cmd = new SqlCommand("select * from Free_Running.Medicamento_por_BonoFarmacia  where Bono_Farmacia= " + Nro_bono + " and Medicamento = '"+Med+"'", miconexion);           
+            bool rta = false;
+            using (miconexion)
+            {
+                SqlDataReader drMed = cmd.ExecuteReader();
+
+                if (drMed.Read())
+                {
+                    rta = true;
+                    miconexion.Close();
+                }
+            }
+            return rta;
+            
+        }
+
 
         public int controlarUtiliza_bono(UInt32 Nro_Afiliado, UInt32 Nro_bono)
         {
