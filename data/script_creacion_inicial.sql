@@ -797,7 +797,7 @@ as
 select M.Compra_Bono_Fecha Fecha_Compra,Free_Running.suNroAfiliado(M.Paciente_Dni) Afiliado
 from gd_esquema.Maestra M
 where M.Bono_Farmacia_Numero is not null and M.Compra_Bono_Fecha is not null
-union
+union ALL
 select M.Compra_Bono_Fecha,Free_Running.suNroAfiliado(M.Paciente_Dni)
 from gd_esquema.Maestra M
 where (M.Compra_Bono_Fecha is not null and M.Bono_Consulta_Numero is not null)
