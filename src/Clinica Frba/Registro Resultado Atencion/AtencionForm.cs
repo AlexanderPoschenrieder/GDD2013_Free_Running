@@ -21,6 +21,7 @@ namespace Clinica_Frba.Registro_Resultado_Atencion
 
         private void botonSi_Click(object sender, EventArgs e)
         {
+            this.Hide();
             Form nuevaVentana;
             int idAtencion;
             idAtencion = miModelo.confirmarAtencion("Confirmado");
@@ -32,6 +33,7 @@ namespace Clinica_Frba.Registro_Resultado_Atencion
 
         private void botonNo_Click(object sender, EventArgs e)
         {
+            this.Hide();
             miModelo.confirmarAtencion("No confirmado");
             MessageBox.Show("La consulta no ocurrio");
             this.Close();

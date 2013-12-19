@@ -20,7 +20,7 @@ namespace Clinica_Frba.Busquedas
         public ModeloBusquedaProfesional()
         {
             consultaBuscarBase = //CONSULTA PARA CONSEGUIR LOS PROFESIONALES
-           "select distinct m.Nombre as Nombre,m.Apellido as Apellido,m.Id as Id  from" +
+           "select distinct m.Nombre as Nombre,m.Apellido as Apellido,m.Id as Id,e.Descripcion  from" +
            "(Free_Running.Medico m left join Free_Running.Especialidad_Por_Med em on m.Id =em.Id)" +
            "join Free_Running.Especialidad e on em.Especialidad_Codigo= e.Codigo";
             

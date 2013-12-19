@@ -197,6 +197,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GD2C2013DataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="GD2C2013DataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD2C2013DataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GD2C2013DataSet3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD2C2013DataSet3.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Generar Receta\crearReceta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -507,6 +517,28 @@
     </None>
     <None Include="GD2C2013DataSet1.xss">
       <DependentUpon>GD2C2013DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2013DataSet2.xsc">
+      <DependentUpon>GD2C2013DataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2013DataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD2C2013DataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD2C2013DataSet2.xss">
+      <DependentUpon>GD2C2013DataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2013DataSet3.xsc">
+      <DependentUpon>GD2C2013DataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2013DataSet3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD2C2013DataSet3.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD2C2013DataSet3.xss">
+      <DependentUpon>GD2C2013DataSet3.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
