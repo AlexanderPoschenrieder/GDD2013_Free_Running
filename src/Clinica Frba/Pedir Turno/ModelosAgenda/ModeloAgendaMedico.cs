@@ -6,12 +6,14 @@ using System.Data.SqlClient;
 using System.Data.Sql;
 using System.Globalization;
 
+
 namespace Clinica_Frba.Pedir_Turno
 {
     class ModeloAgendaMedico : ModeloAgenda
     {
         public ModeloAgendaMedico(UInt32 nro_Medico)
         {
+            
             nroMedico = nro_Medico;
             turnos = new List<DateTime>();
             agendaDelMedico();
@@ -30,6 +32,7 @@ namespace Clinica_Frba.Pedir_Turno
         }
         public void agendaDelMedico()
         {
+            
             miConexion = Conexion.Conectar();             //selecciono los horarios de la agenda del medico
             consultaTurnos = new SqlCommand(string.Format("select a.FechaHora_Turno from Free_Running.agenda a where a.Medico = {0}", nroMedico), miConexion);
             drTurnos = consultaTurnos.ExecuteReader();

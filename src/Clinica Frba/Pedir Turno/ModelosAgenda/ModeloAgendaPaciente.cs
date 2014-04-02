@@ -4,6 +4,7 @@ using System.Linq;
 using System.Data.SqlClient;
 using System.Data.Sql;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Clinica_Frba.Pedir_Turno
 {
@@ -21,7 +22,6 @@ namespace Clinica_Frba.Pedir_Turno
             miConexion = Conexion.Conectar();             //selecciono los horarios de la agenda del medico que...no esten relacionados con un turno o... que si lo estan, entonces que esten cancelados
             consultaTurnos = new SqlCommand(string.Format("select * from Free_Running.turnosLibresMedico({0})", nroMedico), miConexion);
             drTurnos = consultaTurnos.ExecuteReader();
-            
             while (drTurnos.Read())
             {
                turnos.Add(Convert.ToDateTime(drTurnos[0]));

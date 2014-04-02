@@ -16,12 +16,13 @@ namespace Clinica_Frba.Busquedas
         funcionVentana ventanaALevantar;
         UInt32 idBuscado;
         Perfil miPerfil;
-        
+       
         //Constructor para la ABM pedirTurno
 
         public BusquedaForm(Perfil perf) {
             if (perf.perfil == "pac")
             {
+                
                 miModelo = new Clinica_Frba.Busquedas.ModeloBusquedaPaciente();
                 InitializeComponent();
                 label2.Visible = false;//Deshabilito el filtro que no va
@@ -31,6 +32,7 @@ namespace Clinica_Frba.Busquedas
             }
             else
             {
+                
                 miModelo = new ModeloBusquedaProfesional();
                 miPerfil = perf;
                 InitializeComponent();
@@ -45,9 +47,10 @@ namespace Clinica_Frba.Busquedas
                         {
                             try
                             {
-                                (new Clinica_Frba.Pedir_Turno.MostrarAgendaForm(idBuscado, (int)miPerfil.parametro)).ShowDialog();
+                                (new Clinica_Frba.Pedir_Turno.MostrarAgendaForm(idBuscado, Convert.ToInt32(miPerfil.parametro))).ShowDialog();
+                                
                             }
-                            catch (Exception ex) { MessageBox.Show(ex.Message); }
+                            catch (Exception ex) {MessageBox.Show(ex.Message);}
                         };        
                         break;
                     case "M":
@@ -79,6 +82,7 @@ namespace Clinica_Frba.Busquedas
         //
         private void armarGrilla()
         {
+                            
             gridResultados.Rows.Clear();
             while (miModelo.dr_Resultados.Read())
             {
@@ -107,15 +111,21 @@ namespace Clinica_Frba.Busquedas
         }
         
         private void SeleccionarButton_Click(object sender, EventArgs e) {
+                           
             if (gridResultados.SelectedCells.Count == 0)
             {
+               
                 MessageBox.Show("Seleccione al paciente buscado");
             }
             else
             {
+                
                 int index = (int)gridResultados.SelectedCells[0].RowIndex;
+                
                 idBuscado= Convert.ToUInt32(gridResultados.Rows[index].Cells["Id"].Value);
+                
                 ventanaALevantar();
+                
             }    
         }
 

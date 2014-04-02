@@ -57,6 +57,7 @@ namespace Clinica_Frba.Pedir_Turno
 //Acciones para la ABM pedir Turno------------------------------------------------------
         private void calendarioDeAgenda_DateSelected(object sender, DateRangeEventArgs e)
         {
+            
             diaSeleccionado= calendarioDeAgenda.SelectionRange.Start;
             if (!miModelo.turnos.Any(turno =>turno.Date==diaSeleccionado.Date))//verifica que el turno este disponible
             {
