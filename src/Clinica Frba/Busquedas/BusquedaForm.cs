@@ -55,6 +55,13 @@ namespace Clinica_Frba.Busquedas
                         break;
                     case "M":
                         //ABM llegada turnos
+                        
+
+
+                        //NO MANDA EL MEDICO NI LA ESPECIALIDAD
+                        //al parecer lo manda antes de que aparesca la ventana para buscar medicos
+
+
                         ventanaALevantar = () => (new Clinica_Frba.Registro_de_LLegada.Turnos_Llegada(idBuscado, comboEspecialidad.Text)).ShowDialog();
                         break;
                     case "A":
